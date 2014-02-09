@@ -1,0 +1,8 @@
+# input file for running script phyloExpCM_buildHyphyExpCM.py for phyloExpCM_buildHyphyExpCM_combined_FracTolerated
+mutspectrum /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/mutspectrum.txt
+evolequilfreqs /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/experimental_substitution_models//combined_FracTolerated_evolutionary_equilibriumfreqs.txt
+makereversible True
+hyphyExpCMs /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/experimental_substitution_models//combined_FracTolerated.ibf
+aapreferences /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/p1_equilibriumpreferences.txt
+model FracTolerated
+scalefactor 10000.0

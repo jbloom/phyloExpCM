@@ -1,0 +1,10 @@
+# input file for running script phyloExpCM_optimizeHyphyTree.py for phyloExpCM_optimizeHyphyTree
+fastafile /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/Aligned_NPs.fasta
+hyphycmdfile hyphy_cmds.bf
+hyphyoutfile hyphy_output.txt
+hyphytreefile hyphy_tree.newick
+treefile /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/KOSI07_codonPhyML_tree/codonphyml_tree.newick
+hyphypath HYPHYMP CPU=6
+siteslist /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/codonmodel_optimized_trees//siteslist.txt
+model experimental_randomize1 /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/experimental_substitution_models//replicate_B_FracTolerated.ibf
+hyphydistancesfile None

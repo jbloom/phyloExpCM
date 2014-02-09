@@ -1,0 +1,219 @@
+/*
+HYPHY include batch file specifying nucleotides, codons, and amino acids.
+It also specifies the translation of codons into amino acids.
+Designed to be included by other HYPHY scripts to define these values.
+
+Written by Jesse Bloom
+*/
+
+/* Nucleotide definitions:
+
+    N_NTs is an integer giving the number of nucleotides
+
+    NTs[nt_i] is the upper case nucleotide string (such as "A")
+      that corresponds to nucleotide index nt_i for 0 <= nt_i < N_NTs
+
+    NT_Indices[nt] is the index corresponding to nucleotide
+      nt, where nt is a string such as "A". So 
+      nt_i = NT_Indices[NTs[nt_i]]
+    
+*/
+NTs = {"0":"A", "1":"C", "2":"G", "3":"T"};
+N_NTs = Abs(NTs);
+NT_Indices = {};
+for (nt_i = 0; nt_i < N_NTs; nt_i = nt_i + 1) {
+    nt = NTs[nt_i];
+    NT_Indices[nt] = nt_i;
+}
+assert(N_NTs == Abs(NT_Indices), "NT index length mismatch");
+
+/* Codon definitions: NOTE THAT THESE ARE ONLY FOR THE 61 NON-STOP CODONS
+    
+    N_Codons is an integer giving the number of non-stop codons
+
+    Codons[codon_i] is the upper case string (such as "AAA")
+      that corresponds to codon codon_i for 0 <= codon_i < N_NonStopCodons
+
+    Codon_Indices[codon] is the index correspond to codon codon,
+      where codon is a string such as "AAA". So 
+      codon_i = Codon_Indices[Codons[codon_i]]
+*/
+Codons = {};
+Codon_Indices = {};
+codon_i = 0;
+for (nt_i1 = 0; nt_i1 < N_NTs; nt_i1 = nt_i1 + 1) {
+    nt1 = NTs[nt_i1];
+    for (nt_i2 = 0; nt_i2 < N_NTs; nt_i2 = nt_i2 + 1) {
+        nt2 = NTs[nt_i2];
+        for (nt_i3 = 0; nt_i3 < N_NTs; nt_i3 = nt_i3 + 1) {
+            nt3 = NTs[nt_i3];
+            codon = nt1 + nt2 + nt3;
+            if ((codon != "TAA") && (codon != "TAG") && (codon != "TGA")) {
+                Codons[codon_i] = codon;
+                Codon_Indices[codon] = codon_i;
+                codon_i = codon_i + 1;
+            }
+        }
+    }
+}
+N_Codons = Abs(Codons);
+assert(N_Codons == Abs(Codon_Indices), "Codon index length mismatch");
+
+/* Amino-acid definitions
+
+    N_AAs is an integer giving the number of amino acids
+
+    AAs[aa_i] is the upper case string (such as "A" or "D")
+      that corresponds to amino acid aa_i for 0 <= aa_i < N_AAs
+
+    AA_Indices[aa] is the index corresponding to amino acid aa,
+      where aa is a string such as "A" or "D". So
+      aa_i = AA_Indices[AAs[aa_i]]
+
+*/
+AAs = {"0":"A", "1":"C", "2":"D", "3":"E", "4":"F", "5":"G", "6":"H", "7":"I", "8":"K", "9":"L", "10":"M", "11":"N", "12":"P", "13":"Q", "14":"R", "15":"S", "16":"T", "17":"V", "18":"W", "19":"Y"};
+N_AAs = Abs(AAs);
+AA_Indices = {};
+for (aa_i = 0; aa_i < N_AAs; aa_i = aa_i + 1) {
+   aa = AAs[aa_i];
+   AA_Indices[aa] = aa_i;
+}
+assert(N_AAs == Abs(AA_Indices), "AA index length mismatch");
+
+/* Translation definitions
+
+    TranslateByIndex translates from codons to amino acids by index.
+      Specifically, if codon_i is one of the codon indices
+      (0 <= codon_i < N_Codons) then TranslateByIndex[codon_i]
+      gives the amino acid index (0 <= aa_i < N_AAs) for the
+      amino acid encoded by that codon.
+
+    TranslateByString translates codons to amino acids by string.
+      Specifically, if codon is a 3-letter codon string ("AAA")
+      then TranslateByString[codon] gives the one letter amino
+      acid code ("K" in this case) encoded by that codon.
+*/
+TranslateByString = {"TTT":"F", "TTC":"F", "TTA":"L", "TTG":"L", "CTT":"L", "CTC":"L",
+    "CTA":"L", "CTG":"L", "ATT":"I", "ATC":"I", "ATA":"I", "ATG":"M", "GTT":"V",
+    "GTC":"V", "GTA":"V", "GTG":"V", "TCT":"S", "TCC":"S", "TCA":"S",
+    "TCG":"S", "CCT":"P", "CCC":"P", "CCA":"P", "CCG":"P", "ACT":"T",
+    "ACC":"T", "ACA":"T", "ACG":"T", "GCT":"A", "GCC":"A", "GCA":"A",
+    "GCG":"A", "TAT":"Y", "TAC":"Y", 
+    "CAT":"H", "CAC":"H", "CAA":"Q", "CAG":"Q", "AAT":"N", "AAC":"N",
+    "AAA":"K", "AAG":"K", "GAT":"D", "GAC":"D", "GAA":"E", "GAG":"E",
+    "TGT":"C", "TGC":"C", "TGG":"W", "CGT":"R",
+    "CGC":"R", "CGA":"R", "CGG":"R", "AGT":"S", "AGC":"S", "AGA":"R",
+    "AGG":"R", "GGT":"G", "GGC":"G", "GGA":"G", "GGG":"G"};
+assert(Abs(TranslateByString) == N_Codons, "Wrong number of codons in TranslateByString");
+TranslateByIndex = {};
+for (icodon = 0; icodon < N_Codons; icodon = icodon + 1) {
+    codon = Codons(icodon);
+    aa = TranslateByString(codon);
+    aa_i = AA_Indices(aa);
+    TranslateByIndex[icodon] = aa_i;
+}
+assert(Abs(TranslateByIndex) == N_Codons, "Wrong number of codons in TranslateByIndex");
+for (icodon = 0; icodon < N_Codons; icodon = icodon + 1) {
+    aa_i = TranslateByIndex[icodon];
+    codon = Codons[icodon];
+    aa = TranslateByString[aa];
+    assert(AA_Indices[aa] == aa_i, "Mismatch between string translated aa of " + AA_Indices[aa] + " and index translated aa of " + aa_i + "\n");
+}
+
+/* ClassifyCodonMutation function
+
+    ClassifyCodonMutation is a function that takes as an argument two strings
+    representing non-stop codons: startcodon and endcodon. It compares these
+    codons and returns the possible following values:
+
+    * The string "*" if startcodon equals endcodon
+
+    * The string "TRANSITION" if startcodon differs from endcodon by a single
+      transition mutation.
+
+    * The string "TRANSVERSION" if startcodon differs from endcodon by a single
+      transversion mutation.
+
+    * An integer giving the number of transversions that separate startcodon
+      from endcodon if the two codons differ by more than a single mutation.
+*/
+function ClassifyCodonMutation(startcodon, endcodon) {
+    assert(Abs(startcodon) == Abs(endcodon), "Codons not both of length 3");
+    assert(Abs(startcodon) == 3, "Codon not of length 3");
+    ndiffs = 0;
+    ntransversions = 0;
+    ntransitions = 0;
+    for (ii = 0; ii <= 2; ii = ii + 1) {
+        if (startcodon[ii] != endcodon[ii]) {
+            ndiffs = ndiffs + 1;
+            startnt = startcodon[ii];
+            endnt = endcodon[ii];
+            assert(startnt != endnt, "Not a codon mutation if nucleotides match...");
+            if (((startnt == "A") && (endnt == "G")) || ((startnt == "G") && (endnt == "A")) || ((startnt == "C") && (endnt == "T")) || ((startnt == "T") && (endnt == "C"))) {
+                ntransitions = ntransitions + 1;
+            } else {
+                ntransversions = ntransversions + 1;
+            }
+        }
+    }
+    assert(ndiffs == ntransitions + ntransversions, "Transitions and transversions to not sum to differences");
+    if (ndiffs == 0) {
+        return "*";
+    }
+    if (ndiffs == 1) {
+        assert(startnt != endnt, "Not a codon mutation if nucleotides match...");
+        if (ntransitions == 1) {
+            assert(ntransversions == 0, "transition and transversion");
+            return "TRANSITION";
+        }
+        else {
+            assert(ntransversions == 1, "Something wrong, should be one transversion");
+            return "TRANSVERSION";
+        }
+    }
+    else {
+        assert(ndiffs > 1, "Not more than one difference");
+        return ntransversions;
+    }
+}
+
+/* CheckCodonFilter function
+
+    CheckCodonFilter is a function that performs checking on a variable
+    with the name given by the string codonfiltername, which should
+    be a codon data set filter created using:
+
+        DataSetFilter codonfilter = CreateFilter(data, 3, "", "", "TAA,TGA,TAG");
+
+    This function makes sure that all codons are indeed one of the 61 non-stop
+    codons. It does the checking with assert statements, so an error will be
+    raised if the codons are not all one of the 61 non-stop codons.
+
+    These checks are performed on the codon filter with the name specified
+    by codonfiltername, which for example might be "codonfilter".
+*/
+function CheckCodonFilter(codonfiltername) {
+    ExecuteCommands("nspecies = " + codonfiltername + ".species;");
+    ExecuteCommands("nsites = " + codonfiltername + ".sites;");
+    assert(nspecies, "Found no species for codon filter " + codonfiltername);
+    assert(nsites, "Found no sites for codon filter + " codonfiltername);
+//    fprintf(stdout, "\nChecking codon filter " + codonfiltername + ", which consists of ", nspecies, " taxa each represented by a sequence of ", nsites, " codons.\n");
+    ExecuteCommands("GetInformation(seqs, " + codonfiltername + ");");
+    for (itaxa = 0; itaxa < nspecies; itaxa = itaxa + 1) {
+        ExecuteCommands("GetString(taxa, " + codonfiltername + ", itaxa);");
+        seq = seqs[itaxa];
+        assert(Abs(seq) == 3 * nsites, "Sequence of wrong length for taxa " + taxa);
+        for (icodon = 0; icodon < nsites; icodon = icodon + 1) {
+            codon = seq[3 * icodon] + seq[3 * icodon + 1] + seq[3 * icodon + 2];
+            codonvalid = 0;
+            for (jcodon = 0; jcodon < N_Codons; jcodon = jcodon + 1) {
+                if (codon == Codons[jcodon]) {
+                    codonvalid = 1;
+                    break;
+                }
+            }
+            assert(codonvalid || (codon == "---"), "Found invalid codon of " + codon + " in taxa " + taxa);
+        }
+    }
+    return 1;
+}

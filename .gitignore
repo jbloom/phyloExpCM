@@ -1,0 +1,14 @@
+build
+*.pyc
+*.swp
+docs/_build
+docs/_static
+docs/_templates
+slurm-*
+sbatch_*
+messages.log
+errors.log
+sbatch_*
+_codenames_*
+.DS_Store
+*.sbatch

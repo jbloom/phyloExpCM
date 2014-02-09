@@ -1,0 +1,65 @@
+
+
+This is RAxML version 7.7.6 released by Alexandros Stamatakis on August 29 2013.
+
+With greatly appreciated code contributions by:
+Andre Aberer (HITS)
+Simon Berger (HITS)
+Nick Pattengale (Sandia)
+Wayne Pfeiffer (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+
+Alignment has 565 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 0.00%
+
+RAxML rapid hill-climbing mode
+
+Using 1 distinct models/data partitions with joint branch length optimization
+
+
+Executing 1 inferences on the original alignment using 1 distinct randomized MP trees
+
+All free model parameters will be estimated by RAxML
+ML estimate of 25 per site rate categories
+
+Likelihood of final tree will be evaluated and optimized under GAMMA
+
+GAMMA Model parameters will be estimated up to an accuracy of 0.1000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 565
+Name: No Name Provided
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+
+RAxML was called as follows:
+
+raxmlHPC-SSE3 -w /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/RAxML_output/ -n Aligned_NPs -p 1 -m GTRCAT -s /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/Aligned_NPs.fasta 
+
+
+Partition: 0 with name: No Name Provided
+Base frequencies: 0.323 0.198 0.266 0.212 
+
+Inference[0]: Time 45.484705 CAT-based likelihood -11918.012049, best rearrangement setting 5
+alpha[0]: 1.000000 rates[0] ac ag at cg ct gt: 1.091446 5.167192 0.692405 0.080771 7.107521 1.000000 
+
+
+Conducting final model optimizations on all 1 trees under GAMMA-based models ....
+
+Inference[0] final GAMMA-based Likelihood: -13202.240312 tree written to file /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/RAxML_output/RAxML_result.Aligned_NPs
+
+
+Starting final GAMMA-based thorough Optimization on tree 0 likelihood -13202.240312 .... 
+
+Final GAMMA-based Score of best tree -13202.013618
+
+Program execution info written to /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/RAxML_output/RAxML_info.Aligned_NPs
+Best-scoring ML tree written to: /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/RAxML_output/RAxML_bestTree.Aligned_NPs
+
+Overall execution time: 122.267004 secs or 0.033963 hours or 0.001415 days
+

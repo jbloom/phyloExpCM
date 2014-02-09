@@ -1,0 +1,10 @@
+# input file for running script mapmuts_siteprofileplots.py for siteprofileplots
+sitepreferences combined_FracTolerated_evolutionary_equilibriumfreqs.txt
+outfileprefix /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/experimental_substitution_models//combined_FracTolerated_evolutionary
+siterange 2 498
+dsspfile /home/jbloom/phyloExpCM/examples/2013Analysis_Influenza_NP_Human_1918_Descended/DSSP_analysis/2IQH_monomerC.dssp
+dsspchain C
+add_rsa True
+add_ss True
+nperline 63
+includestop False

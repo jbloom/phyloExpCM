@@ -1,0 +1,173 @@
+/* This file implements the KOSI07 empirical codon model.
+
+It is in the format of a HYPHY include batch file.
+
+This is the model described in Kosiol, Holmes, and Goldman, 
+"An empirical model for protein sequence evolution," Mol Biol Evol,
+24:1464-1479 (2007)
+http://www.ncbi.nlm.nih.gov/pubmed/17400572
+
+This file was constructed by Jesse Bloom.
+*/
+
+// Inclusion of these files is required for the function to work, but it is assumed they have already been included elsewhere in the calling HYPHY command file. If that isn't true, you might get an error.
+// #include "NTsCodonsAAs.ibf";
+
+function CreateKOSI07Model(codonfreqmethod, kappa_method, omega_method, omega_classes, rate_classes, printoutput, includefile) {
+/* Creates KOSI07 (Kosiol 2007) empirical codon model.
+
+This model will be created in the global variable named model.
+
+This function assumes the existence of a global variable with the name codonfilter
+that is a DataSetFilter of sequences filtered to the 61 non-stop codons by 
+applying CreateFilter(data, 3, "", "", "TAA,TAG,TGA");
+
+Calling arguments:
+
+    codonfreqmethod is the method used to determine the equilibrium frequencies
+        of codons. Currently the only acceptable value is:
+
+            * "F" : calculate the equilibrium codon frequencies empirically
+              from their frequencies in the sequence alignment (codonfilter).
+              This is the method named "F" in the original Kosiol 2007 paper.
+
+    kappa_method is the method used to favor transitions versus transversions.
+        Currently the only acceptable value is:
+
+           * "ktv", which corresponds to method denoted as "k(tv)"
+            "k(tv)" in the original Kosiol 2007 paper. kappa reflects
+            the reduction in rate of mutations involving transversions, and
+            mutations involving n transversions are reduced in rate by 
+            kappa^n. There is a single global kappa parameter.
+
+    omega_method is the method used to specify the relative rate of 
+        nonsynonymous to synonymous mutations. Valid values are:
+
+            * "global" : specifies that omega is the same for all branches
+              and sites.
+
+            * "branchlocal" : specifies that omega can have different values
+              on different tree branches. If omega_method is "branchlocal", 
+              the omega_classes must be one.
+
+    omega_classes is the number of different classes for the omega values.
+        Must be a number >= 1. If it is one, then there is just one value.
+        If it is > 1, then there are that many values drawn with equal
+        probability from a gamma distribution with shape parameter omega_alpha
+        and mean omega_mean both optimized by maximum likelihood.
+    
+    rate_classes : like omega_classes, but for the synonymous rate values.
+        However, the mean is fixed to one, so only the shape parameter rate_alpha
+        is optimized.
+
+    printoutput : Switch specifying whether we print output. If 0, no output is
+        printed. If not 0, output is printed.
+
+    includefile is a string that specifies the name of the HYPHY batch file
+        defining KOSI07_exchangeabilities. Must be the full path.
+*/
+    tol = 1e-5; // tolerance when error checking for quantities summing to one
+    if (printoutput) {
+        fprintf(stdout, "\nConstructing Kosiol 2007 (KOSI07) empirical codon model.\n");
+        fprintf(stdout, "\nEquilibrium codon frequencies will be estimated empirically (using the ",  codonfreqmethod, " method.\n");
+    }
+    // Read codon frequencies in codonfreqs
+    if (codonfreqmethod == "F") {
+        HarvestFrequencies(allcodonfreqs, codonfilter, 3, 3, 1); // frequencies of all codons including stop
+        // now get codonfreqs as just frequencies of non-stop codons
+        codonfreqs = {N_Codons, 1};
+        codon_i = 0;
+        allcodon_i = 0;
+        for (nt_i1 = 0; nt_i1 < N_NTs; nt_i1 = nt_i1 + 1) {
+            nt1 = NTs[nt_i1];    
+            for (nt_i2 = 0; nt_i2 < N_NTs; nt_i2 = nt_i2 + 1) {        
+                nt2 = NTs[nt_i2];
+                for (nt_i3 = 0; nt_i3 < N_NTs; nt_i3 = nt_i3 + 1) {
+                    nt3 = NTs[nt_i3];
+                    codon = nt1 + nt2 + nt3;
+                    if ((codon != "TAA") && (codon != "TAG") && (codon != "TGA")) {
+                        codonfreqs[codon_i] = allcodonfreqs[allcodon_i];
+                        codon_i = codon_i + 1;
+                    } else {
+                        assert(allcodonfreqs[allcodon_i] < tol, "Stop codon has frequency not close to zero -- did you remove stop codons from the alignment?");
+                    }
+                    allcodon_i = allcodon_i + 1;
+                }
+            }
+        }
+        assert(codon_i == N_Codons, "Didn't go through all non-stop codon");
+        assert(allcodon_i == 3 + N_Codons, "Didn't go through all codons");
+        assert(Rows(codonfreqs) == N_Codons, "Invalid number of rows in codonfreqs");
+        sum = 0.0;
+        for (j = 0; j < N_Codons; j = j + 1) {
+            sum = sum + codonfreqs[j];
+        }
+        assert(1.0 - tol <= sum <= 1.0 + tol, "\nERROR: codon frequencies don't sum to one.\n");
+    } else {
+        assert(0 == 1, "Invalid codonfreqmethod");
+    }
+    // set kappa
+    if (kappa_method == "ktv") {
+        if (printoutput) {
+            fprintf(stdout, "\nA single global value of kappa will be used to represent the reduction in transversion versus transition rate.\n");    
+        }
+        global kappa = 1.0;
+    } else {
+        assert(0 == 1, "Invalid kappa_method");
+    }
+    // set omega
+    assert(omega_classes >= 1, "omega_classes must be >= 1");
+    if (omega_method == "global") {
+        if (omega_classes == 1) {
+            if (printoutput) {
+                fprintf(stdout, "\nUsing a single global dN/dS ratio omega for all branches.\n");
+            }
+            global omega = 1.0;
+        } else {
+            if (printoutput) {
+                fprintf(stdout, "\nUsing ", omega_classes, " discrete gamma-distributed dN/dS ratios omega that are global to all branches with an estimated shape parameter omega_alpha and a mean omega_mean.\n");
+            }
+            global omega_alpha = 0.5;
+            global omega_mean = 1.0;
+            omega_mean :> 1.0e-4;
+            omega_alpha :> 1.0e-2;
+            omega_alpha :< 1.0e3;
+            category omega = (omega_classes, EQUAL, MEAN, GammaDist(_x_, omega_alpha, omega_alpha / omega_mean), CGammaDist(_x_, omega_alpha, omega_alpha / omega_mean), 0.0, 1.0e25);
+        }
+    }
+    else {if (omega_method == "branchlocal") {
+        if (omega_classes == 1) {
+            if (printoutput) {
+                fprintf(stdout, "\nUsing a single local dN/dS ratio omega that is estimated separately for each branch.\n");
+            }
+            omega = 1.0;
+        }
+        else {
+            assert(0 == 1, "Cannot combine omega_scope of branchlocal with omega_classes > 1");
+        }
+    }
+    else {
+        assert(0 == 1, "\nERROR: Invalid value of omega_method\n");
+    }}
+    omega :> 0;
+    // set rate variation
+    assert(rate_classes >= 1, "rate_classes must be >= 1");
+    if (rate_classes == 1 ) {
+        fprintf(stdout, "\nUsing a single rate parameter (no rate variation).\n");
+        global rateparameter := 1.0; // simply set the rate parameter to one
+    } else {
+        global rate_alpha = 0.5;
+        rate_alpha :> 1.0e-2;
+        rate_alpha :< 1.0e3;
+        category rateparameter = (rate_classes, EQUAL, MEAN, GammaDist(_x_, rate_alpha, rate_alpha), CGammaDist(_x_, rate_alpha, rate_alpha), 0.0, 1.0e25, CGammaDist(_x_, rate_alpha + 1.0, rate_alpha));
+        fprintf(stdout, "\nUsing ", rate_classes, " discrete gamma-distributed rate classes with an estimated shape parameter rate_alpha.\n");
+    }
+    // include the transition matrix
+    includestring = "#include \"" + includefile + "\";";
+    ExecuteCommands(includestring);
+    assert(Rows(KOSI07_exchangeabilities) == N_Codons, "KOSI07_exchangeabilities does not have the right number of rows");
+    assert(Columns(KOSI07_exchangeabilities) == N_Codons, "KOSI07_exchangeabilities does not have the right number of rows");
+    // build the model from the rate matrix and the equilibrium frequencies
+    Model model = (KOSI07_exchangeabilities, codonfreqs, 1);
+    return 1;
+}
