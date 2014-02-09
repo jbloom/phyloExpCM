@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>phyloExpCM_buildHyphyExpCM.py &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Scripts" href="scripts.html" />
+    <link rel="next" title="phyloExpCM_optimizeHyphyTree.py" href="phyloExpCM_optimizeHyphyTree.html" />
+    <link rel="prev" title="phyloExpCM_runcodonPhyML.py" href="phyloExpCM_runcodonPhyML.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_runcodonPhyML.html" title="phyloExpCM_runcodonPhyML.py"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="phyloexpcm-buildhyphyexpcm-py">
+<span id="id1"></span><h1>phyloExpCM_buildHyphyExpCM.py<a class="headerlink" href="#phyloexpcm-buildhyphyexpcm-py" title="Permalink to this headline">¶</a></h1>
+<p>This script build experimentally determined codon models for use with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. The resulting codon models have been tested with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> versions 2.112*.</p>
+<p>This script is designed to take experimentally determined amino-acid preferences as inferred by <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> and then combine those with an experimentally determined nucleotide mutation spectrum to create the codon substitution models. These models are in an include batch file (<tt class="docutils literal"><span class="pre">.ibf</span></tt>) in the format to be included in a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> analysis.</p>
+<p>To run the script, create an input file of the format described below. Then run the script followed by the input file, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_runcodonPhyML.py infile.txt
+</pre></div>
+</div>
+<div class="section" id="format-of-the-input-file">
+<h2>Format of the input file<a class="headerlink" href="#format-of-the-input-file" title="Permalink to this headline">¶</a></h2>
+<p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
+<div class="highlight-python"><div class="highlight"><pre>key1 value1
+key2 value2
+</pre></div>
+</div>
+<p>Blank lines or lines
+that begin with # are ignored (i.e. as comment lines).</p>
+<p>The input file should contain the following keys:</p>
+<ul>
+<li><p class="first"><em>aapreferences</em> is the name of a file giving the experimentally determined equilibrium amino-acid preferences. These might be the <span class="math">\(\pi_{r,a}\)</span> values inferred by the <cite>mapmuts_</cite> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt> into the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file. Specifically, <span class="math">\(\pi_{r,a}\)</span> represents the preference of site <em>r</em> for amino acid <em>a</em> under the constraint <span class="math">\(\sum_a \pi_{r,a} = 1\)</span>. This preference is the expected equilibrium amino-acid frequency of amino acid <em>a</em> at site <em>r</em> for a hypothetical evolving population where every amino-acid is equally likely to mutate to every other amino acid (so all frequencies would be 1/20 = 0.05 in the absence of selection).</p>
+<p>The format of the file specified by <em>aapreferences</em> should match that of the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file created by <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt>. After an initial header line, each line gives the site number (1, 2, ... numbering) for all specified sites, the wildtype amino acid(s) (not used by this script), the site entropy (not used by this script), and then the experimentally determined equilibrium amino-acid frequencies for each amino acid. These equilibrium frequencies can either include or exclude a stop codon (denoted by the * character) as a possible amino acid. However, for the purposes of this script, stop codons are not considered possible amino acid identities. So if there is value for a stop codon, it is set to zero and the remaining <span class="math">\(\pi_{r,a}\)</span> values are rescaled so that they sum to one (sum over the 20 amino acids <em>a</em>. Here are a few example lines:</p>
+<div class="highlight-python"><div class="highlight"><pre>#SITE   WT_AA   SITE_ENTROPY    PI_A    PI_C    PI_D    PI_E    PI_F    PI_G    PI_H    PI_I    PI_K    PI_L    PI_M    PI_N    PI_P    PI_Q    PI_R    PI_S    PI_T    PI_V    PI_W    PI_Y    PI_*
+1   M   2.85229 0.0113803   0.0402777   0.0153121   0.0320438   0.013312    0.00936795  0.026916    0.0192017   0.0224047   0.018926    0.554093    0.0445008   0.0138125   0.0212192   0.0131771   0.0152268   0.0237621   0.0102606   0.0369008   0.0367991   0.0211056
+2   A   0.968359    0.878703    0.00384431  0.00390501  0.00815666  0.0048199   0.00244426  0.00333017  0.00258064  0.00391181  0.00094265  0.0248087   0.00238593  0.00064321  0.00288323  0.00610788  0.0012339   0.001455    0.0290568   0.0107545   0.00492073  0.00311186
+3   S   2.93851 0.0295947   0.00304848  0.00227603  0.00668501  0.131168    0.000710502 0.0199653   0.00804841  0.000619715 0.366698    0.0132841   0.0223199   0.0048327   0.0170484   0.00875982  0.090712    0.0171888   0.0102176   0.177257    0.069395    0.000170873
+4   Q   3.93186 0.012565    0.0355955   0.0396076   0.0344002   0.139887    0.0167737   0.0194143   0.0730001   0.0272629   0.131636    0.0424519   0.0840445   0.00063312  0.00533824  0.0554966   0.0647137   0.0153147   0.019934    0.113926    0.0383248   0.0296804
+</pre></div>
+</div>
+</li>
+<li><p class="first"><em>mutspectrum</em> is the name of a file giving the mutational spectrum. These are the mutational rates, and do not include information about selection (that comes from <em>aapreferences</em>). Specifically, the entry for <em>A -&gt; G</em> represents the probability that a given site mutations from nucleotide <em>A</em> to nucleotide <em>G</em> in a unit of time given that it was already <em>A</em> (in other words, it is <span class="math">\(\Pr\left(G \rm{\; at\; time\;} t = 1 | A \rm{\; at\; time\;} t = 0\right)\)</span>. These are what would be termed the &#8220;exchangeabilities&#8221; in the GTR model &#8211; they do not to reflect the equilibrium frequencies of different mutations, but just the relative mutation rates given that an identity is already present. In addition, because the mutations are determined by sequencing one nucleic acid strand and it is not known on which strand a mutation originated, mutations and their reverse complements are grouped together as equivalent (i.e. <em>A -&gt; G</em> on one strand is the same as <em>T -&gt; C</em> on another). Finally, the mutations specified here do not have to be reversible in the sense that <em>A -&gt; G</em> does not have to be equal to <em>G -&gt; A</em> &#8211; however, if you set <em>makereversible</em> to <em>True</em>, they will be constrained to be reversible as described in the documentation for that option.</p>
+<p>The format of the <em>mutspectrum</em> file should be as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AG</span><span class="p">,</span> <span class="n">TC</span><span class="p">,</span> <span class="mf">2.4e-5</span>
+<span class="n">GA</span><span class="p">,</span> <span class="n">CT</span><span class="p">,</span> <span class="mf">2.3e-5</span>
+<span class="n">AT</span><span class="p">,</span> <span class="n">TA</span><span class="p">,</span> <span class="mf">3.0e-6</span>
+<span class="n">AC</span><span class="p">,</span> <span class="n">TG</span><span class="p">,</span> <span class="mf">9.0e-6</span>
+<span class="n">GC</span><span class="p">,</span> <span class="n">CG</span><span class="p">,</span> <span class="mf">1.9e-6</span>
+<span class="n">GT</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="mf">9.4e-6</span>
+</pre></div>
+</div>
+<p>In this file, the first line specifies that the rate of <em>A -&gt; G</em> and <em>T -&gt; C</em> (which are assumed equal due to the reverse-complement symmetry) is equal to 2.4e-5. There should be six such lines covering all possible mutations. The units for the rate numbers are arbitrary, but if they are small numbers then you may want to adjust <em>scalefactor</em> to get them fairly close to one.</p>
+</li>
+<li><p class="first"><em>scalefactor</em> is a number that multiplies all of the substitution matrix entries determined from <em>mutspectrum</em> and <em>aapreferences</em> to give the values actually placed in the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> substitution matrices. In a world of perfect numerical accuracy, the value of this number will not affect the <strong>relative</strong> branch lengths (although making it larger will decrease the absolute magnitude of all branch lengths by a constant factor). However, in practice it may be helpful (this is assumed to be the case but has not been carefully verified) to make this number large enough that when it multiplies the typical value in <em>mutspectrum</em>, the result is at least fairly close to one. This will prevent the substitution matrices from having lots of very small numbers, which could cause numerical underflow. So for the example values of <em>mutspectrum</em> described immediately above, you might want <em>scalefactor</em> equal to something like 10000.0.</p>
+</li>
+<li><p class="first"><em>makereversible</em> specifies that we constrain the mutational spectrum specified by <em>mutspectrum</em> to be reversible. Currently, the only allowable value for this option is <em>True</em> (you must constrain these to be reversible). This means that for the mutational spectrum, we set the actual mutation values to be the average of the two reversible exchanges specified. So for instance, let <em>mutspectrum</em> be this file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AG</span><span class="p">,</span> <span class="n">TC</span><span class="p">,</span> <span class="mf">2.4e-5</span>
+<span class="n">GA</span><span class="p">,</span> <span class="n">CT</span><span class="p">,</span> <span class="mf">2.3e-5</span>
+<span class="n">AT</span><span class="p">,</span> <span class="n">TA</span><span class="p">,</span> <span class="mf">3.0e-6</span>
+<span class="n">AC</span><span class="p">,</span> <span class="n">TG</span><span class="p">,</span> <span class="mf">9.0e-6</span>
+<span class="n">GC</span><span class="p">,</span> <span class="n">CG</span><span class="p">,</span> <span class="mf">1.9e-6</span>
+<span class="n">GT</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="mf">9.4e-6</span>
+</pre></div>
+</div>
+<p>This mutation spectrum is not actually quite reversible, as for example <em>A -&gt; G</em> and <em>G -&gt; A</em> have slightly different values. With this option, we constrain it to be reversible, giving the following values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>A -&gt; T, T -&gt; A</em> = 3.0e-6 (no change from specified values)</li>
+<li><em>G -&gt; C, C -&gt; G</em> = 1.9e-6 (no change from specified values)</li>
+<li><em>A -&gt; G, T -&gt; C, G -&gt; A, C -&gt; T</em> = (2.4e-5 + 2.3e-5) / 2 = 2.35e-5</li>
+<li><em>A -&gt; C, T -&gt; G, C -&gt; A, G -&gt; T</em> = (9.0e-6 + 9.4e-6) / 2 = 9.2e-6</li>
+</ul>
+</div></blockquote>
+<p>You can see that in this example, the assumption of reversibility seems to be quite good, as the two averaged values are very close. If they are not, you might want to question the assumption of reversibility. Unfortunately, this script is not currently set up to accept <em>makereversible</em> set to <em>False</em>, so that will require more algorithmic work (in practice, although <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can accept non-reversible models, it seems to greatly slow the computations and their convergence).</p>
+</li>
+<li><p class="first"><em>model</em> specifies how we convert the experimentally determined amino-acid preferences in <em>aapreferences</em> into substitution probabilities between amino acids. There are currently two possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>FracTolerated</em> specifies that we compute the substitution probabilities by interpreting the amino-acid preferences in <em>aapreferences</em> as the probability (or fraction of genetic backgrounds in which) a substitution is tolerated. Specifically, if <em>aapreferences</em> specifies that two amino acids <em>x</em> and <em>y</em> at site <em>r</em> have equilibrium preferences <span class="math">\(\pi_{r,x}\)</span> and <span class="math">\(\pi_{r,y}\)</span>, then the substitution probabilities from <em>x</em> to <em>y</em> is 1 if <span class="math">\(\pi_{r,y} &gt; \pi_{r,x}\)</span> and is <span class="math">\(\pi_{r,y} / \pi_{r,x}\)</span> otherwise.</li>
+<li><em>HalpernBruno</em> specifies that we compute the substitution probabilities provided by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9656490">Halpern and Bruno, MBE, 1998</a> (Equation 10 of that paper, although note that their equation contains a typo). Specifically, if <em>aapreferences</em> specifies that two amino acids <em>x</em> and <em>y</em> at site <em>r</em> have equilibrium preferences <span class="math">\(\pi_{r,x}\)</span> and <span class="math">\(\pi_{r,y}\)</span>, then the substitution probability from <em>x</em> to <em>y</em> is 1 if <span class="math">\(\pi_{r,x} = \pi_{r,y}\)</span> and otherwise is <span class="math">\(\left[\ln\left(\pi_{r,y} / \pi_{r,x}\right)\right] / \left(1 - \pi_{r,x} / \pi_{r,y}\right)\)</span>. This relationship was derived in <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9656490">Halpern and Bruno, MBE, 1998</a> based on the fixation probabilities of mutations if <span class="math">\(\pi_{r,x}\)</span> and <span class="math">\(\pi_{r,y}\)</span> represent the relative fitness values.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>evolequilfreqs</em> specifies the name of an output file created by this script which contains the expected equilibrium frequencies of each amino-acid (sum of the frequencies of all of its codons) under the substitution model built by this script. The format of this created file is exactly equivalent to that for <em>aapreferences</em>, however the actual frequencies will be different due to the structure of the genetic code, mutational spectrum, and unequal number of codons per amino acid. This file gives our expectation for how often we would observe each amino acid after evolutionary equilibration. Note that this file is in the appropriate format to serve as input for the <tt class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></tt> script of the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> package. The wildtype amino acid column is shown as <em>na</em> for all sites.</p>
+</li>
+<li><p class="first"><em>hyphyExpCMs</em> is the name of the created file that contains the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> substitution models. Its format is described in the <a class="reference internal" href="#output-files">Output files</a> section below.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example input file:</p>
+<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_buildHyphyExpCM.py
+aapreferences equilibriumpreferences.txt
+mutspectrum mutspectrum.txt
+scalefactor 10000.0
+makereversible True
+model FracTolerated
+evolequilfreqs FracTolerated_evolutionary_equilibriumfreqs.txt
+hyphyExpCMs hyphyExpCMs_FracTolerated.ibf
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>Some summary output is printed to standard output. In addition, the following output files are created. If any of these files already exist, they are overwritten:</p>
+<ul>
+<li><p class="first"><em>evolequilfreqs</em> is the output file specified by <em>evolequilfreqs</em>. It is in the format described in the explanation of that parameter above.</p>
+</li>
+<li><p class="first"><em>hyphyExpCMs</em> is a created file in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch format (<tt class="docutils literal"><span class="pre">.ibf</span></tt>) for use in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. This file is designed to be included in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch files using a line such as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;hyphyExpCMs_FracTolerated.ibf&quot;;</span>
+</pre></div>
+</div>
+<p>This file creates a substitution model for each site listed in <em>aapreferences</em>. For each site <em>isite</em> in <em>aapreferences</em> (where numbering goes 1, 2, ...) this file defines the following variables for <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (names are listed below for site <em>isite = 2</em> and <em>isite = 3</em>, but there would be similar names for all site numbers):</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>modelmatrix2</em>, <em>modelmatrix3</em>, etc are 61 X 61 matrices giving the exchangeabilities between each non-stop codon, using the standard <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> codon indexing, which lists all of the 61 non-stop codons in alphabetical order. If <em>makereversible</em> is <em>True</em>, this matrix is symmetric. <em>modelmatrix2[i, j]</em> corresponds to the exchangeability from codon <em>i</em> to <em>j</em> at site <em>isite = 2</em> where codons are indexed 0, 1, ...</p>
+</li>
+<li><p class="first"><em>equilfreqs2</em>, <em>equilfreqs3</em>, etc are 61 X 1 vectors giving the equilibrium frequencies of each of the 61 non-stop codons, again using <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> codon indexing (alphabetical order).</p>
+</li>
+<li><p class="first"><em>model2</em>, <em>model3</em>, etc are the substitution models, constructed from <em>modelmatrix2</em>, <em>modelmatrix3</em>, <em>equilfreqs2</em>, <em>equilfreqs3</em>, etc using the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> commands:</p>
+<div class="highlight-python"><div class="highlight"><pre>Model model2 = (modelmatrix2, equilfreqs2, 1);
+Model model3 = (modelmatrix3, equilfreqs3, 1);
+</pre></div>
+</div>
+<p>The third parameter of 1 on each line indicates that the rate matrices are generated as the product of the symmetric exchangeability matrices and the equilibrium frequencies, and so are reversible.. The defined substitution models <em>model2</em>, <em>model3</em>, etc can then be used in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to construct a <em>LikelihoodFunction</em> after including the batch file <em>hyphyExpCMs</em>.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>You should apply the models (<em>model2</em>, <em>model3</em>, etc) to trees. The model entries all multiply a parameter named <em>t</em>, which is assumed to be the variable name that you use in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to represent branch lengths.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">phyloExpCM_buildHyphyExpCM.py</a><ul>
+<li><a class="reference internal" href="#format-of-the-input-file">Format of the input file</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+<li><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="phyloExpCM_runcodonPhyML.html"
+                        title="previous chapter">phyloExpCM_runcodonPhyML.py</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="phyloExpCM_optimizeHyphyTree.html"
+                        title="next chapter">phyloExpCM_optimizeHyphyTree.py</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/phyloExpCM_buildHyphyExpCM.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_runcodonPhyML.html" title="phyloExpCM_runcodonPhyML.py"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

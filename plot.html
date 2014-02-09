@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>plot Module &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
+    <link rel="next" title="Acknowledgements" href="acknowledgements.html" />
+    <link rel="prev" title="packagedata Module" href="packagedata.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="packagedata.html" title="packagedata Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-plot">
+<span id="plot-module"></span><h1><tt class="docutils literal"><span class="pre">plot</span></tt> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h1>
+<p>Module for making plots with <em>matplotlib</em>.</p>
+<p>Written by Jesse Bloom, 2013.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>This module requires:</p>
+<ul class="simple">
+<li><em>matplotlib</em></li>
+</ul>
+</div>
+<div class="section" id="functions-defined-in-this-module">
+<h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>PlotLogLvsNParams</em> : plots log likelihood versus number of parameters.</li>
+</ul>
+<dl class="function">
+<dt id="plot.PlotLogLvsNParams">
+<tt class="descclassname">plot.</tt><tt class="descname">PlotLogLvsNParams</tt><big>(</big><em>plotfile</em>, <em>data_d</em><big>)</big><a class="headerlink" href="#plot.PlotLogLvsNParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots log likelihood (y-axis) versus number of parameters (x-axis).</p>
+<p>Requires <em>matplotlib</em> and <em>pylab</em>, and will raise an exception if 
+not available.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>plotfile</em> is a string giving the name of the created plotfile. 
+Should end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.</p>
+</li>
+<li><p class="first"><em>data_d</em> specifies the data points to be plotted. Each data point
+has three pieces of information:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The <em>plotting_group</em> (a string).</li>
+<li>The number of parameters (number plotted on x-axis).</li>
+<li>The log likelihood (number plotted on y-axis).</li>
+</ol>
+</div></blockquote>
+<p>Points in the same <em>plotting_group</em> are plotted with the same symbol
+and have the same legend entry.</p>
+<p><em>data_d</em> specifies these points as follows. <em>data_d</em> is a dictionary
+that is keyed by the <em>plotting_group</em> string. The entries for each
+string is a list of one or more 2-tuples. Each 2-tuple specifies
+a data point for that <em>plotting_group</em> as <em>(log_likelihood, nparams)</em>.</p>
+<p>Overall, <em>data_d</em> must specify at least two data points (although
+they can both be from the same plotting group if yo would like).</p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="packagedata.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acknowledgements.html"
+                        title="next chapter">Acknowledgements</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/plot.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="packagedata.html" title="packagedata Module"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

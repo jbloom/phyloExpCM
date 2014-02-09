@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>phyloExpCM_multiHyphyRuns.py &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Scripts" href="scripts.html" />
+    <link rel="next" title="phyloExpCM_plotLogLvsNParams.py" href="phyloExpCM_plotLogLvsNParams.html" />
+    <link rel="prev" title="phyloExpCM_optimizeHyphyTree.py" href="phyloExpCM_optimizeHyphyTree.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_plotLogLvsNParams.html" title="phyloExpCM_plotLogLvsNParams.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="phyloexpcm-multihyphyruns-py">
+<span id="id1"></span><h1>phyloExpCM_multiHyphyRuns.py<a class="headerlink" href="#phyloexpcm-multihyphyruns-py" title="Permalink to this headline">¶</a></h1>
+<p>This script implements multiple runs of <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> that are all being run on the same tree and sequences but are using different substitution models. Essentially, you can use this to automate multiple runs of the <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> to compare different substitution models. For much of the details about the options for this script, see the documentation for <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a>.</p>
+<p>Each run is performed in its own subdirectory, which is created by this script. All of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> results will be in this subdirectory for each run, with the exception of the <em>summaryfile</em> which is created in the main directory used to run the script.</p>
+<p>To run the script, create an input file of the format described below. Then run the script followed by the input file, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_runcodonPhyML.py infile.txt
+</pre></div>
+</div>
+<p>Note that running this script may take quite a while if <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> takes a long time to run. <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can also start to consume a lot of memory for relatively big input trees.</p>
+<div class="section" id="format-of-the-input-file">
+<h2>Format of the input file<a class="headerlink" href="#format-of-the-input-file" title="Permalink to this headline">¶</a></h2>
+<p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
+<div class="highlight-python"><div class="highlight"><pre>key1 value1
+key2 value2
+</pre></div>
+</div>
+<p>Blank lines or lines
+that begin with # are ignored (i.e. as comment lines).
+The entries should appear in the order listed below and shown in the example input file.</p>
+<p>The input file should contain the following lines:</p>
+<ul>
+<li><p class="first">The first seven lines should specify the keys listed below. These keys have exactly the same meaning as for the <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> script. These keys are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>hyphypath</em></li>
+<li><em>hyphycmdfile</em> : should be relative, not absolute, file name</li>
+<li><em>hyphyoutfile</em> : should be relative, not absolute, file name</li>
+<li><em>hyphytreefile</em> : should be relative, not absolute, file name</li>
+<li><em>hyphydistancesfile</em> : should be relative, not absolute, file name. Make this <em>None</em> if you do not want to create these files. Note that no file will be created for substitution models with branch local parameters.</li>
+<li><em>fastafile</em></li>
+<li><em>treefile</em></li>
+<li><em>siteslist</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">The key <em>summaryfile</em> specifies the name of the output file (CSV format) that summarizes the results from all of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> runs. The format is described below under Output files.</p>
+</li>
+<li><p class="first">The key <em>nmulti</em> specifies the integer number of processes that are run at a single time. Each process is a separate run of <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a>. If you just want to run the analyses one at a time, set this value to 1. Otherwise if you set it to more than one, that many processes will be run simultaneously. This might make sense to do if you are using a multi-processor machine. However, when choosing the right value, do note that some <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> executables use multiple processes (such as <tt class="docutils literal"><span class="pre">HYPHYMP</span> <span class="pre">CPU=2</span></tt>), and also that <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> runs can consume large amounts of RAM which is sometimes limiting.</p>
+</li>
+<li><p class="first">The remaining lines should list the different substitution models that are used. Each of these lines should begin with an entry that gives the directory (no spaces) that will be created for the run. It should then be followed by text that provides a valid value for the <em>model</em> parameter for input to <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a>. This script will go through each of these listed substitution models, create the directory, and then run <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> within that directory. For example, the entry:</p>
+<div class="highlight-python"><div class="highlight"><pre>GY94 GY94_CF3x4_omega-global-one_rates-one
+</pre></div>
+</div>
+<p>will lead to the creation of the subdirectory <tt class="docutils literal"><span class="pre">./GY94/</span></tt> and then the running of <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> within that subdirectory using <em>GY94_CF3x4_omega-global-one_rates-one</em> as the <em>model</em> input parameter. Each of the directory names must be unique. If any of the directories already exist, an exception is raised. If the <em>experimental</em> model option is used, the specified <tt class="docutils literal"><span class="pre">.ibf</span></tt> file giving the experimental <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> substitution model should be in the home directory used to run <a class="reference internal" href="#phyloexpcm-multihyphyruns-py"><em>phyloExpCM_multiHyphyRuns.py</em></a>. The input file created for each of the runs within its own subdirectory will have the name <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree_infile.txt</span></tt>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example input file:</p>
+<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_multiHyphyRuns.py
+hyphypath HYPHYMP CPU=2
+hyphycmdfile hyphy_cmds.bf
+hyphyoutfile hyphy_output.txt
+hyphytreefile hyphy_tree.newick
+hyphydistancesfile hyphy_distances.txt
+fastafile Human_NPs.fasta
+treefile Human_NPs_codonphyml_tree.newick
+siteslist equilibriumpreferences.txt
+summaryfile hyphy_summary.csv
+nmulti 6
+GY94 GY94_CF3x4_omega-global-one_rates-one
+GY94_gamma-rates GY94_CF3x4_omega-global-one_rates-gamma5
+GY94_gamma-rates_gamma-omega GY94_CF3x4_omega-global-gamma5_rates-gamma5
+GY94_gamma-rates_branchlocal-omega GY94_CF3x4_omega-branchlocal-one_rates-gamma5
+KOSI07 KOSI07_F_omega-global-one_rates-one
+KOSI07_gamma-rates KOSI07_F_omega-global-one_rates-gamma5
+KOSI07_gamma-rates_gamma-omega KOSI07_F_omega-global-gamma5_rates-gamma5
+KOSI07_gamma-rates_branchlocal-omega KOSI07_F_omega-branchlocal-one_rates-gamma5
+experimental_FracTolerated experimental hyphyExpCMs_FracTolerated.ibf
+experimental_HalpernBruno experimental hyphyExpCMs_HalpernBruno.ibf
+experimental_FracTolerated_random1 experimental_randomize1 hyphyExpCMs_FracTolerated.ibf
+experimental_FracTolerated_random2 experimental_randomize2 hyphyExpCMs_FracTolerated.ibf
+experimental_HalpernBruno_random1 experimental_randomize1 hyphyExpCMs_HalpernBruno.ibf
+experimental_HalpernBruno_random2 experimental_randomize2 hyphyExpCMs_HalpernBruno.ibf
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>Some summary output is printed to standard output. In addition, the following output is created:</p>
+<ul>
+<li><p class="first">For each of the specified models, the specified subdirectory is created with the input file <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree_infile.txt</span></tt>, the log file <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree_log.txt</span></tt>, and the errors file <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree_errors.txt</span></tt> (this last file is empty if nothing is output to standard error). In addition, the subdirectory contains the output files created by running <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a>.</p>
+</li>
+<li><p class="first">The file <em>summaryfile</em> lists the log likelihood, the number of branch lengths, and the number of independently optimized <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> parameters <strong>NOT</strong> including the branch lengths for each model.</p>
+<p>Note, however, that this parameter count does <strong>NOT</strong> include parameters not explicitly optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> but that are still estimated from data in an empirical way. For example, for the <em>GY94</em> method with <em>CF3x4</em>, there are 9 such parameters (three nucleotide frequencies at each of three sites). For the <em>KOSI07</em> method with <em>F</em>, there are 60 parameters (the frequencies of 60 of the 61 non-stop codons).</p>
+<p>Here is an example of the output in <em>summaryfile</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># model, log_likelihood, nbranchlengths, nparameters, nsharedparameters</span>
+<span class="n">GY94</span><span class="p">,</span> <span class="o">-</span><span class="mf">4441.19</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">KOSI07_gamma</span><span class="o">-</span><span class="n">rates</span><span class="p">,</span> <span class="o">-</span><span class="mf">4389.25</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">KOSI07</span><span class="p">,</span> <span class="o">-</span><span class="mf">4410.96</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">GY94_gamma</span><span class="o">-</span><span class="n">rates</span><span class="p">,</span> <span class="o">-</span><span class="mf">4429.59</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">phyloExpCM_multiHyphyRuns.py</a><ul>
+<li><a class="reference internal" href="#format-of-the-input-file">Format of the input file</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+<li><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="phyloExpCM_optimizeHyphyTree.html"
+                        title="previous chapter">phyloExpCM_optimizeHyphyTree.py</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="phyloExpCM_plotLogLvsNParams.html"
+                        title="next chapter">phyloExpCM_plotLogLvsNParams.py</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/phyloExpCM_multiHyphyRuns.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_plotLogLvsNParams.html" title="phyloExpCM_plotLogLvsNParams.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

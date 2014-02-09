@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>submatrix Module &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
+    <link rel="next" title="hyphy Module" href="hyphy.html" />
+    <link rel="prev" title="io Module" href="io.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hyphy.html" title="hyphy Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="io Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-submatrix">
+<span id="submatrix-module"></span><h1><tt class="docutils literal"><span class="pre">submatrix</span></tt> Module<a class="headerlink" href="#module-submatrix" title="Permalink to this headline">¶</a></h1>
+<p>Module for generating experimentally determined codon substitution models.</p>
+<p>This module is designed for constructing codon-level
+substitution matrices from the equilibrium amino-acid frequencies
+inferred by the <tt class="docutils literal"><span class="pre">mapmuts</span></tt> package plus additional information about
+the nucleotide-level mutational spectrum.</p>
+<p>It can generated substitution matrices usable by <tt class="docutils literal"><span class="pre">HYPHY</span></tt>.</p>
+<p>Written by Jesse Bloom, 2013.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>This module requires:</p>
+<ul class="simple">
+<li><em>mapmuts</em></li>
+<li><em>numpy</em></li>
+</ul>
+</div>
+<div class="section" id="functions-defined-in-this-module">
+<h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>NonStopCodons</em> : returns list of all non-stop codons in alphabetical order.</li>
+<li><em>CodonTable</em> : returns codon to amino-acid translation dictionary.</li>
+<li><em>ReadMutSpectrum</em> : reads mutational spectrum.</li>
+<li><em>WriteHYPHYMatrices</em> : writes substitution matrices in <tt class="docutils literal"><span class="pre">HYPHY</span></tt> format.</li>
+<li><em>BuildSubMatrices</em> : build codon substitution matrices.</li>
+<li><em>StationaryStates</em> : gets stationary states of substitution matrices.</li>
+<li><em>DecomposeToExchangeabilityEquilibrium</em> : decomposes reversible matrix.</li>
+</ul>
+<dl class="function">
+<dt id="submatrix.BuildSubMatrices">
+<tt class="descclassname">submatrix.</tt><tt class="descname">BuildSubMatrices</tt><big>(</big><em>mutspectrumfile</em>, <em>equilibriumfreqsfile</em>, <em>model</em>, <em>scalefactor</em>, <em>makereversible</em><big>)</big><a class="headerlink" href="#submatrix.BuildSubMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Codon substitution matrix from mutation spectrum and amino-acid frequencies.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>mutspectrumfile</em> is a file giving the nucleotide mutation spectrum in a
+format that can be read by <em>ReadMutSpectrum</em>.</p>
+</li>
+<li><p class="first"><em>equilibriumfreqsfile</em> is a file giving the equilibrium amino-acid
+frequencies at each site in a format that can be read by
+<em>mapmuts.io.ReadEntropyAndEquilFreqs</em>. If stop codon preferences
+are specified, these are set to zero and all other preferences
+rescaled so that they sum to one over the 20 amino acids for
+each site.</p>
+</li>
+<li><p class="first"><em>model</em> is a string that specifies the type of relationship between
+the equilibrium amino-acid frequencies and the fixation probability.
+The acceptable values are:</p>
+<ul class="simple">
+<li><em>FracTolerated</em> means that these frequencies are interpreted
+as the fraction of genetic backgrounds in which a mutation is
+tolerated.</li>
+<li><em>HalpernBruno</em> means that these frequencies are analyzed as
+described by Halpern and Bruno, MBE, 1998.</li>
+<li><em>PreferWildtype_XX</em> where <em>XX</em> is a number &gt; 0 means that the
+wildtype amino acid is preferred over all others by a factor of <em>XX</em>.</li>
+</ul>
+</li>
+<li><p class="first"><em>scalefactor</em> is a number (&gt; 0) used to multiply all matrix 
+entries. You would want to set this to a number &gt; 1 if you 
+think that the matrix entries would be very small otherwise.
+This is not critical in a world of perfect numerical accuracy,
+but in the real world it might improve things numerically 
+if entries are scaled to not be too small.</p>
+</li>
+<li><p class="first"><em>makereversible</em> is a Boolean switch specifying that we make the 
+matrices reversible. All of the allowed <em>model</em> settings make the
+amino-acid portion of the selection reversible. So whether the
+matrices are reversible depends on whether the nucleotide mutation
+spectrum is reversible. If it is, then the matrices will be reversible.
+So if <em>makereversible</em> is <em>True</em>, we the values for <em>A -&gt; G, T -&gt; C</em> 
+and <em>G -&gt; A, C -&gt; T</em> to both be equal to their average value. We also
+do the same for <em>A -&gt; C, T -&gt; G</em> and <em>C -&gt; A, G -&gt; T</em>. This is probably
+reasonable to do if these estimated values are just slightly different.
+If they are very different, then you may want to consider the
+plausibility of using reversible models in the first place.</p>
+<p>The alternative is to set <em>makereversible</em> to <em>False</em>, in which case
+the two pairs of mutation types set above are kept at their original
+values in <em>mutspectrumfile</em>, and are not set to be equal. This will
+make the model non-reversible unless these happen to be precisely
+equal to begin with.</p>
+</li>
+</ul>
+<p>RETURN VARIABLE:</p>
+<p>The returned variable is a dictionary <em>submatrices</em>. This dictionary is
+keyed by residue numbers, and <em>submatrices[isite]</em> is the substitution 
+matrix for site <em>isite</em> (sites numbered as in <em>equilibriumfreqsfile</em>, which
+is typically 1, 2, ... numbering). <em>submatrices[isite]</em> is a <em>numpy.array</em>
+of dimension <em>(len(NonStopCodons()), len(NonStopCodons()))</em>. For two different
+non-stop codons <em>x</em> and <em>y</em>, the substitution probability from <em>x</em> to <em>y</em> is
+given by <em>submatrices[isite][xi, yi]</em> where <em>xi = NonStopCodons().index(x)</em>
+and <em>yi = NonStopCodons().index(y)</em> for all <em>x != y</em>. The diagonal elements
+are given by:</p>
+<div class="highlight-python"><div class="highlight"><pre>*submatrices[isite][xi, xi] = -sum([submatrices[isite][xi, yi] for yi in range(len(NonStopCodons())) if yi != xi])
+</pre></div>
+</div>
+<p>This means that rows of the matrices sum to zero. This means that the matrices
+plus the identity matrix are right-stochastic matrices.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.CodonTable">
+<tt class="descclassname">submatrix.</tt><tt class="descname">CodonTable</tt><big>(</big><big>)</big><a class="headerlink" href="#submatrix.CodonTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary keyed by codons, values amino acids.</p>
+<p>Returns a dictionary of length 64 keyed by all of the codons
+as upper-case strings. The values are the encoded amino acid
+in the one-letter upper-case code, or * for stop codons.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">genetic_code</span> <span class="o">=</span> <span class="n">CodonTable</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">genetic_code</span><span class="p">)</span> <span class="o">==</span> <span class="mi">64</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span> <span class="o">=</span> <span class="n">genetic_code</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">dict</span><span class="p">([(</span><span class="n">aa</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">aas</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">21</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;M&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;W&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;D&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;E&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;H&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;K&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;N&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;Q&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;Y&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;P&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;V&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;L&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;R&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">aas</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;S&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.DecomposeToExchangeabilityEquilibrium">
+<tt class="descclassname">submatrix.</tt><tt class="descname">DecomposeToExchangeabilityEquilibrium</tt><big>(</big><em>submatrices</em>, <em>atol=1e-08</em>, <em>rtol=1e-05</em>, <em>min_p=2e-06</em><big>)</big><a class="headerlink" href="#submatrix.DecomposeToExchangeabilityEquilibrium" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decomposes reversible matrix to exchangeability and equilibrium.</p>
+<p>Let <em>M</em> be a substitution matrix of the type returned by <em>BuildSubMatrices</em>.
+Assuming that <em>M</em> is acyclic and irreducible, then <em>M</em> will have one
+eigenvalue of zero and all other eigenvalues &lt; 0 and &gt; -1 (<em>M + I</em> is
+a right-stochastic matrix where <em>I</em> is the identity matrix). The left
+eigenvector corresponding to the zero eigenvalue is the equilibrium
+(stationary) state. Call this eigenvector <em>pi</em>. In other words, we have
+<em>0 = pi M</em>.</p>
+<p>If <em>M</em> is also reversible, then it is possibly to write <em>M</em> as
+<em>M = S diag(pi)</em> where <em>S</em> is a symmetrix matrix. We call <em>S</em> the
+exchangeability matrix.</p>
+<p>This function takes a set of substitition matrices <em>submatrices</em>,
+checks that they are reversible, and computes the equilibrium
+vector and the exchangeability matrix for each substitution matrix.
+If it encounters a substitution matrix that is not reversible, it
+raises an exception.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>submatrices</em> is a dictionary keyed by site number and with values
+equal to the substitution matrices, as returned by <em>BuildSubMatrices</em>.
+Because each of these substitution matrices is a right-stochastic matrix
+minus the identity matrix, the matrices should have one eigenvalue equal
+to zero and all of the rest of the eigenvalues &lt; 0. The left eigenvector
+corresponding to the zero eigenvalue is the stationary state.</li>
+<li><em>rtol</em> and <em>atol</em> specify the numerical tolerance for checking detailed
+balance and the closeness of the principal eigenvector of satisfying
+the condition <em>0 = pi M</em>. They have the meanings of the same calling
+arguments to <em>numpy.allclose</em>.</li>
+<li><em>min_p</em> specifies the lowest allowed value for an entry in the 
+equilibrium state vector before an error is raised. The reason for this
+argument is that the current method for computing the exchangeability
+matrix <em>S</em> will not work if there are entries in <em>min_p</em> that get too
+close to zero.</li>
+</ul>
+<p>RETURN VARIABLES:</p>
+<p>If all of the matrices in <em>submatrices</em> are reversible within
+the tolerance specified by <em>atol</em> and <em>rtol</em>, then the 
+returned variable is the 3-tuple: 
+<em>(stationary_vecs, pi_d, exchangeabilities)</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>stationary_vecs</em> is a dictionary keyed by all site number keys
+in <em>submatrices</em>. The values are the left eigenvectors
+of the substitution matrix &#8211; these are <em>numpy.array</em> objects
+of dimension <em>(1, len(NonStopCodons()))</em>. These are the eigenvectors
+in codon space. These eigenvectors are scaled so that all entries
+are positive and sum to one.</li>
+<li><em>pi_d</em> is a dictionary keyed by all site number keys in
+<em>submatrices</em>. The values are dictionaries keyed by <em>&#8216;PI_%s&#8217; % aa</em>
+where <em>aa</em> is a one-letter amino-acid code for each amino acid.
+The value is the frequency for that amino acid in the stationary
+state, determined as the sum of the frequencies of all of the 
+encoding codons. These are the stationary states in amino-acid
+space.</li>
+<li><em>exchangeabilities</em> is a dictionary keyed by all site number keys
+in <em>submatrices</em>. The values are <em>numpy.array</em> objects of the 
+dimension <em>(len(NonStopCodons()), len(NonStopCodons()))</em>. These
+are the exchangeability matrices <em>S</em>. They are tested to be
+symmetric using the criteria specified by <em>rtol</em> and <em>atol</em>.</li>
+</ul>
+</div></blockquote>
+<p>If we encounter a non-reversible matrix in <em>submatrices</em>, an exception
+is raised.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.NonStopCodons">
+<tt class="descclassname">submatrix.</tt><tt class="descname">NonStopCodons</tt><big>(</big><big>)</big><a class="headerlink" href="#submatrix.NonStopCodons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all non-stop codons using standard genetic code.</p>
+<p>The codons are returned in a fixed order (alphabetical order)
+as upper-case three-letter strings.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">codons</span> <span class="o">=</span> <span class="n">NonStopCodons</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">codons</span><span class="p">)</span> <span class="o">==</span> <span class="mi">61</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.ReadMutSpectrum">
+<tt class="descclassname">submatrix.</tt><tt class="descname">ReadMutSpectrum</tt><big>(</big><em>infile</em><big>)</big><a class="headerlink" href="#submatrix.ReadMutSpectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the mutation spectrum.</p>
+<p>On call, <em>infile</em> should be the name of a file specifying the rate of
+mutation from each nucleotide to each other nucleotide. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AG</span><span class="p">,</span> <span class="n">TC</span><span class="p">,</span> <span class="mf">2.4e-5</span>
+<span class="n">GA</span><span class="p">,</span> <span class="n">CT</span><span class="p">,</span> <span class="mf">2.3e-5</span>
+<span class="n">AT</span><span class="p">,</span> <span class="n">TA</span><span class="p">,</span> <span class="mf">3.0e-6</span>
+<span class="n">AC</span><span class="p">,</span> <span class="n">TG</span><span class="p">,</span> <span class="mf">9.0e-6</span>
+<span class="n">GC</span><span class="p">,</span> <span class="n">CG</span><span class="p">,</span> <span class="mf">1.9e-6</span>
+<span class="n">GT</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="mf">9.4e-6</span>
+</pre></div>
+</div>
+<p>For example, the first line is interpreted as giving the probability
+that a site that is initially A is mutated to G in a unit time step,
+or the probability that a site that is initially C is mutated to T
+in a unit time step.</p>
+<p>The returned variable is a dictionary keyed by all of the 2-tuples
+found in <em>mapmuts.sequtils.NTMutTypes()</em>. The values for each 2-tuple
+is the rate specified by <em>infile</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.StationaryStates">
+<tt class="descclassname">submatrix.</tt><tt class="descname">StationaryStates</tt><big>(</big><em>submatrices</em>, <em>tol=1e-07</em><big>)</big><a class="headerlink" href="#submatrix.StationaryStates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes stationary states of substitution matrices.</p>
+<p><em>submatrices</em> is a dictionary keyed by site number and with values
+equal to the substitution matrices, as returned by <em>BuildSubMatrices</em>.
+Because each of these substitution matrices is a right-stochastic matrix
+minus the identity matrix, the matrices should have one eigenvalue equal
+to zero and all of the rest of the eigenvalues &lt; 0. The left eigenvector
+corresponding to the zero eigenvalue is the stationary state.</p>
+<p><em>tol</em> specifies the amount that the zero eigenvector (stationary state)
+can deviate from zero before an exception is raised.</p>
+<p>The returned variable is a 2-tuple: <em>(stationary_vecs, pi_d)</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>stationary_vecs</em> is a dictionary keyed by all site number keys
+in <em>submatrices</em>. The values are the left eigenvectors
+of the substitution matrix &#8211; these are <em>numpy.array</em> objects
+of length  <em>len(NonStopCodons())</em>. These are the eigenvectors
+in codon space. These eigenvectors are scaled so that all entries
+are positive and sum to one.</li>
+<li><em>pi_d</em> is a dictionary keyed by all site number keys in
+<em>submatrices</em>. The values are dictionaries keyed by <em>&#8216;PI_%s&#8217; % aa</em>
+where <em>aa</em> is a one-letter amino-acid code for each amino acid.
+The value is the frequency for that amino acid in the stationary
+state, determined as the sum of the frequencies of all of the 
+encoding codons. These are the stationary states in amino-acid
+space.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="submatrix.WriteHYPHYMatrices">
+<tt class="descclassname">submatrix.</tt><tt class="descname">WriteHYPHYMatrices</tt><big>(</big><em>exchangeabilities</em>, <em>stationary_vecs</em>, <em>outfile</em><big>)</big><a class="headerlink" href="#submatrix.WriteHYPHYMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes substitution matrices in <tt class="docutils literal"><span class="pre">HYPHY</span></tt> batch file format.</p>
+<p><em>exchangeabilities</em> is a set of symmetrix exchangeability matrices 
+as returned by the function <em>DecomposeToExchangeabilityEquilibrium</em>.
+Because this matrix is assumed to be symmetric, only the lower left
+is used.</p>
+<p><em>stationary_vecs</em> is a set of equilibrium frequencies as returned
+by the function <em>DecomposeToExchangeabilityEquilibrium</em></p>
+<p><em>outfile</em> is the file to which we write all of the substitution 
+matrices. This file will have the format of a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> include
+batch file, so you might typically give it the extension <tt class="docutils literal"><span class="pre">.ibf</span></tt>.
+<em>outfileprefix</em> specifies the name of the output files.</p>
+<p>For each site in <em>exchangeabilities</em> and <em>stationary_vecs</em> (which
+are assumed to contain the same set of sites), this function creates
+a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> substitution matrix of name <em>model1</em>, <em>model2</em>, etc
+for sites 1, 2, ... that is a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> reversible substitution model.
+It also creates the variables <em>modelmatrix1</em>, <em>modelmatrix2</em>, etc
+to define the exchangeabilities, and <em>equilfreqs1</em>, <em>equilfreqs2</em>, etc
+to define the equilibrium frequencies. Each matrix entry multiplies
+the variable <em>t</em>, which is assumed to be the notation that <tt class="docutils literal"><span class="pre">HYPHY</span></tt>
+uses to denote branch lengths.</p>
+<p>The indexing of the codons for these matrices are indexed according
+to the order of codons defined in <em>NonStopCodons()</em>, starting with 0
+and going to 60. This is alphabetical order. This is the same
+standard order that <tt class="docutils literal"><span class="pre">HYPHY</span></tt> uses to index codons.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">submatrix</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="io.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">io</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hyphy.html"
+                        title="next chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">hyphy</span></tt> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/submatrix.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hyphy.html" title="hyphy Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="io Module"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

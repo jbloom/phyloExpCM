@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hyphy Module &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
+    <link rel="next" title="packagedata Module" href="packagedata.html" />
+    <link rel="prev" title="submatrix Module" href="submatrix.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="packagedata.html" title="packagedata Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="submatrix.html" title="submatrix Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-hyphy">
+<span id="hyphy-module"></span><h1><tt class="docutils literal"><span class="pre">hyphy</span></tt> Module<a class="headerlink" href="#module-hyphy" title="Permalink to this headline">¶</a></h1>
+<p>Module for running <tt class="docutils literal"><span class="pre">HYPHY</span></tt> analyses.</p>
+<p>This module is designed to run the <tt class="docutils literal"><span class="pre">HYPHY</span></tt> program. It has been 
+tested with <tt class="docutils literal"><span class="pre">HYPHY</span></tt> version 2.112*.</p>
+<p>Requires <tt class="docutils literal"><span class="pre">mapmuts</span></tt> for some basic sequence operations.</p>
+<p>Written by Jesse Bloom, 2013.</p>
+<div class="section" id="functions-defined-in-this-module">
+<h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>RandomizeCodonAlignment</em> : randomly rearranges sites in an alignment.</li>
+<li><em>ExtractTree</em> : extract tree from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</li>
+<li><em>ExtractLikelihoodAndNParameters</em> : extracts likelihood and number of parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</li>
+<li><em>CreateHYPHYCommandFile</em> : creates command file for <tt class="docutils literal"><span class="pre">HYPHY</span></tt> batch mode.</li>
+</ul>
+<dl class="function">
+<dt id="hyphy.CreateHYPHYCommandFile">
+<tt class="descclassname">hyphy.</tt><tt class="descname">CreateHYPHYCommandFile</tt><big>(</big><em>cmdfile</em>, <em>outputfile</em>, <em>fastafile</em>, <em>newickfile</em>, <em>distancesfile</em>, <em>sites</em>, <em>model</em><big>)</big><a class="headerlink" href="#hyphy.CreateHYPHYCommandFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command file.</p>
+<p>The created command file <em>cmdfile</em> specifies that we run <tt class="docutils literal"><span class="pre">HYPHY</span></tt>
+on a pre-existing tree topology given by <em>newickfile</em>, where
+<em>fastafile</em> gives the sequences of the tip nodes of the tree.
+The analysis is run using only the sites listed in <em>sites</em>, and
+uses the substitution model specified by <em>model</em>.
+The tree topology is not changed, but the branch lengths and
+any parameters in the substitution model are optimized.</p>
+<p>This function currently only works for codon sequences and
+codon models.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>cmdfile</em> is the name of the <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command file that we create.
+It is overwritten if it already exists. This file can be used
+to run <tt class="docutils literal"><span class="pre">HYPHY</span></tt> using the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>hyphypath cmdfile
+</pre></div>
+</div>
+<p>where <em>hyphypath</em> gives a path to a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> executable.</p>
+</li>
+<li><p class="first"><em>outputfile</em> is the name of the file that the <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command
+file <em>cmdfile</em> specifies that the final output should be written.</p>
+</li>
+<li><p class="first"><em>fastafile</em> is the name of a FASTA file that gives the aligned
+coding sequences (the lengths must be multiples of three,
+and they must be aligned at the codon level). Stop codons
+should be removed or else not included in the listing specified in 
+<em>sites</em>. The sequence headers must match the tip node names given
+in <em>newickfile</em>. The sequence names must conform to <tt class="docutils literal"><span class="pre">HYPHY</span></tt> 
+naming conventions, which means only alphanumeric characters
+and underscores.</p>
+</li>
+<li><p class="first"><em>newickfile</em> gives the tree in Newick format, with tip names
+matching the sequence names in <em>fastafile</em>.</p>
+</li>
+<li><p class="first"><em>distancesfile</em> specifies that we create a file that contains the
+pairwise distances between all sequences computed using the model
+parameters obtained after maximizing the likelihood over the whole tree.
+These distances represent the branch length of a two-taxa tree for
+each pair of sequences after fixing the substitution model parameters
+to the maximum-likelihood values for the whole tree. If the substitution
+model contains local parameters (such as an <em>omega_scope</em> of &#8220;branchlocal&#8221;
+for <em>model</em>) then <em>distancesfile</em> can <strong>not</strong> be used, and must
+be set to <em>None</em>. That is because branch local model parameters
+cannot be fixed for the pairwise distance estimations. So if you
+have local parameters and set <em>distancesfile</em> to something other than
+<em>None</em>, an exception will be raised.</p>
+<p>The valid values for <em>distancesfile</em> are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>None</em> specifies that no pairwise distances are computed.</li>
+<li>A string giving the name of the file to create. This file will
+contain the pairwise distances for all possible pairs of
+sequences.</li>
+<li>A 2-tuple <em>(filename, distanceseqs)</em> specifies that we create
+a pairwise-distance file of the name <em>filename</em>, but that it only
+contains pairwise distances to all of the sequence listed in
+<em>distanceseqs</em>. Then <em>distanceseqs</em> should be a non-empty list
+containing one or more sequence names that match the headers in
+<em>fastafile</em>. The created <em>filename</em> contains the pairwise
+distances from all other sequences to each sequence listed
+in <em>distanceseqs</em>.</li>
+</ul>
+</div></blockquote>
+<p>If a pairwise distances file is create, it contain a line for each
+pair of sequences with three tab-delimited entries:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the first sequence name</li>
+<li>the second sequence name</li>
+<li>the pairwise distance between these two sequences</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>sites</em> is a listing of all codon sites that we include in the analysis.
+These sites are numbered 1, 2, ... For example, a value
+of <em>sites = [2, 3, 4]</em> specifies that we only include
+codon positions 2, 3, and 4. This list must be sorted from
+smallest to largest or an Exception will be raised. Note that
+these are the codon numbers, not the nucleotide numbers.</p>
+</li>
+<li><p class="first"><em>model</em> specifies the codon substitution model used. Valid values are:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>(&#8216;experimental&#8217;, hyphyExpCMs)</em> : if <em>model</em> is set to this
+2-tuple, we use an experimentally determined codon model
+where a different substitution model is applied to each
+site. The first element of the 2-tuple is just the string
+&#8216;experimental&#8217;, while the second element is the name of
+a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> include batch file specifying the model for
+each site in sites as <em>model1</em>, <em>model2</em>, etc where the
+numerical suffixes are in 1, 2, ... numbering and
+are present for each site in <em>sites</em>. Typically,
+this file would be the file that you create for the argument
+<em>hyphyExpCMs</em> using the script <tt class="docutils literal"><span class="pre">phyloExpCM_buildHyphyExpCM.py</span></tt>.</p>
+</li>
+<li><p class="first"><em>(&#8216;GY94&#8217;, equilfreqs, omega_scope, omega_classes, rate_classes)</em> :
+is a tuple that specifies that we use the Goldman and Yang 1994 
+model. The transition-transversion ratio <em>kappa</em> is treated as a
+single global parameter for all branches and sites, and is estimated
+by maximum likelihood. The remaining parameters are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>equilfreqs</em> specifies how we estimate the equilibrium codon
+frequencies. The supported values are the string <em>CF3x4</em> and
+<em>F3x4</em>. You should use <em>CF3x4</em> unless you have a good reason
+to use <em>F3x4</em>. The <em>CF3x4</em> is the corrected method for estimating
+the codon frequencies as the products of the individual nucleotides
+at the three positions.</li>
+<li><em>omega_scope</em> specifies the scope of the dN/dS ratio (<em>omega</em>).
+Valid values are the string <em>global</em> if the same ratio (or
+set of ratios) are applied to all branches, or <em>branchlocal</em>
+if different ratios (or sets of ratios) are applied to each
+branch. The latter approach will greatly increase the number
+of parameters.</li>
+<li><em>omega_classes</em> specifies how many <em>omega</em> values there are
+either for the whole tree (if <em>omega_scope</em> is <em>global</em>)
+or for each branch (if <em>omega_scope</em> is <em>branchlocal</em>). This
+variable can be set to the string <em>one</em> if there is just one
+<em>omega</em> value, or to <em>gamma6</em> if the values are drawn from
+six equally probable gamma distributed classes (you can also
+use <em>gamma2</em>, <em>gamma3</em>, etc). The shape of the gamma distribution
+is estimated by maximum likelihood.</li>
+<li><em>rate_classes</em> specifies how many rate classes there are for
+the synonymous substitution rate. Valid values are the string
+<em>one</em> if there is only one rate class, or <em>gamma6</em> if there
+are six rate classes drawn from six equally probably 
+gamma-distributed classes (you can also use <em>gamma2</em>, <em>gamma3</em>,
+etc). The shape of the gamma distribution is
+estimated by maximum likelihood.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>(&#8216;KOSI07&#8217;, equilfreqs, omega_scope, omega_classes, rate_classes)</em> :
+is a tuple that specifies that we use the Kosiol et al, 2007 model.
+This is the variant termed <em>ECM+F+omega+1kappa(tv)</em> in that
+original paper. The other variables in the tuple have the same
+meaining as for the <em>GY94</em> model except that now the only allowable
+option for <em>equilfreqs</em> is <em>F</em>.</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="hyphy.ExtractLikelihoodAndNParameters">
+<tt class="descclassname">hyphy.</tt><tt class="descname">ExtractLikelihoodAndNParameters</tt><big>(</big><em>hyphyoutfile</em><big>)</big><a class="headerlink" href="#hyphy.ExtractLikelihoodAndNParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts log likelihood and number of parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</p>
+<p><em>hyphyoutfile</em> is a string giving the name of a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output file
+of the type produced by <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></tt>.
+It should contain the following lines (along with probably many others):</p>
+<div class="highlight-python"><div class="highlight"><pre>Log likelihood: -671.317
+independent parameters (includes branch lengths): 47
+shared parameters: 0
+number of branch lengths: 45
+number of tip nodes: 24
+number of internal branches: 21
+</pre></div>
+</div>
+<p>This function returns the 2-tuple <em>(loglikelihood, nparameters)</em>. The entries
+are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>loglikelihood</em> is the log likelihood, so -671.317 in the example
+output shown above.</li>
+<li><em>nparameters</em> is the number of free parameters <strong>not</strong> including the
+branch lengths. So in the example above, <em>nparameters</em> is
+47 - 45, since the number of branch lengths is subtracted from the
+total number of independent parameters including branch lengths.
+Note that this parameter count will <strong>not</strong> include parameters
+that are empirically estimated from the data (such as the 9
+frequencies in the Goldman-Yang 1994 CF3x4 model).</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="hyphy.ExtractTree">
+<tt class="descclassname">hyphy.</tt><tt class="descname">ExtractTree</tt><big>(</big><em>hyphyoutfile</em>, <em>treename='tree'</em><big>)</big><a class="headerlink" href="#hyphy.ExtractTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a the Newick tree string from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</p>
+<p>This function is designed to extract the newick tree string from a
+<tt class="docutils literal"><span class="pre">HYPHY</span></tt> output file that includes the tree topology and the branch
+lengths. This would be the type of file created by printing the
+optimized <em>likelihood</em> object in <tt class="docutils literal"><span class="pre">HYPHY</span></tt> with 
+<em>LIKELIHOOD_FUNCTION_OUTPUT = 5</em>. More specifically, this is the 
+tree that would be present in the <em>outputfile</em> created by
+<em>CreateHYPHYCommandFile</em>.</p>
+<p><em>hyphyoutfile</em> should specify the name of the <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output file
+that contains the tree.</p>
+<p><em>treename</em> is a string giving the name used to specify the tree
+in <em>hyphyoutfile</em>. By default, this is the string &#8216;tree&#8217;.</p>
+<p>This function returns a string giving the Newick string of the tree
+with the correct branch lengths.</p>
+<p>If the same substitution model is used for all sites, it would be
+possible simply to extract the Newick string line from <em>hyphyoutfile</em>.
+However, if different sites have different models, then the file will
+contain lots of different tree lines with different branches. To handle
+this situation, this function looks for the newick tree with the name 
+specified by <em>treename</em>, a line beginning:</p>
+<div class="highlight-python"><div class="highlight"><pre>Tree tree=(((((((((((((((TipSeq13_:0.012291,TipSeq24_:0.0122797)Node14
+</pre></div>
+</div>
+<p>and gets that tree topology. However, it does not simply extract that line,
+because the branch lengths are only for the substitution model applied
+to the sites in that tree. It then also looks for entries specifying
+branch lengths, such as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tree</span><span class="o">.</span><span class="n">Node6</span><span class="o">.</span><span class="n">t</span><span class="o">=</span><span class="mf">5.000000025e-09</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and uses those to fill in the branch lengths. Once this is done, it
+returns the resulting tree string.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hyphy.RandomizeCodonAlignment">
+<tt class="descclassname">hyphy.</tt><tt class="descname">RandomizeCodonAlignment</tt><big>(</big><em>seqs</em><big>)</big><a class="headerlink" href="#hyphy.RandomizeCodonAlignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomly rearranges sites in a codon alignment.</p>
+<p><em>seqs</em> is a set of aligned coding nucleotide sequences, aligned
+at the codon level (so consecutive triplets are aligned). The
+list consists of <em>(header, sequence)</em> 2-tuples. Because the sequences
+are aligned, the <em>sequence</em> elements of the 2-tuples should
+all be the same length and should be multiples of three.</p>
+<p>For all sequences, codon sites are randomly interchanged, with the same
+interchange applied to all sequences. The interchange is done
+using the Python <em>random</em> module, so for reproducible output seed
+this with <em>random.seed</em>.</p>
+<p>The return variable <em>randomizedseqs</em> is a copy of <em>seqs</em>
+in which the codons have been interchanged randomly.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">hyphy</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="submatrix.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">submatrix</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="packagedata.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/hyphy.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="packagedata.html" title="packagedata Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="submatrix.html" title="submatrix Module"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

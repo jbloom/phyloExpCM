@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>phyloExpCM_plotLogLvsNParams.py &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Scripts" href="scripts.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="phyloExpCM_multiHyphyRuns.py" href="phyloExpCM_multiHyphyRuns.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="phyloexpcm-plotloglvsnparams-py">
+<span id="id1"></span><h1>phyloExpCM_plotLogLvsNParams.py<a class="headerlink" href="#phyloexpcm-plotloglvsnparams-py" title="Permalink to this headline">¶</a></h1>
+<p>This script is designed to help visually display the results of testing several substitution models to infer or optimize phylogenetic trees from the same set of data. The script uses <a class="reference external" href="http://matplotlib.org/">matplotlib</a> to plot the likelihood versus the number of parameters. You might want to use this script to help display results after several runs of <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a>.</p>
+<p>To run the script, create an <a class="reference internal" href="#input-file">Input file</a>  as described below. Then run the script from the command line using the input file as the single argument, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_plotLogLvsNParams.py infile.txt
+</pre></div>
+</div>
+<p>This will create the output plot described in <a class="reference internal" href="#output-files">Output files</a>.</p>
+<div class="section" id="input-file">
+<h2>Input file<a class="headerlink" href="#input-file" title="Permalink to this headline">¶</a></h2>
+<p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
+<div class="highlight-python"><div class="highlight"><pre>key1 value1
+key2 value2
+</pre></div>
+</div>
+<p>Blank lines or lines
+that begin with # are ignored (i.e. as comment lines).</p>
+<p>The input file should contain the following keys:</p>
+<ul>
+<li><p class="first"><em>plotfile</em> should give the name of the created PDF plot. This name should end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.</p>
+</li>
+<li><p class="first"><em>datafile</em> should give the name of the existing data file. This is a CSV file which currently does not support entries that themselves contain commas. Essentially, each line is split between commas into entries. Lines in the file that begin with # or are blank are ignored. All other lines must contain at least seven comma-separated entries. Each line should specify a data point. The entries that are important to this script are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Entry 3 should give the log likelihood for that model as a number.</li>
+<li>Entry 4 should give the number of free parameters for that model as an integer.</li>
+<li>Entry 7 should be a string that is the &#8220;plotting group&#8221; to which the data point is assigned. This is the label assigned to the data point in the legend. Each &#8220;plotting group&#8221; is indicated by a different style point and has its own entry in the legend. So if you make a separate &#8220;plotting group&#8221; for each data point, then each data point has its own legend entry. On the other hand, if you give several data points the same &#8220;plotting group,&#8221; then they will have the same symbol and legend entry.</li>
+</ul>
+</div></blockquote>
+<p>Here is an example of a valid <em>datafile</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07.
+#
+#SUBSTITUTION_MODEL, AIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS, PLOTTING_GROUP
+experimental, 31000.0, -15000.0, 0, 0, 0, experimental
+KOSI07_F_omega-global-gamma4_rates-one, 32354.2, -16114.1, 63, 3, 60, KOSI07
+KOSI07_F_omega-global-one_rates-gamma4, 32454.8, -16164.4, 63, 3, 60, KOSI07
+KOSI07_F_omega-global-one_rates-one, 33032.5, -16454.3, 62, 2, 60, KOSI07
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example input file:</p>
+<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_plotLogLvsNParams.py
+plotfile logl_vs_nparams.pdf
+datafile KOSI07_summary.csv
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>The created output file is the PDF plot file specified by <em>plotfile</em>. Here is an example:</p>
+<blockquote>
+<div><strong>INCLUDE EXAMPLE HERE</strong></div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">phyloExpCM_plotLogLvsNParams.py</a><ul>
+<li><a class="reference internal" href="#input-file">Input file</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+<li><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="phyloExpCM_multiHyphyRuns.html"
+                        title="previous chapter">phyloExpCM_multiHyphyRuns.py</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">Examples</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/phyloExpCM_plotLogLvsNParams.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>runphyml Module &mdash; phyloExpCM 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
+    <link rel="next" title="io Module" href="io.html" />
+    <link rel="prev" title="phyloExpCM package" href="phyloExpCM_package.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="io Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_package.html" title="phyloExpCM package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-runphyml">
+<span id="runphyml-module"></span><h1><tt class="docutils literal"><span class="pre">runphyml</span></tt> Module<a class="headerlink" href="#module-runphyml" title="Permalink to this headline">¶</a></h1>
+<p>Python module for running <tt class="docutils literal"><span class="pre">phyml</span></tt> and <tt class="docutils literal"><span class="pre">codonphyml</span></tt>.</p>
+<p>Requires the <tt class="docutils literal"><span class="pre">mapmuts</span></tt> package.</p>
+<p>Written by Jesse Bloom, 2013.</p>
+<div class="section" id="functions-defined-in-this-module">
+<h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>WritePhylipSequenceFile</em> : writes sequences in PHYLIP format</li>
+<li><em>RunCodonphyml</em> : runs <tt class="docutils literal"><span class="pre">codonphyml</span></tt></li>
+</ul>
+<dl class="function">
+<dt id="runphyml.RunCodonphyml">
+<tt class="descclassname">runphyml.</tt><tt class="descname">RunCodonphyml</tt><big>(</big><em>seqfile</em>, <em>path</em>, <em>seed</em>, <em>outprefix</em>, <em>model</em>, <em>add_mm_line=None</em><big>)</big><a class="headerlink" href="#runphyml.RunCodonphyml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs <tt class="docutils literal"><span class="pre">codonphyml</span></tt>, returns log likelihood of tree.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>seqfile</em> is a FASTA file with the sequences that we want to
+analyze. Each must have a unique header of less than 100 characters
+that does not include a blank or the characters :(),&#8221;</p>
+</li>
+<li><p class="first"><em>path</em> is the path to the <tt class="docutils literal"><span class="pre">codonphyml</span></tt> executable.</p>
+</li>
+<li><p class="first"><em>seed</em> is the integer random number seed.</p>
+</li>
+<li><p class="first"><em>outprefix</em> is the prefix for the files created by this function.
+These files have that prefix with the following suffixes. 
+Any existing files with these names are overwritten:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">_config.drw</span></tt> is the darwin format input file used to run
+<tt class="docutils literal"><span class="pre">codonphyml</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">_output.txt</span></tt> is the output of <tt class="docutils literal"><span class="pre">codonphyml</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">_tree.newick</span></tt> is the inferred tree in Newick format. Branch
+supports are shown, calculated using the SH-aLRT approach
+(<a class="reference external" href="http://sysbio.oxfordjournals.org/content/60/5/685.long">http://sysbio.oxfordjournals.org/content/60/5/685.long</a>)</li>
+<li><tt class="docutils literal"><span class="pre">_stats.txt</span></tt> contains the statistics from the inference,
+including all parameter values.</li>
+<li><tt class="docutils literal"><span class="pre">_loglikelihood.txt</span></tt> contains a single number representing
+the log likelihood.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>model</em> specifies the codon substitution model used. Valid values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>GY94_CF3x4</em> : The Goldman-Yang codon model with 
+the equilibrium codon frequencies estimated empirically using 
+the CF3x4 method, with kappa (the transition / transversion ratio) 
+estimated by maximum likelihood, and with omega (the dN/dS ratio) 
+estimated as a single parameter by maximum likelihood</li>
+<li><em>GY94_CF3x4_omega-gamma4</em> : The Goldman-Yang codon model with 
+the equilibrium codon frequencies estimated empirically using 
+the CF3x4 method, with kappa (the transition / transversion ratio) 
+estimated by maximum likelihood, and with omega (the dN/dS ratio) 
+drawn from four gamma-distributed categories with the distribution 
+shape parameter (alpha) estimated by maximum likelihood.</li>
+<li><em>KOSI07_F_omega-gamma4 : The Kosiol et al, 2007 empirical codon model 
+with the equilibrium codon frequencies estimated empirically using 
+the *F</em> method, with <em>kappa(tv)</em> (the relative decrease in transversions 
+versus transitions) estimated by maximum likelihood, and with <em>omega</em>
+(the elevation in nonsynonymous over synonymous) drawn from four 
+gamma-distributed categories with the distribution shape parameter 
+and mean estimated by maximum likelihood. This is based on 
+the <em>ECM+F+omega+1kappa(tv)</em> model described by Kosiol et al, 2007.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>add_mm_line</em> is <em>None</em> by default. If it is set to another
+value, it should be set to a string specifying a multi-model
+line in the format described in the documentation for the 
+parameter of the same name in <em>WritePhylipSequenceFile</em>.</p>
+</li>
+</ul>
+<p>RETURN VARIABLE:</p>
+<p>This function returns a number giving the calculated log likelihood.</p>
+<p>It also creates the files specified by <em>outprefix</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="runphyml.WritePhylipSequenceFile">
+<tt class="descclassname">runphyml.</tt><tt class="descname">WritePhylipSequenceFile</tt><big>(</big><em>sequences</em>, <em>f</em>, <em>add_mm_line=False</em><big>)</big><a class="headerlink" href="#runphyml.WritePhylipSequenceFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a sequence file in sequential relaxed Phylip format.</p>
+<dl class="docutils">
+<dt><em>sequences</em> is a list of 2-tuples <em>(head, seq)</em> where <em>head</em> is the</dt>
+<dd>sequence header and <em>seq</em> is the sequence (both strings). The sequences
+should be aligned, and so should all be the same length.</dd>
+<dt><em>f</em> is a writeable file-like object to which the Phylip formatted</dt>
+<dd>sequences are written.</dd>
+</dl>
+<p><em>add_mm_line</em> specifies that we add the final line necessary for using
+<tt class="docutils literal"><span class="pre">codonPhyML</span></tt> with multi-models. If this option has its default value
+of <em>None</em>, then no such line is added. Otherwise, <em>add_mm_line</em> should
+be a string of length equal to the length of the sequences in <em>sequences</em>.
+The characters in this line are typically taken to specify the model 
+assigned to each site, and are written with the prefix <tt class="docutils literal"><span class="pre">#=GR</span> <span class="pre">mods</span></tt>, 
+as in:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#=GR mods AAAAABBAAAAAAAAAA</span>
+</pre></div>
+</div>
+<p>Phylip file format is defined here: <a class="reference external" href="http://www.phylo.org/tools/phylip.html">http://www.phylo.org/tools/phylip.html</a></p>
+<p>This function modifies that Phylip format as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the sequence name (<em>head</em>) can be up to 100 characters long</li>
+<li>there is always a space between the sequence name and the sequence</li>
+<li>the following symbols are not allowed, blanks and any of :(),&#8221;</li>
+</ul>
+</div></blockquote>
+<p>If any of the headers violate these restrictions, or are not unique,
+an exception is raised.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sequences</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;head1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGACT&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;head2&#39;</span><span class="p">,</span> <span class="s">&#39;ATGCTA&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">WritePhylipSequenceFile</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">2 6</span>
+<span class="go">head1 ATGACT</span>
+<span class="go">head2 ATGCTA</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sequences</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;head1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGACT&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;head1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGCTA&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">WritePhylipSequenceFile</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">Duplicate name of head1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">runphyml</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="phyloExpCM_package.html"
+                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">phyloExpCM</span></tt> package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="io.html"
+                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">io</span></tt> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/runphyml.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="io Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_package.html" title="phyloExpCM package"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

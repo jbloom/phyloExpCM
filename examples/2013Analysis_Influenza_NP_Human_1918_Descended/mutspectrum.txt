@@ -1,6 +1,0 @@
-AG, TC, 2.4e-5
-GA, CT, 2.3e-5
-AT, TA, 3.0e-6
-AC, TG, 9.0e-6
-GC, CG, 1.9e-6
-GT, CA, 9.4e-6
