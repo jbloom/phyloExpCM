@@ -6,7 +6,7 @@ A `Python`_ package to implement experimentally determined codom models of subst
 
 `phyloExpCM`_ source code is available `on GitHub`_.
 
-`phyloExpCM`_ documentation is available `on GitHub pages`_.
+`phyloExpCM documentation`_ is available `on GitHub pages`_.
 
 `phyloExpCM` is written by `Jesse Bloom`_.
 
@@ -14,7 +14,8 @@ A `Python`_ package to implement experimentally determined codom models of subst
 
 .. _`on GitHub`: https://github.com/jbloom/phyloExpCM
 .. _`phyloExpCM`: https://github.com/jbloom/phyloExpCM
-.. _`on GitHub Pages`: http://jbloom.github.com/phyloExpCM
+.. _`on GitHub Pages`: http://jbloom.github.io/phyloExpCM
+.. _`phyloExpCM documentation`: http://jbloom.github.io/phyloExpCM
 .. _`Jesse Bloom`: http://research.fhcrc.org/bloom/en.html
 .. _`Python`: http://www.python.org/
 .. _`GPLv3`: http://www.gnu.org/licenses/gpl.html

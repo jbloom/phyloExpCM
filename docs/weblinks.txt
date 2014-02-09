@@ -1,7 +1,7 @@
 .. _`on GitHub`: https://github.com/jbloom/phyloExpCM
 .. _`phyloExpCM`: https://github.com/jbloom/phyloExpCM
-.. _`on GitHub Pages`: http://jbloom.github.com/phyloExpCM
-.. _`phyloExpCM documentation`: http://jbloom.github.com/phyloExpCM
+.. _`on GitHub Pages`: http://jbloom.github.io/phyloExpCM
+.. _`phyloExpCM documentation`: http://jbloom.github.io/phyloExpCM
 .. _`Jesse Bloom`: http://research.fhcrc.org/bloom/en.html
 .. _`codonPhyML`: http://sourceforge.net/projects/codonphyml/
 .. _`HYPHY`: http://www.hyphy.org/w/index.php/Main_Page
