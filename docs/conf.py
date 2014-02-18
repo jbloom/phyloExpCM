@@ -54,6 +54,7 @@ for example in examples:
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, "%s/../src/" % os.path.abspath('.'))
+sys.path.insert(0, "%s/../" % os.path.abspath('.'))
 
 # -- General configuration -----------------------------------------------------
 
