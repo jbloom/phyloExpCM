@@ -272,6 +272,8 @@ for each of the three amino-acid preference sets (*replicate A*, *replicate B*, 
 
         * ``./experimental_substitution_models/combined_HalpernBruno_evolutionary_equilibriumfreqs.txt`` is the expected equilibrium frequencies for evolution governed by the *HalpernBruno* model.
 
+Note that the ``*.ibf`` files are not actually included in the `phyloExpCM`_ repository `on GitHub`_ due to their large file size, but they can be regenerated with the commands here.
+
 We also make a visual logo plot image of the expected equilibrium frequencies of the different amino acids during evolution. Note that these frequencies are **different** from the amino-acid preferences themselves described in the `mapmuts analysis of the Aichi68 influenza NP from 2013`_, since these evolutionary frequencies account for the structure of the genetic code and mutation frequencies (see the `phyloExpCM documentation`_ for ``phyloExpCM_buildHyphyExpCM.py``). A visual plot is made for the *combined* experimental data using the *FracTolerated* model (as will be seen below, this appears to be the best model), and is in the file ``./experimental_substitution_models/combined_FracTolerated_evolutionarysite_preferences_logoplot.pdf`` as shown below:
 
     .. figure:: example_2013Analysis_Influenza_NP_Human_1918_Descended_experimental_substitution_models_combined_FracTolerated_evolutionarysite_preferences_logoplot.jpg
@@ -292,7 +294,7 @@ The results of the optimizations for the various substitution models are in the 
 
     * ``hyphy_tree.newick`` is the tree with branch lengths optimized by `HYPHY`_ using the substitution model in question.
 
-    * ``hyphy_output.txt`` is a text file summarizing the `HYPHY`_ output from the optimization.
+    * ``hyphy_output.txt`` is a text file summarizing the `HYPHY`_ output from the optimization. Note that the ``hyphy_output.txt`` files are not actually included in the `phyloExpCM`_ repository `on GitHub`_ due to their large file size, but they can be regenerated using the commands here.
 
 A more helpful way to view the results is to look at the main summary files created in the examples home directory. These files are ``KOSI07_summary.csv`` (for optimization of the tree topology estimated by `codonPhyML`_ with the *KOSI07* model) and ``GY94_summary.csv`` (for optimization of the tree topology estimated by `codonPhyML`_ with the *GY94* model). The results are sorted by the likelihood from best to worst.
 Overall, this file contains the following columns:
@@ -348,6 +350,7 @@ Similar files are created in LaTex formatted tables as ``GY94_summary.tex`` and 
 .. _`RAxML`: https://github.com/stamatak/standard-RAxML
 .. _`Path-O-Gen`: http://tree.bio.ed.ac.uk/software/pathogen/
 .. _`phyloExpCM`: https://github.com/jbloom/phyloExpCM
+.. _`on GitHub`: https://github.com/jbloom/phyloExpCM
 .. _`phyloExpCM documentation`: http://jbloom.github.io/phyloExpCM
 .. _`codonPhyML`: http://sourceforge.net/projects/codonphyml/
 .. _`Python`: http://www.python.org/
