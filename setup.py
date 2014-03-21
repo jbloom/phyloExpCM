@@ -30,7 +30,7 @@ from distutils.core import setup
 # main setup command
 setup(
     name = 'phyloExpCM', 
-    version = '0.1', 
+    version = '0.2', 
     author = 'Jesse D. Bloom', 
     author_email = 'jbloom@fhcrc.org', 
     url = 'https://github.com/jbloom/phyloExpCM', 
@@ -52,6 +52,7 @@ setup(
             'scripts/phyloExpCM_runcodonPhyML.py',
             'scripts/phyloExpCM_buildHyphyExpCM.py',
             'scripts/phyloExpCM_optimizeHyphyTree.py',
+            'scripts/phyloExpCM_ExpModelOptimizeHyphyTree.py',
             'scripts/phyloExpCM_multiHyphyRuns.py',
             ],
 )

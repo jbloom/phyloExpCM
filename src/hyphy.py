@@ -17,7 +17,11 @@ Functions defined in this module
 
 * *ExtractLikelihoodAndNParameters* : extracts likelihood and number of parameters from ``HYPHY`` output.
 
+* *ExtractValues* : extract variable values from ``HYPHY`` output.
+
 * *CreateHYPHYCommandFile* : creates command file for ``HYPHY`` batch mode.
+
+* *CreateHYPHYCommandFile2* : more general function for creating ``HYPHY`` command file to optimize tree and/or model.
 
 """
 
@@ -65,6 +69,57 @@ def RandomizeCodonAlignment(seqs):
     return rseqs
 
 
+def ExtractValues(hyphyoutfile, values):
+    """Extracts values for parameters from ``HYPHY`` output.
+
+    *hyphyoutfile* is a string giving the name of a ``HYPHY`` output file
+    of the type produced by ``phyloExpCM_OptimizeDetectSelectionHyphy.py``.
+
+    *values* specifies the values that we want to extract. It is keyed
+    by strings giving the names of the parameters. Initially, the value
+    for each key must be *None*. This function expects to find **exactly one**
+    occurrence of each key, and sets the corresponding value to that
+    numerical value. Keys can be present in *hyphyoutfile* as follow:
+
+        - There can be an exact match for that key preceded by nothing
+          else on the line, and followed by a colon and then the value,
+          optionally followed by a semicolon. For example, the key
+          *Log likelihood* would match either of the following lines::
+
+            Log likelihood: -58.6512466447406
+            Log likelihood: -58.6512466447406;
+
+        - There can be the name of a variable followed preceded by
+          either nothing or the string *global*, and followed by
+          an *=* or *:=* and the the value. For example, the 
+          key *RCG* would match any one of the following lines (and
+          several other similar variants)::
+
+            RCG=1.02;
+            RCG:=1.02;
+            RCG = 1.02;
+            RCG := 1.02;
+            RCG=1.02
+            global RCG=1.02;
+            global RCG:=1.02;
+
+    On return, *values* will hold the extracted values for each key.
+    An exception (a *ValueError*) will be raised if a key is either
+    not present or is present multiple times.
+    """
+    lines = open(hyphyoutfile).readlines()
+    keys = values.keys()
+    for key in keys:
+        m = re.compile("^\s*(global\s+){0,1}%s\s*(\:|\=|\:\=)\s*(?P<value>\-{0,1}\d+\.{0,1}\d*((e|E)(\-|\+){0,1}\d+){0,1})\s*\;{0,1}\s*$" % re.escape(key))
+        matches = [m.search(line) for line in lines]
+        matches = [x for x in matches if x]
+        if not matches:
+            raise ValueError("Failed to match %s in %s" % (key, hyphyoutfile))
+        elif len(matches) > 1:
+            raise ValueError("Multiple matches for %s in %s" % (key, hyphyoutfile))
+        values[key] = float(matches[0].group('value'))
+
+
 def ExtractLikelihoodAndNParameters(hyphyoutfile):
     """Extracts log likelihood and number of parameters from ``HYPHY`` output.
 
@@ -78,6 +133,12 @@ def ExtractLikelihoodAndNParameters(hyphyoutfile):
         number of branch lengths: 45
         number of tip nodes: 24
         number of internal branches: 21
+
+    Or the following lines:
+
+        Log likelihood: -671.317
+        Branch lengths optimized: 45
+        Model parameters optimized: 2
 
     This function returns the 2-tuple *(loglikelihood, nparameters)*. The entries
     are:
@@ -95,9 +156,10 @@ def ExtractLikelihoodAndNParameters(hyphyoutfile):
     """
     llmatch = re.compile ('Log likelihood: (?P<value>\-\d+(\.\d+(e|E\d+){0,1}){0,1})')
     parametersmatch = re.compile('independent parameters \(includes branch lengths\): (?P<value>\d+)')
-    branchlengthsmatch = re.compile('number of branch lengths: (?P<value>\d+)')
-    d = {'ll':None, 'ntotparameters':None, 'nbranchlengths':None}
-    match_d = {'ll':llmatch, 'ntotparameters':parametersmatch, 'nbranchlengths':branchlengthsmatch}
+    branchlengthsmatch = re.compile('(number of branch lengths:|Branch lengths optimized:) (?P<value>\d+)')
+    modelparametersmatch = re.compile('Model parameters optimized: (?P<value>\d+)')
+    d = {'ll':None, 'ntotparameters':None, 'nbranchlengths':None, 'nmodelparameters':None}
+    match_d = {'ll':llmatch, 'ntotparameters':parametersmatch, 'nbranchlengths':branchlengthsmatch, 'nmodelparameters':modelparametersmatch}
     for line in open(hyphyoutfile):
         for key in d.iterkeys():
             if match_d[key].search(line):
@@ -109,15 +171,19 @@ def ExtractLikelihoodAndNParameters(hyphyoutfile):
         loglikelihood = float(d['ll'])
     else:
         raise ValueError("Failed to parse log likelihood")
-    if d['ntotparameters']:
-        ntotparameters = int(d['ntotparameters'])
+    if d['nmodelparameters'] != None:
+        nmodelparameters = int(d['nmodelparameters'])
     else:
-        raise ValueError("Failed to parse total number of independent parameters")
-    if d['nbranchlengths']:
-        nbranchlengths = int(d['nbranchlengths'])
-    else:
-        raise ValueError("Failed to parse total number of branch lengths")
-    return (loglikelihood, ntotparameters - nbranchlengths)
+        if d['ntotparameters']:
+            ntotparameters = int(d['ntotparameters'])
+        else:
+            raise ValueError("Failed to parse total number of independent parameters from %s" % hyphyoutfile)
+        if d['nbranchlengths']:
+            nbranchlengths = int(d['nbranchlengths'])
+        else:
+            raise ValueError("Failed to parse total number of branch lengths")
+        nmodelparameters = ntotparameters - nbranchlengths
+    return (loglikelihood, nmodelparameters)
 
 
 
@@ -163,8 +229,8 @@ def ExtractTree(hyphyoutfile, treename='tree'):
     lines = open(hyphyoutfile).readlines()
     treeline = [line for line in lines if line.split('=')[0] == 'Tree %s' % treename]
     if len(treeline) != 1:
-        raise ValueError("Failed to find exactly one tree line")
-    treeline = treeline[0]
+        raise ValueError("Failed to find exactly one tree line in %s, found %d instead" % (hyphyoutfile, len(treeline)))
+    treeline = treeline[0].split('=', 1)[1].strip()
     blmatch = re.compile('^%s\.(?P<node>\w+)\.t\=(?P<bl>\d+(\.\d+(e(\-){0,1}\d+){0,1}){0,1});\n$' % treename)
     bls = {}
     for line in lines:
@@ -333,7 +399,7 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
     """
     seqs = mapmuts.sequtils.ReadFASTA(fastafile)
     if len(seqs) != len(dict([(head, True) for (head, seq) in seqs])):
-        raise ValueError("The sequence names in %s are not all identical." % fastafile)
+        raise ValueError("The sequence names in %s are not all unique." % fastafile)
     validnamematch = re.compile('^\w+$')
     for (head, seq) in seqs:
         if not validnamematch.search(head):
@@ -367,7 +433,7 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
         'DataSet data = ReadDataFile("%s");' % fastafile,
         'assert(data.sites % 3 == 0, "Sequence lengths not multiples of 3");',
         'totalcodons = data.sites $ 3;',
-        'fprintf(stdout, "Read from %s a set of ", data.species, " seqeunces consisting of ", data.sites, " nucleotides corresponding to ", totalcodons, " codons each.\\n");' % fastafile,
+        'fprintf(stdout, "Read from %s a set of ", data.species, " sequences consisting of ", data.sites, " nucleotides corresponding to ", totalcodons, " codons each.\\n");' % fastafile,
         'fprintf(stdout, "The analysis will include the following %d codon positions (sequential numbering starting with 1):\\n%s\\n");' % (len(sites), ', '.join([str(site) for site in sites])),
         'assert(totalcodons >= %d, "Largest included site exceeds sequence length");' % max(sites),
         'DataSetFilter codonfilter = CreateFilter(data, 3, "%s", "", "TAA,TAG,TGA");' % ntsites,
@@ -573,6 +639,176 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
         ]
     # write the file
     open(cmdfile, 'w').write('\n'.join(cmds))
+
+
+def CreateHYPHYCommandFile2(cmdfile, outputfile, fastafile, treefile, sites, modelfile, constraints, branchconstraints=None):
+    """Create a command file for using ``HYPHY`` to optimize branch lengths and/or model parameters.
+
+    This function is more general than *CreateHPHYCommandFile*. The only strict requirements
+    are that you provide a tree of known topology.
+
+    The end result of this function is creation of the batch file specified by *cmdfile*. You can then use
+    this function to run ``HYPHY`` with a command such as::
+
+        hyphypath cmdfile
+
+    where ``hyphypath`` gives the path to a ``HYPHY`` executable.
+
+    CALLING VARIABLES:
+
+    * *cmdfile* : String name of the created ``HYPHY`` command batch file. 
+      Overwritten if it exists already.
+
+    * *outputfile* : String name of the file to which *cmdfile* tells ``HYPHY`` to 
+      write its output. If a file of this name already exists, it is deleted by 
+      this function.
+
+    * *fastafile* : Name of existing file with the aligned sequences (lengths must
+      be multiples of three and they must be aligned at the codon level). Stop codons should be removed
+      or else not included in the listing specified by *sites*. The sequence headers must match the tip node
+      names in *treefile*, and conform to ``HYPHY`` naming conventions.
+
+    * *treefile* : String name of existing file that gives the tree in Newick format, with tip names
+      matching the sequence names in *fastafile*.
+
+    * *sites* : List of integers specifying all codon sites that we include in the analysis. The codons
+      are numbered 1, 2, ... beginning with the first codon.
+
+    * *modelfile* : String name of existing file specifying the codon substitution models for the 61 non-stop
+      codons, with codons listed in alphabetical order. For each site *r* in *sites*, there should be
+      a ``HYPHY`` Model defined conforming to the name *Prxy* (such as ``P1xy``, ``P2xy``, etc).
+
+    * *constraints* : List of strings giving any constraints applied to ``HYPHY`` variables that are defined
+      as part of the substitution models. The string entries should be valid ``HYPHY`` commands but lacking
+      the tailing semi-colon. These can be used to assign variable specific values, as in::
+      
+        RAC := 1.2357
+        
+      or to assign them ranges, as in::
+        
+        mu1 :> 0
+        
+      or to assign them initial values, as in::
+      
+        omega1A = 1
+        
+      or to make them global, as in::
+      
+        global RAC = 1.2357
+
+      or to make them global and fixed, as in::
+
+        global RAC := 1.2357
+
+      So a possible value for *constraints* might be::
+
+        constraints = ['RAC := 1.2357', 'mu1 :> 0', 'omega1A := omega1']
+
+    * *branchconstraints* : List of strings giving constraints applied to ``HYPHY`` branch lengths.
+      These constraints should be provided here rather than in *constraints* because branch length
+      constraints need to be defined **after** constructing the tree, while other constraints should
+      be defined before this in the ``HYPHY`` command file. By default, this option is *None*, meaning
+      that no such constraints are applied. If you want to apply constraints, set this
+      to a list of the same format as *constraints*, for example::
+
+        branchconstraints = ['tree.Node1.t := 1.0131', 'tree.TipSeq2_.t := 0.312']
+
+    """
+    if os.path.isfile(outputfile):
+        os.remove(outputfile)
+
+    # check validity of sequences
+    seqs = mapmuts.sequtils.ReadFASTA(fastafile)
+    if len(seqs) != len(dict([(head, True) for (head, seq) in seqs])):
+        raise ValueError("The sequence names in %s are not all unique." % fastafile)
+    validnamematch = re.compile('^\w+$')
+    for (head, seq) in seqs:
+        if not validnamematch.search(head):
+            raise ValueError("Invalid sequence name (can only contain letters, numbers, underscore):\n%s" % head)
+
+    # get information about sites
+    if not sites:
+        raise ValueError("No sites specified")
+    if len(sites) != len(dict([(site, True) for site in sites])):
+        raise ValueError("sites contains duplicate entries.")
+    if min(sites) < 1:
+        raise ValueError("minimum value in sites is less than one")
+    sites = [site for site in sites]
+    sites.sort()
+    ntsites = ','.join(["%d,%d,%d" % (3 * site - 3, 3 * site - 2, 3 * site - 1) for site in sites]) # listing of sites to include for HYPHY DataSetFilter
+
+    # include batch files
+    includepath = phyloExpCM.packagedata.Path() # path where HYPHY include batch files were installed
+    includefiles = ['%s/NTsCodonsAAs.ibf' % includepath, "%s/%s" % (os.getcwd(), modelfile)] 
+    for f in includefiles:
+        if not os.path.isfile(f):
+            raise IOError("Cannot find HYPHY include file %s. Did you install the package data correctly? Did you specify an invalid modelfile?" % f)
+
+    # commands to set up analysis and read in codon data
+    cmds = [ 
+        'INTEGRATION_PRECISION_FACTOR = 5.0e-6;',
+        'END_OF_FILE = 0;',
+        'LIKELIHOOD_FUNCTION_OUTPUT = 5;',
+        'ACCEPT_BRANCH_LENGTHS = 1;',
+        '\n'.join(["%s;" % constraint for constraint in constraints]), # apply constraints before model
+        '\n'.join(['#include "%s";' % f for f in includefiles]),
+        'fprintf(stdout, "Running HYPHY script %s...\\n");' % cmdfile,
+        'DataSet data = ReadDataFile("%s");' % fastafile,
+        'assert(data.sites % 3 == 0, "Sequence lengths not multiples of 3");',
+        'totalcodons = data.sites $ 3;',
+        'fprintf(stdout, "Read from %s a set of ", data.species, " sequences consisting of ", data.sites, " nucleotides corresponding to ", totalcodons, " codons each.\\n");' % fastafile,
+        'fprintf(stdout, "The analysis will include the following %d codon positions (sequential numbering starting with 1):\\n%s\\n");' % (len(sites), ', '.join([str(site) for site in sites])),
+        'assert(totalcodons >= %d, "Largest included site exceeds sequence length");' % max(sites),
+        'fprintf(stdout, "Reading tree string from %s.\\n");' % treefile,
+        'fscanf("%s", String, treestring);' % treefile,
+        ]
+
+    # commands to set up substitution model, apply to tree, define likelihood
+    cmds += [
+        'fprintf(stdout, "Using the substitution model defined in %s...\\n");' % modelfile,
+        'fprintf(stdout, "Now constructing the likelihood function...\\n");',
+        ]
+    firstsite = True
+    for site in sites:
+        cmds += [
+            'DataSetFilter codonfilter%d = CreateFilter(data, 3, "%d-%d", "", "TAA,TAG,TGA");' % (site, 3 * site - 3, 3 * site - 1),
+            'assert(data.species == codonfilter%d.species, "species number mismatch");' % site,
+            'assert(1 == codonfilter%d.sites, "codon filter does not contain exactly one site");' % site,
+            'CheckCodonFilter("codonfilter%d");' % site,
+            'UseModel(P%dxy);' % site,
+            ]
+        if firstsite:
+            cmds += [
+                'ExecuteCommands("Tree tree = treestring;");',
+                'assert(data.species == TipCount(tree), "Number of species and number of tips differ");',
+            ]
+            firstsite = False
+        else:
+            cmds += [
+                'ExecuteCommands("Tree tree%d = treestring;");' % site,
+                'ReplicateConstraint("this1.?.t := this2.?.t", tree%d, tree);' % site,
+                'assert(data.species == TipCount(tree%d), "Number of species and number of tips differ");' % site,
+            ]
+    if branchconstraints:
+        cmds += ["%s;" % constraint for constraint in branchconstraints] # apply branch constraints after tree
+    cmds.append('LikelihoodFunction likelihood = (codonfilter%d, tree, %s);' % (sites[0], ', '.join(['codonfilter%d, tree%d' % (site, site) for site in sites[1 : ]]))),
+
+    # now maximize the likelihood
+    cmds += [
+        'fprintf(stdout, "\\nNow optimizing the likelihood function...\\n");',
+        'Optimize(mlestimates, likelihood)',
+        'fprintf(stdout, "Completed likelihood optimization. Optimized ", mlestimates[1][1], " indpendent parameters and ", mlestimates[1][2], " shared parameters to obtain a log likelihood of ", mlestimates[1][0], ".\\n");',
+        'fprintf(stdout, "Writing the results to %s.\\n");' % outputfile,
+        'fprintf("%s", "Log likelihood: ", mlestimates[1][0], "\\nindependent parameters (includes branch lengths): ", mlestimates[1][1], "\\nshared parameters: ", mlestimates[1][2], "\\nnumber of branch lengths: ", TipCount(tree) + BranchCount(tree), "\\nnumber of tip nodes: ", TipCount(tree), "\\nnumber of internal branches: ", BranchCount(tree), "\\n",likelihood);' % outputfile,
+        ]
+
+    # last command
+    cmds += [
+        'fprintf(stdout, "Completed HYPHY script %s.\\n");' % cmdfile,
+        ]
+    # write the file
+    open(cmdfile, 'w').write('\n'.join(cmds))
+
 
 
 if __name__ == '__main__':

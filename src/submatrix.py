@@ -30,6 +30,8 @@ Functions defined in this module
 
 * *WriteHYPHYMatrices* : writes substitution matrices in ``HYPHY`` format.
 
+* *WriteHYPHYMatrices2* : more versatile version of *WriteHYPHYMatrices*.
+
 * *BuildSubMatrices* : build codon substitution matrices.
 
 * *StationaryStates* : gets stationary states of substitution matrices.
@@ -205,6 +207,214 @@ def WriteHYPHYMatrices(exchangeabilities, stationary_vecs, outfile):
         f.write("\nModel model%d = (modelmatrix%d, equilfreqs%d, 1);\n\n" % (isite, isite, isite))
     f.close()
 
+
+def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includeselection=True):
+    """Creates HYPHY include batch file with codon substitution models.
+
+    Created HYPHY include batch file (``*.ibf`` file), include with the command::
+        
+        #include "myfile.ibf";
+
+    For each site *r*, this batch file defines a HYPHY Model *Prxy* that defines the
+    substitution probabilities for site *r* as a 61 X 61 matrix for the rates
+    among all non-stop codons, where the codons are indexed from 0 to 60 in the order
+    defined by *NonStopCodons()*, which is alphabetical. Element *Prxy[xi, yi]* is
+    the substitution rate from codon *NonStopCodons()[xi]* to *NonStopCodons()[yi]*.
+    So if there are are two sites 1 and 2, then this file will define the HYPHY Models
+    *P1xy* and *P2xy*. Also defines equilibrium frequencies (*prx*) and
+    exchangeabilities (*Srxy*) for each site.
+
+    The substitution model is defined by
+
+        .. math::
+
+           P_{r,xy} = 
+           \\begin{cases}
+           \mu_r \\times Q_{xy} & \mbox{if $\mathcal{A}\left(x\\right) = \mathcal{A}\left(y\\right)$} \\\\
+           \mu_r \\times \omega_{r,\mathcal{A}\left(y\\right)} \\times Q_{xy} \\times F_{r,xy} & \mbox{if $\mathcal{A}\left(x\\right) \\ne \mathcal{A}\left(y\\right)$}. \\\\
+           \end{cases}
+
+    where :math:`\mathcal{A}\left(x\\right)` is the amino acid encoded by *x*. The
+    mutation rate is :math:`Q_{xy}`, the fixation probability is 
+    :math:`F_{r,xy}`, selection for amino-acid *a* is :math:`omega_{r,a}`,
+    and a scaling factor is represented by :math:`\mu_r`. If you are not trying to
+    detect selection, you will want to constrain these last two variables to be one
+    in HYPHY, as with::
+
+        mu1 := 1.0;
+        omega1A := 1.0;
+        omega1C := 1.0;
+        omega1D := 1.0;
+
+    If you are detecting *positive selection* for amino-acid change, but not looking 
+    for *additional selection* for specific amino acids, constrain :math:`\omega_{r,a}`
+    values to have equal values of :math:`\omega_r` with HYPHY, as in::
+
+        omega1A := omega1;
+        omega1C := omega1;
+        omega1D := omega1;
+
+    Fixation probabilities are defined as numbers in the substition models. 
+    These numbers are computed from the amino-acid preferences
+    :math:`\pi_{r,a}`. There are two different models that can be used to calculate
+    these fixation probabilities. The model to be used is specified by 
+    *fixationmodel* as one of these:
+
+       * *FracTolerated* specifies that the fixation probabilities are
+
+            .. math::
+
+               F_{r,xy} =
+               \\begin{cases}
+               1 & \mbox{if $\mathcal{A}\left(x\\right) = \mathcal{A}\left(y\\right)$ or $\pi_{r,\mathcal{A}\left(y\\right)} \ge \pi_{r,\mathcal{A}\left(x\\right)}$} \\\\
+               \\frac{\pi_{r, \mathcal{A}\left(y\\right)}}{\pi_{r, \mathcal{A}\left(x\\right)}} & \mbox{otherwise.}
+               \end{cases}
+
+       * *HalpernBruno* specifies that the fixation probabilities are
+
+            .. math::
+
+               F_{r,xy} = 
+               \\begin{cases}
+               1 & \mbox{if $\mathcal{A}\left(x\\right) = \mathcal{A}\left(y\\right)$ or $\pi_{r,\mathcal{A}\left(x\\right)} = \pi_{r,\mathcal{A}\left(y\\right)}$} \\\\
+               \\frac{\ln\left(\pi_{r,\mathcal{A}\left(y\\right)} / \pi_{r,\mathcal{A}\left(x\\right)}\\right)}{1 - \pi_{r,\mathcal{A}\left(x\\right)} / \pi_{r,\mathcal{A}\left(y\\right)}} & \mbox{otherwise.}
+               \end{cases}
+
+    The mutation rates are equal among all sites, and are 
+
+        .. math::
+
+           Q_{xy} = 
+           \\begin{cases}
+           0 & \mbox{if $x$ and $y$ differ by more than on nucleotide} \\\\
+           R_{m \\rightarrow n} & \mbox{if $x$ differs from $y$ by a single-nucleotide change of $m$ to $n$}.
+           \end{cases}
+
+    The rates are defined by :math:`R_{m \\rightarrow n}`, which denotes the probability
+    that nucleotide *m* mutates to *n* in a unit time given that the identity is already
+    *m*. We place the following constraints on these values:
+
+        * :math:`R_{m \\rightarrow n} = R_{m_c \\rightarrow n_c}` where :math:`m_c` is the complement of 
+          nucleotide :math:`m` (so :math:`A_c = T`). This constraint assumes that the
+          same mutation process operates on the sequenced and complementary strands.
+
+        * :math:`R_{C \\rightarrow T} = \\frac{R_{A \\rightarrow G} \\times R_{C \\rightarrow A}}{R_{A \\rightarrow C}}`. This constraint makes the mutation rates
+          reversible. It is defined more for this property than on any
+          biological basis.
+
+    With these these constraints, there are four independent mutation rates, denoted
+    by the following HYPHY variables::
+
+        RAC
+        RAG
+        RAT
+        RCA
+        RCG
+
+    If you want these mutation rates to be free parameters, don't assign them any constraints. If you want them
+    to have fixed values, assign these in HYPHY, such as::
+
+        RAC := 1.23e-2;
+
+    CALLING VARIABLES:
+
+    * *outfile* is the created HYPHY include batch file, such as *Prxy.ibf*. This file is
+      overwritten if it already exists.
+
+    * *sites* is a list of the integer sites *r* for which we create models. 
+
+    * *aapreferences* is a dictionary that specifies the amino-acid preferences :math:`\pi_{r,a}`.
+      For each site *r* in *sites*, there should be a key *r* in *aapreferences*, with
+      *aapreferences[r][PI_A]' giving the preference for amino-acid *A* at site *r*, 
+      *aapreferences[r][PI_S]* giving the preference for amino-acid *S* at site *r*, etc.
+      All preferences are assumed to be > 0.
+
+    * *fixationmodel* is the model used to calculate the fixation probabilities :math:`F_{r,xy}`
+      from the amino-acid preferences. It should be one of the two following strings as
+      described above:
+
+        * *FracTolerated*
+
+        * *HalpernBruno*
+
+    * *includeselection* is a Boolean switch which is *True* by default. If it is
+      *False*, the substitution model is constructed with all selection parameters
+      (:math:`\omega_{r,a}`) set to one. This is the model you would use if you 
+      don't want to consider the possibility of additional or positive selection.
+    """
+    codontable = CodonTable()
+    codons = NonStopCodons()
+    ncodons = len(codons)
+    aminoacids = mapmuts.sequtils.AminoAcids()
+    assert ncodons == 61, "Not 61 non-stop codons -- this is likely to cause problems with HYPHY"
+    f = open(outfile, 'w')
+    f.write("\n//Values for constrained mutation rates defined by others.\n")
+    f.write("global RTG := RAC;\nglobal RTC := RAG;\nglobal RTA := RAT;\nglobal RGT := RCA;\nglobal RGC := RCG;\nglobal RCT := RAG * RCA / RAC;\n");
+    f.write("\n// Equilibrium codon frequencies for purely mutation-driven evolution, denoted by qx.\n")
+    f.write("global qx_denominator := 8.0 * (RAC + RAG + RCA + RCG)^3;\n")
+    for x in codons:
+        ncg = x.count('C') + x.count('G')
+        assert 0 <= ncg <= 3
+        if ncg == 0:
+            f.write('global q%s := (RCA + RCT)^3 / qx_denominator;\n' % x)
+        elif ncg == 3:
+            f.write('global q%s := (RAC + RAG)^3 / qx_denominator;\n' % x)
+        else:
+            f.write('global q%s := (RAC + RAG)^%d * (RCA + RCT)^%d / qx_denominator;\n' % (x, ncg, 3 - ncg))
+    for r in sites:
+        f.write("\n//Equilibrium frequencies for site %d\np%dx = {%d, 1};\n" % (r, r, ncodons))
+        if includeselection:
+            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s * omega%d%s" % (aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x]) for x in codons])))
+        else:
+            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s" % (aapreferences[r]['PI_%s' % codontable[x]], x) for x in codons])))
+        for xi in range(ncodons):
+            x = codons[xi]
+            if includeselection:
+                f.write("p%dx[%d] := (%g * q%s * omega%d%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x], r))
+            else:
+                f.write("p%dx[%d] := (%g * q%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r))
+        f.write("\n// Exchangeabilities for site %d\nS%dxy = {%d, %d};\n" % (r, r, ncodons, ncodons))
+        for xi in range(ncodons):
+            x = codons[xi]
+            for yi in range(xi + 1, ncodons):
+                y = codons[yi]
+                ntdiffs = [(x[j], y[j]) for j in range(len(x)) if x[j] != y[j]]
+                assert ntdiffs > 0, "Found no differences between codons %s and %s" % (x, y)
+                if len(ntdiffs) > 1:
+                    # zero if amino acids differ by more than one nucleotide
+                    f.write("S%dxy[%d][%d] := 0.0;\n" % (r, xi, yi)) 
+                    f.write("S%dxy[%d][%d] := 0.0;\n" % (r, yi, xi)) 
+                else:
+                    ax = codontable[x]
+                    ay = codontable[y]
+                    pirx = aapreferences[r]['PI_%s' % ax]
+                    piry = aapreferences[r]['PI_%s' % ay]
+                    assert pirx > 0 and piry > 0, "Preferences must be > 0"
+                    if fixationmodel == 'FracTolerated':
+                        if piry >= pirx:
+                            frxy = 1.0
+                        else:
+                            frxy = float(piry / pirx)
+                    elif fixationmodel == 'HalpernBruno':
+                        if piry == pirx:
+                            frxy = 1.0;
+                        else:
+                            frxy = math.log(piry / pirx) / (1.0 - pirx / piry)
+                    else:
+                        raise ValueError("Invalid fixationmodel of %s" % fixationmodel)
+                    qxy = "R%s" % ''.join(ntdiffs[0])
+                    if ax != ay: # nonsynonymous
+                        f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
+                        f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                    else: # synonymous
+                        if includeselection:
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, r, ay))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, r, ay))
+                        else:
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+        f.write("\n//Define substitution model for site %d as exchangeabilities times equilibrium frequencies\nModel P%dxy = (S%dxy, p%dx);\n\n" % (r, r, r, r))
+    f.close()
 
 
 def BuildSubMatrices(mutspectrumfile, equilibriumfreqsfile, model, scalefactor, makereversible):

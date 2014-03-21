@@ -78,6 +78,7 @@ Calling arguments:
         codonfreqs = {N_Codons, 1};
         codon_i = 0;
         allcodon_i = 0;
+        stopfreq = 0.0;
         for (nt_i1 = 0; nt_i1 < N_NTs; nt_i1 = nt_i1 + 1) {
             nt1 = NTs[nt_i1];    
             for (nt_i2 = 0; nt_i2 < N_NTs; nt_i2 = nt_i2 + 1) {        
@@ -89,7 +90,8 @@ Calling arguments:
                         codonfreqs[codon_i] = allcodonfreqs[allcodon_i];
                         codon_i = codon_i + 1;
                     } else {
-                        assert(allcodonfreqs[allcodon_i] < tol, "Stop codon has frequency not close to zero -- did you remove stop codons from the alignment?");
+                        stopfreq = stopfreq + allcodonfreqs[allcodon_i];
+                        //assert(allcodonfreqs[allcodon_i] < tol, "Stop codon has frequency not close to zero -- did you remove stop codons from the alignment?");
                     }
                     allcodon_i = allcodon_i + 1;
                 }
@@ -98,6 +100,9 @@ Calling arguments:
         assert(codon_i == N_Codons, "Didn't go through all non-stop codon");
         assert(allcodon_i == 3 + N_Codons, "Didn't go through all codons");
         assert(Rows(codonfreqs) == N_Codons, "Invalid number of rows in codonfreqs");
+        for (j = 0; j < N_Codons; j = j + 1) {
+            codonfreqs[i] = codonfreqs[i] / (1.0 - stopfreq);
+        }
         sum = 0.0;
         for (j = 0; j < N_Codons; j = j + 1) {
             sum = sum + codonfreqs[j];
