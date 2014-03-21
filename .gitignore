@@ -10,5 +10,5 @@ messages.log
 errors.log
 sbatch_*
 _codenames_*
-.DS_Store
+*.DS_Store
 *.sbatch

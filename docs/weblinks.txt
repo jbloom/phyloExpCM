@@ -18,4 +18,7 @@
 .. _`SH-aLRT`: http://sysbio.oxfordjournals.org/content/60/5/685.long
 .. _`Python`: http://www.python.org/
 .. _`GPLv3`: http://www.gnu.org/licenses/gpl.html
-
+.. _`stochastic matrix`: http://en.wikipedia.org/wiki/Stochastic_matrix
+.. _`reversible`: http://en.wikipedia.org/wiki/Markov_chain#Reversible_Markov_chain
+.. _`Bloom, 2014`: http://biorxiv.org/content/early/2014/02/20/002899
+.. _`Posada and Buckley 2004`: http://sysbio.oxfordjournals.org/content/53/5/793.full

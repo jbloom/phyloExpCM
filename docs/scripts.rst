@@ -12,6 +12,7 @@ Here are the scripts:
    phyloExpCM_runcodonPhyML
    phyloExpCM_buildHyphyExpCM
    phyloExpCM_optimizeHyphyTree
+   phyloExpCM_ExpModelOptimizeHyphyTree
    phyloExpCM_multiHyphyRuns
 
 
