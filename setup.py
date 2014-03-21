@@ -53,6 +53,5 @@ setup(
             'scripts/phyloExpCM_buildHyphyExpCM.py',
             'scripts/phyloExpCM_optimizeHyphyTree.py',
             'scripts/phyloExpCM_multiHyphyRuns.py',
-            'scripts/phyloExpCM_plotLogLvsNParams.py',
             ],
 )
