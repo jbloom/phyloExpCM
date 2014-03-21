@@ -13,7 +13,6 @@ Here are the scripts:
    phyloExpCM_buildHyphyExpCM
    phyloExpCM_optimizeHyphyTree
    phyloExpCM_multiHyphyRuns
-   phyloExpCM_plotLogLvsNParams
 
 
 
