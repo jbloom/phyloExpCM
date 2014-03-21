@@ -232,7 +232,7 @@ def main():
         constraints.append('global RAC := 1.0') # set one mutation rate to one if branch lengths are free parameters and no date stamping
         for mutrate in ['RAG', 'RAT', 'RCA', 'RCG']:
             constraints.append("global %s :> 1.0e-7" % mutrate) # constrain all mutation rates greater than zero
-    phyloExpCM.hyphy.CreateHYPHYCommandFile2(optimizetree_cmdfile, optimizetree_outfile, codefastafile, codetreefile, sites, prxy, constraints)
+    phyloExpCM.hyphy.CreateHYPHYCommandFile2(optimizetree_cmdfile, optimizetree_outfile, codefastafile, codetreefile, sites, prxy_file, constraints)
     RunHYPHY(hyphypath, optimizetree_cmdfile, optimizetree_outfile)
     # extract tree and write to file
     print "Extracting the optimized tree to files %s and %s." % (optimizedtreefile, codeoptimizedtreefile)
