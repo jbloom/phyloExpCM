@@ -1,0 +1,7 @@
+Log likelihood: -2421.36
+Branch lengths optimized: 95
+Model parameters optimized: 4
+R_AG: 1.83259
+R_AT: 0.457869
+R_CA: 1.11229
+R_CG: 0.443459

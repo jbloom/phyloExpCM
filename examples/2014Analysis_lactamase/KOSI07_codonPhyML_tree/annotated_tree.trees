@@ -1,0 +1,177 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=85;
+	taxlabels
+	SEQ106_Klebsiella_pneumoniae_plasmid_pML1708_extended-spectrum_beta-lactamase_TEM-162_gene_complete
+	'SEQ57_Klebsiella_pneumoniae_beta-lactamase_TEM-104_gene_complete_cds.'
+	'SEQ131_Escherichia_coli_strain_WDR-13_plasmid_beta-lactamase_blaTEM-201_gene_complete_cds.'
+	SEQ119_Haemophilus_parainfluenzae_strain_201025861_inhibitor_resistant_beta-lactamase_TEM-182_gene_
+	'SEQ24_Escherichia_coli_inhibitor-resistant_beta-lactamase_TEM-77_blaTEM-77_gene_complete_cds.'
+	SEQ108_Escherichia_coli_strain_3343_putative_inhibitor-resistant_TEM-163_beta-lactamase_gene_comple
+	'SEQ52_Salmonella_typhimurium_DT193_TEM_beta-lactamase_gene_complete_cds.'
+	'SEQ38_Escherichia_coli_isolate_CIT-T15_inhibitor_resistant_TEM_beta-lactamase_gene_complete_cds.'
+	'SEQ89_Escherichia_coli_isolate_PMM40_TEM-145_gene_complete_cds.'
+	'SEQ78_Escherichia_coli_beta-lactamase_TEM-126_blaTEM-126_gene_complete_cds.'
+	'SEQ66_Morganella_morganii_class_A_beta-lactamase_TEM-124_blaTEM-124_gene_complete_cds.'
+	SEQ32_Klebsiella_pneumoniae_plasmid_pMG272_extended-spectrum_beta-lactamase_TEM-88_gene_complete_cd
+	'SEQ79_Escherichia_coli_beta-lactamase_TEM-109_blaTEM-109_gene_complete_cds.'
+	'SEQ30_Klebsiella_pneumoniae_beta-lactamase_TEM-43_blaTEM-43_gene_complete_cds.'
+	'SEQ6_Escherichia_coli_beta-lactamase_TEM-28_gene_complete_cds.'
+	SEQ81_Klebsiella_pneumoniae_strain_Kp_403_extended-spectrum_beta-lactamase_TEM-136_blaTEM-136_gene_
+	'SEQ29_Escherichia_coli_TEM-91_gene_for_TEM-derived_extended-spectrum_beta-lactamase_complete_cds.'
+	'SEQ10_K.pneumoniae_bla-TEM-47_gene.'
+	SEQ140_Proteus_mirabilis_strain_IHMA_845676_extended_spectrum_beta-lactamase_TEM-211_gene_complete_
+	'SEQ65_Proteus_mirabilis_class_A_beta-lactamase_TEM-123_blaTEM-123_gene_complete_cds.'
+	'SEQ14_Klebsiella_pneumoniae_blaTEM-20_gene_partial.'
+	'SEQ133_Escherichia_coli_blaTEM-184_gene_for_TEM-184_beta-lactamase_strain_PI-12197.'
+	'SEQ31_Proteus_mirabilis_plasmid_pPm87_class_A_beta-lactamase_TEM-87_gene_complete_cds.'
+	'SEQ93_Enterobacter_aerogenes_TEM-149_beta-lactamase_blaTEM-149_gene_complete_cds.'
+	'SEQ33_Escherichia_coli_extended_spectrum_beta-lactamase_TEM-63_blaTEM-63_gene_complete_cds.'
+	'SEQ100_Proteus_mirabilis_beta-lactamase_TEM-159_blaTEM-159_gene_complete_cds.'
+	'SEQ129_Acinetobacter_baumannii_strain_195_beta-lactamase_TEM_195_gene_complete_cds.'
+	'SEQ127_Acinetobacter_baumannii_strain_197_beta-lactamase_TEM_193_gene_complete_cds.'
+	'SEQ128_Acinetobacter_baumannii_strain_194_beta-lactamase_TEM_194_gene_complete_cds.'[&CustomName="TEM-194 beta-lactamase"]
+	'SEQ118_Proteus_mirabilis_strain_7001324_plasmid_beta-lactamase_TEM_variant_gene_complete_cds.'
+	'SEQ18_Klebsiella_pneumoniae_extended_spectrum_beta-lactamase_TEM-53_blaTEM-53_gene_complete_cds.'
+	'SEQ62_Proteus_mirabilis_plasmid_pANG-1_beta-lactamase_TEM-67_gene_complete_cds.'
+	'SEQ9_S.marcescens_beta-lactamase_gene.'
+	SEQ110_Escherichia_coli_clone_421_extended-spectrum_beta-lactamase_TEM-167_blaTEM-167_gene_complete
+	'SEQ12_E.coli_bla-TEM-49_gene.'
+	'SEQ48_Escherichia_coli_strain_Ur7883/2001_TEM-type_beta_lactamase_gene_complete_cds.'
+	'SEQ37_Proteus_mirabilis_TEM-89_beta-lactamase_TEM-89_gene_partial_cds.'
+	'SEQ2_K.pneumoniae_Bla_CAZ-2_gene_for_extended_spectrum_beta-lactamase_CAZ-2.'
+	'SEQ50_Escherichia_coli_plasmid_pBP311_extended-spectrum_beta-lactamase_TEM-101_gene_complete_cds.'
+	'SEQ80_Escherichia_coli_beta-lactamase_TEM-125_blaTEM-125_gene_complete_cds.'
+	'SEQ22_Escherichia_coli_inhibitor-resistant_beta-lactamase_TEM-78_blaTEM-78_gene_complete_cds.'
+	'SEQ7_E.coli_plasmid_blaIRT-14_gene.'
+	'SEQ82_Klebsiella_pneumoniae_tem-130_gene_for_beta-lactamase.'
+	'SEQ3_K.pneumoniae_Bla_CAZ-6_gene_for_extended_spectrum_beta-lactamase_CAZ-6.'
+	'SEQ138_Pseudomonas_aeruginosa_strain_12_beta-lactamase_TEM205_gene_partial_cds.'
+	'SEQ102_Acinetobacter_haemolyticus_plasmid_pUPI191_TEM_beta-lactamase_bla_gene_complete_cds.'
+	'SEQ99_Enterobacter_cloacae_plasmid_pEC005_beta-lactamase_TEM-157_gene_complete_cds.'
+	TEM1_beta_lactamase_from_Firnberg_et_al[&CustomName="TEM-1 beta-lactamase"]
+	'SEQ25_Capnocytophaga_ochracea_bla_TEM-17_gene.'
+	'SEQ73_Klebsiella_pneumoniae_blaSHV-164_gene_for_beta-lactamase_SHV-164_strain_INSRAKp12267.'
+	'SEQ37_Klebsiella_pneumoniae_blaSHV-100_gene_for_beta-lactamase_isolate_KpARG185.'
+	'SEQ27_Klebsiella_pneumoniae_blaSHV-76_gene_for_beta-lactamase_isolate_INSRAkp1677.'
+	SEQ47_Klebsiella_pneumoniae_strain_25_ZUM_1801226_SHV-52_beta-lactamase_blaSHV-52_gene_complete_cds
+	'SEQ38_Klebsiella_pneumoniae_strain_ARS9_beta-lactamase_SHV-121_blaSHV-121_gene_complete_cds.'
+	'SEQ10_Klebsiella_pneumoniae_strain_H18_beta-lactamase_SHV-37_gene_complete_cds.'
+	'SEQ13_Klebsiella_pneumoniae_beta-lactamase_SHV-42_blaSHV-42_gene_complete_cds.'
+	'SEQ5_K.pneumoniae_blaSHV-1a_gene_strain_KPZU-12.'
+	'SEQ4_Klebsiella_pneumoniae_blaSHV-2a_gene_strain_KPLA-10.'
+	'SEQ9_Klebsiella_pneumoniae_strain_G122_plasmid_pOZ187_beta-lactamase_SHV-36_gene_complete_cds.'
+	'SEQ36_Klebsiella_pneumoniae_blaSHV-99_gene_for_beta-lactamase_isolate_KpARG220.'
+	'SEQ52_Klebsiella_pneumoniae_gene_for_beta-lactamase_SHV-167_partial_cds_strain_249/MALATI_HALDER/BL'
+	'SEQ15_Klebsiella_pneumoniae_SHV-38_beta-lactamase_bla-SHV-38_gene_complete_cds.'
+	'SEQ24_Klebsiella_pneumoniae_blaSHV-73_gene_for_beta-lactamase_isolate_INSRAkp1234.'[&CustomName="SHV-73 beta-lactamase"]
+	'SEQ48_Klebsiella_pneumoniae_strain_Kp1.31_beta-lactamase_SHV-140_blaSHV-140_gene_partial_cds.'
+	'SEQ64_Klebsiella_pneumoniae_strain_35315A_SHV-157_beta-lactamase_blaSHV-157_gene_complete_cds.'
+	'SEQ11_Klebsiella_pneumoniae_beta-lactamase_SHV-40_blaSHV-40_gene_complete_cds.'
+	'SEQ58_Klebsiella_pneumoniae_strain_1357A_SHV-151_beta-lactamase_blaSHV-151_gene_partial_cds.'
+	'SEQ56_Klebsiella_pneumoniae_strain_1357A_SHV-149_beta-lactamase_blaSHV-149_gene_partial_cds.'
+	'SEQ18_Klebsiella_pneumoniae_beta-lactamase_SHV-50_blaSHV-50_gene_complete_cds.'
+	'SEQ12_Klebsiella_pneumoniae_beta-lactamase_SHV-41_blaSHV-41_gene_complete_cds.'
+	'SEQ54_Klebsiella_pneumoniae_strain_2106A_SHV-147_beta-lactamase_blaSHV-147_gene_partial_cds.'
+	'SEQ40_Klebsiella_pneumoniae_SHV-133_gene_for_beta-lactamase_SHV-133_complete_cds.'
+	'SEQ26_Klebsiella_pneumoniae_blaSHV-75_gene_for_beta-lactamase_isolate_INSRAkp1488.'
+	'SEQ17_Klebsiella_pneumoniae_plasmid_SHV-48_beta-lactamase_gene_complete_cds.'
+	'SEQ68_Klebsiella_pneumoniae_strain_40150A_SHV-161_beta-lactamase_blaSHV-161_gene_complete_cds.'
+	'SEQ59_Klebsiella_pneumoniae_strain_25110A_SHV-152_beta-lactamase_blaSHV-152_gene_partial_cds.'
+	'SEQ1_K.pneuminiae_shv5_gene_for_SHV-5_beta-lactamase.'
+	'SEQ69_Klebsiella_pneumoniae_strain_40150A_SHV-162_beta-lactamase_blaSHV-162_gene_partial_cds.'
+	'SEQ61_Klebsiella_pneumoniae_strain_1357A_SHV-154_beta-lactamase_blaSHV-154_gene_partial_cds.'
+	'SEQ2_Escherichia_coli_cefotaxime-hydrolyzing_beta-lactamase_SHV-7_gene_complete_cds.'
+	'SEQ14_Klebsiella_pneumoniae_strain_KPBRZ-16_SHV_beta_lactamase_gene_complete_cds.'
+	SEQ42_Klebsiella_pneumoniae_strain_K-534_extended_spectrum_beta-lactamase_SHV-134_blaSHV-134_gene_c
+	'SEQ21_Escherichia_coli_partial_blaSHV-12_gene_for_beta-lactamase_SHV-12.'
+	SEQ41_Enterobacter_cloacae_plasmid_pBF1417_extended-spectrum_beta-lactamase_SHV-128_gene_complete_c
+	SEQ39_Escherichia_coli_strain_Ec6-66_plasmid_pEc6-66_extended_spectrum_beta-lactamase_SHV-129_blaSH[&CustomName="SHV-129 beta-lactamase"]
+;
+end;
+
+begin trees;
+	tree TREE1 = [&R] (((((((((((((SEQ106_Klebsiella_pneumoniae_plasmid_pML1708_extended-spectrum_beta-lactamase_TEM-162_gene_complete[&!color=#-8387313,!rotate=false]:0.0089636216,'SEQ57_Klebsiella_pneumoniae_beta-lactamase_TEM-104_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0045508571)[&!color=#-8387313,!rotate=false]:4.632E-7,'SEQ131_Escherichia_coli_strain_WDR-13_plasmid_beta-lactamase_blaTEM-201_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0089569824)[&!color=#-8387313,!rotate=false]:2.988E-7,((SEQ119_Haemophilus_parainfluenzae_strain_201025861_inhibitor_resistant_beta-lactamase_TEM-182_gene_[&!color=#-8387313,!rotate=false]:0.0134771934,'SEQ24_Escherichia_coli_inhibitor-resistant_beta-lactamase_TEM-77_blaTEM-77_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0089602682)[&!color=#-8387313,!rotate=false]:3.57E-7,((SEQ108_Escherichia_coli_strain_3343_putative_inhibitor-resistant_TEM-163_beta-lactamase_gene_comple[&!color=#-8387313,!rotate=false]:0.0089258196,('SEQ52_Salmonella_typhimurium_DT193_TEM_beta-lactamase_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0180181369,'SEQ38_Escherichia_coli_isolate_CIT-T15_inhibitor_resistant_TEM_beta-lactamase_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0090221748)[&!color=#-8387313,!rotate=false]:0.0090552902)[&!color=#-8387313,!rotate=false]:6.791E-7,'SEQ89_Escherichia_coli_isolate_PMM40_TEM-145_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.017847743)[&!color=#-8387313,!rotate=false]:0.0044520196)[&!color=#-8387313,!rotate=false]:2.832E-7)[&!color=#-8387313,!rotate=false]:3.911E-7,('SEQ78_Escherichia_coli_beta-lactamase_TEM-126_blaTEM-126_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044852145,(('SEQ66_Morganella_morganii_class_A_beta-lactamase_TEM-124_blaTEM-124_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0091104345,SEQ32_Klebsiella_pneumoniae_plasmid_pMG272_extended-spectrum_beta-lactamase_TEM-88_gene_complete_cd[&!color=#-8387313,!rotate=false]:0.0088831342)[&!color=#-8387313,!rotate=false]:3.444E-7,('SEQ79_Escherichia_coli_beta-lactamase_TEM-109_blaTEM-109_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.013570253,'SEQ30_Klebsiella_pneumoniae_beta-lactamase_TEM-43_blaTEM-43_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044318521)[&!color=#-8387313,!rotate=false]:0.0044522201)[&!color=#-8387313,!rotate=false]:0.004444319)[&!color=#-8387313,!rotate=false]:0.0044645305)[&!color=#-8387313,!rotate=false]:0.0044871726,'SEQ6_Escherichia_coli_beta-lactamase_TEM-28_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044369516)[&!color=#-8387313,!rotate=false]:0.0044699427,SEQ81_Klebsiella_pneumoniae_strain_Kp_403_extended-spectrum_beta-lactamase_TEM-136_blaTEM-136_gene_[&!color=#-8387313,!rotate=false]:0.0134402717)[&!color=#-8387313,!rotate=false]:0.0045007943,'SEQ29_Escherichia_coli_TEM-91_gene_for_TEM-derived_extended-spectrum_beta-lactamase_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0089451571)[&!color=#-8387313,!rotate=false]:4.203E-7,'SEQ10_K.pneumoniae_bla-TEM-47_gene.'[&!color=#-8387313,!rotate=false]:0.0223931914)[&!color=#-8387313,!rotate=false]:0.0043650479,((((((SEQ140_Proteus_mirabilis_strain_IHMA_845676_extended_spectrum_beta-lactamase_TEM-211_gene_complete_[&!color=#-8387313,!rotate=false]:0.00477909,'SEQ65_Proteus_mirabilis_class_A_beta-lactamase_TEM-123_blaTEM-123_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0132580438)[&!color=#-8387313,!rotate=false]:0.0131372375,'SEQ14_Klebsiella_pneumoniae_blaTEM-20_gene_partial.'[&!color=#-8387313,!rotate=false]:4.556E-7)[&!color=#-8387313,!rotate=false]:0.004426091,((('SEQ133_Escherichia_coli_blaTEM-184_gene_for_TEM-184_beta-lactamase_strain_PI-12197.'[&!color=#-8387313,!rotate=false]:0.0088025263,'SEQ31_Proteus_mirabilis_plasmid_pPm87_class_A_beta-lactamase_TEM-87_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0089029408)[&!color=#-8387313,!rotate=false]:0.0044082064,'SEQ93_Enterobacter_aerogenes_TEM-149_beta-lactamase_blaTEM-149_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044527995)[&!color=#-8387313,!rotate=false]:4.652E-7,'SEQ33_Escherichia_coli_extended_spectrum_beta-lactamase_TEM-63_blaTEM-63_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0132366329)[&!color=#-8387313,!rotate=false]:0.0089036749)[&!color=#-8387313,!rotate=false]:3.532E-7,'SEQ100_Proteus_mirabilis_beta-lactamase_TEM-159_blaTEM-159_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.01341896)[&!color=#-8387313,!rotate=false]:0.0044590505,((((('SEQ129_Acinetobacter_baumannii_strain_195_beta-lactamase_TEM_195_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:6.842E-7,'SEQ127_Acinetobacter_baumannii_strain_197_beta-lactamase_TEM_193_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.045442307)[&!color=#-8387313,!rotate=true]:0.0088934893,'SEQ128_Acinetobacter_baumannii_strain_194_beta-lactamase_TEM_194_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0469292686)[&!color=#-8387313,!rotate=true]:0.0318619962,('SEQ118_Proteus_mirabilis_strain_7001324_plasmid_beta-lactamase_TEM_variant_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.011471868,'SEQ18_Klebsiella_pneumoniae_extended_spectrum_beta-lactamase_TEM-53_blaTEM-53_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0038969554)[&!color=#-8387313,!rotate=false]:0.0069845063)[&!color=#-8387313,!rotate=false]:3.178E-7,('SEQ62_Proteus_mirabilis_plasmid_pANG-1_beta-lactamase_TEM-67_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0134790011,('SEQ9_S.marcescens_beta-lactamase_gene.'[&!color=#-8387313,!rotate=false]:0.0697415188,(((SEQ110_Escherichia_coli_clone_421_extended-spectrum_beta-lactamase_TEM-167_blaTEM-167_gene_complete[&!color=#-8387313,!rotate=false]:0.0044320434,'SEQ12_E.coli_bla-TEM-49_gene.'[&!color=#-8387313,!rotate=false]:0.0134580489)[&!color=#-8387313,!rotate=false]:0.004430813,'SEQ48_Escherichia_coli_strain_Ur7883/2001_TEM-type_beta_lactamase_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044719412)[&!color=#-8387313,!rotate=false]:0.0044364253,(('SEQ37_Proteus_mirabilis_TEM-89_beta-lactamase_TEM-89_gene_partial_cds.'[&!color=#-8387313,!rotate=false]:0.0045100036,'SEQ2_K.pneumoniae_Bla_CAZ-2_gene_for_extended_spectrum_beta-lactamase_CAZ-2.'[&!color=#-8387313,!rotate=false]:0.0044153212)[&!color=#-8387313,!rotate=false]:4.401E-7,'SEQ50_Escherichia_coli_plasmid_pBP311_extended-spectrum_beta-lactamase_TEM-101_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0135768568)[&!color=#-8387313,!rotate=false]:0.0044412016)[&!color=#-8387313,!rotate=false]:0.0066013595)[&!color=#-8387313,!rotate=false]:0.0022880942)[&!color=#-8387313,!rotate=false]:3.062E-7)[&!color=#-8387313,!rotate=false]:3.872E-7,(('SEQ80_Escherichia_coli_beta-lactamase_TEM-125_blaTEM-125_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0179503298,'SEQ22_Escherichia_coli_inhibitor-resistant_beta-lactamase_TEM-78_blaTEM-78_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0032937933)[&!color=#-8387313,!rotate=false]:0.0101705738,'SEQ7_E.coli_plasmid_blaIRT-14_gene.'[&!color=#-8387313,!rotate=false]:0.0089474701)[&!color=#-8387313,!rotate=false]:5.056E-7)[&!color=#-8387313,!rotate=false]:5.149E-7)[&!color=#-8387313,!rotate=false]:0.008549713,('SEQ82_Klebsiella_pneumoniae_tem-130_gene_for_beta-lactamase.'[&!color=#-8387313,!rotate=false]:0.0130431725,'SEQ3_K.pneumoniae_Bla_CAZ-6_gene_for_extended_spectrum_beta-lactamase_CAZ-6.'[&!color=#-8387313,!rotate=false]:0.0047157409)[&!color=#-8387313,!rotate=false]:0.0180920044)[&!color=#-8387313,!rotate=false]:0.0049368678)[&!color=#-8387313,!rotate=false]:0.0045527936,('SEQ138_Pseudomonas_aeruginosa_strain_12_beta-lactamase_TEM205_gene_partial_cds.'[&!color=#-8387313,!rotate=false]:0.022456474,('SEQ102_Acinetobacter_haemolyticus_plasmid_pUPI191_TEM_beta-lactamase_bla_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0224131981,'SEQ99_Enterobacter_cloacae_plasmid_pEC005_beta-lactamase_TEM-157_gene_complete_cds.'[&!color=#-8387313,!rotate=false]:0.0044462201)[&!color=#-8387313,!rotate=false]:0.0044189515)[&!color=#-8387313,!rotate=false]:0.0089446325)[&!color=#-8387313,!rotate=false]:4.031E-7,TEM1_beta_lactamase_from_Firnberg_et_al[&!color=#-8387313,!rotate=false]:1.0E-8)[&!color=#-8387313,!rotate=false]:0.022357998,'SEQ25_Capnocytophaga_ochracea_bla_TEM-17_gene.'[&!color=#-8387313,!rotate=false]:3.58E-8)[&!color=#-8387313,!rotate=true]:1.8196714624166384,('SEQ73_Klebsiella_pneumoniae_blaSHV-164_gene_for_beta-lactamase_SHV-164_strain_INSRAKp12267.'[&!color=#-16247168]:0.0180256033,('SEQ37_Klebsiella_pneumoniae_blaSHV-100_gene_for_beta-lactamase_isolate_KpARG185.'[&!color=#-16247168]:0.0133789454,('SEQ27_Klebsiella_pneumoniae_blaSHV-76_gene_for_beta-lactamase_isolate_INSRAkp1677.'[&!color=#-16247168]:0.0132957098,(SEQ47_Klebsiella_pneumoniae_strain_25_ZUM_1801226_SHV-52_beta-lactamase_blaSHV-52_gene_complete_cds[&!color=#-16247168]:0.0267402332,((('SEQ38_Klebsiella_pneumoniae_strain_ARS9_beta-lactamase_SHV-121_blaSHV-121_gene_complete_cds.'[&!color=#-16247168]:0.0045312031,'SEQ10_Klebsiella_pneumoniae_strain_H18_beta-lactamase_SHV-37_gene_complete_cds.'[&!color=#-16247168]:0.0135789528)[&!color=#-16247168]:0.0041853257,'SEQ13_Klebsiella_pneumoniae_beta-lactamase_SHV-42_blaSHV-42_gene_complete_cds.'[&!color=#-16247168]:0.0136919913)[&!color=#-16247168]:0.0045055992,('SEQ5_K.pneumoniae_blaSHV-1a_gene_strain_KPZU-12.'[&!color=#-16247168]:0.0044587707,('SEQ4_Klebsiella_pneumoniae_blaSHV-2a_gene_strain_KPLA-10.'[&!color=#-16247168]:0.0133581078,(('SEQ9_Klebsiella_pneumoniae_strain_G122_plasmid_pOZ187_beta-lactamase_SHV-36_gene_complete_cds.'[&!color=#-16247168]:0.0089267436,(('SEQ36_Klebsiella_pneumoniae_blaSHV-99_gene_for_beta-lactamase_isolate_KpARG220.'[&!color=#-16247168]:0.0135009236,((('SEQ52_Klebsiella_pneumoniae_gene_for_beta-lactamase_SHV-167_partial_cds_strain_249/MALATI_HALDER/BL'[&!color=#-16247168]:0.0179827229,'SEQ15_Klebsiella_pneumoniae_SHV-38_beta-lactamase_bla-SHV-38_gene_complete_cds.'[&!color=#-16247168]:3.608E-7)[&!color=#-16247168]:3.946E-7,'SEQ24_Klebsiella_pneumoniae_blaSHV-73_gene_for_beta-lactamase_isolate_INSRAkp1234.'[&!color=#-16247168]:0.0191868458)[&!color=#-16247168]:0.0044133257,'SEQ48_Klebsiella_pneumoniae_strain_Kp1.31_beta-lactamase_SHV-140_blaSHV-140_gene_partial_cds.'[&!color=#-16247168]:0.0135274692)[&!color=#-16247168]:0.0044923288)[&!color=#-16247168]:0.0044926949,('SEQ64_Klebsiella_pneumoniae_strain_35315A_SHV-157_beta-lactamase_blaSHV-157_gene_complete_cds.'[&!color=#-16247168]:0.0134615907,'SEQ11_Klebsiella_pneumoniae_beta-lactamase_SHV-40_blaSHV-40_gene_complete_cds.'[&!color=#-16247168]:0.0089580711)[&!color=#-16247168]:4.025E-7)[&!color=#-16247168]:0.0044742845)[&!color=#-16247168]:0.0044753164,(((((('SEQ58_Klebsiella_pneumoniae_strain_1357A_SHV-151_beta-lactamase_blaSHV-151_gene_partial_cds.'[&!color=#-16247168]:0.0088765362,'SEQ56_Klebsiella_pneumoniae_strain_1357A_SHV-149_beta-lactamase_blaSHV-149_gene_partial_cds.'[&!color=#-16247168]:0.0088322635)[&!color=#-16247168]:0.0044868404,'SEQ18_Klebsiella_pneumoniae_beta-lactamase_SHV-50_blaSHV-50_gene_complete_cds.'[&!color=#-16247168]:0.0089682627)[&!color=#-16247168]:2.628E-7,'SEQ12_Klebsiella_pneumoniae_beta-lactamase_SHV-41_blaSHV-41_gene_complete_cds.'[&!color=#-16247168]:0.0134626205)[&!color=#-16247168]:4.513E-7,'SEQ54_Klebsiella_pneumoniae_strain_2106A_SHV-147_beta-lactamase_blaSHV-147_gene_partial_cds.'[&!color=#-16247168]:0.0089353003)[&!color=#-16247168]:3.416E-7,'SEQ40_Klebsiella_pneumoniae_SHV-133_gene_for_beta-lactamase_SHV-133_complete_cds.'[&!color=#-16247168]:0.0089829831)[&!color=#-16247168]:0.004466159,('SEQ26_Klebsiella_pneumoniae_blaSHV-75_gene_for_beta-lactamase_isolate_INSRAkp1488.'[&!color=#-16247168]:0.0134384239,('SEQ17_Klebsiella_pneumoniae_plasmid_SHV-48_beta-lactamase_gene_complete_cds.'[&!color=#-16247168]:0.0134072752,('SEQ68_Klebsiella_pneumoniae_strain_40150A_SHV-161_beta-lactamase_blaSHV-161_gene_complete_cds.'[&!color=#-16247168]:0.0044553865,('SEQ59_Klebsiella_pneumoniae_strain_25110A_SHV-152_beta-lactamase_blaSHV-152_gene_partial_cds.'[&!color=#-16247168]:0.0088513338,('SEQ1_K.pneuminiae_shv5_gene_for_SHV-5_beta-lactamase.'[&!color=#-16247168]:0.0044166812,(((('SEQ69_Klebsiella_pneumoniae_strain_40150A_SHV-162_beta-lactamase_blaSHV-162_gene_partial_cds.'[&!color=#-16247168]:0.0131964048,'SEQ61_Klebsiella_pneumoniae_strain_1357A_SHV-154_beta-lactamase_blaSHV-154_gene_partial_cds.'[&!color=#-16247168]:0.0043515299)[&!color=#-16247168]:0.0088041298,'SEQ2_Escherichia_coli_cefotaxime-hydrolyzing_beta-lactamase_SHV-7_gene_complete_cds.'[&!color=#-16247168]:0.004432006)[&!color=#-16247168]:0.0088882849,'SEQ14_Klebsiella_pneumoniae_strain_KPBRZ-16_SHV_beta_lactamase_gene_complete_cds.'[&!color=#-16247168]:0.0088849789)[&!color=#-16247168]:0.0044052701,(SEQ42_Klebsiella_pneumoniae_strain_K-534_extended_spectrum_beta-lactamase_SHV-134_blaSHV-134_gene_c[&!color=#-16247168]:0.004426784,('SEQ21_Escherichia_coli_partial_blaSHV-12_gene_for_beta-lactamase_SHV-12.'[&!color=#-16247168]:1.0E-8,(SEQ41_Enterobacter_cloacae_plasmid_pBF1417_extended-spectrum_beta-lactamase_SHV-128_gene_complete_c[&!color=#-16247168]:0.0180857913,SEQ39_Escherichia_coli_strain_Ec6-66_plasmid_pEc6-66_extended_spectrum_beta-lactamase_SHV-129_blaSH[&!color=#-16247168]:0.0090396903)[&!color=#-16247168]:4.784E-7)[&!color=#-16247168]:4.356E-7)[&!color=#-16247168]:0.0088875446)[&!color=#-16247168]:4.753E-7)[&!color=#-16247168]:0.0044342642)[&!color=#-16247168]:0.0044445405)[&!color=#-16247168]:4.221E-7)[&!color=#-16247168]:4.114E-7)[&!color=#-16247168]:0.0044651415)[&!color=#-16247168]:0.0044706385)[&!color=#-16247168]:2.926E-7)[&!color=#-16247168]:4.263E-7)[&!color=#-16247168]:0.0046762169)[&!color=#-16247168]:0.0045764504)[&!color=#-16247168]:0.0044658109)[&!color=#-16247168]:0.0050070815)[&!color=#-16247168]:1.2186E-6)[&!color=#-16247168,!rotate=true]:1.8394757318833617)[&!rotate=true];
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#-1;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchLineWidth=1.5;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#-16777216;
+	set appearance.selectionColour=#-2144520576;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="Abadi MT Condensed Extra Bold";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute=null;
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName="Abadi MT Condensed Extra Bold";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShape.colourAttribute="User selection";
+	set nodeShape.isShown=false;
+	set nodeShape.minSize=10.0;
+	set nodeShape.scaleType=Width;
+	set nodeShape.shapeType=Circle;
+	set nodeShape.size=4.0;
+	set nodeShape.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=false;
+	set scaleBar.fontSize=11.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=2.0;
+	set scaleBar.scaleRange=0.5;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="CustomName";
+	set tipLabels.fontName="Arial";
+	set tipLabels.fontSize=10;
+	set tipLabels.fontStyle=1;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=true;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

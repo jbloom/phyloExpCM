@@ -1,0 +1,17 @@
+#Summary for tree KOSI07_SHV.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+HalpernBruno, 0, -1778.55, 4, 4, 0
+FracTolerated, 10.22, -1783.66, 4, 4, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 382.172, -1909.64, 64, 4, 60
+KOSI07_F_omega-global-one_rates-gamma4, 387.314, -1913.21, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.923, -1966.01, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 397.129, -1969.11, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 443.221, -1941.16, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 458.154, -1949.63, 62, 2, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 463.62, -2002.36, 12, 3, 9
+KOSI07_F_omega-branchlocal-one_rates-gamma4, 471.019, -1887.06, 131, 71, 60
+GY94_CF3x4_omega-global-one_rates-one, 481.866, -2012.48, 11, 2, 9
+GY94_CF3x4_omega-branchlocal-one_rates-gamma4, 482.593, -1943.85, 80, 71, 9
+FracToleratedrandomized, 936.56, -2246.83, 4, 4, 0
+HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0

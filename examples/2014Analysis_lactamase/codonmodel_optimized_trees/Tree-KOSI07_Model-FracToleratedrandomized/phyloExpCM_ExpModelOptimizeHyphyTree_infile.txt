@@ -1,0 +1,12 @@
+# input file for running script phyloExpCM_ExpModelOptimizeHyphyTree.py for phyloExpCM_ExpModelOptimizeHyphyTree
+fastafile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/aligned_lactamases.fasta
+randomizepreferences 1
+aapreferences /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+siteslist /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+keeptempfiles False
+hyphypath HYPHYMP CPU=4
+mutationrates freeparameters
+treefile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/KOSI07_codonPhyML_tree/codonphyml_tree.newick
+outfileprefix None
+fixationmodel FracTolerated
+scalefactor 10000.0

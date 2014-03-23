@@ -1,0 +1,6 @@
+# input file for running script phyloExpCM_runcodonPhyML.py for phyloExpCM_runcodonphyml
+seqfile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/aligned_lactamases.fasta
+codonPhyML_path codonphyml
+seed 1
+outprefix codonphyml
+model KOSI07_F_omega-gamma4

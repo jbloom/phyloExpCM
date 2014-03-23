@@ -1,0 +1,17 @@
+#Summary for tree GY94.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+HalpernBruno, 0, -4044.85, 4, 4, 0
+FracTolerated, 39.24, -4064.47, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 345.96, -4208.83, 13, 4, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 364.263, -4166.98, 64, 4, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 414.46, -4244.08, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 420.593, -4196.15, 63, 3, 60
+KOSI07_F_omega-branchlocal-one_rates-gamma4, 476.373, -4058.04, 229, 169, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 482.484, -4278.09, 12, 3, 9
+KOSI07_F_omega-global-one_rates-gamma4, 504.858, -4238.28, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 586.438, -4280.07, 62, 2, 60
+GY94_CF3x4_omega-global-one_rates-one, 609.747, -4342.72, 11, 2, 9
+GY94_CF3x4_omega-branchlocal-one_rates-gamma4, 1067.96, -4404.83, 178, 169, 9
+FracToleratedrandomized, 1218.44, -4654.07, 4, 4, 0
+HalpernBrunorandomized, 1428.02, -4758.86, 4, 4, 0

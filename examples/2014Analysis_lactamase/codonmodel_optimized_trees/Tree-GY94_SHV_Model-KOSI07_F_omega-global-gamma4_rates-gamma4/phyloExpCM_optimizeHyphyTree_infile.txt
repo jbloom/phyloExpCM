@@ -1,0 +1,10 @@
+# input file for running script phyloExpCM_optimizeHyphyTree.py for phyloExpCM_optimizeHyphyTree
+fastafile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/aligned_GY94_SHV.fasta
+hyphycmdfile hyphy_cmds.bf
+hyphyoutfile hyphy_output.txt
+hyphytreefile hyphy_tree.newick
+treefile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/GY94_codonPhyML_tree/codonphyml_tree_SHV.newick
+hyphypath HYPHYMP CPU=4
+siteslist /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+model KOSI07_F_omega-global-gamma4_rates-gamma4
+hyphydistancesfile None
