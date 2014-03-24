@@ -262,8 +262,7 @@ where :math:`\rm{diag}\left(\ldots, p_{r,x}, \ldots\right)` is the diagonal matr
    S_{r,xy} = 
    \begin{cases}
    \frac{P_{r,xy}}{p_{r,y}} = 0 & \mbox{if $x$ and $y$ differ by more than one nucleotide mutation,} \\
-   \frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \pi_{r,\mathcal{A}\left(z\right)} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} & \mbox{if $x$ and $y$ differ by one nucleotide and $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$,} \\
-   \frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \pi_{r,\mathcal{A}\left(z\right)} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} & \mbox{if $x$ and $y$ differ by one nucleotide and $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$,} \\
+   \frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \pi_{r,\mathcal{A}\left(z\right)} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} & \mbox{if $x$ and $y$ differ by one nucleotide,} \\
    \frac{P_{r,xx}}{p_{r,x}} & \mbox{otherwise.} \\
    \end{cases}
 

@@ -337,11 +337,25 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
 
         * *HalpernBruno*
 
-    * *includeselection* is a Boolean switch which is *True* by default. If it is
-      *False*, the substitution model is constructed with all selection parameters
-      (:math:`\omega_{r,a}`) set to one. This is the model you would use if you 
-      don't want to consider the possibility of additional or positive selection.
+    * *includeselection* is a Boolean switch which is *True* by default. It has 
+      the following possible values:
+      
+        - *True* (default value) means that each site and amino-acid gets
+          its own selection value of :math:`\omega_{r,a}` as described
+          above.
+          
+        - *False* means that all :math:`\omega_{r,a}` values are set to
+          one. This is what you would want to use if you don't want to
+          consider the possibility of any type of selection beyond
+          that defined by the amino-acid preferences.
+          
+         - The string *global_omega* means that there is a single 
+           global :math:`\omega` value for all sites and mutations,
+           so only one free parameter for all selection. This could be
+           useful if there is stronger selection on nonsynymous mutations
+           than captured by the amino-acid preferences.
     """
+    assert includeselection in [False, True, 'global_omega'], "Invalid value of includeselection: %s" % includeselection
     codontable = CodonTable()
     codons = NonStopCodons()
     ncodons = len(codons)
@@ -363,13 +377,13 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
             f.write('global q%s := (RAC + RAG)^%d * (RCA + RCT)^%d / qx_denominator;\n' % (x, ncg, 3 - ncg))
     for r in sites:
         f.write("\n//Equilibrium frequencies for site %d\np%dx = {%d, 1};\n" % (r, r, ncodons))
-        if includeselection:
+        if includeselection == True:
             f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s * omega%d%s" % (aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x]) for x in codons])))
         else:
             f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s" % (aapreferences[r]['PI_%s' % codontable[x]], x) for x in codons])))
         for xi in range(ncodons):
             x = codons[xi]
-            if includeselection:
+            if includeselection == True:
                 f.write("p%dx[%d] := (%g * q%s * omega%d%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x], r))
             else:
                 f.write("p%dx[%d] := (%g * q%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r))
@@ -404,10 +418,14 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
                         raise ValueError("Invalid fixationmodel of %s" % fixationmodel)
                     qxy = "R%s" % ''.join(ntdiffs[0])
                     if ax != ay: # nonsynonymous
-                        f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
-                        f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                        if includeselection == 'global_omega':
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g * omega / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g * omega / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                        else:
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
                     else: # synonymous
-                        if includeselection:
+                        if includeselection == True:
                             f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, r, ay))
                             f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, r, ay))
                         else:

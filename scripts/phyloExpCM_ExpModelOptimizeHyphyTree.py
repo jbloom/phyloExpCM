@@ -191,11 +191,20 @@ def main():
                 raise ValueError("randomizepreferences must be False or an integer >= 1")
         else:
             randomizepreferences = False
+    fitomega = False
+    if 'fitomega' in d:
+        fitomega = phyloExpCM.io.ParseStringValue(d, 'fitomega')
+        if fitomega.upper() in ['NONE', 'FALSE']:
+            fitomega = False
+        elif fitomega == 'freeparameter':
+            fitomega = 'global_omega'
+        else:
+            raise ValueError("Invalid value of fitomega: %s\nMust be freeparameter, None, or False" % fitomega)
 
     # create prxy_file which contains the substitution models for HYPHY
     prxy_file = 'Prxy.ibf'
     print "\nCreating the HYPHY include batch file %s which holds the substitution model constructed using the %s fixation model..." % (prxy_file, fixationmodel)
-    phyloExpCM.submatrix.WriteHYPHYMatrices2(prxy_file, sites, aapreferences, fixationmodel, includeselection=False)
+    phyloExpCM.submatrix.WriteHYPHYMatrices2(prxy_file, sites, aapreferences, fixationmodel, includeselection=fitomega)
 
     # re-map names in treefile and fastafile to HYPHY acceptable formats in codetreefile and codefastafile
     # code_d maps sequence headers to code names
@@ -232,6 +241,8 @@ def main():
         constraints.append('global RAC := 1.0') # set one mutation rate to one if branch lengths are free parameters and no date stamping
         for mutrate in ['RAG', 'RAT', 'RCA', 'RCG']:
             constraints.append("global %s :> 1.0e-7" % mutrate) # constrain all mutation rates greater than zero
+    if fitomega == 'global_omega':
+        constraints.append('global omega :> 1.0e-7') # set omega greater than zero
     phyloExpCM.hyphy.CreateHYPHYCommandFile2(optimizetree_cmdfile, optimizetree_outfile, codefastafile, codetreefile, sites, prxy_file, constraints)
     RunHYPHY(hyphypath, optimizetree_cmdfile, optimizetree_outfile)
     # extract tree and write to file
@@ -247,6 +258,8 @@ def main():
         values['RAT'] = None
         values['RCA'] = None
         values['RCG'] = None
+    if fitomega == 'global_omega':
+        values['omega'] = None
     phyloExpCM.hyphy.ExtractValues(optimizetree_outfile, values)
     f = open(optimizedtreeresults, 'w')
     f.write('Log likelihood: %g\n' % values['Log likelihood'])
