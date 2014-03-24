@@ -164,11 +164,12 @@ We consider two different models for how the fixation probabilities :math:`F_{r,
 
    F_{r,xy} =
    \begin{cases}
-   1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
-   \frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}} & \mbox{otherwise.}
+   1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
+   \omega & \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
+   \omega \times \frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}} & \mbox{otherwise.}
    \end{cases}
 
-where :math:`\mathcal{A}\left(x\right)` denotes the amino acid encoded by codon *x*.
+where :math:`\mathcal{A}\left(x\right)` denotes the amino acid encoded by codon *x* and the meaning of :math:`\omega` is discussed below.
 
 We refer to the second model as the *HalpernBruno* model since it was originally introduced by `Halpern and Bruno, MBE, 1998`_. This model interprets the amino-acid preferences :math:`\pi_{r,xy}` as being related to selection coefficients, and specifies,
 
@@ -177,9 +178,12 @@ We refer to the second model as the *HalpernBruno* model since it was originally
 
    F_{r,xy} = 
    \begin{cases}
-   1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
-   \frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} & \mbox{otherwise.}
+   1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
+   \omega & \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
+   \omega \times \frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} & \mbox{otherwise.}
    \end{cases}
+
+In both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno`, :math:`\omega` is a parameter that scales the rate of nonsynonymous versus synonymous mutations. A large value of :math:`\omega` means that nonsynonymous mutations are elevated relative to the expectation from the amino-acid preferences, and a small value means that they are depressed. Fixing :math:`\omega = 1` means that the amino-acid preferences naturally describe the relative rates of nonsynonymous and synonymous mutations by capturing all of the selection. This script allows models either with :math:`\omega = 1`, or :math:`\omega` as a free parameter. In general, if the selection in natural evolution is more stringent than that in the experiment used to determine the preferences, then we might expect models with :math:`\omega < 1` might provide better fit by adding extra selection against nonsynoymous mutations.
 
 Note that the definitions in both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` are `reversible`_ with respect to :math:`\pi_{r,x}`, such that
 
@@ -360,6 +364,8 @@ The input file should contain the following keys:
 
 * *outfileprefix* gives the name of the prefix pre-pended to the output files. You can also make it *None* if you don't want to pre-pend any prefix. 
 
+* *fitomega* is an optional parameters. If it is *None*, *False*, or is not specified, then the :math:`\omega` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If *fitomega* is instead specified with a value of *freeparameter*, then the value of :math:`\omega` is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.
+
 * *randomizepreferences* is an optional argument. If it is not specified or set to a value of *False*, nothing unusual is done. Otherwise it should be set to an integer >= 1 that specifies the random number seed used to randomize the amino-acid preferences among sites. You might want to do this if you are testing that the model relies relies on accurate experimental determination of the amino-acid preferences at each site by scrambling these preferences.
 
 
@@ -405,6 +411,10 @@ The following primary output files are created. Each of these files begins with 
         R_CG: 1.8586e-15
 
       Here *R_AG* is the rate of mutation from *A* to *G* (:math:`R_{A \rightarrow G}`). If the mutation rates are not free parameters, then the last four lines giving these rates will be absent.
+
+      If :math:`\omega` is also being fit via setting *fitomega* to *freeparameter*, then the file also specifies the value of this parameter as in::
+
+        omega 0.03132
 
 
 Temporary output files
