@@ -1,0 +1,11 @@
+#Input file for mapmuts_siteprofileplots.py
+sitepreferences /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+outfileprefix lactamase_
+siterange all
+dsspfile 1XPB_renumbered.dssp
+dsspchain None
+add_rsa True
+add_ss True
+nperline 72
+includestop False
+sitenumbermapping sequential_to_Ambler.csv

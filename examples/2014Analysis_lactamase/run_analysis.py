@@ -173,9 +173,36 @@ def main():
         raise ValueError("Failed to generate expected output file %s" % preferencesfile)
     print "Completed extracting the amino acid preferences with get_preferences.py into the file %s.\n%s\n\n" % (preferencesfile, separator)
 
+    # make the preferences logo plot
+    print "\n%s\nCreating logo plot of amino-acid preferences..." % separator
+    logoplot = 'lactamase_site_preferences_logoplot.jpg'
+    if os.path.isfile(logoplot):
+        print "Logo plot %s already exists." % logoplot
+    else:
+        print "Creating logo plot..."
+        open('mapmuts_siteprofileplots_infile.txt', 'w').write('\n'.join([
+                '#Input file for mapmuts_siteprofileplots.py',
+                'sitepreferences %s' % preferencesfile,
+                'outfileprefix lactamase_',
+                'siterange all', 
+                'dsspfile 1XPB_renumbered.dssp',
+                'dsspchain None',
+                'add_rsa True',
+                'add_ss True',
+                'nperline 72',
+                'includestop False',
+                'sitenumbermapping sequential_to_Ambler.csv',
+                ]))
+        os.system('mapmuts_siteprofileplots.py mapmuts_siteprofileplots_infile.txt')
+        os.system('convert -density 250 lactamase_site_preferences_logoplot.pdf %s' % logoplot)
+    if not os.path.isfile(logoplot):
+        raise ValueError("Failed to create logoplot %s" % logoplot)
+    print "The preferences are visually displayed in %s\n%s\n\n" % (logoplot, separator)
+
+
     # build the sequence set
     alignmentfile = '%s/aligned_lactamases.fasta' % os.getcwd()
-    print "\nBuilding the sequence set with get_treeseqs.py...\n"
+    print "\n%s\nBuilding the sequence set with get_treeseqs.py...\n" % separator
     if os.path.isfile(alignmentfile) and use_existing_output:
         print "The existing alignment file of %s will be used, and no new sequence set will be created." % alignmentfile
     else:

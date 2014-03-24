@@ -328,13 +328,14 @@ ul.auto-toc {
 <li><a class="reference internal" href="#running-the-analysis" id="id5">Running the analysis</a></li>
 <li><a class="reference internal" href="#steps-in-the-analysis" id="id6">Steps in the analysis</a><ul>
 <li><a class="reference internal" href="#extracting-amino-acid-preferences" id="id7">Extracting amino-acid preferences</a></li>
-<li><a class="reference internal" href="#creation-of-sequence-alignment" id="id8">Creation of sequence alignment</a></li>
-<li><a class="reference internal" href="#inspection-of-aligned-sequences" id="id9">Inspection of aligned sequences</a></li>
-<li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id10">Construction of phylogenetic trees</a></li>
-<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id11">Optimizing the trees with various substitution models</a></li>
+<li><a class="reference internal" href="#visualizing-the-amino-acid-preferences" id="id8">Visualizing the amino-acid preferences</a></li>
+<li><a class="reference internal" href="#creation-of-sequence-alignment" id="id9">Creation of sequence alignment</a></li>
+<li><a class="reference internal" href="#inspection-of-aligned-sequences" id="id10">Inspection of aligned sequences</a></li>
+<li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id11">Construction of phylogenetic trees</a></li>
+<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id12">Optimizing the trees with various substitution models</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusions" id="id12">Conclusions</a></li>
+<li><a class="reference internal" href="#conclusions" id="id13">Conclusions</a></li>
 </ul>
 </div>
 <div class="section" id="overview">
@@ -374,7 +375,7 @@ Linux version 3.5.0-43-generic (buildd&#64;roseapple) (gcc version 4.6.3 (Ubuntu
 </li>
 <li><p class="first"><a class="reference external" href="http://biopython.org/wiki/Main_Page">Biopython</a> (version 1.58)</p>
 </li>
-<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> (version 1.0)</p>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> (version 1.0) was used to make the sequence logo plot and to do some basic sequence manipulation in <a class="reference external" href="http://www.python.org/">Python</a>.</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/apps/release/6.6/emboss/apps/needle.html">EMBOSS needle</a> (version 6.6.0). The executable with the name <tt class="docutils literal">needle</tt> is expected to be in the current search path.</p>
 </li>
@@ -400,6 +401,10 @@ make install
 <li><p class="first">This analysis was run on the FHCRC scientific computing cluster using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> (version 2.6.2), and requires <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> to be installed to run as currently implemented. If you don't want to use <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>, all you need to do is modify the main <tt class="docutils literal">run_analysis.py</tt> script to not submit any jobs via <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>. The use of <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> in the current version simply allows more processors to be used simultaneously and so speeds up the analysis.</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> 6.6.9-7 2012-08-17 was used to convert PDF files to JPGs.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://weblogo.threeplusone.com/">weblogo</a> (version 3.3) was used to make the sequence logo plot.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://pybrary.net/pyPdf/">PyPdf</a> (version 1.13) was used to make overlays on the sequence logo plot.</p>
 </li>
 </ul>
 </div>
@@ -430,6 +435,12 @@ python run_analysis.py
 <li><tt class="docutils literal">Lahey_SHV_GenbankSequences.gb</tt></li>
 </ul>
 </blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal">1XPB.pdb</tt> is PDB file <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> of the crystal structure of TEM-1 beta-lactmase, as downloaded from the Protein Data Bank.</p>
+</li>
+<li><p class="first"><tt class="docutils literal">1XPB_renumbered.pdb</tt> is file <tt class="docutils literal">1XPB.pdb</tt> renumbered using <a class="reference external" href="http://dicsoft2.physics.iisc.ernet.in/pdbgoodies/inputpage.html">PDB Goodies</a> so that the numbering is sequential and matches the sequential numbering in <tt class="docutils literal">TEM1_cds.fasta</tt> in sequential numbering as described in <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal">1XPB_renumbered.dssp</tt> is the result of analyzing <tt class="docutils literal">1XPB_renumbered.pdb</tt> using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a>. This contains the accessible surface area and secondary structure for the crystal structure.</p>
 </li>
 </ul>
 </div>
@@ -488,8 +499,17 @@ Note that the residues in the created <tt class="docutils literal">amino_acid_pr
 </li>
 </ol>
 </div>
+<div class="section" id="visualizing-the-amino-acid-preferences">
+<h2><a class="toc-backref" href="#id8">Visualizing the amino-acid preferences</a></h2>
+<p>The amino-acid preferences are visualized using a logo plot created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal">mapmuts_siteprofileplots.py</tt>, which is detailed in the <a class="reference external" href="http://jbloom.github.io/mapmuts/">mapmuts documentation</a>. Briefly, this script uses <a class="reference external" href="http://weblogo.threeplusone.com/">weblogo</a> to visualize the preferences by making a plot in which the heights of amino acids are equal to their preferences at each site. Secondary structure and relative solvent accessibility information calculated using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> from PDB <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> is overlaid on the plot. The residues in this plot are numbered using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
+<p>The main <tt class="docutils literal">run_analsis.py</tt> script runs <tt class="docutils literal">mapmuts_siteprofileplots.py</tt> after creating its input file <tt class="docutils literal">mapmuts_siteprofileplots_infile.txt</tt>. The resulting image is in <tt class="docutils literal">lactamase_site_preferences_logoplot.pdf</tt>. A JPG version of this plot (<tt class="docutils literal">lactamase_site_preferences_logoplot.jpg</tt>) is also created using <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a>. The JPG is shown below:</p>
+<div class="figure align-center">
+<img alt="lactamase_site_preferences_logoplot.jpg" src="lactamase_site_preferences_logoplot.jpg" style="width: 80%;" />
+<p class="caption">Visual display of amino-acid preferences. Letter heights are proportional to the preference for that amino acid at that site. Secondary structure (SS) and relative solvent accessibility information is overlaid on the plots. Amino-acid letters are colored according to a hydrophobicity scale.</p>
+</div>
+</div>
 <div class="section" id="creation-of-sequence-alignment">
-<h2><a class="toc-backref" href="#id8">Creation of sequence alignment</a></h2>
+<h2><a class="toc-backref" href="#id9">Creation of sequence alignment</a></h2>
 <p>The creation of the sequence alignment <tt class="docutils literal">aligned_lactamases.fasta</tt> is performed by the <a class="reference external" href="http://www.python.org/">Python</a> script <tt class="docutils literal">get_treeseqs.py</tt> using the command:</p>
 <pre class="literal-block">
 python get_treeseqs.py
@@ -504,7 +524,7 @@ python get_treeseqs.py
 </ol>
 </div>
 <div class="section" id="inspection-of-aligned-sequences">
-<h2><a class="toc-backref" href="#id9">Inspection of aligned sequences</a></h2>
+<h2><a class="toc-backref" href="#id10">Inspection of aligned sequences</a></h2>
 <p>The aligned sequences in <tt class="docutils literal">aligned_lactamases.fasta</tt> are subjected to the following manual steps to check the quality of the data:</p>
 <ol class="arabic">
 <li><p class="first">The <tt class="docutils literal">aligned_lactamases.fasta</tt> file was manually checked for recombinant sequences using the online interface to <a class="reference external" href="http://www.datamonkey.org/">DataMonkey</a> to run the <em>SBP</em> and <em>GARD</em> programs. Briefly:</p>
@@ -524,7 +544,7 @@ raxmlHPC-SSE3 -w ./RAxML_output/ -n aligned_lactamases -p 1 -m GTRCAT -s aligned
 </ol>
 </div>
 <div class="section" id="construction-of-phylogenetic-trees">
-<h2><a class="toc-backref" href="#id10">Construction of phylogenetic trees</a></h2>
+<h2><a class="toc-backref" href="#id11">Construction of phylogenetic trees</a></h2>
 <p>High-quality phylogenetic trees were then constructed using <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>, which is able to build maximum-likelihood trees with codon substitution models.</p>
 <p>The <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal">phyloExpCM_runcodonPhyML.py</tt> (see <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for details) was used to run <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. Trees were built using two different substitution models, with each tree in its own subdirectory within <tt class="docutils literal">./examples/2014Analysis_lactamase/</tt>. The substitution models used to build the trees:</p>
 <blockquote>
@@ -594,7 +614,7 @@ convert -density 300 annotated_tree.pdf annotated_tree.jpg
 </blockquote>
 </div>
 <div class="section" id="optimizing-the-trees-with-various-substitution-models">
-<h2><a class="toc-backref" href="#id11">Optimizing the trees with various substitution models</a></h2>
+<h2><a class="toc-backref" href="#id12">Optimizing the trees with various substitution models</a></h2>
 <p>This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topologies estimated with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> and the <em>GY94</em> or <em>KOSI07</em> substitution models as described in <a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a>. The analyses are also done for the <em>TEM</em> and <em>SHV</em> subtrees. This analysis compares the experimentally determined codon substitution models with various other substitution models.</p>
 <p>This analysis is done with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> scripts <tt class="docutils literal">phyloExpCM_optimizeHyphyTree.py</tt> (for standard substitution models) and <tt class="docutils literal">phyloExpCM_ExpModelOptimizeHyphyTree.py</tt> (for substitution models using the experimentally determined amino-acid preferences), both of which are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>. These scripts uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model free parameters while keeping the tree topologies fixed.</p>
 <p>The results of the optimizations for the various substitution models are in the subdirectory <tt class="docutils literal">./codonmodel_optimized_trees/</tt>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. For example, <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/Tree-KOSI07_Model-KOSI07_F_omega-global-gamma4_rates-one/</span></tt> contains one such model. Within this subdirectory, the files of interest are:</p>
@@ -825,7 +845,7 @@ HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
 </div>
 </div>
 <div class="section" id="conclusions">
-<h1><a class="toc-backref" href="#id12">Conclusions</a></h1>
+<h1><a class="toc-backref" href="#id13">Conclusions</a></h1>
 <p>The key conclusions that can be drawn from the tables generated by <a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models">Optimizing the trees with various substitution models</a> are as follows:</p>
 <ol class="arabic simple">
 <li>The evolutionary models that use the experimentally determined amino-acid preferences substantially outperform the other models. The results are slightly better if the fixation probabilities are estimated using the <em>HalpernBruno</em> method.</li>

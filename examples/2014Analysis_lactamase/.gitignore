@@ -3,3 +3,5 @@ slurm*
 messages.log
 errors.log
 *.ibf
+lactamase_site_entropy_plot.pdf
+lactamase_entropy_rsa_correlationplot.pdf
