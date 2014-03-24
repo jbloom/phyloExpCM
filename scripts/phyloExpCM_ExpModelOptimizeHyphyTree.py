@@ -266,10 +266,10 @@ def main():
     f.write('Branch lengths optimized: %d\n' % round(values['number of branch lengths']))
     f.write('Model parameters optimized: %d\n' % round(values['independent parameters (includes branch lengths)'] - values['number of branch lengths']))
     if mutationrates == 'freeparameters':
-        mutationrates = {'AC':1.0}
         for mut in ['AG', 'AT', 'CA', 'CG']:
             f.write('R_%s: %g\n' % (mut, values["R%s" % mut]))
-            mutationrates[mut] = values['R%s' % mut]
+    if fitomega == 'global_omega':
+        f.write('omega: %g\n' % values['omega'])
     f.close()
     # extract branch lengths
     nodebranchmatch = re.compile('(?P<node>((TipSeq\d+_)|(Node\d+)))\:(?P<branch>\d+\.*\d*((e|E)\-{0,1}\d+){0,1})[\(\,\)]')
