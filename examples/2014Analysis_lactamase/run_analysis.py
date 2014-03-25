@@ -189,7 +189,7 @@ def main():
                 'dsspchain None',
                 'add_rsa True',
                 'add_ss True',
-                'nperline 72',
+                'nperline 58',
                 'includestop False',
                 'sitenumbermapping sequential_to_Ambler.csv',
                 ]))
