@@ -12,6 +12,7 @@ Written by Jesse Bloom, 2014."""
 
 import math
 import mapmuts.sequtils
+import mapmuts.bayesian
 
 
 def main():
@@ -63,11 +64,13 @@ def main():
     for r in range(residuerange[0], residuerange[1] + 1):
         knownfitnesses = [x for x in fitnesses[r].values() if x != None]
         meanknownfitness = sum(knownfitnesses) / float(len(knownfitnesses))
+        pi = {}
         for a in aminoacids:
             if fitnesses[r][a] == None:
                 fitnesses[r][a] = meanknownfitness # assign unknown fitnesses mean for that residue
+            pi[a] = fitnesses[r][a]
         totfitnesses = sum(fitnesses[r].values())
-        f.write('%d\t%s\t0\t%s\n' % (r, wts[r], '\t'.join(['%g' % (fitnesses[r][a] / totfitnesses) for a in aminoacids])))
+        f.write('%d\t%s\t%.3f\t%s\n' % (r, wts[r], mapmuts.bayesian.SiteEntropy(pi), '\t'.join(['%g' % (fitnesses[r][a] / totfitnesses) for a in aminoacids])))
     f.close()
 
 

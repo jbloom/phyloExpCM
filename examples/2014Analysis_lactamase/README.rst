@@ -138,7 +138,7 @@ Here are the steps in the analysis. Except for a few indicated manual steps, all
 
 Extracting amino-acid preferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The approach used here defines the evolutionary model in terms of the amino-acid preferences, where :math:`\pi_{r,a}` denotes the preference of site *r* for amino acid *a*. `Firnberg et al 2014`_ provide their data in terms of the "fitnesses" of different mutations, which are computed using what appears to be a rather ad-hoc procedure from the deep sequencing counts. Because `Firnberg et al 2014`_ fail to provide access to either their raw sequencing data or the computer code used to analyze these data, the best that is possible is to simply take their fitness values at face value and convert them to something approximating the amino-acid preferences. This is done by the `Python`_ script ``get_preferences.py``, which can be run using the command::
+The approach used here defines the evolutionary model in terms of the amino-acid preferences, where :math:`\pi_{r,a}` denotes the preference of site *r* for amino acid *a*. `Firnberg et al 2014`_ provide their data in terms of the "fitnesses" of different mutations, which are computed from the deep sequencing counts. Some aspects of the procedure used to compute these "fitnesses" from the deep sequencing counts appear to be rather ad hoc. However, here we do not attempt to re-analyze the raw data of `Firnberg et al 2014`_ (which in any case is only partly provided in their publication), but instead simply take their fitness values at face value and convert them to something approximating the amino-acid preferences. This is done by the `Python`_ script ``get_preferences.py``, which can be run using the command::
 
     python get_preferences.py
 
@@ -395,7 +395,6 @@ Here are the results for optimization of the  *SHV*-only tree built with the *KO
 
     .. include:: KOSI07_SHV_summary.csv
        :literal:
-
 
 
 Similar files are created in LaTex formatted tables as ``GY94_summary.tex``, ``KOSI07_summary.tex``, etc.
