@@ -338,12 +338,12 @@ def main():
                 'KOSI07_F_omega-global-one_rates-gamma4',
                 'KOSI07_F_omega-global-gamma4_rates-one', 
                 'KOSI07_F_omega-global-gamma4_rates-gamma4',
-                'KOSI07_F_omega-branchlocal-one_rates-gamma4',
+#                'KOSI07_F_omega-branchlocal-one_rates-gamma4',
                 'GY94_CF3x4_omega-global-one_rates-one',
                 'GY94_CF3x4_omega-global-one_rates-gamma4',
                 'GY94_CF3x4_omega-global-gamma4_rates-one',
                 'GY94_CF3x4_omega-global-gamma4_rates-gamma4',
-                'GY94_CF3x4_omega-branchlocal-one_rates-gamma4',
+#                'GY94_CF3x4_omega-branchlocal-one_rates-gamma4',
                 ]
     substitutionmodels = dict([(x, x) for x in substitutionmodels])
     print "Using %s to optimize the tree branch lengths for different substitution models and compute the resulting likelihoods..." % (script)

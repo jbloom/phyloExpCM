@@ -9,9 +9,7 @@ GY94_CF3x4_omega-global-gamma4_rates-gamma4, 399.58, -1973.45, 13, 4, 9
 GY94_CF3x4_omega-global-one_rates-gamma4, 407.754, -1978.54, 12, 3, 9
 KOSI07_F_omega-global-gamma4_rates-one, 449.52, -1948.42, 63, 3, 60
 KOSI07_F_omega-global-one_rates-one, 467.36, -1958.34, 62, 2, 60
-KOSI07_F_omega-branchlocal-one_rates-gamma4, 474.792, -1893.06, 131, 71, 60
 GY94_CF3x4_omega-global-gamma4_rates-one, 475.306, -2012.31, 12, 3, 9
-GY94_CF3x4_omega-branchlocal-one_rates-gamma4, 491.319, -1952.32, 80, 71, 9
 GY94_CF3x4_omega-global-one_rates-one, 496.353, -2023.84, 11, 2, 9
 FracToleratedrandomized, 940.78, -2253.05, 4, 4, 0
 HalpernBrunorandomized, 964.98, -2265.15, 4, 4, 0
