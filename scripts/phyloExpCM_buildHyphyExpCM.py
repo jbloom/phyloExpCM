@@ -46,6 +46,31 @@ def main():
     evolequilfreqs = phyloExpCM.io.ParseStringValue(d, 'evolequilfreqs')
     hyphyExpCMs = phyloExpCM.io.ParseStringValue(d, 'hyphyExpCMs')
 
+    # see if mutspectrum specifies in alternative format
+    lines = [line for line in open(mutspectrum).readlines() if not (line.isspace() or line[0] == '#')]
+    if len(lines) == 5:
+        # alternative format, read in
+        mutspectrum = {'AC':None, 'AG':None, 'AT':None, 'CA':None, 'CG':None}
+        for line in lines:
+            entries = line.split()
+            if len(entries) != 2:
+                raise ValueError("Invalid line in mutspectrum file: %s" % line)
+            mut = entries[0].strip().upper()
+            if mut not in mutspectrum:
+                raise ValueError("Invalid mutation type of %s in mutspectrum file\nShould be AC, AG, AT, CA, or CG" % mut)
+            if mutspectrum[mut] != None:
+                raise ValueError("Duplicate entry for mutation rate %s in mutspectrum file" % mut)
+            try:
+                mutspectrum[mut] = float(entries[1]) 
+            except ValueError:
+                raise ValueError("mutspectrum file does not specify a valid mutation rate for %s" % mut)
+        mutspectrum[('AC', 'TG')] = mutspectrum['AC']
+        mutspectrum[('AG', 'TC')] = mutspectrum['AG']
+        mutspectrum[('AT', 'TA')] = mutspectrum['AT']
+        mutspectrum[('GT', 'CA')] = mutspectrum['CA']
+        mutspectrum[('GC', 'CG')] = mutspectrum['CG']
+        mutspectrum[('GA', 'CT')] = mutspectrum['AG'] * mutspectrum['CA'] / float(mutspectrum['AC'])
+
     # now build the matrices, exchangeabilities, equilibrium frequencies
     print "\nBuilding substitution matrices for model %s..." % model
     submatrices = phyloExpCM.submatrix.BuildSubMatrices(mutspectrum, aapreferences, model, scalefactor, makereversible)

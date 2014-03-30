@@ -35,22 +35,41 @@ The input file should contain the following keys:
     3   S   2.93851 0.0295947   0.00304848  0.00227603  0.00668501  0.131168    0.000710502 0.0199653   0.00804841  0.000619715 0.366698    0.0132841   0.0223199   0.0048327   0.0170484   0.00875982  0.090712    0.0171888   0.0102176   0.177257    0.069395    0.000170873
     4   Q   3.93186 0.012565    0.0355955   0.0396076   0.0344002   0.139887    0.0167737   0.0194143   0.0730001   0.0272629   0.131636    0.0424519   0.0840445   0.00063312  0.00533824  0.0554966   0.0647137   0.0153147   0.019934    0.113926    0.0383248   0.0296804
 
-* *mutspectrum* is the name of a file giving the mutational spectrum. These are the mutational rates, and do not include information about selection (that comes from *aapreferences*). Specifically, the entry for *A -> G* represents the probability that a given site mutations from nucleotide *A* to nucleotide *G* in a unit of time given that it was already *A* (in other words, it is :math:`\Pr\left(G \rm{\; at\; time\;} t = 1 | A \rm{\; at\; time\;} t = 0\right)`. These are what would be termed the "exchangeabilities" in the GTR model -- they do not to reflect the equilibrium frequencies of different mutations, but just the relative mutation rates given that an identity is already present. In addition, because the mutations are determined by sequencing one nucleic acid strand and it is not known on which strand a mutation originated, mutations and their reverse complements are grouped together as equivalent (i.e. *A -> G* on one strand is the same as *T -> C* on another). Finally, the mutations specified here do not have to be reversible in the sense that *A -> G* does not have to be equal to *G -> A* -- however, if you set *makereversible* to *True*, they will be constrained to be reversible as described in the documentation for that option.
+* *mutspectrum* is the name of a file giving the mutational spectrum. These are the mutational rates, and do not include information about selection (that comes from *aapreferences*). Specifically, the entry for *A -> G* represents the probability that a given site mutations from nucleotide *A* to nucleotide *G* in a unit of time given that it was already *A* (in other words, it is :math:`\Pr\left(G \rm{\; at\; time\;} t = 1 | A \rm{\; at\; time\;} t = 0\right)`. Because the mutations are determined by sequencing one nucleic acid strand and it is not known on which strand a mutation originated, mutations and their reverse complements are grouped together as equivalent (i.e. *A -> G* on one strand is the same as *T -> C* on another). 
 
-  The format of the *mutspectrum* file should be as follows::
+  There are two options for how you specify *mutspectrum*:
 
-    AG, TC, 2.4e-5
-    GA, CT, 2.3e-5
-    AT, TA, 3.0e-6
-    AC, TG, 9.0e-6
-    GC, CG, 1.9e-6
-    GT, CA, 9.4e-6
 
-  In this file, the first line specifies that the rate of *A -> G* and *T -> C* (which are assumed equal due to the reverse-complement symmetry) is equal to 2.4e-5. There should be six such lines covering all possible mutations. The units for the rate numbers are arbitrary, but if they are small numbers then you may want to adjust *scalefactor* to get them fairly close to one.
+    1) The format below, which gives the rates of all six types of mutations. Note that these rates may frequently not lead to a reversible substitution model, so you may want to consider using the *makereversible* option. The format here is::
+
+        AG, TC, 2.4e-5
+        GA, CT, 2.3e-5
+        AT, TA, 3.0e-6
+        AC, TG, 9.0e-6
+        GC, CG, 1.9e-6
+        GT, CA, 9.4e-6
+
+       In this file, the first line specifies that the rate of *A -> G* and *T -> C* (which are assumed equal due to the reverse-complement symmetry) is equal to 2.4e-5. There should be six such lines covering all possible mutations. The units for the rate numbers are arbitrary, but if they are small numbers then you may want to adjust *scalefactor* to get them fairly close to one.
+
+    2) The format below, which just gives the rates of five types of mutations::
+           
+            AC 9.0e-6
+            AG 2.4e-5
+            AT 3.0e-6
+            CA 9.4e-6
+            CG 1.9e-6
+
+       In this model, the sixth mutation rate *CT* is calculated from :math:`R_{C \rightarrow T} = \frac{R_{A \rightarrow G} \times R_{C \rightarrow A}}{R_{A \rightarrow C}}` (see :ref:`phyloExpCM_ExpModelOptimizeHyphyTree.py`). Calculating the mutation rate in this way makes the model reversible, so you should be safe setting *makereversible* to *False*. Note that you still may want to make *scalefactor* large if the absolute values of these rates are low.
 
 * *scalefactor* is a number that multiplies all of the substitution matrix entries determined from *mutspectrum* and *aapreferences* to give the values actually placed in the `HYPHY`_ substitution matrices. In a world of perfect numerical accuracy, the value of this number will not affect the **relative** branch lengths (although making it larger will decrease the absolute magnitude of all branch lengths by a constant factor). However, in practice it may be helpful (this is assumed to be the case but has not been carefully verified) to make this number large enough that when it multiplies the typical value in *mutspectrum*, the result is at least fairly close to one. This will prevent the substitution matrices from having lots of very small numbers, which could cause numerical underflow. So for the example values of *mutspectrum* described immediately above, you might want *scalefactor* equal to something like 10000.0.
 
-* *makereversible* specifies that we constrain the mutational spectrum specified by *mutspectrum* to be reversible. **Note that this script may not function well / properly if this option is False, as the False option has not been thoroughly tested.** If *False*, nothing is done. If *True*, then we set the actual mutation values to be the average of the two symmetric exchanges specified. So for instance, let *mutspectrum* be this file::
+* *makereversible* specifies that we constrain the mutational spectrum specified by *mutspectrum* to be reversible. Two **important notes**:
+
+    - Note that subsequent optimization with `HYPHY`_ may not function well / properly if this option is *False*, as the *False* option has not been thoroughly tested. The concern is that `HYPHY`_ will not perform well with non-reversible models.
+
+    - Note that this option is really misnamed, and should probably be called *makesymmetric* rather than *makereversible*. This is because it makes the mutation rates symmetric. This is sufficient to make the model reversible -- but there are also less stringent ways to do this that do not require symmetry. See :ref:`phyloExpCM_ExpModelOptimizeHyphyTree.py`, which is a newer and recommended script for using `HYPHY`_ to optimize with experimentally determined models.
+    
+  If *makereversible* is *False*, then nothing is done. If *True*, then we set the actual mutation values to be the average of the two symmetric exchanges specified. So for instance, let *mutspectrum* be this file::
 
     AG, TC, 2.4e-5
     GA, CT, 2.3e-5
@@ -71,7 +90,6 @@ The input file should contain the following keys:
 
   You can see that in this example, the assumption of symmetry seems to be quite good, as the two averaged values are very close. Note that the symmetry enforced by this option is actually stricter than the requirement needed to make things reversible.
 
-  Overall, you are suggested to use :ref:`phyloExpCM_ExpModelOptimizeHyphyTree.py` to deal with making experimental models reversible, as this is a newer script that handles this better.
   
 
 * *model* specifies how we convert the experimentally determined amino-acid preferences in *aapreferences* into substitution probabilities between amino acids. There are currently two possible values:

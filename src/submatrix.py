@@ -43,6 +43,7 @@ Functions defined in this module
 
 import os
 import math
+import copy
 import re
 import numpy
 import mapmuts.io
@@ -441,7 +442,9 @@ def BuildSubMatrices(mutspectrumfile, equilibriumfreqsfile, model, scalefactor, 
     CALLING VARIABLES:
 
     * *mutspectrumfile* is a file giving the nucleotide mutation spectrum in a
-      format that can be read by *ReadMutSpectrum*.
+      format that can be read by *ReadMutSpectrum*. Alternatively, it can also
+      be a dictionary in which case it should be of the format returned
+      by *ReadMutSpectrum*.
 
     * *equilibriumfreqsfile* is a file giving the equilibrium amino-acid
       frequencies at each site in a format that can be read by
@@ -506,7 +509,12 @@ def BuildSubMatrices(mutspectrumfile, equilibriumfreqsfile, model, scalefactor, 
     This means that rows of the matrices sum to zero. This means that the matrices
     plus the identity matrix are right-stochastic matrices.
     """
-    mutspectrum = ReadMutSpectrum(mutspectrumfile)
+    if isinstance(mutspectrumfile, str):
+        mutspectrum = ReadMutSpectrum(mutspectrumfile)
+    elif not isinstance(mutspectrumfile, dict):
+        raise ValueError("mutspectrumfile must be a string (file name) or dictionary giving mutation rates.")
+    else:
+        mutspectrum = copy.deepcopy(mutspectrumfile)
     if makereversible:
         ag = (mutspectrum[('AG', 'TC')] + mutspectrum[('GA', 'CT')]) / 2.0
         mutspectrum[('AG', 'TC')] = ag
