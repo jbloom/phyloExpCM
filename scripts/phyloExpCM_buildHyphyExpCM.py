@@ -39,8 +39,6 @@ def main():
     if scalefactor <= 0:
         raise ValueError("scalefactor must be > 0")
     makereversible = phyloExpCM.io.ParseBoolValue(d, 'makereversible')
-    if makereversible != True:
-        raise ValueError("True is the only option that is currently supported for makereversible.")
     model = phyloExpCM.io.ParseStringValue(d, 'model')
     validmodels = ['FracTolerated', 'HalpernBruno']
     if (model not in validmodels) and not re.search("^PreferWildtype_\d+(\.\d*){0,1}$", model):

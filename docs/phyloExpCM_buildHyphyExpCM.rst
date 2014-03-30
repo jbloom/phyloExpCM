@@ -50,7 +50,7 @@ The input file should contain the following keys:
 
 * *scalefactor* is a number that multiplies all of the substitution matrix entries determined from *mutspectrum* and *aapreferences* to give the values actually placed in the `HYPHY`_ substitution matrices. In a world of perfect numerical accuracy, the value of this number will not affect the **relative** branch lengths (although making it larger will decrease the absolute magnitude of all branch lengths by a constant factor). However, in practice it may be helpful (this is assumed to be the case but has not been carefully verified) to make this number large enough that when it multiplies the typical value in *mutspectrum*, the result is at least fairly close to one. This will prevent the substitution matrices from having lots of very small numbers, which could cause numerical underflow. So for the example values of *mutspectrum* described immediately above, you might want *scalefactor* equal to something like 10000.0.
 
-* *makereversible* specifies that we constrain the mutational spectrum specified by *mutspectrum* to be reversible. Currently, the only allowable value for this option is *True* (you must constrain these to be reversible). This means that for the mutational spectrum, we set the actual mutation values to be the average of the two reversible exchanges specified. So for instance, let *mutspectrum* be this file::
+* *makereversible* specifies that we constrain the mutational spectrum specified by *mutspectrum* to be reversible. **Note that this script may not function well / properly if this option is False, as the False option has not been thoroughly tested.** If *False*, nothing is done. If *True*, then we set the actual mutation values to be the average of the two symmetric exchanges specified. So for instance, let *mutspectrum* be this file::
 
     AG, TC, 2.4e-5
     GA, CT, 2.3e-5
@@ -59,7 +59,7 @@ The input file should contain the following keys:
     GC, CG, 1.9e-6
     GT, CA, 9.4e-6
 
-  This mutation spectrum is not actually quite reversible, as for example *A -> G* and *G -> A* have slightly different values. With this option, we constrain it to be reversible, giving the following values:
+  This mutation spectrum is not actually quite symmetric, as for example *A -> G* and *G -> A* have slightly different values. With this option, we constrain it to be reversible, giving the following values:
 
     - *A -> T, T -> A* = 3.0e-6 (no change from specified values)
 
@@ -69,7 +69,10 @@ The input file should contain the following keys:
 
     - *A -> C, T -> G, C -> A, G -> T* = (9.0e-6 + 9.4e-6) / 2 = 9.2e-6
 
-  You can see that in this example, the assumption of reversibility seems to be quite good, as the two averaged values are very close. If they are not, you might want to question the assumption of reversibility. Unfortunately, this script is not currently set up to accept *makereversible* set to *False*, so that will require more algorithmic work (in practice, although `HYPHY`_ can accept non-reversible models, it seems to greatly slow the computations and their convergence).
+  You can see that in this example, the assumption of symmetry seems to be quite good, as the two averaged values are very close. Note that the symmetry enforced by this option is actually stricter than the requirement needed to make things reversible.
+
+  Overall, you are suggested to use :ref:`phyloExpCM_ExpModelOptimizeHyphyTree.py` to deal with making experimental models reversible, as this is a newer script that handles this better.
+  
 
 * *model* specifies how we convert the experimentally determined amino-acid preferences in *aapreferences* into substitution probabilities between amino acids. There are currently two possible values:
 
