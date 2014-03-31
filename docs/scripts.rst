@@ -13,6 +13,7 @@ Here are the scripts:
    phyloExpCM_buildHyphyExpCM
    phyloExpCM_optimizeHyphyTree
    phyloExpCM_ExpModelOptimizeHyphyTree
+   phyloExpCM_FreqsFromAlignment
    phyloExpCM_multiHyphyRuns
 
 
