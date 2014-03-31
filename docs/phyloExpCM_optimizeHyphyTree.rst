@@ -10,7 +10,7 @@ This script has been tested with `HYPHY`_ versions 2.112*. This script uses seve
 
 To run the script, create an `Input file`_  as described below. Then run the script from the command line using the input file as the single argument, as in::
 
-    phyloExpCM_runcodonPhyML.py infile.txt
+    phyloExpCM_optimizeHyphyTree.py infile.txt
 
 Note that running this script may take quite a while if `HYPHY`_ takes a long time to run. `HYPHY`_ can also start to consume a lot of memory for relatively big input trees -- so you may need to use a computer with a large amount of RAM.
 

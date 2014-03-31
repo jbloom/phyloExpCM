@@ -10,7 +10,7 @@ This script is designed to take experimentally determined amino-acid preferences
 
 To run the script, create an input file of the format described below. Then run the script followed by the input file, as in::
 
-    phyloExpCM_runcodonPhyML.py infile.txt
+    phyloExpCM_buildHyphyExpCM.py infile.txt
 
 
 Format of the input file
