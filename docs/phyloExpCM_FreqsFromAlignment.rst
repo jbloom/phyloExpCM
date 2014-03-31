@@ -32,6 +32,8 @@ The input file should contain the following keys:
 
 * *includestop* : specifies whether we tally the frequencies of stop codons as a possible amino acid. If *True* then we include stop codons in the tally; if *False* then we do not.
 
+* *pseudocounts* : integer number of pseudocounts added to the counts for each amino acid at each site. If you set this to zero, the actual fractions will be computed. But you might want to use a pseudocount (such as one) if you don't want to estimate zero frequencies.
+
 * *outputfile* is the created file in form the of the ``*_equilibriumpreferences.txt`` file created by the `mapmuts`_ script ``mapmuts_inferpreferences.py``. Specifically, for each site all the occurrences of each amino acid is counted. Gaps are disregarded, and stop codons are either included or disregarded depending on the value of *includestop*. For each site *r* the script counts the fraction of sequences (among those being counted at this site) that have *a* as the amino acid. The results are written to the create file as in::
 
     #SITE   WT_AA   SITE_ENTROPY    PI_A    PI_C    PI_D    PI_E    PI_F    PI_G    PI_H    PI_I    PI_K    PI_L    PI_M    PI_N    PI_P    PI_Q    PI_R    PI_S    PI_T    PI_V    PI_W    PI_Y    PI_*
@@ -53,6 +55,7 @@ Here is an example input file::
     alignmentfile cds_sequences.fasta
     translateseqs True
     includestop False
+    pseudocounts 1
     outputfile aminoacid_frequencies.txt
 
 

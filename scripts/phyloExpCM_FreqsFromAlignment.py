@@ -35,6 +35,7 @@ def main():
         raise IOError("Failed to find alignmentfile of %s" % alignmentfile)
     translateseqs = phyloExpCM.io.ParseBoolValue(d, 'translateseqs')
     includestop = phyloExpCM.io.ParseBoolValue(d, 'includestop')
+    pseudocounts = phyloExpCM.io.ParseIntValue(d, 'pseudocounts')
     outputfile = phyloExpCM.io.ParseStringValue(d, 'outputfile')
 
     # read sequences, make sure all of same length
@@ -54,7 +55,7 @@ def main():
     count_d = {}
     aminoacids = mapmuts.sequtils.AminoAcids(includestop)
     for r in range(1, seqlength + 1):
-        count_d[r] = dict([(aa, 0) for aa in aminoacids])
+        count_d[r] = dict([(aa, pseudocounts) for aa in aminoacids])
     for (head, seq) in seqs:
         for r in range(1, seqlength + 1):
             aa = seq[r - 1]
