@@ -8,5 +8,6 @@ Examples of `phyloExpCM`_ usage are provided with the package. These examples ca
    :maxdepth: 1
 
    example_2013Analysis_Influenza_NP_Human_1918_Descended
+   example_2014Analysis_lactamase
 
 .. include:: weblinks.txt

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>submatrix Module &mdash; phyloExpCM 0.1 documentation</title>
+    <title>submatrix Module &mdash; phyloExpCM 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.2 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="hyphy Module" href="hyphy.html" />
     <link rel="prev" title="io Module" href="io.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="io.html" title="io Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
@@ -79,6 +79,7 @@ the nucleotide-level mutational spectrum.</p>
 <li><em>CodonTable</em> : returns codon to amino-acid translation dictionary.</li>
 <li><em>ReadMutSpectrum</em> : reads mutational spectrum.</li>
 <li><em>WriteHYPHYMatrices</em> : writes substitution matrices in <tt class="docutils literal"><span class="pre">HYPHY</span></tt> format.</li>
+<li><em>WriteHYPHYMatrices2</em> : more versatile version of <em>WriteHYPHYMatrices</em>.</li>
 <li><em>BuildSubMatrices</em> : build codon substitution matrices.</li>
 <li><em>StationaryStates</em> : gets stationary states of substitution matrices.</li>
 <li><em>DecomposeToExchangeabilityEquilibrium</em> : decomposes reversible matrix.</li>
@@ -90,7 +91,9 @@ the nucleotide-level mutational spectrum.</p>
 <p>CALLING VARIABLES:</p>
 <ul>
 <li><p class="first"><em>mutspectrumfile</em> is a file giving the nucleotide mutation spectrum in a
-format that can be read by <em>ReadMutSpectrum</em>.</p>
+format that can be read by <em>ReadMutSpectrum</em>. Alternatively, it can also
+be a dictionary in which case it should be of the format returned
+by <em>ReadMutSpectrum</em>.</p>
 </li>
 <li><p class="first"><em>equilibriumfreqsfile</em> is a file giving the equilibrium amino-acid
 frequencies at each site in a format that can be read by
@@ -348,6 +351,165 @@ and going to 60. This is alphabetical order. This is the same
 standard order that <tt class="docutils literal"><span class="pre">HYPHY</span></tt> uses to index codons.</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="submatrix.WriteHYPHYMatrices2">
+<tt class="descclassname">submatrix.</tt><tt class="descname">WriteHYPHYMatrices2</tt><big>(</big><em>outfile</em>, <em>sites</em>, <em>aapreferences</em>, <em>fixationmodel</em>, <em>includeselection=True</em><big>)</big><a class="headerlink" href="#submatrix.WriteHYPHYMatrices2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates HYPHY include batch file with codon substitution models.</p>
+<p>Created HYPHY include batch file (<tt class="docutils literal"><span class="pre">*.ibf</span></tt> file), include with the command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;myfile.ibf&quot;;</span>
+</pre></div>
+</div>
+<p>For each site <em>r</em>, this batch file defines a HYPHY Model <em>Prxy</em> that defines the
+substitution probabilities for site <em>r</em> as a 61 X 61 matrix for the rates
+among all non-stop codons, where the codons are indexed from 0 to 60 in the order
+defined by <em>NonStopCodons()</em>, which is alphabetical. Element <em>Prxy[xi, yi]</em> is
+the substitution rate from codon <em>NonStopCodons()[xi]</em> to <em>NonStopCodons()[yi]</em>.
+So if there are are two sites 1 and 2, then this file will define the HYPHY Models
+<em>P1xy</em> and <em>P2xy</em>. Also defines equilibrium frequencies (<em>prx</em>) and
+exchangeabilities (<em>Srxy</em>) for each site.</p>
+<p>The substitution model is defined by</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}P_{r,xy} = 
+\begin{cases}
+\mu_r \times Q_{xy} &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
+\mu_r \times \omega_{r,\mathcal{A}\left(y\right)} \times Q_{xy} \times F_{r,xy} &amp; \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$}. \\
+\end{cases}\end{split}\]</div>
+</div></blockquote>
+<p>where <span class="math">\(\mathcal{A}\left(x\right)\)</span> is the amino acid encoded by <em>x</em>. The
+mutation rate is <span class="math">\(Q_{xy}\)</span>, the fixation probability is 
+<span class="math">\(F_{r,xy}\)</span>, selection for amino-acid <em>a</em> is <span class="math">\(omega_{r,a}\)</span>,
+and a scaling factor is represented by <span class="math">\(\mu_r\)</span>. If you are not trying to
+detect selection, you will want to constrain these last two variables to be one
+in HYPHY, as with:</p>
+<div class="highlight-python"><div class="highlight"><pre>mu1 := 1.0;
+omega1A := 1.0;
+omega1C := 1.0;
+omega1D := 1.0;
+</pre></div>
+</div>
+<p>If you are detecting <em>positive selection</em> for amino-acid change, but not looking 
+for <em>additional selection</em> for specific amino acids, constrain <span class="math">\(\omega_{r,a}\)</span>
+values to have equal values of <span class="math">\(\omega_r\)</span> with HYPHY, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>omega1A := omega1;
+omega1C := omega1;
+omega1D := omega1;
+</pre></div>
+</div>
+<p>Fixation probabilities are defined as numbers in the substition models. 
+These numbers are computed from the amino-acid preferences
+<span class="math">\(\pi_{r,a}\)</span>. There are two different models that can be used to calculate
+these fixation probabilities. The model to be used is specified by 
+<em>fixationmodel</em> as one of these:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>FracTolerated</em> specifies that the fixation probabilities are</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}F_{r,xy} =
+\begin{cases}
+1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
+\frac{\pi_{r, \mathcal{A}\left(y\right)}}{\pi_{r, \mathcal{A}\left(x\right)}} &amp; \mbox{otherwise.}
+\end{cases}\end{split}\]</div>
+</div></blockquote>
+</li>
+<li><p class="first"><em>HalpernBruno</em> specifies that the fixation probabilities are</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}F_{r,xy} = 
+\begin{cases}
+1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
+\frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} &amp; \mbox{otherwise.}
+\end{cases}\end{split}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>The mutation rates are equal among all sites, and are</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}Q_{xy} = 
+\begin{cases}
+0 &amp; \mbox{if $x$ and $y$ differ by more than on nucleotide} \\
+R_{m \rightarrow n} &amp; \mbox{if $x$ differs from $y$ by a single-nucleotide change of $m$ to $n$}.
+\end{cases}\end{split}\]</div>
+</div></blockquote>
+<p>The rates are defined by <span class="math">\(R_{m \rightarrow n}\)</span>, which denotes the probability
+that nucleotide <em>m</em> mutates to <em>n</em> in a unit time given that the identity is already
+<em>m</em>. We place the following constraints on these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(R_{m \rightarrow n} = R_{m_c \rightarrow n_c}\)</span> where <span class="math">\(m_c\)</span> is the complement of 
+nucleotide <span class="math">\(m\)</span> (so <span class="math">\(A_c = T\)</span>). This constraint assumes that the
+same mutation process operates on the sequenced and complementary strands.</li>
+<li><span class="math">\(R_{C \rightarrow T} = \frac{R_{A \rightarrow G} \times R_{C \rightarrow A}}{R_{A \rightarrow C}}\)</span>. This constraint makes the mutation rates
+reversible. It is defined more for this property than on any
+biological basis.</li>
+</ul>
+</div></blockquote>
+<p>With these these constraints, there are four independent mutation rates, denoted
+by the following HYPHY variables:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">RAC</span>
+<span class="n">RAG</span>
+<span class="n">RAT</span>
+<span class="n">RCA</span>
+<span class="n">RCG</span>
+</pre></div>
+</div>
+<p>If you want these mutation rates to be free parameters, don&#8217;t assign them any constraints. If you want them
+to have fixed values, assign these in HYPHY, such as:</p>
+<div class="highlight-python"><div class="highlight"><pre>RAC := 1.23e-2;
+</pre></div>
+</div>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>outfile</em> is the created HYPHY include batch file, such as <em>Prxy.ibf</em>. This file is
+overwritten if it already exists.</p>
+</li>
+<li><p class="first"><em>sites</em> is a list of the integer sites <em>r</em> for which we create models.</p>
+</li>
+<li><p class="first"><em>aapreferences</em> is a dictionary that specifies the amino-acid preferences <span class="math">\(\pi_{r,a}\)</span>.
+For each site <em>r</em> in <em>sites</em>, there should be a key <em>r</em> in <em>aapreferences</em>, with
+<em>aapreferences[r][PI_A]&#8217; giving the preference for amino-acid *A</em> at site <em>r</em>, 
+<em>aapreferences[r][PI_S]</em> giving the preference for amino-acid <em>S</em> at site <em>r</em>, etc.
+All preferences are assumed to be &gt; 0.</p>
+</li>
+<li><p class="first"><em>fixationmodel</em> is the model used to calculate the fixation probabilities <span class="math">\(F_{r,xy}\)</span>
+from the amino-acid preferences. It should be one of the two following strings as
+described above:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>FracTolerated</em></li>
+<li><em>HalpernBruno</em></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>includeselection</em> is a Boolean switch which is <em>True</em> by default. It has 
+the following possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>True</em> (default value) means that each site and amino-acid gets
+its own selection value of <span class="math">\(\omega_{r,a}\)</span> as described
+above.</li>
+<li><em>False</em> means that all <span class="math">\(\omega_{r,a}\)</span> values are set to
+one. This is what you would want to use if you don&#8217;t want to
+consider the possibility of any type of selection beyond
+that defined by the amino-acid preferences.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>The string <em>global_omega</em> means that there is a single 
+global <span class="math">\(\omega\)</span> value for all sites and mutations,
+so only one free parameter for all selection. This could be
+useful if there is stronger selection on nonsynymous mutations
+than captured by the amino-acid preferences.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
 </div>
 </div>
 
@@ -411,7 +573,7 @@ standard order that <tt class="docutils literal"><span class="pre">HYPHY</span><
         <li class="right" >
           <a href="io.html" title="io Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>

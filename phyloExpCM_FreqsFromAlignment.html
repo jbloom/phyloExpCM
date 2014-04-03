@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>phyloExpCM_FreqsFromAlignment.py &mdash; phyloExpCM 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.2 documentation" href="index.html" />
+    <link rel="up" title="Scripts" href="scripts.html" />
+    <link rel="next" title="phyloExpCM_multiHyphyRuns.py" href="phyloExpCM_multiHyphyRuns.html" />
+    <link rel="prev" title="phyloExpCM_ExpModelOptimizeHyphyTree.py" href="phyloExpCM_ExpModelOptimizeHyphyTree.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="phyloexpcm-freqsfromalignment-py">
+<span id="id1"></span><h1>phyloExpCM_FreqsFromAlignment.py<a class="headerlink" href="#phyloexpcm-freqsfromalignment-py" title="Permalink to this headline">¶</a></h1>
+<p>This simple script gets the frequencies of amino acids at each site from a sequence
+alignment. It then writes them to a format equivalent to that of the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> files produced by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt>.</p>
+<p>Typically you would want to run this script if you wanted to create a file giving the amino-acid frequencies in an alignment of sequences that could be analyzed with the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> scripts <tt class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></tt> or <tt class="docutils literal"><span class="pre">mapmuts_preferencescorrelate.py</span></tt>.</p>
+<p>To run the script, create an input file of the format described below. Then run the script followed by the input file, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_FreqsFromAlignment.py infile.txt
+</pre></div>
+</div>
+<div class="section" id="format-of-the-input-file">
+<h2>Format of the input file<a class="headerlink" href="#format-of-the-input-file" title="Permalink to this headline">¶</a></h2>
+<p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
+<div class="highlight-python"><div class="highlight"><pre>key1 value1
+key2 value2
+</pre></div>
+</div>
+<p>Blank lines or lines
+that begin with # are ignored (i.e. as comment lines).</p>
+<p>The input file should contain the following keys:</p>
+<ul>
+<li><p class="first"><em>alignmentfile</em> : the name of a file containing the aligned sequences. These sequences must all be aligned (of the same length). They should either be proteins or translatable DNA sequences depending on the value of <em>translateseqs</em>. This file should be in FASTA format.</p>
+</li>
+<li><p class="first"><em>translateseqs</em> : specifies whether we translate the sequences in <em>alignmentfile</em>. If <em>False</em> then the sequences in <em>alignmentfile</em> are assumed to already be protein sequences. If <em>True</em>, then the sequences in <em>alignmentfile</em> must be translatable DNA sequences. Gap codons (<tt class="docutils literal"><span class="pre">---</span></tt>) are translated to a <tt class="docutils literal"><span class="pre">-</span></tt> character, stop codons to a <tt class="docutils literal"><span class="pre">*</span></tt> character. In this latter case, the analysis is done on these translated sequences. An error is raised if the sequences cannot be translated.</p>
+</li>
+<li><p class="first"><em>includestop</em> : specifies whether we tally the frequencies of stop codons as a possible amino acid. If <em>True</em> then we include stop codons in the tally; if <em>False</em> then we do not.</p>
+</li>
+<li><p class="first"><em>pseudocounts</em> : integer number of pseudocounts added to the counts for each amino acid at each site. If you set this to zero, the actual fractions will be computed. But you might want to use a pseudocount (such as one) if you don&#8217;t want to estimate zero frequencies.</p>
+</li>
+<li><p class="first"><em>outputfile</em> is the created file in form the of the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt>. Specifically, for each site all the occurrences of each amino acid is counted. Gaps are disregarded, and stop codons are either included or disregarded depending on the value of <em>includestop</em>. For each site <em>r</em> the script counts the fraction of sequences (among those being counted at this site) that have <em>a</em> as the amino acid. The results are written to the create file as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>#SITE   WT_AA   SITE_ENTROPY    PI_A    PI_C    PI_D    PI_E    PI_F    PI_G    PI_H    PI_I    PI_K    PI_L    PI_M    PI_N    PI_P    PI_Q    PI_R    PI_S    PI_T    PI_V    PI_W    PI_Y    PI_*
+1   na   2.85229 0.0113803   0.0402777   0.0153121   0.0320438   0.013312    0.00936795  0.026916    0.0192017   0.0224047   0.018926    0.554093    0.0445008   0.0138125   0.0212192   0.0131771   0.0152268   0.0237621   0.0102606   0.0369008   0.0367991   0.0211056
+2   na   0.968359    0.878703    0.00384431  0.00390501  0.00815666  0.0048199   0.00244426  0.00333017  0.00258064  0.00391181  0.00094265  0.0248087   0.00238593  0.00064321  0.00288323  0.00610788  0.0012339   0.001455    0.0290568   0.0107545   0.00492073  0.00311186
+3   na   2.93851 0.0295947   0.00304848  0.00227603  0.00668501  0.131168    0.000710502 0.0199653   0.00804841  0.000619715 0.366698    0.0132841   0.0223199   0.0048327   0.0170484   0.00875982  0.090712    0.0171888   0.0102176   0.177257    0.069395    0.000170873
+</pre></div>
+</div>
+<p>In this file, the <tt class="docutils literal"><span class="pre">SITE_ENTROPY</span></tt> column gives the site entropy taken to the base 2.</p>
+<p>In this file, all of the wildtype identities (<tt class="docutils literal"><span class="pre">WT_AA</span></tt>) are set to <tt class="docutils literal"><span class="pre">na</span></tt> because there is no wildtype in the sequence alignment.</p>
+<p>In this file, residues are numbered sequentially starting with one according to the aligned sequences in <em>alignmentfile</em>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example input file:</p>
+<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_FreqsFromAlignment.py
+alignmentfile cds_sequences.fasta
+translateseqs True
+includestop False
+pseudocounts 1
+outputfile aminoacid_frequencies.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h2>
+<p>Some summary output is printed to standard output. In addition, the file specified by <em>outputfile</em> is created with the format described above in the documentation for the <em>outputfile</em> specification.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">phyloExpCM_FreqsFromAlignment.py</a><ul>
+<li><a class="reference internal" href="#format-of-the-input-file">Format of the input file</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+<li><a class="reference internal" href="#output-files">Output files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="phyloExpCM_ExpModelOptimizeHyphyTree.html"
+                        title="previous chapter">phyloExpCM_ExpModelOptimizeHyphyTree.py</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="phyloExpCM_multiHyphyRuns.html"
+                        title="next chapter">phyloExpCM_multiHyphyRuns.py</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/phyloExpCM_FreqsFromAlignment.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>

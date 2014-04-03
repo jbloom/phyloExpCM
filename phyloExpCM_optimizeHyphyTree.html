@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>phyloExpCM_optimizeHyphyTree.py &mdash; phyloExpCM 0.1 documentation</title>
+    <title>phyloExpCM_optimizeHyphyTree.py &mdash; phyloExpCM 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.2 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
-    <link rel="next" title="phyloExpCM_multiHyphyRuns.py" href="phyloExpCM_multiHyphyRuns.html" />
+    <link rel="next" title="phyloExpCM_ExpModelOptimizeHyphyTree.py" href="phyloExpCM_ExpModelOptimizeHyphyTree.html" />
     <link rel="prev" title="phyloExpCM_buildHyphyExpCM.py" href="phyloExpCM_buildHyphyExpCM.html" /> 
   </head>
   <body role="document">
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+          <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,10 +57,10 @@
             
   <div class="section" id="phyloexpcm-optimizehyphytree-py">
 <span id="id1"></span><h1>phyloExpCM_optimizeHyphyTree.py<a class="headerlink" href="#phyloexpcm-optimizehyphytree-py" title="Permalink to this headline">¶</a></h1>
-<p>This script takes a tree of known topology and uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model parameters. It can use several common codon models as well as the experimentally based codon models.</p>
+<p>This script takes a tree of known topology and uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model parameters. It can use several common codon models as well as the experimentally based codon models with known mutation rates. However, for experimentally based evolutionary models it will often be more convenient to instead use the newer script <a class="reference internal" href="phyloExpCM_ExpModelOptimizeHyphyTree.html#phyloexpcm-expmodeloptimizehyphytree-py"><em>phyloExpCM_ExpModelOptimizeHyphyTree.py</em></a> &#8211; and use of this latter script is necessary if the mutation rates are unknown.</p>
 <p>This script has been tested with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> versions 2.112*. This script uses several <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch files (<tt class="docutils literal"><span class="pre">*.ibf</span></tt> files) that are distributed with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package in the <tt class="docutils literal"><span class="pre">./src/data/</span></tt> subdirectory, and should be installed in a location that the script can find if you have installed this package as instructed. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> fails with messages about being unable to find included files, maybe this didn&#8217;t work.</p>
 <p>To run the script, create an <a class="reference internal" href="#input-file">Input file</a>  as described below. Then run the script from the command line using the input file as the single argument, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_runcodonPhyML.py infile.txt
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_optimizeHyphyTree.py infile.txt
 </pre></div>
 </div>
 <p>Note that running this script may take quite a while if <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> takes a long time to run. <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can also start to consume a lot of memory for relatively big input trees &#8211; so you may need to use a computer with a large amount of RAM.</p>
@@ -212,8 +212,8 @@ Sequence2   Sequence3    2.13376
   <p class="topless"><a href="phyloExpCM_buildHyphyExpCM.html"
                         title="previous chapter">phyloExpCM_buildHyphyExpCM.py</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="phyloExpCM_multiHyphyRuns.html"
-                        title="next chapter">phyloExpCM_multiHyphyRuns.py</a></p>
+  <p class="topless"><a href="phyloExpCM_ExpModelOptimizeHyphyTree.html"
+                        title="next chapter">phyloExpCM_ExpModelOptimizeHyphyTree.py</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -248,12 +248,12 @@ Sequence2   Sequence3    2.13376
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+          <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
              >next</a> |</li>
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>

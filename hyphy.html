@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>hyphy Module &mdash; phyloExpCM 0.1 documentation</title>
+    <title>hyphy Module &mdash; phyloExpCM 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.1 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.2 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="packagedata Module" href="packagedata.html" />
     <link rel="prev" title="submatrix Module" href="submatrix.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="submatrix.html" title="submatrix Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
@@ -68,7 +68,9 @@ tested with <tt class="docutils literal"><span class="pre">HYPHY</span></tt> ver
 <li><em>RandomizeCodonAlignment</em> : randomly rearranges sites in an alignment.</li>
 <li><em>ExtractTree</em> : extract tree from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</li>
 <li><em>ExtractLikelihoodAndNParameters</em> : extracts likelihood and number of parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</li>
+<li><em>ExtractValues</em> : extract variable values from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</li>
 <li><em>CreateHYPHYCommandFile</em> : creates command file for <tt class="docutils literal"><span class="pre">HYPHY</span></tt> batch mode.</li>
+<li><em>CreateHYPHYCommandFile2</em> : more general function for creating <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command file to optimize tree and/or model.</li>
 </ul>
 <dl class="function">
 <dt id="hyphy.CreateHYPHYCommandFile">
@@ -220,6 +222,82 @@ option for <em>equilfreqs</em> is <em>F</em>.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="hyphy.CreateHYPHYCommandFile2">
+<tt class="descclassname">hyphy.</tt><tt class="descname">CreateHYPHYCommandFile2</tt><big>(</big><em>cmdfile</em>, <em>outputfile</em>, <em>fastafile</em>, <em>treefile</em>, <em>sites</em>, <em>modelfile</em>, <em>constraints</em>, <em>branchconstraints=None</em><big>)</big><a class="headerlink" href="#hyphy.CreateHYPHYCommandFile2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a command file for using <tt class="docutils literal"><span class="pre">HYPHY</span></tt> to optimize branch lengths and/or model parameters.</p>
+<p>This function is more general than <em>CreateHPHYCommandFile</em>. The only strict requirements
+are that you provide a tree of known topology.</p>
+<p>The end result of this function is creation of the batch file specified by <em>cmdfile</em>. You can then use
+this function to run <tt class="docutils literal"><span class="pre">HYPHY</span></tt> with a command such as:</p>
+<div class="highlight-python"><div class="highlight"><pre>hyphypath cmdfile
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">hyphypath</span></tt> gives the path to a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> executable.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>cmdfile</em> : String name of the created <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command batch file. 
+Overwritten if it exists already.</p>
+</li>
+<li><p class="first"><em>outputfile</em> : String name of the file to which <em>cmdfile</em> tells <tt class="docutils literal"><span class="pre">HYPHY</span></tt> to 
+write its output. If a file of this name already exists, it is deleted by 
+this function.</p>
+</li>
+<li><p class="first"><em>fastafile</em> : Name of existing file with the aligned sequences (lengths must
+be multiples of three and they must be aligned at the codon level). Stop codons should be removed
+or else not included in the listing specified by <em>sites</em>. The sequence headers must match the tip node
+names in <em>treefile</em>, and conform to <tt class="docutils literal"><span class="pre">HYPHY</span></tt> naming conventions.</p>
+</li>
+<li><p class="first"><em>treefile</em> : String name of existing file that gives the tree in Newick format, with tip names
+matching the sequence names in <em>fastafile</em>.</p>
+</li>
+<li><p class="first"><em>sites</em> : List of integers specifying all codon sites that we include in the analysis. The codons
+are numbered 1, 2, ... beginning with the first codon.</p>
+</li>
+<li><p class="first"><em>modelfile</em> : String name of existing file specifying the codon substitution models for the 61 non-stop
+codons, with codons listed in alphabetical order. For each site <em>r</em> in <em>sites</em>, there should be
+a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> Model defined conforming to the name <em>Prxy</em> (such as <tt class="docutils literal"><span class="pre">P1xy</span></tt>, <tt class="docutils literal"><span class="pre">P2xy</span></tt>, etc).</p>
+</li>
+<li><p class="first"><em>constraints</em> : List of strings giving any constraints applied to <tt class="docutils literal"><span class="pre">HYPHY</span></tt> variables that are defined
+as part of the substitution models. The string entries should be valid <tt class="docutils literal"><span class="pre">HYPHY</span></tt> commands but lacking
+the tailing semi-colon. These can be used to assign variable specific values, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>RAC := 1.2357
+</pre></div>
+</div>
+<p>or to assign them ranges, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>mu1 :&gt; 0
+</pre></div>
+</div>
+<p>or to assign them initial values, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">omega1A</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>or to make them global, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>global RAC = 1.2357
+</pre></div>
+</div>
+<p>or to make them global and fixed, as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>global RAC := 1.2357
+</pre></div>
+</div>
+<p>So a possible value for <em>constraints</em> might be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;RAC := 1.2357&#39;</span><span class="p">,</span> <span class="s">&#39;mu1 :&gt; 0&#39;</span><span class="p">,</span> <span class="s">&#39;omega1A := omega1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><em>branchconstraints</em> : List of strings giving constraints applied to <tt class="docutils literal"><span class="pre">HYPHY</span></tt> branch lengths.
+These constraints should be provided here rather than in <em>constraints</em> because branch length
+constraints need to be defined <strong>after</strong> constructing the tree, while other constraints should
+be defined before this in the <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command file. By default, this option is <em>None</em>, meaning
+that no such constraints are applied. If you want to apply constraints, set this
+to a list of the same format as <em>constraints</em>, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">branchconstraints</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tree.Node1.t := 1.0131&#39;</span><span class="p">,</span> <span class="s">&#39;tree.TipSeq2_.t := 0.312&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
 <dt id="hyphy.ExtractLikelihoodAndNParameters">
 <tt class="descclassname">hyphy.</tt><tt class="descname">ExtractLikelihoodAndNParameters</tt><big>(</big><em>hyphyoutfile</em><big>)</big><a class="headerlink" href="#hyphy.ExtractLikelihoodAndNParameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts log likelihood and number of parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</p>
@@ -234,6 +312,11 @@ number of tip nodes: 24
 number of internal branches: 21
 </pre></div>
 </div>
+<p>Or the following lines:</p>
+<blockquote>
+<div>Log likelihood: -671.317
+Branch lengths optimized: 45
+Model parameters optimized: 2</div></blockquote>
 <p>This function returns the 2-tuple <em>(loglikelihood, nparameters)</em>. The entries
 are:</p>
 <blockquote>
@@ -286,6 +369,50 @@ branch lengths, such as:</p>
 </div>
 <p>and uses those to fill in the branch lengths. Once this is done, it
 returns the resulting tree string.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="hyphy.ExtractValues">
+<tt class="descclassname">hyphy.</tt><tt class="descname">ExtractValues</tt><big>(</big><em>hyphyoutfile</em>, <em>values</em><big>)</big><a class="headerlink" href="#hyphy.ExtractValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts values for parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</p>
+<p><em>hyphyoutfile</em> is a string giving the name of a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output file
+of the type produced by <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelectionHyphy.py</span></tt>.</p>
+<p><em>values</em> specifies the values that we want to extract. It is keyed
+by strings giving the names of the parameters. Initially, the value
+for each key must be <em>None</em>. This function expects to find <strong>exactly one</strong>
+occurrence of each key, and sets the corresponding value to that
+numerical value. Keys can be present in <em>hyphyoutfile</em> as follow:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">There can be an exact match for that key preceded by nothing
+else on the line, and followed by a colon and then the value,
+optionally followed by a semicolon. For example, the key
+<em>Log likelihood</em> would match either of the following lines:</p>
+<div class="highlight-python"><div class="highlight"><pre>Log likelihood: -58.6512466447406
+Log likelihood: -58.6512466447406;
+</pre></div>
+</div>
+</li>
+<li><p class="first">There can be the name of a variable followed preceded by
+either nothing or the string <em>global</em>, and followed by
+an <em>=</em> or <em>:=</em> and the the value. For example, the 
+key <em>RCG</em> would match any one of the following lines (and
+several other similar variants):</p>
+<div class="highlight-python"><div class="highlight"><pre>RCG=1.02;
+RCG:=1.02;
+RCG = 1.02;
+RCG := 1.02;
+RCG=1.02
+global RCG=1.02;
+global RCG:=1.02;
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<p>On return, <em>values</em> will hold the extracted values for each key.
+An exception (a <em>ValueError</em>) will be raised if a key is either
+not present or is present multiple times.</p>
 </dd></dl>
 
 <dl class="function">
@@ -367,7 +494,7 @@ in which the codons have been interchanged randomly.</p>
         <li class="right" >
           <a href="submatrix.html" title="submatrix Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>
