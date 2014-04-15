@@ -37,12 +37,21 @@ def main():
     includestop = phyloExpCM.io.ParseBoolValue(d, 'includestop')
     pseudocounts = phyloExpCM.io.ParseIntValue(d, 'pseudocounts')
     outputfile = phyloExpCM.io.ParseStringValue(d, 'outputfile')
+    requiresubstring = False
+    if 'requiresubstring' in d:
+        requiresubstring = phyloExpCM.io.ParseStringValue(d, 'None')
+        if requiresubstring.upper() in ['NONE', 'FALSE']:
+            requiresubstring = False
 
     # read sequences, make sure all of same length
     print "Reading alignment from %s..." % alignmentfile
     seqs = mapmuts.sequtils.ReadFASTA(alignmentfile)
     if not seqs:
         raise ValueError("Failed to find any sequences in alignmentfile")
+    if requiresubstring:
+        seqs = [(head, seq) for (head, seq) in seqs if requiresubstring in head]
+        if not seqs:
+            raise ValueError("No sequences in alignmentfile had the requiresubstring substring of %s" % requiresubstring)
     seqlength = len(seqs[0][1])
     for (head, seq) in seqs:
         if len(seq) != seqlength:
