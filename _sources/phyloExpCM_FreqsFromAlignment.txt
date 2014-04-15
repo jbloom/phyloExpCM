@@ -47,6 +47,8 @@ The input file should contain the following keys:
 
   In this file, residues are numbered sequentially starting with one according to the aligned sequences in *alignmentfile*.
 
+* *requiresubstring* is an optional argument. If it is not specified or set to *None* then nothing is done. Otherwise, it should be set to a substring -- in this case, we only compute the frequencies from sequences in *alignmentfile* that have headers that contain the substring specified by *requiresubstring*. For instance, if this substring is *HOST_Swine* then only sequences with headers that contain *HOST_swine* are counted. Note that if no sequences in *alignmentfile* contain headers with this substring, an error will be raised.
+
 Example input file
 ---------------------------
 Here is an example input file::

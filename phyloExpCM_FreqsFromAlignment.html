@@ -94,6 +94,8 @@ that begin with # are ignored (i.e. as comment lines).</p>
 <p>In this file, all of the wildtype identities (<tt class="docutils literal"><span class="pre">WT_AA</span></tt>) are set to <tt class="docutils literal"><span class="pre">na</span></tt> because there is no wildtype in the sequence alignment.</p>
 <p>In this file, residues are numbered sequentially starting with one according to the aligned sequences in <em>alignmentfile</em>.</p>
 </li>
+<li><p class="first"><em>requiresubstring</em> is an optional argument. If it is not specified or set to <em>None</em> then nothing is done. Otherwise, it should be set to a substring &#8211; in this case, we only compute the frequencies from sequences in <em>alignmentfile</em> that have headers that contain the substring specified by <em>requiresubstring</em>. For instance, if this substring is <em>HOST_Swine</em> then only sequences with headers that contain <em>HOST_swine</em> are counted. Note that if no sequences in <em>alignmentfile</em> contain headers with this substring, an error will be raised.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="example-input-file">
