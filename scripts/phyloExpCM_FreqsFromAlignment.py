@@ -39,7 +39,7 @@ def main():
     outputfile = phyloExpCM.io.ParseStringValue(d, 'outputfile')
     requiresubstring = False
     if 'requiresubstring' in d:
-        requiresubstring = phyloExpCM.io.ParseStringValue(d, 'None')
+        requiresubstring = phyloExpCM.io.ParseStringValue(d, 'requiresubstring')
         if requiresubstring.upper() in ['NONE', 'FALSE']:
             requiresubstring = False
 
