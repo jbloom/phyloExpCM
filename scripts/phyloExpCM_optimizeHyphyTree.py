@@ -95,17 +95,30 @@ def ParseModelOptions(line):
     equilfreqs = entries[1]
     if not ((modeltype == 'GY94' and equilfreqs in ['CF3x4', 'F3x4']) or (modeltype == 'KOSI07' and equilfreqs == 'F')):
         raise ValueError("Not a valid equilibrium frequencies method of %s for model %s." % (equilfreqs, modeltype))
-    omega = entries[2].split('-')
-    if omega[0] != 'omega' or len(omega) != 3:
-        raise ValueError("Invalid omega specification in model:\n%s" % line)
-    omega_scope = omega[1]
-    if omega_scope not in ['global', 'branchlocal']:
-        raise ValueError("Not a valid omega scope in model:\n%s\nValid values are global or branchlocal" % line)
-    omega_classes = omega[2]
-    if omega_classes != 'one' and not re.search('^gamma\d+$', omega_classes):
-        raise ValueError("Not a valid omega rate class in model:\n%s" % line)
-    if omega_scope == 'branchlocal' and omega_classes != 'one':
-        raise ValueError("branchlocal cannot be combined with multiple rate classes for omega, so the following is an invalid model\n%s" % line)
+    if entries[2] == 'M1a':
+        omega_scope = 'M1a'
+        omega_classes = 'one'
+    elif entries[2] == 'M2a':
+        omega_scope = 'M2a'
+        omega_classes = 'one'
+    elif entries[2] == 'M7':
+        omega_scope = 'M7'
+        omega_classes = 'one'
+    elif entries[2] == 'M8':
+        omega_scope = 'M8'
+        omega_classes = 'one'
+    else:
+        omega = entries[2].split('-')
+        if omega[0] != 'omega' or len(omega) != 3:
+            raise ValueError("Invalid omega specification in model:\n%s" % line)
+        omega_scope = omega[1]
+        if omega_scope not in ['global', 'branchlocal']:
+            raise ValueError("Not a valid omega scope in model:\n%s\nValid values are global or branchlocal" % line)
+        omega_classes = omega[2]
+        if omega_classes != 'one' and not re.search('^gamma\d+$', omega_classes):
+            raise ValueError("Not a valid omega rate class in model:\n%s" % line)
+        if omega_scope == 'branchlocal' and omega_classes != 'one':
+            raise ValueError("branchlocal cannot be combined with multiple rate classes for omega, so the following is an invalid model\n%s" % line)
     rate_classes = entries[3].split('-')
     if rate_classes[0] != 'rates' or len(rate_classes) != 2:
         raise ValueError("Invalid rates specification in model:\n%s" % line)

@@ -331,7 +331,6 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
 
         - the pairwise distance between these two sequences
 
-
     * *sites* is a listing of all codon sites that we include in the analysis.
       These sites are numbered 1, 2, ... For example, a value
       of *sites = [2, 3, 4]* specifies that we only include
@@ -371,16 +370,42 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
               set of ratios) are applied to all branches, or *branchlocal*
               if different ratios (or sets of ratios) are applied to each
               branch. The latter approach will greatly increase the number
-              of parameters.
+              of parameters. 
+
+              If you use *global*, then the variables are defined by *omega_classes*.
+              The following values also set specific global omegas:
+
+                - *M1a* if using the M1a model defined by 
+                   http://mbe.oxfordjournals.org/content/22/4/1107.full
+                   If using this option, set *omega_classes* to *one*
+                   (the actual value is meaningless in this case).
+
+                - *M2a* if using the M2a model defined by 
+                   http://mbe.oxfordjournals.org/content/22/4/1107.full
+                   If using this option, set *omega_classes* to *one*
+                   (the actual value is meaningless in this case).
+
+                - *M7* if using the M7 model defined by 
+                   http://mbe.oxfordjournals.org/content/22/4/1107.full
+                   If using this option, set *omega_classes* to *one*
+                   (the actual value is meaningless in this case).
+
+                - *M8* if using the M8 model defined by 
+                   http://mbe.oxfordjournals.org/content/22/4/1107.full
+                   If using this option, set *omega_classes* to *one*
+                   (the actual value is meaningless in this case).
 
             - *omega_classes* specifies how many *omega* values there are
               either for the whole tree (if *omega_scope* is *global*)
-              or for each branch (if *omega_scope* is *branchlocal*). This
-              variable can be set to the string *one* if there is just one
-              *omega* value, or to *gamma6* if the values are drawn from
-              six equally probable gamma distributed classes (you can also
-              use *gamma2*, *gamma3*, etc). The shape of the gamma distribution
-              is estimated by maximum likelihood.
+              or for each branch (if *omega_scope* is *branchlocal*). Possible 
+              values include:
+              
+                - *one* if there is just one *omega* value
+
+                - *gamma6* if the values are drawn from
+                   six equally probable gamma distributed classes (you can also
+                   use *gamma2*, *gamma3*, etc). The shape of the gamma distribution
+                   is estimated by maximum likelihood.
 
             - *rate_classes* specifies how many rate classes there are for
               the synonymous substitution rate. Valid values are the string

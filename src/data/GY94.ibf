@@ -61,7 +61,18 @@ Calling arguments:
           different tree branches. If omega_method is "branchlocal", then
           omega_classes must be one.
 
-    omega_classes: the number of different classes for the omega values. Must
+        * "M1a" : specifies a global omega that follows the 
+          model indicated as M1a in MBE, 22:1107 (http://mbe.oxfordjournals.org/content/22/4/1107.full)
+
+        * "M2a" : specifies a global omega that follows the three parameter
+          model indicated as M2a in MBE, 22:1107 (http://mbe.oxfordjournals.org/content/22/4/1107.full)
+
+        * "M7" : specifies a beta distribution (2 parameters), indicated as M7 in MBE 22:1107 (http://mbe.oxfordjournals.org/content/22/4/1107.full)
+
+        * "M8" : specifies a beta distribution (2 parameters) plus one category,
+         indicated as M8 in MBE 22:1107 (http://mbe.oxfordjournals.org/content/22/4/1107.full)
+
+    omega_classes: the number of different classes for the gamma-distributed omega values. Must
         be a number >= 1. If it is one, then there is just one rate. If it is
         > 1, then there are that many rate classes drawn with equal probability
         from a gamma distribution whose shape parameter omega_alpha and
@@ -184,10 +195,84 @@ Calling arguments:
         else {
             assert(0 == 1, "Cannot combine omega_scope of branchlocal with omega_classes > 1");
         }
+    } else {if (omega_method == "M1a") {
+        if (printoutput >= 1) {
+            fprintf(stdout, "\nUsing model M1a.\n");
+        }
+        ncategories := 2;
+        global m1a_p0;
+        m1a_p0 :> 0.0;
+        m1a_p0 :< 1.0;
+        global omega0;
+        omega0 :> 0.0;
+        omega0 :< 1.0;
+        weightmatrix = {{m1a_p0, 1.0-m1a_p0}};
+        omega_matrix = {{omega0, 1}};
+        category omega = (ncategories, weightmatrix, MEAN, , omega_matrix, 0, 1.0e25);
+    } else {if (omega_method == "M2a") {
+        if (printoutput >= 1) {
+            fprintf(stdout, "\nUsing model M2a.\n");
+        }
+        global m2a_p0;
+        global m2a_p1;
+        global m2a_p2;
+        m2a_p0 :> 0.0;
+        m2a_p0 :< 1.0;
+        m2a_p1 :> 0.0;
+        m2a_p1 :< 1.0;
+        m2a_p2 :> 0.0;
+        m2a_p2 :< 1.0;
+        m2a_p2 := 1.0 - m2a_p0 - m2a_p1;
+        global omega0;
+        global omega2;
+        omega0 :> 0.0;
+        omega0 :< 1.0;
+        omega2 :> 1.0;
+        omega2 :< 1.0e3;
+        weightmatrix = {{m2a_p0, m2a_p1, m2a_p2}};
+        omega_matrix = {{omega0, 1.0, omega2}};
+        category omega = (3, weightmatrix, MEAN, , omega_matrix, 0, 1.0e25);
+    } else {if (omega_method == "M7") {
+        if (printoutput >= 1) {
+            fprintf(stdout, "\nUsing model M7.\n");
+        }
+        ncategories := 10;
+        global betaP = 1;
+        global betaQ = 1;
+        betaP :> 0.05;
+        betaQ :> 0.05;
+        betaP :< 85;
+        betaQ :< 85;
+        category omega = (ncategories, EQUAL, MEAN, _x_^(betaP-1)*(1-_x_)^(betaQ-1)/Beta(betaP,betaQ), IBeta(_x_,betaP,betaQ), 0, 1,IBeta(_x_,betaP+1,betaQ)*betaP/(betaP+betaQ));
+    } else {if (omega_method == "M8") {
+        if (printoutput >= 1) {
+            fprintf(stdout, "\nUsing model M8.\n");
+        }
+        ncategories := 10;
+        global m8_W = 2;
+        global m8_P = 1.0 - 1.0 / (ncategories + 1.0);
+        global betaP = 1;
+        global betaQ = 1;
+        betaP :> 0.05;
+        betaQ :> 0.05;
+        betaP :< 85;
+        betaQ :< 85;
+        m8_P :> 0.0000001;
+        m8_p :< 0.9999999;
+        categFreqMatrix = {ncategories + 1, 1};
+        for (k=0; k<ncategories; k=k+1) {
+            categFreqMatrix[k] := m8_P / ncategories__;
+        }
+        categFreqMatrix[ncategories] := (1 - m8_P);
+        category omega = (ncategories + 1, categFreqMatrix, MEAN,
+            m8_P*_x_^(betaP-1)*(1-Min(_x_,1))^(betaQ-1)/Beta(betaP,betaQ)+m8_W-m8_W,
+            m8_P*IBeta(Min(_x_,1),betaP,betaQ)+(1-m8_P)*(_x_>=m8_W),
+            0,1e25,
+            m8_P*IBeta(Min(_x_,1),betaP+1,betaQ)*betaP/(betaP+betaQ)+(1-m8_P)*m8_W*(_x_>=m8_W));
     }
     else {
         assert(0 == 1, "\nERROR: Invalid value of omega_method\n");
-    }}
+    }}}}}}
     omega :> 0;
     // set rate variation
     assert(rate_classes >= 1, "rate_classes must be >= 1");

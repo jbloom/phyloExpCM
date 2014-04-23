@@ -84,6 +84,14 @@ The input file should contain the following keys:
 
         - *GY94_CF3x4_omega-branchlocal-one_rates-gamma6* is like *GY94_CF3x4_omega-global-one_rates-gamma6* except now each branch gets its own single dN/dS ratio *omega* that is estimated by maximum likelihood.
 
+        - *GY94_CF3x4_M1a_rates-one* is the *M1a* model described by `Yang et al 2005`_.
+
+        - *GY94_CF3x4_M2a_rates-one* is the *M2a* model described by `Yang et al 2005`_.
+
+        - *GY94_CF3x4_M7_rates-one* is the *M7* model described by `Yang et al 2005`_ with 10 equal probability categories in the beta distribution.
+
+        - *GY94_CF3x4_M8_rates-one* is the *M8* model described by `Yang et al 2005`_ with 10 equal probability categories in the beta distribution plus one additional discrete category.
+
       Note that it is NOT allowed to combined *branchlocal* with *gamma* for the *omega* as this introduces too many parameters. So the following would NOT be valid: *GY94_CF3x4_omega-branchlocal-gamma6_rates-one*.
 
     - A number of variants of the KOSI07 empirical codon model described in `Kosiol et al, 2007`_. That reference delineates a large list of model variants. The ones implemented here are all variants of what is described as the *ECM+F+omega+1kappa(tv)* in the original reference. Specifically, the codon exchangeabilities are those given by `Kosiol et al, 2007`_, and allow multi as well as single-nucleotide codon changes. The equilibrium codon frequencies are empirically estimated as the frequencies in the data (the *+F* option). There is a parameter *omega* scaling non-synonymous substitution rates relative to synonymous rates. Codon changes with *ntv* transversions are scaled to a rate of *kappa^ntv* relative to mutations without transversions. Similarly to the *GY94* models, *omega* can be global to all branches with one estimated value, global to all branches with gamma distributed values, or local to branches with one estimated value per branch. The substitution rate can have a single value (no parameters in this case since it just involves branch length scaling) or have gamma distributed values with an estimated shape parameter. *kappa* is always global and estimated from the data. These options are specified with suffixes similar to the *GY94* model, such as:
