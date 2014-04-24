@@ -18,10 +18,9 @@ assert(totalcodons - (totalcodons - 498) - 1 == codonfilter.sites, "Codon filter
 CheckCodonFilter("codonfilter");
 fprintf(stdout, "Reading tree string from _codenames_codonphyml_tree.newick.\n");
 fscanf("_codenames_codonphyml_tree.newick", String, treestring);
-fprintf(stdout, "Using the Goldman Yang 1994 (GY94) codon model...\n");
-#include "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//CF3x4.ibf";
-#include "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//GY94.ibf";
-CreateGY94Model("CF3x4", "global", "global", 4, 1, 1);
+fprintf(stdout, "Using the Kosiol et al 2007 (KOSI07) codon model...\n");
+#include "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//KOSI07.ibf";
+CreateKOSI07Model("F", "ktv", "M8", 1, 1, 1, "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//KOSI07_exchangeabilities.ibf");
 UseModel(model);
 ExecuteCommands("Tree tree = treestring;")
 assert(codonfilter.species == TipCount(tree), "Number of species and number of tips differ");

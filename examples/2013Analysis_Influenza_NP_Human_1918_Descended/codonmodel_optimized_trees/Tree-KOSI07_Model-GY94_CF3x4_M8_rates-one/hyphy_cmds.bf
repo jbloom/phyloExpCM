@@ -21,7 +21,7 @@ fscanf("_codenames_codonphyml_tree.newick", String, treestring);
 fprintf(stdout, "Using the Goldman Yang 1994 (GY94) codon model...\n");
 #include "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//CF3x4.ibf";
 #include "/home/jbloom/.local/lib/python2.7/site-packages/phyloExpCM/data//GY94.ibf";
-CreateGY94Model("CF3x4", "global", "global", 4, 1, 1);
+CreateGY94Model("CF3x4", "global", "M8", 1, 1, 1);
 UseModel(model);
 ExecuteCommands("Tree tree = treestring;")
 assert(codonfilter.species == TipCount(tree), "Number of species and number of tips differ");

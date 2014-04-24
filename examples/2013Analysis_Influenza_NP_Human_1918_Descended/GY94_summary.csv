@@ -1,25 +1,27 @@
 #Summary for tree GY94.
 #
-#SUBSTITUTION_MODEL, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS, AIC, PLOTTING_GROUP
-combined_FracTolerated, -12338.9, 0, 0, 0, 24677.8, experimental
-replicate_A_FracTolerated, -12372.8, 0, 0, 0, 24745.7, experimental
-replicate_B_FracTolerated, -12392, 0, 0, 0, 24783.9, experimental
-combined_HalpernBruno, -12517.9, 0, 0, 0, 25035.7, experimental
-replicate_A_HalpernBruno, -12535.4, 0, 0, 0, 25070.8, experimental
-replicate_B_HalpernBruno, -12566.7, 0, 0, 0, 25133.3, experimental
-GY94_CF3x4_omega-branchlocal-one_rates-gamma4, -12769.1, 556, 547, 9, 26650.1, GY94
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, -12853.9, 13, 4, 9, 25733.8, GY94
-KOSI07_F_omega-branchlocal-one_rates-gamma4, -12891.7, 607, 547, 60, 26997.3, KOSI07
-GY94_CF3x4_omega-global-gamma4_rates-one, -12935.9, 12, 3, 9, 25895.8, GY94
-KOSI07_F_omega-global-gamma4_rates-gamma4, -12999.9, 64, 4, 60, 26127.7, KOSI07
-GY94_CF3x4_omega-global-one_rates-gamma4, -13069.8, 12, 3, 9, 26163.5, GY94
-KOSI07_F_omega-global-gamma4_rates-one, -13154.8, 63, 3, 60, 26435.5, KOSI07
-KOSI07_F_omega-global-one_rates-gamma4, -13191.5, 63, 3, 60, 26508.9, KOSI07
-GY94_CF3x4_omega-global-one_rates-one, -13205, 11, 2, 9, 26431.9, GY94
-KOSI07_F_omega-global-one_rates-one, -13404, 62, 2, 60, 26932, KOSI07
-randomize1_combined_FracTolerated, -14209.4, 0, 0, 0, 28418.8, experimental
-randomize1_replicate_A_FracTolerated, -14243.7, 0, 0, 0, 28487.4, experimental
-randomize1_replicate_B_FracTolerated, -14259.1, 0, 0, 0, 28518.2, experimental
-randomize1_combined_HalpernBruno, -14533.3, 0, 0, 0, 29066.5, experimental
-randomize1_replicate_B_HalpernBruno, -14618.5, 0, 0, 0, 29236.9, experimental
-randomize1_replicate_A_HalpernBruno, -14649.9, 0, 0, 0, 29299.9, experimental
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+combined_FracTolerated, 0, -12338.9, 0, 0, 0
+replicate_A_FracTolerated, 67.8835, -12372.8, 0, 0, 0
+replicate_B_FracTolerated, 106.1, -12392, 0, 0, 0
+combined_HalpernBruno, 357.942, -12517.9, 0, 0, 0
+replicate_A_HalpernBruno, 393.026, -12535.4, 0, 0, 0
+replicate_B_HalpernBruno, 455.526, -12566.7, 0, 0, 0
+GY94_CF3x4_M8_rates-one, 1136.82, -12893.3, 14, 5, 9
+GY94_CF3x4_M2a_rates-one, 1209.52, -12929.7, 14, 5, 9
+GY94_CF3x4_omega-global-gamma4_rates-one, 1217.97, -12935.9, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 1485.75, -13069.8, 12, 3, 9
+KOSI07_F_M2a_rates-one, 1679.73, -13113.8, 65, 5, 60
+KOSI07_F_M8_rates-one, 1680.47, -13114.1, 65, 5, 60
+GY94_CF3x4_omega-global-one_rates-one, 1754.13, -13205, 11, 2, 9
+KOSI07_F_omega-global-gamma4_rates-one, 1757.71, -13154.8, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 1831.13, -13191.5, 63, 3, 60
+GY94_CF3x4_omega-branchlocal-one_rates-gamma4, 1972.31, -12769.1, 556, 547, 9
+KOSI07_F_omega-global-one_rates-one, 2254.2, -13404, 62, 2, 60
+KOSI07_F_omega-branchlocal-one_rates-gamma4, 2319.53, -12891.7, 607, 547, 60
+randomize1_combined_FracTolerated, 3740.99, -14209.4, 0, 0, 0
+randomize1_replicate_A_FracTolerated, 3809.56, -14243.7, 0, 0, 0
+randomize1_replicate_B_FracTolerated, 3840.41, -14259.1, 0, 0, 0
+randomize1_combined_HalpernBruno, 4388.74, -14533.3, 0, 0, 0
+randomize1_replicate_B_HalpernBruno, 4559.13, -14618.5, 0, 0, 0
+randomize1_replicate_A_HalpernBruno, 4622.09, -14649.9, 0, 0, 0

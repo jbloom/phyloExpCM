@@ -138,38 +138,6 @@ def RunProcesses(processes, nmultiruns):
                         raise IOError("One of the processes failed to complete.")
         time.sleep(1)
         
-def FormatModelName(name):
-    """Returns a LaTex formatted model name."""
-    formatted_names = {
-        'combined_FracTolerated':'experimental, combined replicates',
-        'replicate_A_FracTolerated':'experimental, replicate A',
-        'replicate_B_FracTolerated':'experimental, replicate B',
-        'combined_HalpernBruno':'Halpern \& Bruno, combined replicates',
-        'replicate_A_HalpernBruno':'Halpern \& Bruno, replicate A',
-        'replicate_B_HalpernBruno':'Halpern \& Bruno, replicate B',
-        'randomize1_combined_FracTolerated':'randomized experimental, combined replicates',
-        'randomize1_replicate_A_FracTolerated':'randomized experimental, replicate A',
-        'randomize1_replicate_B_FracTolerated':'randomized experimental, replicate B',
-        'randomize1_combined_HalpernBruno':'randomized Halpern \& Bruno, combined replicates',
-        'randomize1_replicate_A_HalpernBruno':'randomized Halpern \& Bruno, replicate A',
-        'randomize1_replicate_B_HalpernBruno':'randomized Halpern \& Bruno, replicate B',
-        'GY94_CF3x4_omega-global-gamma4_rates-one':'\\textit{GY94}, gamma $\omega$, one rate (M5)',
-        'GY94_CF3x4_omega-global-one_rates-gamma4':'\\textit{GY94}, one $\omega$, gamma rates',
-        'GY94_CF3x4_omega-global-one_rates-one': '\\textit{GY94}, one $\omega$, one rate (M0)',
-        'GY94_CF3x4_M2a_rates-one': '\\textit{GY94}, three-category $\omega$, one rate (M2a)',
-        'GY94_CF3x4_M8_rates-one': '\\textit{GY94}, beta $\omega$ plus positive, one rate (M8)',
-        'KOSI07_F_omega-global-gamma4_rates-one':'\\textit{KOSI07+F}, gamma $\omega$, one rate',
-        'KOSI07_F_omega-global-one_rates-gamma4':'\\textit{KOSI07+F}, one $\omega$, gamma rates',
-        'GY94_CF3x4_omega-branchlocal-one_rates-gamma4':'\\textit{GY94}, branch-specific $\omega$, gamma rates (M5)',
-        'KOSI07_F_omega-global-one_rates-one':'\\textit{KOSI07+F}, one $\omega$, one rate (M0)',
-        'KOSI07_F_omega-branchlocal-one_rates-gamma4':'\\textit{KOSI07+F}, branch-specific $\omega$, gamma rates',
-        'KOSI07_F_M2a_rates-one': '\\textit{KOSI07+F}, three-category $\omega$, one rate (M2a)',
-        'KOSI07_CF3x4_M8_rates-one': '\\textit{KOSI07+F}, beta $\omega$ plus positive, one rate (M8)',
-        }
-    if name in formatted_names:
-        return formatted_names[name]
-    else:
-        return name.replace('_', ' ')
 
 
 def main():
@@ -338,14 +306,14 @@ def main():
                 'KOSI07_F_omega-global-one_rates-gamma4',
                 'KOSI07_F_omega-global-gamma4_rates-one', 
                 'KOSI07_F_omega-branchlocal-one_rates-gamma4',
-                'KOSI07_F_M2a_rates-one',
-                'KOSI07_F_M8_rates-one',
+              #  'KOSI07_F_M2a_rates-one',
+              #  'KOSI07_F_M8_rates-one',
                 'GY94_CF3x4_omega-global-one_rates-one',
                 'GY94_CF3x4_omega-global-one_rates-gamma4',
                 'GY94_CF3x4_omega-global-gamma4_rates-one',
                 'GY94_CF3x4_omega-branchlocal-one_rates-gamma4',
-                'GY94_CF3x4_M2a_rates-one',
-                'GY94_CF3x4_M8_rates-one',
+              #  'GY94_CF3x4_M2a_rates-one',
+              #  'GY94_CF3x4_M8_rates-one',
                 ]
     substitutionmodels = dict([(x, x) for x in substitutionmodels])
     randomseeds = [1] # make randomized experimental models with these seeds
@@ -389,11 +357,14 @@ def main():
     print "\n%s\n\n" % separator
 
     # Make summary output of log likelihood and number of parameters
-    empiricalparameters = [ # (unique re matching model name, number empirical parameters)
-            (re.compile('GY94_CF3x4'), 9),
-            (re.compile('KOSI07_F'), 60),
-            (re.compile('FracTolerated'), 0),
-            (re.compile('HalpernBruno'), 0),
+    empiricalparameters_plotgroup = [ # (unique re matching model name, number empirical parameters, grouping for plot)
+            (re.compile('GY94_CF3x4'), 9, 'GY94'),
+            (re.compile('KOSI07_F'), 60, 'KOSI07'),
+            (re.compile('_[AB]_FracTolerated'), 0, 'experimental'),
+            (re.compile('_[AB]_HalpernBruno'), 0, 'experimental'),
+            (re.compile('combined_FracTolerated'), 0, 'experimental'),
+            (re.compile('combined_HalpernBruno'), 0, 'experimental'),
+            (re.compile('_randomize\d+_'), 0, 'randomized_experimental'),
             ]
     print "\n%s\nCreating summaries of log likelihoods and parameter counts.\n" % separator
     for treemodel in codonphyml_trees:
@@ -403,34 +374,46 @@ def main():
         linelist = []
         latexlinelist = []
         for substitutionmodel in substitutionmodels:
-            eparameters = None
-            for (m, n) in empiricalparameters:
+            eparameters = plotgroup = None
+            for (m, n, pg) in empiricalparameters_plotgroup:
                 if m.search(substitutionmodel):
                     if eparameters != None:
-                        raise ValueError("%s matches two empiricalparameters" % substitutionmodel)
+                        raise ValueError("%s matches two empiricalparameters_plotgroup" % substitutionmodel)
                     else:
                         eparameters = n
+                        plotgroup = pg
             if eparameters == None:
-                raise ValueError("empiricalparameters not specified for %s" % substitutionmodel)
+                raise ValueError("empiricalparameters_plotgroup not specified for %s" % substitutionmodel)
             resultfile = hyphy_results[(treemodel, substitutionmodel)]
             (loglikelihood, mlparameters) = phyloExpCM.hyphy.ExtractLikelihoodAndNParameters(resultfile)
             totparameters = mlparameters + eparameters
             aic = 2.0 * totparameters - 2.0 * loglikelihood
-            textstring = "%s, %%g, %g, %d, %d, %d" % (substitutionmodel, loglikelihood, totparameters, mlparameters, eparameters)
-            latexsubstitutionmodel = FormatModelName(substitutionmodel)
-            latexstring = "%s & %%.1f & %.1f & %d (%d + %d) " % (latexsubstitutionmodel, loglikelihood, totparameters, mlparameters, eparameters)
-            linelist.append((aic, textstring))
-            latexlinelist.append((aic, latexstring))
+            textstring = "%s, %g, %d, %d, %d, %g, %s" % (substitutionmodel, loglikelihood, totparameters, mlparameters, eparameters, aic, plotgroup)
+            latexsubstitutionmodel = substitutionmodel.replace('_rates-one', ', one rate')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('_rates-gamma4', ', multiple rates')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('_omega-global-one', ', one $\omega$')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('_omega-global-gamma4', ', multiple $\omega$')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('_omega-branchlocal-one', ', branch-specific $\omega$')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('GY94_CF3x4', 'GY94')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('KOSI07_F', 'KOSI07')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('combined_FracTolerated', 'experimental, combined replicates')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('replicate_A_FracTolerated', 'experimental, replicate A')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('replicate_B_FracTolerated', 'experimental, replicate B')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('combined_HalpernBruno', 'Halpern \& Bruno, combined replicates')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('replicate_A_HalpernBruno', 'Halpern \& Bruno, replicate A')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('replicate_B_HalpernBruno', 'Halpern \& Bruno, replicate B')
+            latexsubstitutionmodel = latexsubstitutionmodel.replace('randomize1_', 'randomized ')
+            latexstring = "%s & %.1f & %d (%d + %d) & %.1f " % (latexsubstitutionmodel, loglikelihood, totparameters, mlparameters, eparameters, aic)
+            linelist.append((loglikelihood, textstring))
+            latexlinelist.append((loglikelihood, latexstring))
         linelist.sort()
+        linelist.reverse()
         latexlinelist.sort()
-        aics = [tup[0] for tup in linelist]
-        daics = [aic - min(aics) for aic in aics]
-        linelist = [line % daic for ((aic, line), daic) in zip(linelist, daics)]
-        latexlinelist = [line % daic for ((aic, line), daic) in zip(latexlinelist, daics)]
+        latexlinelist.reverse()
         f = open(fname, 'w')
         flatex = open(flatexname, 'w')
-        f.write('#Summary for tree %s.\n#\n#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS\n%s' % (treemodel, '\n'.join([line for line in linelist])))
-        flatex.write('\\begin{tabular}{c|c|c|c}\nmodel & $\Delta$AIC & log likelihood & \parbox[b]{0.9in}{\center parameters (optimized + empirical)} \\\\ \hline\n%s\n\end{tabular}' % '\\\\ \n'.join([line for line in latexlinelist]))
+        f.write('#Summary for tree %s.\n#\n#SUBSTITUTION_MODEL, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS, AIC, PLOTTING_GROUP\n%s' % (treemodel, '\n'.join([tup[1] for tup in linelist])))
+        flatex.write('\\begin{tabular}{c|c|c|c}\nmodel & log likelihood & \parbox[b]{0.9in}{\center parameters (optimized + empirical)} & AIC \\\\ \hline\n%s\n\end{tabular}' % '\\\\ \n'.join([tup[1] for tup in latexlinelist]))
         f.close()
         flatex.close()
     print "\nAll summaries created.\n%s\n\n" % separator
