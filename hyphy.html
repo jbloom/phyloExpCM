@@ -177,34 +177,86 @@ model. The transition-transversion ratio <em>kappa</em> is treated as a
 single global parameter for all branches and sites, and is estimated
 by maximum likelihood. The remaining parameters are as follows:</p>
 <blockquote>
-<div><ul class="simple">
-<li><em>equilfreqs</em> specifies how we estimate the equilibrium codon
+<div><ul>
+<li><p class="first"><em>equilfreqs</em> specifies how we estimate the equilibrium codon
 frequencies. The supported values are the string <em>CF3x4</em> and
 <em>F3x4</em>. You should use <em>CF3x4</em> unless you have a good reason
 to use <em>F3x4</em>. The <em>CF3x4</em> is the corrected method for estimating
 the codon frequencies as the products of the individual nucleotides
-at the three positions.</li>
-<li><em>omega_scope</em> specifies the scope of the dN/dS ratio (<em>omega</em>).
+at the three positions.</p>
+</li>
+<li><p class="first"><em>omega_scope</em> specifies the scope of the dN/dS ratio (<em>omega</em>).
 Valid values are the string <em>global</em> if the same ratio (or
 set of ratios) are applied to all branches, or <em>branchlocal</em>
 if different ratios (or sets of ratios) are applied to each
 branch. The latter approach will greatly increase the number
-of parameters.</li>
-<li><em>omega_classes</em> specifies how many <em>omega</em> values there are
+of parameters.</p>
+<p>If you use <em>global</em>, then the variables are defined by <em>omega_classes</em>.
+The following values also set specific global omegas:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><em>M1a</em> if using the M1a model defined by </dt>
+<dd><p class="first last"><a class="reference external" href="http://mbe.oxfordjournals.org/content/22/4/1107.full">http://mbe.oxfordjournals.org/content/22/4/1107.full</a>
+If using this option, set <em>omega_classes</em> to <em>one</em>
+(the actual value is meaningless in this case).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>M2a</em> if using the M2a model defined by </dt>
+<dd><p class="first last"><a class="reference external" href="http://mbe.oxfordjournals.org/content/22/4/1107.full">http://mbe.oxfordjournals.org/content/22/4/1107.full</a>
+If using this option, set <em>omega_classes</em> to <em>one</em>
+(the actual value is meaningless in this case).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>M7</em> if using the M7 model defined by </dt>
+<dd><p class="first last"><a class="reference external" href="http://mbe.oxfordjournals.org/content/22/4/1107.full">http://mbe.oxfordjournals.org/content/22/4/1107.full</a>
+If using this option, set <em>omega_classes</em> to <em>one</em>
+(the actual value is meaningless in this case).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>M8</em> if using the M8 model defined by </dt>
+<dd><p class="first last"><a class="reference external" href="http://mbe.oxfordjournals.org/content/22/4/1107.full">http://mbe.oxfordjournals.org/content/22/4/1107.full</a>
+If using this option, set <em>omega_classes</em> to <em>one</em>
+(the actual value is meaningless in this case).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>omega_classes</em> specifies how many <em>omega</em> values there are
 either for the whole tree (if <em>omega_scope</em> is <em>global</em>)
-or for each branch (if <em>omega_scope</em> is <em>branchlocal</em>). This
-variable can be set to the string <em>one</em> if there is just one
-<em>omega</em> value, or to <em>gamma6</em> if the values are drawn from
-six equally probable gamma distributed classes (you can also
+or for each branch (if <em>omega_scope</em> is <em>branchlocal</em>). Possible 
+values include:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><em>one</em> if there is just one <em>omega</em> value</p>
+</li>
+<li><dl class="first docutils">
+<dt><em>gamma6</em> if the values are drawn from</dt>
+<dd><p class="first last">six equally probable gamma distributed classes (you can also
 use <em>gamma2</em>, <em>gamma3</em>, etc). The shape of the gamma distribution
-is estimated by maximum likelihood.</li>
-<li><em>rate_classes</em> specifies how many rate classes there are for
+is estimated by maximum likelihood.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><em>rate_classes</em> specifies how many rate classes there are for
 the synonymous substitution rate. Valid values are the string
 <em>one</em> if there is only one rate class, or <em>gamma6</em> if there
 are six rate classes drawn from six equally probably 
 gamma-distributed classes (you can also use <em>gamma2</em>, <em>gamma3</em>,
 etc). The shape of the gamma distribution is
-estimated by maximum likelihood.</li>
+estimated by maximum likelihood.</p>
+</li>
 </ul>
 </div></blockquote>
 </li>

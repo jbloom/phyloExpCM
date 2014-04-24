@@ -42,7 +42,7 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ (version 0.1).
+* `phyloExpCM`_ (version 0.21).
 
 * `numpy`_ (version 1.6.1)
 
@@ -301,17 +301,19 @@ Overall, this file contains the following columns:
 
     1) Description of the substitution model.    
 
-    2) The log likellihood
+    2) The difference in `AIC`_ from the best model.
 
-    3) The total number of free parameters in the substitution model. This is the sum of the parameters optimized by maximum likelihood and the parameters estimated empirically from the data.
+    3) The log likelihood.
 
-    4) The total number of parameters in the substitution model optimized by maximum likelihood:
+    4) The total number of free parameters in the substitution model. This is the sum of the parameters optimized by maximum likelihood and the parameters estimated empirically from the data.
+
+    5) The total number of parameters in the substitution model optimized by maximum likelihood:
 
         - For experimental models, this is zero.
 
-        - For *GY94* and *KOSI07* models, this is always at least two, as both *omega* and *kappa* are estimated by maximum likelihood. For some of the variants, *omega* is drawn from discrete gamma categories, which adds an additional parameter (there is now a shape and rate parameter). For some of the variants, the rate is also allowed to be drawn from discrete gamma categories, which also adds another parameter. Finally, for some of the variants *omega* is different for each branch, which adds a number of free parameters equal to the number of branches.
+        - For *GY94* and *KOSI07* models, this are always at least two, as both *omega* and *kappa* are estimated by maximum likelihood. For some of the variants, *omega* is drawn from discrete gamma, beta, or discrete category distributions, which adds additional parameters. For some of the variants, the rate is drawn from discrete gamma categories, which also adds another parameter. Finally, for some of the variants *omega* is different for each branch, which adds a number of free parameters equal to the number of branches.
 
-    5) The total number of parameters in the substitution model that are empirically estimated from the sequence data:
+    6) The total number of parameters in the substitution model that are empirically estimated from the sequence data:
 
         - For experimental models, this is zero.
 
@@ -319,9 +321,6 @@ Overall, this file contains the following columns:
 
         - For *KOSI07* models, this is 60 as there are a total of 60 independent frequencies for the 61 non-stop codons.
 
-    6) The `AIC`_.
-
-    7) A string giving the group to which the model is assigned for plotting purposes.
 
 Here are the results for optimization of the tree built with the *GY94* model in `codonPhyML`_ (this is the file ``GY94_summary.csv``):
 
