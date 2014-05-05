@@ -9,6 +9,8 @@ Overview
 ------------
 This is a description of an analysis of the effectiveness of experimentally determined substitution models for describing the evolution of influenza nucleoprotein (NP).
 
+This is the analysis described in the paper `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_.
+
 This analysis was performed by `Jesse Bloom`_.
 
 The overall approach is to use the `phyloExpCM`_ package to analyze a NP phylogeny using an experimentally derived substitution model from a `mapmuts analysis of the Aichi68 influenza NP from 2013`_, and to compare this model to various standard codon substitution models.
@@ -365,3 +367,4 @@ Similar files are created in LaTex formatted tables as ``GY94_summary.tex`` and 
 .. _`AIC`: http://en.wikipedia.org/wiki/Akaike_information_criterion
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
+.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://biorxiv.org/content/early/2014/04/27/002899
