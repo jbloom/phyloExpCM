@@ -9,5 +9,6 @@ Examples of `phyloExpCM`_ usage are provided with the package. These examples ca
 
    example_2013Analysis_Influenza_NP_Human_1918_Descended
    example_2014Analysis_lactamase
+   example_2014Analysis_Influenza_H1_HA
 
 .. include:: weblinks.txt

@@ -23,7 +23,7 @@ import sys, os, re, shutil
 #
 # Essentially, you can autodocument examples by including a 
 # README in their subdirectory and then listing them here.
-examples = ['2013Analysis_Influenza_NP_Human_1918_Descended', '2014Analysis_lactamase']
+examples = ['2013Analysis_Influenza_NP_Human_1918_Descended', '2014Analysis_lactamase', '2014Analysis_Influenza_H1_HA']
 includematch = re.compile('^\s*\.\. (include|figure)\:\:\s+(?P<file>.*\S.*)\n$')
 for example in examples:
     exampleprefix = "example_%s" % example

@@ -1,0 +1,27 @@
+#Summary for tree H1_HumanSwine_GY94.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+combined-FracTolerated, 0, -24088.7, 0, 0, 0
+replicate_3-FracTolerated, 303.2, -24240.3, 0, 0, 0
+combined-HalpernBruno, 500.6, -24339, 0, 0, 0
+replicate_1-FracTolerated, 535.4, -24356.4, 0, 0, 0
+replicate_3-HalpernBruno, 657.8, -24417.6, 0, 0, 0
+replicate_2-FracTolerated, 876.2, -24526.8, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 882.573, -24517, 13, 4, 9
+replicate_1-HalpernBruno, 983.2, -24580.3, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-one, 1109.67, -24631.5, 12, 3, 9
+replicate_2-HalpernBruno, 1190, -24683.7, 0, 0, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 1620.45, -24834.9, 64, 4, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 1859.37, -25006.4, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 1883, -24967.2, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 2378.83, -25215.1, 63, 3, 60
+GY94_CF3x4_omega-global-one_rates-one, 2544.53, -25350, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 3039.97, -25546.7, 62, 2, 60
+combined-FracToleratedrandomized, 5632.8, -26905.1, 0, 0, 0
+replicate_1-FracToleratedrandomized, 6002.4, -27089.9, 0, 0, 0
+replicate_3-FracToleratedrandomized, 6138.8, -27158.1, 0, 0, 0
+replicate_2-FracToleratedrandomized, 6477.8, -27327.6, 0, 0, 0
+combined-HalpernBrunorandomized, 7072.8, -27625.1, 0, 0, 0
+replicate_1-HalpernBrunorandomized, 7795, -27986.2, 0, 0, 0
+replicate_3-HalpernBrunorandomized, 7891.8, -28034.6, 0, 0, 0
+replicate_2-HalpernBrunorandomized, 8494.4, -28335.9, 0, 0, 0
