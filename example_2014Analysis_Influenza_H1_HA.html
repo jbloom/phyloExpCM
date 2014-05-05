@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2014 analysis of H1 influenza HAs descended from 1918 virus &mdash; phyloExpCM 0.21 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.21',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
+    <link rel="next" title="Python modules in phyloExpCM" href="modules.html" />
+    <link rel="prev" title="2014 analysis of beta-lactamase phylogenetic fit" href="example_2014Analysis_lactamase.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="Python modules in phyloExpCM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="example_2014Analysis_lactamase.html" title="2014 analysis of beta-lactamase phylogenetic fit"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+          <li><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="analysis-of-h1-influenza-has-descended-from-1918-virus">
+<h1><a class="toc-backref" href="#id1">2014 analysis of H1 influenza HAs descended from 1918 virus</a><a class="headerlink" href="#analysis-of-h1-influenza-has-descended-from-1918-virus" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#analysis-of-h1-influenza-has-descended-from-1918-virus" id="id1">2014 analysis of H1 influenza HAs descended from 1918 virus</a><ul>
+<li><a class="reference internal" href="#overview" id="id2">Overview</a></li>
+<li><a class="reference internal" href="#software-used" id="id3">Software used</a></li>
+<li><a class="reference internal" href="#input-files" id="id4">Input files</a></li>
+<li><a class="reference internal" href="#running-the-analysis" id="id5">Running the analysis</a></li>
+<li><a class="reference internal" href="#steps-in-the-analysis" id="id6">Steps in the analysis</a><ul>
+<li><a class="reference internal" href="#construction-of-sequence-sets" id="id7">Construction of sequence sets</a></li>
+<li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id8">Construction of phylogenetic trees</a></li>
+<li><a class="reference internal" href="#computing-evolutionary-equilibrium-frequencies" id="id9">Computing evolutionary equilibrium frequencies</a></li>
+<li><a class="reference internal" href="#correlations-between-preferences-and-evolutionary-conservation" id="id10">Correlations between preferences and evolutionary conservation</a></li>
+<li><a class="reference internal" href="#analysis-of-tree-with-various-substitution-models" id="id11">Analysis of tree with various substitution models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>This description of the analysis is currently available. The actual source code and data for this specific analysis are not yet posted publicly on GitHub in the ``./examples/2014Analysis_Influenza_H1_HA/`` subdirectory. They will be posted upon publication of the paper. If you are a reviewer and you would like to see them now, please relay this request to Jesse via the editor.</strong></p>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This is an analysis of influenza A virus H1 hemagglutinins (HAs) from human and swine that are descended from a common ancestor closely related the HA of the 1918 virus. This analysis constructs phylogenies of these sequences and analyzes them with standard and experimentally determined codon substitution models.</p>
+<p>This analysis was performed by <a class="reference external" href="http://research.fhcrc.org/bloom/en.html">Jesse Bloom</a>.</p>
+<p>Much of the analysis itself is performed using <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>, which is run by <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> using the scripts detailed in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>.</p>
+<p>The code, data, and results from the analysis are in the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_Influenza_H1_HA/</span></tt> subdirectory in the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package directory. This subdirectory contains the necessary input files (see <a class="reference internal" href="#input-files">Input files</a>) for running the analysis. It also contains a master script (<tt class="docutils literal"><span class="pre">run_analysis.py</span></tt>) that can be used to regenerate the analysis with the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+</pre></div>
+</div>
+<p>provided that you have installed the software described in <a class="reference internal" href="#software-used">Software used</a>.</p>
+</div>
+<div class="section" id="software-used">
+<h2><a class="toc-backref" href="#id3">Software used</a><a class="headerlink" href="#software-used" title="Permalink to this headline">¶</a></h2>
+<p>The analysis was performed using the following software on the Fred Hutchinson computer cluster using the following Linux distribution:</p>
+<div class="highlight-python"><div class="highlight"><pre>Linux version 3.5.0-43-generic (buildd@roseapple) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #66~precise1-Ubuntu SMP Thu Oct 24 14:52:23 UTC 2013
+</pre></div>
+</div>
+<p>In order to replicate the analysis, you will need to use Linux or Mac OS X, and install the software listed below.</p>
+<p>The specific versions of software used are specified. Other versions will likely work as well, but this has not been confirmed.</p>
+<ul>
+<li><p class="first"><a class="reference external" href="http://www.python.org/">Python</a> (version 2.7.3)</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> (version 0.21).</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.numpy.org/">numpy</a> (version 1.6.1)</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://matplotlib.org/">matplotlib</a> (version 1.3.1).</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> (version 1.0)</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://biopython.org/wiki/Main_Page">Biopython</a> (version 1.5.8)</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/download/">EMBOSS needle</a> (version 6.6.0). The executable with the name <tt class="docutils literal"><span class="pre">needle</span></tt> is expected to be in the current search path.</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> (version 7.7.6). The executable with the name <tt class="docutils literal"><span class="pre">raxmlHPC-SSE3</span></tt> is expected to be in the current search path. This is the SSE3 version, and was built using the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>make -f Makefile.SSE3.gcc
+</pre></div>
+</div>
+<p>and then copying the executable into the search path.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> (version 1.4) was used for the visual identification of outliers from the molecular clock and to root trees based on date-stamping.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> (version 1.4.0) was used to open tree files for annotation, visualization, and saving of images.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (version 1.00 201306.18) was used to build phylogenetic trees. The executable with the name <tt class="docutils literal"><span class="pre">codonphyml</span></tt> is expected to be in the current search path. This executable was compiled with the <em>omp</em> options to make it multi-threaded.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (version HYPHY 2.220131214beta(MP) for Linux on x86_64) was used to optimize the branches and compute the likelihoods under the different models. The multiprocessor (<tt class="docutils literal"><span class="pre">HYPHYMP</span></tt>) version of the executable was used. To install this, the following commands were run in the unzipped <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> source code directory after download:</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake -DINSTALL_PREFIX=/home/jbloom/.local/ .
+make MP2
+make install
+</pre></div>
+</div>
+</li>
+<li><p class="first">This analysis was run on the FHCRC scientific computing cluster using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> (version 2.6.2), and requires <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> to be installed to run as currently implemented. If you don&#8217;t want to use <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>, all you need to do is modify the main <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script to not submit any jobs via <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>. The use of <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> in the current version simply allows more processors to be used simultaneously and so speeds up the analysis.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> 6.6.9-7 2012-08-17 was used to convert PDF files to JPGs.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://weblogo.threeplusone.com/">weblogo</a> (version 3.3) was used to make the sequence logo plot.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://pybrary.net/pyPdf/">PyPdf</a> (version 1.13) was used to make overlays on the sequence logo plot.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="input-files">
+<h2><a class="toc-backref" href="#id4">Input files</a><a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<p>Here are the input files that are necessary to repeat the analysis. These are the names assigned with the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_Influenza_H1_HA/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> is a <a class="reference external" href="http://www.python.org/">Python</a> script that will perform the analysis assuming that you have all of the appropriate software (see <a class="reference internal" href="#software-used">Software used</a>) and input files. To run this script, use:</p>
+<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+</pre></div>
+</div>
+<p>at the command line.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">WSN-HA.fasta</span></tt> is the coding DNA sequence for the A/WSN/1933 (H1N1) HA as taken from reverse-genetics plasmid pHW184-HA.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">H1_HAseqs.fasta</span></tt> is the set of all full-length influenza A HA coding DNA sequences of subtype H1 (excluding lab-adapted strains) as downloaded from the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/genomes/FLU/FLU.html">Influenza Virus Resource</a> on March-29-2014.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">parse_H1_HumanSwine.py</span></tt> is a <a class="reference external" href="http://www.python.org/">Python</a> scripts that extracts and aligns the HA sequences in <tt class="docutils literal"><span class="pre">H1_HAseqs.fasta</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">JVI_82_8947_Anomalies.txt</span></tt> is a list of the strain names for the sequences identified as anomalous (either frozen in time or recombinant) in Appendices 1 and 2 of <cite>Krasnitz et al, 2008</cite>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">JDB_Anomalies.txt</span></tt> is a list of strain names that appear to be anomalous based on their strong violation of the molecular clock. These sequences are probably mis-annotated in the database, come from non-standard lineages (for examples a swine H3N2 isolated from humans), are reassortants, are extensively lab adapted and so deviate from the molecular clock due to large numbers of adaptation mutations, or are simply valid H1N1 sequences that don&#8217;t fall into the 1918 descended human or swine lineages.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">mutationrates.txt</span></tt> is a file giving the nucleotide mutation rates for the influenza polymerase as described in <a class="reference external" href="http://biorxiv.org/content/early/2014/03/05/002899">Bloom 2014</a>. Specifically, in that reference the mutation rates were determined as:</p>
+<blockquote>
+<div><ul class="simple">
+<li>AG, TC : <span class="math">\(2.4 \times 10^{-5}\)</span></li>
+<li>GA, CT : <span class="math">\(2.3 \times 10^{-5}\)</span></li>
+<li>AC, TG : <span class="math">\(9.0 \times 10^{-6}\)</span></li>
+<li>CA, GT : <span class="math">\(9.4 \times 10^{-6}\)</span></li>
+<li>AT, TA : <span class="math">\(3.0 \times 10^{-6}\)</span></li>
+<li>GC, CG : <span class="math">\(1.9 \times 10^{-6}\)</span></li>
+</ul>
+</div></blockquote>
+<p>There are six experimentally determined mutation rates, but in order for the overall substitution model to be reversible, the mutation rates must satisfy <span class="math">\(R_{C \rightarrow T} = \frac{R_{A \rightarrow G} \times R_{C \rightarrow A}}{R_{A \rightarrow C}}\)</span> as described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> to <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelectionHyphy.py</span></tt>. To satisfy this constraint will conforming to the experimentally measured values, we set the rates for A to C and C to A mutations equal to their average, and the same for A to G and G to A. This seems justified as these pairs of rates are nearly equal in the experimentally determined values. This gives the contents of <tt class="docutils literal"><span class="pre">mutationrates.txt</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre>AC 9.2e-6
+AG 2.35e-5
+AT 3.0e-6
+CA 9.2e-6
+CG 1.9e-6
+</pre></div>
+</div>
+</li>
+<li><p class="first">The site-specific amino-acid preferences for the WSN HA as inferred using <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> and described as part of the <a class="reference external" href="http://jbloom.github.io/mapmuts/example_WSN_HA_2014Analysis.html">mapmuts analysis of the WSN HA from 2014</a>. These are the preferences inferred with the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt>. The specific files are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">combined_amino_acid_preferences.txt</span></tt> : combined data from all three experimental replicates.</li>
+<li><tt class="docutils literal"><span class="pre">replicate_1_amino_acid_preferences.txt</span></tt> : data from first experimental replicate.</li>
+<li><tt class="docutils literal"><span class="pre">replicate_2_amino_acid_preferences.txt</span></tt> : data from second experimental replicate.</li>
+<li><tt class="docutils literal"><span class="pre">replicate_3_amino_acid_preferences.txt</span></tt> : data from third experimental replicate.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">./PDB_structure/</span></tt> : subdirectory containing the results of analyzing the crystal structure of HA. Specific input files in this directory:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">1RVX.pdb</span></tt> is the crystal structure <a class="reference external" href="http://www.pdb.org/pdb/explore/explore.do?structureId=1RVX">1RVX</a> (downloaded from the Protein Data Bank) of the HA from A/PR/8/1934 (H1N1). This is the crystallized HA closest in identity to the WSN HA.</li>
+<li><tt class="docutils literal"><span class="pre">1RVX_trimer.pdb</span></tt> is a version of <tt class="docutils literal"><span class="pre">1RVX.pdb</span></tt> that has been manually edited to contain only one trimer (chains A through F). The original <tt class="docutils literal"><span class="pre">1RVX.pdb</span></tt> contains two trimers in the asymmetric unit.</li>
+<li><tt class="docutils literal"><span class="pre">1RVX_trimer_renumbered.pdb</span></tt> is a version of <tt class="docutils literal"><span class="pre">1RVX_trimer.pdb</span></tt> that has been renumbered with <a class="reference external" href="http://dicsoft2.physics.iisc.ernet.in/pdbgoodies/inputpage.html">PDB Goodies</a> and so manual touch-up so that the numbering matches sequential 1, 2, ... numbering of the WSN HA sequence. The HA1 and HA2 chains have been merged into single chains (A, B, and C) and these chains are now numbered so that residue <em>r</em> corresponds to residue <em>r</em> in sequential numbering of the WSN HA sequence. Overall, this renumbered PDB contains 483 residues in each of the three HA chains, of which 438 are exact matches with the corresponding position in the WSN HA protein.</li>
+<li><tt class="docutils literal"><span class="pre">1RVX_trimer_renumbered.dssp</span></tt> is a text file containing the results of running the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> on <tt class="docutils literal"><span class="pre">1RVX_trimer_renumbered.pdb</span></tt> to determine the secondary structure and solvent accessibility of residues. The residues in this file match sequential 1, 2, ... numbering of the WSN HA protein sequence.</li>
+<li><tt class="docutils literal"><span class="pre">sequential_to_H3.txt</span></tt> is a file that converts between the sequential 1, 2, ... numbering of the WSN HA and the H3 numbering scheme as used in PDB <a class="reference external" href="http://www.pdb.org/pdb/explore/explore.do?structureId=4HMG">4HMG</a>. This conversion was done using <a class="reference external" href="https://github.com/jbloom/HA_numbering">HA_numbering</a>. The file contains comma-separated lines with the first entry giving the sequential number and the second giving the H3 number. For the H3 number, numbers alone indicate the HA1 chain and numbers followed by HA2 indicate the HA2 chain.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="running-the-analysis">
+<h2><a class="toc-backref" href="#id5">Running the analysis</a><a class="headerlink" href="#running-the-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The analysis in this directory can be repeated simply by running the master script <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> from the command line with:</p>
+<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+</pre></div>
+</div>
+<p>or running it using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> with:</p>
+<div class="highlight-python"><div class="highlight"><pre>sbatch run_analysis.sbatch
+</pre></div>
+</div>
+<p>Other than the files delineated under <a class="reference internal" href="#input-files">Input files</a>, all data files in this directory can be re-generated with this command. However, the analysis approach does involve a few manual steps with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> to create nicely formatted and annotated tree images from the raw tree files produced by the script. These manual steps are indicated below.</p>
+<p>There is a variable called <em>use_existing_output</em> that is hardcoded into the beginning of this script. This variable is currently set to <em>True</em>, which means that if output already exists it is <strong>not</strong> overwritten and regenerated. If you want to regenerate the output (such as after changing input files or altering analysis parameters), then either manually delete the old output or change <em>use_existing_output</em> to <em>False</em> to force the script to overwrite old output. This script does <strong>not</strong> automatically test for dependencies among files, so if you change a file but keep <em>use_existing_output</em> to <em>True</em>, then you need to manually remove any old files with dependencies.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> uses multiple CPUs to speed up some of the analyses. If you don&#8217;t have as many CPUs on your system, you might want to check that you are not overloading the system &#8211; you can avoid this by using fewer CPUs, which will require you to manually modify the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> uses <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> by default to run some of its subsidiary programs &#8211; if you don&#8217;t want to do this, set the <em>use_sbatch</em> option to <em>False</em> within the program.</p>
+</div>
+<div class="section" id="steps-in-the-analysis">
+<h2><a class="toc-backref" href="#id6">Steps in the analysis</a><a class="headerlink" href="#steps-in-the-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Here are the steps in the analysis. The command for each step is shown, but most of these commands (with the exception of some manual formatting of tree images with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>) are run automatically by the main <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script if you are using that.</p>
+<div class="section" id="construction-of-sequence-sets">
+<h3><a class="toc-backref" href="#id7">Construction of sequence sets</a><a class="headerlink" href="#construction-of-sequence-sets" title="Permalink to this headline">¶</a></h3>
+<p>The first step is construction of alignment of H1 HA sequences. The ultimate set of aligned sequences are in <tt class="docutils literal"><span class="pre">aligned_HAs.fasta</span></tt>.</p>
+<div class="section" id="parsing-and-alignment-of-sequences">
+<h4>Parsing and alignment of sequences<a class="headerlink" href="#parsing-and-alignment-of-sequences" title="Permalink to this headline">¶</a></h4>
+<p>The alignment is done by the <a class="reference external" href="http://www.python.org/">Python</a> script <tt class="docutils literal"><span class="pre">parse_H1_HumanSwine.py</span></tt> using the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>python parse_H1_HumanSwine.py
+</pre></div>
+</div>
+<p>Briefly, the script functions as follows:</p>
+<ol class="arabic">
+<li><p class="first">All sequences in <tt class="docutils literal"><span class="pre">H1_HAseqs.fasta</span></tt> are read, and any sequences defined by anomalous (are listed in <tt class="docutils literal"><span class="pre">JVI_82_8947_Anomalies.txt</span></tt> or <tt class="docutils literal"><span class="pre">JDB_Anomalies.txt</span></tt>) are removed, as are sequences with ambiguous nucleotides, sequences that are not at least 1695 nucleotides in length, or sequences with headers that cannot be parsed.</p>
+</li>
+<li><p class="first">Of the remaining sequences, only the following are retained:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Human H1N1 from 1918 to 1957, and from 1977 to 2014.</li>
+<li>Swine H1N1 from any year.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">For these retained sequences, a maximum of three sequences per host and year. The sequences that are retained are the three unique sequences that have the most occurrences in <tt class="docutils literal"><span class="pre">H1_HAseqs.fasta</span></tt> in that host / year &#8211; the idea here is to avoid picking sequences with outlier mutations. If there are multiple sequences with equal numbers of occurrences, one is chosen randomly.</p>
+</li>
+<li><p class="first">The sequences are pairwise aligned with <a class="reference external" href="http://emboss.sourceforge.net/download/">EMBOSS needle</a> to the WSN HA (<tt class="docutils literal"><span class="pre">WSN-HA.fasta</span></tt>), and any gaps relative to this reference sequence are removed. The retained sequences are written to <tt class="docutils literal"><span class="pre">aligned_HAs.fasta</span></tt>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="molecular-clock-analysis-for-anomalous-and-off-lineage-sequences">
+<h4>Molecular clock analysis for anomalous and off-lineage sequences<a class="headerlink" href="#molecular-clock-analysis-for-anomalous-and-off-lineage-sequences" title="Permalink to this headline">¶</a></h4>
+<p>To identify and remove any anomalous sequences in <tt class="docutils literal"><span class="pre">aligned_HA.fasta</span></tt>, an analysis is performed to make sure the sequences conform reasonably well to the molecular clock. Sequences that don&#8217;t conform could be misannotated, lab adapted, or (most frequently) are genuine H1N1 that are not from the major lineage (for example, European swine H1N1 or the 1976 Fort Dix swine flu in humans).</p>
+<p>All sequences written by <tt class="docutils literal"><span class="pre">parse_seqs.py</span></tt> to <tt class="docutils literal"><span class="pre">aligned_HAs.fasta</span></tt> have their date pre-pended.
+Human seasonal H1N1 reappeared in 1977 and persisted through 2008. The appearance was due to revival of the human H1N1 from about 1954. The dates for these sequences therefore need to have 24 years substracted in order to conform to a molecular clock (see <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19787384">dos Reis et al, 2009</a>) &#8211; this is done by <tt class="docutils literal"><span class="pre">parse_seqs.py</span></tt></p>
+<p>An analysis for concordance with the molecular clock is performed using <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>. Specifically:</p>
+<ol class="arabic">
+<li><p class="first">Build a <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree (no date stamping) to allow visual inspection for possible outliers, and write this tree to the <tt class="docutils literal"><span class="pre">RAxML_output</span></tt> subdirectory:</p>
+<div class="highlight-python"><div class="highlight"><pre>raxmlHPC-SSE3 -w ./RAxML_output -n aligned_HAs -p 1 -m GTRCAT -s aligned_HAs.fasta
+</pre></div>
+</div>
+</li>
+<li><p class="first">The tree was then visually inspected using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, and clear outliers from the molecular clock were removed by adding them to <tt class="docutils literal"><span class="pre">JDB_Anomalies.txt</span></tt> and re-running the analysis.</p>
+</li>
+<li><p class="first">This was repeated until there were no further outliers.</p>
+</li>
+<li><p class="first">In addition, sequences that appeared to be one-off zoonotic transfers (i.e. a single avian virus in an otherwise swine lineage, etc) were also added to <tt class="docutils literal"><span class="pre">JDB_Anomalies.txt</span></tt>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="construction-of-phylogenetic-trees">
+<h3><a class="toc-backref" href="#id8">Construction of phylogenetic trees</a><a class="headerlink" href="#construction-of-phylogenetic-trees" title="Permalink to this headline">¶</a></h3>
+<p>High-quality phylogenetic trees of the sequences in <tt class="docutils literal"><span class="pre">aligned_HAs.fasta</span></tt> were constructed using <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>.
+The <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_runcodonPhyML.py</span></tt> (see <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for details) was used to run <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>.</p>
+<p>Two trees were built with two different codon substitution models:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">The <em>GY94</em> codon model (<a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a>) was used with the following setting:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The equilibrium codon frequencies estimated emprically using the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> method.</li>
+<li>A single transition / transversion ratio (<em>kappa</em>) estimated by maximum likelihood.</li>
+<li>The dN/dS ratio (<em>omega</em>) drawn from four discrete gamma-distributed categories (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/7932792">Yang 1994</a>) with the shape parameter and mean estimated by maximum likelihood.</li>
+</ul>
+</div></blockquote>
+<p>The tree construction was performed in the <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_GY94/</span></tt> subdirectory of the example subdirectory. The tree itself is in the file <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_GY94/codonphyml_tree.newick</span></tt>.</p>
+</li>
+<li><p class="first">The <em>KOSI07</em> codon model (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/17400572">Kosiol et al 2007</a>) was used with the following setting:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The equilibrium codon frequencies estimated emprically using the <em>F</em> method.</li>
+<li>A single transition / transversion ratio (<em>kappa</em>) estimated by maximum likelihood.</li>
+<li>The dN/dS ratio (<em>omega</em>) drawn from four discrete gamma-distributed categories (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/7932792">Yang 1994</a>) with the shape parameter and mean estimated by maximum likelihood.</li>
+</ul>
+</div></blockquote>
+<p>The tree construction was performed in the <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_KOSI07/</span></tt> subdirectory of the example subdirectory. The tree itself is in the file <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_KOSI07/codonphyml_tree.newick</span></tt>.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>To visualize the tree, the following <strong>manual</strong> steps were performed:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">The <tt class="docutils literal"><span class="pre">codonphyml_tree.newick</span></tt> tree in each of the two subdirectories was opened with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>, the tree was re-rooted according to the dates assigned to the tips, and the re-rooted tree was saved with the name <tt class="docutils literal"><span class="pre">rooted_tree.trees</span></tt>.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">rooted_tree.trees</span></tt> file was opened in <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, adjusted for attractive visual display, and saved to the file <tt class="docutils literal"><span class="pre">annotated_tree.trees</span></tt>.</p>
+</li>
+<li><p class="first">A PDF image of the tree in the <tt class="docutils literal"><span class="pre">annotated_tree.trees</span></tt> file was saved manually with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, and then converted to a JPG with <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> using the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>convert -density 300 annotated_tree.pdf annotated_tree.jpg
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>The tree images created by these steps are shown below. Note that these trees are extremely similar regardless of the whether the <em>GY94</em> or <em>KOSI07</em> model is used to infer the topology.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_Influenza_H1_HA_CodonPhyML_Tree_H1_HumanSwine_GY94_annotated_tree.jpg"><img alt="CodonPhyML_Tree_H1_HumanSwine_GY94/annotated_tree.jpg" src="_images/example_2014Analysis_Influenza_H1_HA_CodonPhyML_Tree_H1_HumanSwine_GY94_annotated_tree.jpg" style="width: 65%;" /></a>
+<p class="caption">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>GY94</em> substitution model (file <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_GY94/annotated_tree.jpg</span></tt>). The swine HAs descended from the 1918 virus are shown in red. The human H1N1 from 1918 to 1957 directly descended from the 1918 virus are shown in blue. The human H1N1 that reappeared in 1977 is shown in purple. The 2009 swine-origin pandemic H1N1 is shown in green.</p>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_Influenza_H1_HA_CodonPhyML_Tree_H1_HumanSwine_KOSI07_annotated_tree.jpg"><img alt="CodonPhyML_Tree_H1_HumanSwine_KOSI07/annotated_tree.jpg" src="_images/example_2014Analysis_Influenza_H1_HA_CodonPhyML_Tree_H1_HumanSwine_KOSI07_annotated_tree.jpg" style="width: 65%;" /></a>
+<p class="caption">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>KOSI07</em> substitution model (file <tt class="docutils literal"><span class="pre">./CodonPhyML_Tree_H1_HumanSwine_KOSI07/annotated_tree.jpg</span></tt>). The swine HAs descended from the 1918 virus are shown in red. The human H1N1 from 1918 to 1957 directly descended from the 1918 virus are shown in blue. The human H1N1 that reappeared in 1977 is shown in purple. The 2009 swine-origin pandemic H1N1 is shown in green.</p>
+</div>
+</div>
+<div class="section" id="computing-evolutionary-equilibrium-frequencies">
+<h3><a class="toc-backref" href="#id9">Computing evolutionary equilibrium frequencies</a><a class="headerlink" href="#computing-evolutionary-equilibrium-frequencies" title="Permalink to this headline">¶</a></h3>
+<p>The expected evolutionary frequencies are different than the site-specific amino-acid preferences due to the structure of the genetic code (for example, lysine has six more codons than methionine, and so will be six times as abundant if the preferences are equal) as well as the mutation rates when these are non-symmetric.</p>
+<p>These expected evolutionary equilibrium frequencies are computed using the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_builHyphyExpCM.py</span></tt>, and are in the subdirectory <tt class="docutils literal"><span class="pre">./evolutionary_frequencies/</span></tt>.</p>
+<p>Below is a logo plot showing these frequencies for sequential 1, 2, ... numbering of the WSN HA:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_Influenza_H1_HA_evolutionary_frequencies_sequential_numbering_combined_evolequilfreqs_site_preferences_logoplot.jpg"><img alt="evolutionary_frequencies/sequential_numbering_combined_evolequilfreqs_site_preferences_logoplot.jpg" src="_images/example_2014Analysis_Influenza_H1_HA_evolutionary_frequencies_sequential_numbering_combined_evolequilfreqs_site_preferences_logoplot.jpg" style="width: 65%;" /></a>
+<p class="caption">The expected evolutionary equilibrium frequencies using the site-specific amino-acid preferences from the combined replicates and sequential 1, 2, ... numbering of the WSN HA. This is the file <tt class="docutils literal"><span class="pre">evolutionary_frequencies/sequential_numbering_combined_evolequilfreqs_site_preferences_logoplot.jpg</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="correlations-between-preferences-and-evolutionary-conservation">
+<h3><a class="toc-backref" href="#id10">Correlations between preferences and evolutionary conservation</a><a class="headerlink" href="#correlations-between-preferences-and-evolutionary-conservation" title="Permalink to this headline">¶</a></h3>
+<p>A very crude analysis is to examine the correlation between the amino-acid preferences and the frequency with which residues are present in the natural sequences that compose the phylogenetic trees shown in <a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a>. The reason why this is a crude analysis is that evolution on this timescale is not ergodic, so we wouldn&#8217;t expect residues to be sampled in the trees according to their preferences even if those preferences were exactly correct. So the better analysis is really that done in the next section (<a class="reference internal" href="#analysis-of-tree-with-various-substitution-models">Analysis of tree with various substitution models</a>) which takes into account phylogeny. Nonetheless, it is simple and easy to compare the preferences and frequencies in the natural sequence alignments. This analysis is done in the subdirectory <tt class="docutils literal"><span class="pre">./frequency_correlations/</span></tt>.</p>
+<p>First, the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_FreqsFromAlignment.py</span></tt> is used to calculate the frequencies in the natural alignment (<tt class="docutils literal"><span class="pre">H1_HumanSwine_alignment.fasta</span></tt>): these frequencies are reported in <tt class="docutils literal"><span class="pre">./frequency_correlations/H1_HumanSwine_alignment_frequencies.txt</span></tt>.</p>
+<p>Next, the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_preferencescorrelate.py</span></tt> is used to correlate these natural frequencies the amino-acid preferences. The results are plotted below. Although the correlation is far from perfect, it is substantial and highly significant.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_Influenza_H1_HA_frequency_correlations_natural_frequency_vs_preference.jpg"><img alt="frequency_correlations/natural_frequency_vs_preference.jpg" src="_images/example_2014Analysis_Influenza_H1_HA_frequency_correlations_natural_frequency_vs_preference.jpg" style="width: 35%;" /></a>
+<p class="caption">The site-specific amino-acid preferences (the average of the three replicates) are substantially correlated with the actual frequencies of different amino acids in the natural sequences. This is the plot <tt class="docutils literal"><span class="pre">frequency_correlations/natural_frequency_vs_preference.jpg</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="analysis-of-tree-with-various-substitution-models">
+<h3><a class="toc-backref" href="#id11">Analysis of tree with various substitution models</a><a class="headerlink" href="#analysis-of-tree-with-various-substitution-models" title="Permalink to this headline">¶</a></h3>
+<p>The tree topologies were analyzed with experimentally determined and &#8220;conventional&#8221; codon substitution models.</p>
+<p>For each of these substitution models, the tree topology was fixed but the branch lengths and model parameters were optimized to give the maximum likelihood. These optimizations were done using <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> run by the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></tt> (for conventional substitution models) or <tt class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></tt> (for experimentally determined models).</p>
+<p>The conventional models used were variants of the <em>GY94</em> codon model (<a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a>) and <em>KOSI07</em> (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/17400572">Kosiol et al 2007</a>) modes. For <em>GY94</em>, the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> method was used to determine the equilibrium codon frequencies (9 free parameters). For <em>KOSI07</em>, the <em>F</em> method was used to determine the equilibrium codon frequencies (60 free parameters). In all cases,  <em>kappa</em> (the transition-transversion ratio) was estimated as a single values by maximum likelihood. For some variants, the rate was drawn from a discrete gamma distribution (4 categories) with shape parameter estimated by maximum likelihood. The following approaches were taken to estimate <em>omega</em> (the nonsynonymous / synonymous ratio):</p>
+<blockquote>
+<div><ul class="simple">
+<li>A single value estimated by maximum likelihood.</li>
+<li>Four discrete gamma categories with mean and shape parameters estimated by maximum likelihood.</li>
+<li>A different value for each branch estimated by maximum likelihood.</li>
+</ul>
+</div></blockquote>
+<p>The experimentally determined substitution models used either the <em>HalpernBruno</em> or <em>FracTolerated</em> methods to compute the evolutionary models &#8211; these methods are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>.</p>
+<p>The results of the optimizations for the various substitution models are in the subdirectory <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/</span></tt>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. Files within these subdirectories give the results of the optimizations.</p>
+<p>Overall summaries are in the following files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">H1_HumanSwine_GY94_summary.csv</span></tt> : optimizations of the tree topology estimated using <em>GY94</em>.</li>
+<li><tt class="docutils literal"><span class="pre">H1_HumanSwine_GY94_summary.tex</span></tt> : like above, but in LaTex format.</li>
+<li><tt class="docutils literal"><span class="pre">H1_HumanSwine_KOSI07_summary.csv</span></tt> : optimizations of the tree topology estimated using <em>KOSI07</em>.</li>
+<li><tt class="docutils literal"><span class="pre">H1_HumanSwine_KOSI07_summary.tex</span></tt> : like above, but in LaTex format.</li>
+</ul>
+</div></blockquote>
+<p>Here are the results for the <em>GY94</em> tree topology:</p>
+<div class="highlight-python"><div class="highlight"><pre>#Summary for tree H1_HumanSwine_GY94.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+combined-FracTolerated, 0, -24088.7, 0, 0, 0
+replicate_3-FracTolerated, 303.2, -24240.3, 0, 0, 0
+combined-HalpernBruno, 500.6, -24339, 0, 0, 0
+replicate_1-FracTolerated, 535.4, -24356.4, 0, 0, 0
+replicate_3-HalpernBruno, 657.8, -24417.6, 0, 0, 0
+replicate_2-FracTolerated, 876.2, -24526.8, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 882.573, -24517, 13, 4, 9
+replicate_1-HalpernBruno, 983.2, -24580.3, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-one, 1109.67, -24631.5, 12, 3, 9
+replicate_2-HalpernBruno, 1190, -24683.7, 0, 0, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 1620.45, -24834.9, 64, 4, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 1859.37, -25006.4, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 1883, -24967.2, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 2378.83, -25215.1, 63, 3, 60
+GY94_CF3x4_omega-global-one_rates-one, 2544.53, -25350, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 3039.97, -25546.7, 62, 2, 60
+combined-FracToleratedrandomized, 5632.8, -26905.1, 0, 0, 0
+replicate_1-FracToleratedrandomized, 6002.4, -27089.9, 0, 0, 0
+replicate_3-FracToleratedrandomized, 6138.8, -27158.1, 0, 0, 0
+replicate_2-FracToleratedrandomized, 6477.8, -27327.6, 0, 0, 0
+combined-HalpernBrunorandomized, 7072.8, -27625.1, 0, 0, 0
+replicate_1-HalpernBrunorandomized, 7795, -27986.2, 0, 0, 0
+replicate_3-HalpernBrunorandomized, 7891.8, -28034.6, 0, 0, 0
+replicate_2-HalpernBrunorandomized, 8494.4, -28335.9, 0, 0, 0
+</pre></div>
+</div>
+<p>Here are the results for the <em>KOSI07</em> tree topology:</p>
+<div class="highlight-python"><div class="highlight"><pre>#Summary for tree H1_HumanSwine_KOSI07.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+combined-FracTolerated, 0, -24082.5, 0, 0, 0
+replicate_3-FracTolerated, 304.8, -24234.9, 0, 0, 0
+combined-HalpernBruno, 494.4, -24329.7, 0, 0, 0
+replicate_1-FracTolerated, 534.2, -24349.6, 0, 0, 0
+replicate_3-HalpernBruno, 653.2, -24409.1, 0, 0, 0
+replicate_2-FracTolerated, 869.4, -24517.2, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 876.673, -24507.8, 13, 4, 9
+replicate_1-HalpernBruno, 976.8, -24570.9, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-one, 1100.99, -24621, 12, 3, 9
+replicate_2-HalpernBruno, 1180.4, -24672.7, 0, 0, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 1609.02, -24823, 64, 4, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 1856.23, -24998.6, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 1867.29, -24953.1, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 2367.9, -25203.4, 63, 3, 60
+GY94_CF3x4_omega-global-one_rates-one, 2548.27, -25345.6, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 3027.99, -25534.5, 62, 2, 60
+combined-FracToleratedrandomized, 5628, -26896.5, 0, 0, 0
+replicate_1-FracToleratedrandomized, 5993.6, -27079.3, 0, 0, 0
+replicate_3-FracToleratedrandomized, 6138, -27151.5, 0, 0, 0
+replicate_2-FracToleratedrandomized, 6475.2, -27320.1, 0, 0, 0
+combined-HalpernBrunorandomized, 7069.4, -27617.2, 0, 0, 0
+replicate_1-HalpernBrunorandomized, 7786.8, -27975.9, 0, 0, 0
+replicate_3-HalpernBrunorandomized, 7889.2, -28027.1, 0, 0, 0
+replicate_2-HalpernBrunorandomized, 8496, -28330.5, 0, 0, 0
+</pre></div>
+</div>
+<p>The models are ranked in order of <a class="reference external" href="http://en.wikipedia.org/wiki/Akaike_information_criterion">AIC</a> difference from the best model. Both tree topologies give nearly identical results. These results show that:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The experimentally determined evolutionary models using the estimates from the three replicates combined (these are expected to be the best estimates) are clearly far superior to any of the conventional substitution models. This repeats the finding in <a class="reference external" href="http://biorxiv.org/content/early/2014/03/05/002899">Bloom 2014</a> that experimentally determined evolutionary models are superior.</li>
+<li>The models from the individual replicates are also generally better than the conventional models, but not by as large a margin. Presumably this is because estimating the evolutionary model from just one replicate is not as accurate.</li>
+<li>The <em>FracTolerated</em> model is superior to the <em>HalpernBruno</em> model (this was also found to be the case in <a class="reference external" href="http://biorxiv.org/content/early/2014/03/05/002899">Bloom 2014</a>).</li>
+<li>Randomizing the preferences among sites makes the models far worse than conventional models.</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2014 analysis of H1 influenza HAs descended from 1918 virus</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#software-used">Software used</a></li>
+<li><a class="reference internal" href="#input-files">Input files</a></li>
+<li><a class="reference internal" href="#running-the-analysis">Running the analysis</a></li>
+<li><a class="reference internal" href="#steps-in-the-analysis">Steps in the analysis</a><ul>
+<li><a class="reference internal" href="#construction-of-sequence-sets">Construction of sequence sets</a><ul>
+<li><a class="reference internal" href="#parsing-and-alignment-of-sequences">Parsing and alignment of sequences</a></li>
+<li><a class="reference internal" href="#molecular-clock-analysis-for-anomalous-and-off-lineage-sequences">Molecular clock analysis for anomalous and off-lineage sequences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a></li>
+<li><a class="reference internal" href="#computing-evolutionary-equilibrium-frequencies">Computing evolutionary equilibrium frequencies</a></li>
+<li><a class="reference internal" href="#correlations-between-preferences-and-evolutionary-conservation">Correlations between preferences and evolutionary conservation</a></li>
+<li><a class="reference internal" href="#analysis-of-tree-with-various-substitution-models">Analysis of tree with various substitution models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="example_2014Analysis_lactamase.html"
+                        title="previous chapter">2014 analysis of beta-lactamase phylogenetic fit</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Python modules in phyloExpCM</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/example_2014Analysis_Influenza_H1_HA.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="Python modules in phyloExpCM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="example_2014Analysis_lactamase.html" title="2014 analysis of beta-lactamase phylogenetic fit"
+             >previous</a> |</li>
+        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Jesse D. Bloom.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+    </div>
+  </body>
+</html>
