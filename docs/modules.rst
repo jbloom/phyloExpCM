@@ -14,6 +14,7 @@ Most of the functionality can be accessed directly from the scripts without inte
    hyphy
    packagedata
    plot
+   phylodistances
 
 
 .. include:: weblinks.txt

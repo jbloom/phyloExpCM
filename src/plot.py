@@ -1,6 +1,6 @@
 """Module for making plots with *matplotlib*.
 
-Written by Jesse Bloom, 2013.
+Written by Jesse Bloom.
 
 
 Dependencies
@@ -14,6 +14,8 @@ Functions defined in this module
 -----------------------------------
 
 * *PlotLogLvsNParams* : plots log likelihood versus number of parameters.
+
+* *PlotYearVersusDistance* : plots year separation versus distance
 
 """
 
@@ -29,6 +31,67 @@ try:
     _pylabavailable = True
 except ImportError:
     _pylabavailable = False
+
+
+def PlotYearVersusDistance(plotfile, years, distances, xlabel='Year of isolation', ylabel='Distance', title=None):
+    """Makes scatter plot of year versus distance.
+
+    Requires ``matplotlib`` / ``pylab``; will raise an exception if
+    not available.
+
+    * *plotfile* : name of created PDF plot.
+
+    * *years* : list of years, plotted on x-axis.
+
+    * *distances* : list of distances, as same length as *years* and with
+      corresponding entries. Plotted on y-axis.
+
+    * *xlabel* : label for the x-axis, uses LaTex formatting.
+
+    * *ylabel* : label for the y-axis, uses LaTex formatting.
+
+    * *title* : if set to a non-empty value, is a string title placed
+      above plot.
+    """
+    # check parameters
+    if not _pylabavailable:
+        raise ImportError("matplotlib and pylab are not available")
+    if os.path.splitext(plotfile)[1].upper() != '.PDF':
+        raise ValueError("plotfile must end in .pdf: %s" % plotfile)
+    assert len(years) == len(distances), "years and distances not of same length"
+
+    # plot size parameters
+    (bigmargin, smallmargin) = (0.19, 0.02) # margins outside axes
+    titlemargin = 0.15 # title height as fraction of plot
+    (lmargin, rmargin, bmargin, tmargin) = (bigmargin, smallmargin, bigmargin, smallmargin)
+    if title:
+        tmargin += titlemargin
+    plotmargin = 0.04 # add this much above / below last data point
+    xsize = 2.1 # plot xsize in inches
+    ysize = xsize * (1.0 - lmargin - rmargin) / (1.0 - tmargin - bmargin)
+    matplotlib.rc('text', usetex=True)
+    matplotlib.rc('font', size=10)
+
+    # make plot
+    figure = pylab.figure(figsize=(xsize, ysize), facecolor='white')
+    ax = pylab.axes([lmargin, bmargin, 1.0 - lmargin - rmargin, 1.0 - tmargin - bmargin])
+    pylab.plot(years, distances, 'b.', markersize=5)
+    (xmin, xmax, ymin, ymax) = (min(years), max(years), min(distances), max(distances))
+    xmargin = plotmargin * (xmax - xmin)
+    ymargin = plotmargin * (ymax - ymin)
+    ax.set_xlim([xmin - xmargin, xmax + xmargin])
+    ax.set_ylim([ymin - ymargin, ymax + ymargin])
+    pylab.xlabel(xlabel, size=10)
+    pylab.ylabel(ylabel, size=10)
+    if title:
+        pylab.title(title, size=10)
+    ax.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(5))
+    ax.yaxis.set_major_locator(matplotlib.ticker.MaxNLocator(5))
+    pylab.savefig(plotfile)
+    pylab.clf()
+    pylab.close()
+
+
 
 
 def PlotLogLvsNParams(plotfile, data_d):
