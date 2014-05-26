@@ -58,7 +58,7 @@
   <div class="section" id="module-plot">
 <span id="plot-module"></span><h1><tt class="docutils literal"><span class="pre">plot</span></tt> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h1>
 <p>Module for making plots with <em>matplotlib</em>.</p>
-<p>Written by Jesse Bloom, 2013.</p>
+<p>Written by Jesse Bloom.</p>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>This module requires:</p>
@@ -70,6 +70,7 @@
 <h2>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><em>PlotLogLvsNParams</em> : plots log likelihood versus number of parameters.</li>
+<li><em>PlotYearVersusDistance</em> : plots year separation versus distance</li>
 </ul>
 <dl class="function">
 <dt id="plot.PlotLogLvsNParams">
@@ -103,6 +104,24 @@ they can both be from the same plotting group if yo would like).</p>
 </ul>
 </dd></dl>
 
+<dl class="function">
+<dt id="plot.PlotYearVersusDistance">
+<tt class="descclassname">plot.</tt><tt class="descname">PlotYearVersusDistance</tt><big>(</big><em>plotfile</em>, <em>years</em>, <em>distances</em>, <em>xlabel='Year of isolation'</em>, <em>ylabel='Distance'</em>, <em>title=None</em><big>)</big><a class="headerlink" href="#plot.PlotYearVersusDistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes scatter plot of year versus distance.</p>
+<p>Requires <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>; will raise an exception if
+not available.</p>
+<ul class="simple">
+<li><em>plotfile</em> : name of created PDF plot.</li>
+<li><em>years</em> : list of years, plotted on x-axis.</li>
+<li><em>distances</em> : list of distances, as same length as <em>years</em> and with
+corresponding entries. Plotted on y-axis.</li>
+<li><em>xlabel</em> : label for the x-axis, uses LaTex formatting.</li>
+<li><em>ylabel</em> : label for the y-axis, uses LaTex formatting.</li>
+<li><em>title</em> : if set to a non-empty value, is a string title placed
+above plot.</li>
+</ul>
+</dd></dl>
+
 </div>
 </div>
 
@@ -123,7 +142,7 @@ they can both be from the same plotting group if yo would like).</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="packagedata.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="acknowledgements.html"
                         title="next chapter">Acknowledgements</a></p>
