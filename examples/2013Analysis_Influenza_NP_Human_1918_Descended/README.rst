@@ -44,13 +44,13 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ (version 0.21).
+* `phyloExpCM`_ : specifically, `phyloExpCM version 0.21`_
 
 * `numpy`_ (version 1.6.1)
 
 * `matplotlib`_ (version 1.3.1).
 
-* `mapmuts`_ (version 1.0)
+* `mapmuts`_ : specifically, `mapmuts version 1.0`_
 
 * `EMBOSS needle`_ (version 6.6.0). The executable with the name ``needle`` is expected to be in the current search path.
 
@@ -367,4 +367,6 @@ Similar files are created in LaTex formatted tables as ``GY94_summary.tex`` and 
 .. _`AIC`: http://en.wikipedia.org/wiki/Akaike_information_criterion
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
-.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://biorxiv.org/content/early/2014/04/27/002899
+.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract
+.. _`phyloExpCM version 0.21`: https://github.com/jbloom/phyloExpCM/tree/v0.21
+.. _`mapmuts version 1.0`: https://github.com/jbloom/mapmuts/tree/v1.0
