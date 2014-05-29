@@ -47,7 +47,11 @@ The input file should contain the following keys:
 
   In this file, residues are numbered sequentially starting with one according to the aligned sequences in *alignmentfile*.
 
+  Note that if *averagesites* is set to *True*, then the fractions for each site *r* will be identical, and will represent the average over the entire length of the sequence.
+
 * *requiresubstring* is an optional argument. If it is not specified or set to *None* then nothing is done. Otherwise, it should be set to a substring -- in this case, we only compute the frequencies from sequences in *alignmentfile* that have headers that contain the substring specified by *requiresubstring*. For instance, if this substring is *HOST_Swine* then only sequences with headers that contain *HOST_swine* are counted. Note that if no sequences in *alignmentfile* contain headers with this substring, an error will be raised.
+
+* *averagesites* is an optional Boolean switch. If it is not specified or set to *False*, then nothing is done. If you specify this option as *True*, then the fractions are **averaged over all sites**, and include the total number of occurrences of each amino acid at every site over all of the sequences. The pseudocounts specified by *pseudocounts* are then added to these total occurrences of amino acids at all sites. In this case, the reported fractions for each site in *outputfile* will be identical, since each is just reported as the average of all sites.
 
 Example input file
 ---------------------------

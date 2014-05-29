@@ -42,6 +42,10 @@ def main():
         requiresubstring = phyloExpCM.io.ParseStringValue(d, 'requiresubstring')
         if requiresubstring.upper() in ['NONE', 'FALSE']:
             requiresubstring = False
+    averagesites = False
+    if 'averagesites' in d:
+        averagesites = phyloExpCM.io.ParseBoolValue(d, 'averagesites')
+        print "Reported frequencies will be averaged over all sites and will NOT be site-specific, since averagesites option is being used."
 
     # read sequences, make sure all of same length
     print "Reading alignment from %s..." % alignmentfile
@@ -63,8 +67,11 @@ def main():
         seqlength = len(seqs[0][1])
     count_d = {}
     aminoacids = mapmuts.sequtils.AminoAcids(includestop)
-    for r in range(1, seqlength + 1):
-        count_d[r] = dict([(aa, pseudocounts) for aa in aminoacids])
+    if averagesites:
+        count_d = dict([(aa, pseudocounts) for aa in aminoacids])
+    else:
+        for r in range(1, seqlength + 1):
+            count_d[r] = dict([(aa, pseudocounts) for aa in aminoacids])
     for (head, seq) in seqs:
         for r in range(1, seqlength + 1):
             aa = seq[r - 1]
@@ -74,7 +81,10 @@ def main():
                 continue
             else:
                 assert aa in aminoacids, "Invalid amino acid %s" % aa
-                count_d[r][aa] += 1
+                if averagesites:
+                    count_d[aa] += 1
+                else:
+                    count_d[r][aa] += 1
 
     # write outputfile
     print "\nNow writing the frequencies to %s..." % outputfile
@@ -85,10 +95,16 @@ def main():
     f.write('\n')
     for r in range(1, seqlength + 1):
         pi_d = {}
-        n = float(sum(count_d[r].values()))
-        if not n:
-            raise ValueError("No counts for site %d" % r)
-        pi_d = dict([(aa, count_d[r][aa] / n) for aa in aminoacids])
+        if averagesites:
+            n = float(sum(count_d.values()))
+            if not n:
+                raise ValueError("No counts for all sites")
+            pi_d = dict([(aa, count_d[aa] / n) for aa in aminoacids])
+        else:
+            n = float(sum(count_d[r].values()))
+            if not n:
+                raise ValueError("No counts for site %d" % r)
+            pi_d = dict([(aa, count_d[r][aa] / n) for aa in aminoacids])
         assert abs(1.0 - sum(pi_d.values())) < 1.0e-7, "Sum of frequencies not close to one for site %d" % r
         f.write('%d\tna\t%f' % (r, mapmuts.bayesian.SiteEntropy(pi_d)))
         for aa in aminoacids:
