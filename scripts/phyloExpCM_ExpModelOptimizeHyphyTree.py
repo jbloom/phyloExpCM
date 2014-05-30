@@ -200,6 +200,15 @@ def main():
             fitomega = 'global_omega'
         else:
             raise ValueError("Invalid value of fitomega: %s\nMust be freeparameter, None, or False" % fitomega)
+    persitelikelihoods = False
+    if 'persitelikelihoods' in d:
+        persitelikelihoods = phyloExpCM.io.ParseStringValue(d, 'persitelikelihoods')
+        if persitelikelihoods.upper() in ['NONE', 'FALSE']:
+            persitelikelihoods = False
+        elif persitelikelihoods.upper() == 'TRUE':
+            persitelikelihoods = True
+        else:
+            raise ValueError("Invalid value of persitelikelihoods: %s" % persitelikelihoods)
 
     # create prxy_file which contains the substitution models for HYPHY
     prxy_file = 'Prxy.ibf'
@@ -266,8 +275,10 @@ def main():
     f.write('Branch lengths optimized: %d\n' % round(values['number of branch lengths']))
     f.write('Model parameters optimized: %d\n' % round(values['independent parameters (includes branch lengths)'] - values['number of branch lengths']))
     if mutationrates == 'freeparameters':
+        mutationrates = {'AC':1.0}
         for mut in ['AG', 'AT', 'CA', 'CG']:
             f.write('R_%s: %g\n' % (mut, values["R%s" % mut]))
+            mutationrates[mut] = values['R%s' % mut]
     if fitomega == 'global_omega':
         f.write('omega: %g\n' % values['omega'])
     f.close()
@@ -278,6 +289,35 @@ def main():
         raise ValueError("Failed to find correct number of branch lengths.\nExpected %d, but found %d." % (values['number of branch lengths'], len(matches)))
     branchlengths = [(m.group('node'), float(m.group('branch'))) for m in matches]
     tempfiles = [prxy_file, codetreefile, codefastafile, optimizetree_cmdfile, optimizetree_outfile, codeoptimizedtreefile] # temporary files created so far
+
+    # Now examine per-site likelihoods
+    if persitelikelihoods:
+        sitelikelihoodsfile = '%ssitelikelihoods.txt' % outfileprefix
+        print "\nNow computing per-site likelihoods and writing to %s" % sitelikelihoodsfile
+        f = open(sitelikelihoodsfile, 'w')
+        f.write('#SITE\tSITE_LOG_LIKELIHOOD\n')
+        if fitomega:
+            raise ValueError("The persitelikelihoods and fitomega options are currently incompatible")
+        mutconstraints = ['global R%s := %g' % (mut, mutrate) for (mut, mutrate) in mutationrates.iteritems()] # constrain mutation rates to pre-specified or pre-determined values
+        branchconstraints = ['tree.%s.t := %g' % (node, branch) for (node, branch) in branchlengths] # constrain branch lengths to fixed values
+        for r in sites:
+            print "Computing per-site likelihood for site %d..." % r
+            cmdfile = 'hyphy_site%d_cmds.bf' % r
+            outfile = 'hyphy_site%d_output.txt' % r
+            if os.path.isfile(outfile):
+                os.remove(outfile)
+            tempfiles += [cmdfile, outfile]
+            constraints = ['global mu%d := 1.0' % r] 
+            phyloExpCM.hyphy.CreateHYPHYCommandFile2(cmdfile, outfile, codefastafile, codeoptimizedtreefile, [r], prxy_file, constraints + mutconstraints, branchconstraints=branchconstraints)
+            RunHYPHY(hyphypath, cmdfile, outfile)
+            values = dict([('Log likelihood', None), ('independent parameters (includes branch lengths)', None)])
+            phyloExpCM.hyphy.ExtractValues(outfile, values)
+            if values['independent parameters (includes branch lengths)'] != 0:
+                raise ValueError("Found %d independent parameters rather than the expected zero." % values['independent parameters (includes branch lengths)'])
+            f.write('%d\t%g\n' % (r, values['Log likelihood']))
+            f.flush()
+        f.close()
+        print "Finished writing per-site likelihoods to %s" % sitelikelihoodsfile
 
     # delete temporary files
     if not keeptempfiles:

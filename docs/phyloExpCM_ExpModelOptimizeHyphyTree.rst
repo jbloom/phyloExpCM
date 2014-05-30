@@ -153,7 +153,7 @@ Amino-acid preferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 For each codon site *r*, we are assumed to have measured the preference :math:`\pi_{r,a}` for each amino-acid *a*, where :math:`1 = \sum_a \pi_{r,a}`. These must be provided as input to the script based on experimental measurements.
 
-The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationshps are described below.
+The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationships are described below.
 
 Fixation probabilitites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -363,10 +363,11 @@ The input file should contain the following keys:
 
 * *outfileprefix* gives the name of the prefix pre-pended to the output files. You can also make it *None* if you don't want to pre-pend any prefix. 
 
-* *fitomega* is an optional parameters. If it is *None*, *False*, or is not specified, then the :math:`\omega` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If *fitomega* is instead specified with a value of *freeparameter*, then the value of :math:`\omega` is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.
+* *fitomega* is an optional argument. If it is *None*, *False*, or is not specified, then the :math:`\omega` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If *fitomega* is instead specified with a value of *freeparameter*, then the value of :math:`\omega` is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.
 
 * *randomizepreferences* is an optional argument. If it is not specified or set to a value of *False*, nothing unusual is done. Otherwise it should be set to an integer >= 1 that specifies the random number seed used to randomize the amino-acid preferences among sites. You might want to do this if you are testing that the model relies relies on accurate experimental determination of the amino-acid preferences at each site by scrambling these preferences.
 
+* *persitelikelihoods* is an optional argument. If it is *None*, *False*, or not specified, the nothing is done. If you set it to *True*, then the script also reports the per-site likelihoods in a separate file. Specifically, the file with the suffix ``sitelikelihoods.txt`` (see `Output files`_) lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are **not** re-optimized for each site -- rather, they are set to their global best values and then the likelihood contribution of each site is computed. Note that this option is currently **not compatible** with *fitomega*, so if you set *persitelikelihoods* to *True* then you cannot use *fitomega*. 
 
 Example input file
 ---------------------------
@@ -415,6 +416,13 @@ The following primary output files are created. Each of these files begins with 
 
         omega 0.03132
 
+    * ``sitelikelihoods.txt`` is created if *persitelikelihoods* is *True*. In this case, the first line is a header line and all subsequent lines list the integer site number and the log likelihood with tabs between these two columns. The format is as follows::
+
+        #SITE   SITE_LOG_LIKELIHOODS
+        1   -4.792906363107919
+        2   -15.89808216031635
+        3   -17.19022748421175
+
 
 Temporary output files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -431,5 +439,9 @@ The following temporary output files are created, largely for running `HYPHY`_. 
     * ``hyphy_optimizetree_output.txt`` is a file that contains the results of running `HYPHY`_ on ``hyphy_optimizetree_cmds.bf``.
 
     * ``coded_optimizedtree.newick`` is a version of the tree with `HYPHY`_ optimized branch lengths with the names still matching those that have been changed to `HYPHY`_ naming as in ``coded_fastafile.fasta`` and ``coded_treefile.newick``. Except for the names being coded, this matches the primary output file with suffix ``optimizedtree.newick``.
+
+    * If *persitelikelihoods* is *True*, then for each site files of the name ``hyphy_site1_cmds.bf`` and ``hyphy_site1_output.txt`` are created for each site number (the example names above are for site ``1``). 
+
+
 
 .. include:: weblinks.txt

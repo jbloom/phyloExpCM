@@ -100,6 +100,7 @@ The input file should contain the following keys:
 
         - *KOSI07_F_omega-branchlocal-one_rates-one*
 
+* *persitelikelihoods* is an optional argument. If it is *None*, *False*, or not specified, the nothing is done. Otherwise, set it to the name of a file that you would like to create that reports the per-site likelihoods. Specifically, the created file lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are **not** re-optimized for each site -- rather, they are set to their global best values and then the likelihood contribution of each site is computed. The per-site likelihoods are listed in tab-delimited columns with each site on a separate line, and the first column giving the site number and second giving the per-site likelihood. The first line in the file is a header.
 
 
 Example input file
@@ -153,6 +154,12 @@ Some summary output is printed to standard output. In addition, the following ou
     Sequence1   Sequence3    0.92947
     Sequence2   Sequence3    2.13376
 
+* If you use the *persitelikelihoods* option, then an output file is created that shows the per-site likelihoods. The format is as follows::
+
+    #SITE   SITE_LOG_LIKELIHOODS
+    1   -4.792906363107919
+    2   -15.89808216031635
+    3   -17.19022748421175
 
 * The script also creates several temporary files that re-map the sequences in *fastafile* and *treefile* to names that are usable by `HYPHY`_ (which only accepts alphanumeric characters and underscores). Specifically, these files begin with the prefix *_codenames_* and then are followed by suffixes which are the names of *fastafile*, *treefile*, and *hyphydistancesfile*. If the script terminates normally, these files are then deleted -- but they will be present when the script is running, and will be preserved if it halts prematurely to aid in debugging.
 

@@ -185,7 +185,12 @@ def main():
             if  os.path.isfile(distancefilename):
                 print "Removing existing hyphydistancesfile %s" % distancefilename
                 os.remove(distancefilename)
-
+    persitelikelihoods = False
+    if 'persitelikelihoods' in d:
+        persitelikelihoods = phyloExpCM.io.ParseStringValue(d, 'persitelikelihoods')
+        if persitelikelihoods.upper() in ['NONE', 'FALSE']:
+            persitelikelihoods = False
+        print "Per-site likelihoods will be written to %s" % persitelikelihoods
 
     # re-map names in _codenames_* files to HYPHY acceptable format
     # code_d maps sequence headers to code names
@@ -253,7 +258,7 @@ def main():
     else:
         raise ValueError("Unrecognized model of %s" % model)
     print "\nCreating the HYPHY command file %s..." % hyphycmdfile
-    phyloExpCM.hyphy.CreateHYPHYCommandFile(hyphycmdfile, hyphyoutfile, codefastafile, codetreefile, codedistancesfile, sites, model)
+    phyloExpCM.hyphy.CreateHYPHYCommandFile(hyphycmdfile, hyphyoutfile, codefastafile, codetreefile, codedistancesfile, sites, model, persitelikelihoods=persitelikelihoods)
 
     # run HYPHY
     assert not os.path.isfile(hyphyoutfile), "hyphyoutfile should have already been deleted"

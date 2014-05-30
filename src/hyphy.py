@@ -253,7 +253,7 @@ def ExtractTree(hyphyoutfile, treename='tree'):
 
 
 
-def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distancesfile, sites, model):
+def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distancesfile, sites, model, persitelikelihoods=False):
     """Creates a ``HYPHY`` command file.
 
     The created command file *cmdfile* specifies that we run ``HYPHY``
@@ -421,6 +421,17 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
           original paper. The other variables in the tuple have the same
           meaining as for the *GY94* model except that now the only allowable
           option for *equilfreqs* is *F*.
+
+    * *persitelikelihoods* specifies that we compute the per-site likelihoods and write
+      them to a file. This is the contribution of each site to the likelihood after
+      fixing the model parameters and branch lengths to the values obtained from maximizing
+      the likelihood using all of the sites specified in *sites*. If *persitelikelihoods*
+      has its default value of *False*, then nothing is done. Otherwise, set
+      *persitelikelihoods* to the name of the file that you would like to create that
+      gives the per-site likelihoods. This file contains an initial header line, and
+      then subsequent rows are the site and the log likelihood delimited by tabs.
+      If the file specified by *persitelikelihoods* already exists, it is removed before
+      running ``HYPHY``.
     """
     seqs = mapmuts.sequtils.ReadFASTA(fastafile)
     if len(seqs) != len(dict([(head, True) for (head, seq) in seqs])):
@@ -658,6 +669,62 @@ def CreateHYPHYCommandFile(cmdfile, outputfile, fastafile, newickfile, distances
             '  }',
             '}',
             ]
+    if persitelikelihoods:
+        if not isinstance(persitelikelihoods, str):
+            raise ValueError("persitelikelihoods is not a string")
+        if os.path.isfile(persitelikelihoods):
+            os.remove(persitelikelihoods)
+        cmds += [
+                'fprintf(stdout, "\\nNow computing per-site likelihoods.\\n");',
+                'fprintf(stdout, "\\nFirst fixing all global variables to the maximum-likelihood values estimated on the entire tree.\\n");',
+                'GetString(associativearray, likelihood, -1);',
+                'globalindependentvariables = associativearray["Global Independent"];',
+                'for (ivariable=0; ivariable<Columns(globalindependentvariables); ivariable=ivariable+1) {',
+                '  variable = globalindependentvariables[ivariable];',
+                '  cmdstring = variable + " := " + Format(variable, 0, 30) + ";";',
+                '  fprintf(stdout, "\\nFixing variable as follows: ", cmdstring, "\\n");',
+                '  ExecuteCommands(cmdstring);',
+                '}',
+                'persitelikelihoods = "%s";' % persitelikelihoods,
+                'fprintf(stdout, "\\nNow computing per-site likelihoods and writing to ", persitelikelihoods, "...\\n");',
+                'fprintf(persitelikelihoods, "#SITE\\tSITE_LOG_LIKELIHOODS\\n");',
+                ]
+        for site in sites:
+            ntsites = "%d,%d,%d" % (3 * site - 3, 3 * site - 2, 3 * site - 1)
+            cmds += [
+                    'fprintf(stdout, "\\nComputing likelihood for site %d...\\n");' % site,
+                    'DataSetFilter sitecodonfilter = CreateFilter(data, 3, "%s", "", "TAA,TAG,TGA");' % ntsites,
+                    'assert(sitecodonfilter.sites == 1, "Codon filtered data does not have one site for %d");' % site,
+                    'CheckCodonFilter("sitecodonfilter");',
+                    ]
+            if model[0] == 'experimental':
+                cmds += [
+                        'UseModel(model%d);' % site,
+                        ]
+            else:
+                cmds += [
+                        'UseModel(model);'
+                        ]
+            cmds += [
+                    'ExecuteCommands("Tree sitetree = treestring;");',
+                    'assert(sitecodonfilter.species == TipCount(sitetree), "Number of species and number of tips differ");',
+                    'assert(TipCount(tree) == TipCount(sitetree), "Number of tips differ");',
+                    'for (ibranch=0; ibranch<BranchCount(tree); ibranch=ibranch+1) {',
+                    '  branchname = BranchName(tree, ibranch);',
+                    '  ExecuteCommands("branchlength = tree." + branchname + ".t;");',
+                    '  ExecuteCommands("sitetree." + branchname + ".t := " + Format(branchlength, 0, 30) + ";");',
+                    '}',
+                    'for (itip=0; itip<TipCount(tree); itip=itip+1) {',
+                    '  tipname = TipName(tree, itip);',
+                    '  ExecuteCommands("tiplength = tree." + tipname + ".t;");',
+                    '  ExecuteCommands("sitetree." + tipname + ".t := " + Format(tiplength, 0, 30) + ";");',
+                    '}',
+                    'LikelihoodFunction sitelikelihood = (sitecodonfilter, sitetree);',
+                    'Optimize(sitemlestimates, sitelikelihood);',
+                    'assert(sitemlestimates[1][1] == 0, "Found a variable optimized. Either a model or branch parameter must have not been fixed");',
+                    'fprintf(persitelikelihoods, "%d\\t", sitemlestimates[1][0], "\\n");' % site,
+                    ]
+        
     # last command
     cmds += [
         'fprintf(stdout, "Completed HYPHY script %s.\\n");' % cmdfile,
