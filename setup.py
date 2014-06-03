@@ -30,7 +30,7 @@ from distutils.core import setup
 # main setup command
 setup(
     name = 'phyloExpCM', 
-    version = '0.22', 
+    version = '0.3', 
     author = 'Jesse D. Bloom', 
     author_email = 'jbloom@fhcrc.org', 
     url = 'https://github.com/jbloom/phyloExpCM', 

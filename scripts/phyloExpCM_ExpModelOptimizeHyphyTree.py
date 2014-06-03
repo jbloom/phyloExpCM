@@ -200,6 +200,15 @@ def main():
             fitomega = 'global_omega'
         else:
             raise ValueError("Invalid value of fitomega: %s\nMust be freeparameter, None, or False" % fitomega)
+    fitbeta = False
+    if 'fitbeta' in d:
+        fitbeta = phyloExpCM.io.ParseStringValue(d, 'fitbeta')
+        if fitbeta.upper() in ['NONE', 'FALSE']:
+            fitbeta = False
+        elif fitbeta == 'freeparameter':
+            fitbeta = 'global_beta'
+        else:
+            raise ValueError("Invalid value of fitbeta: %s\nMust be freeparameter, None, or False" % fitbeta)
     persitelikelihoods = False
     if 'persitelikelihoods' in d:
         persitelikelihoods = phyloExpCM.io.ParseStringValue(d, 'persitelikelihoods')
@@ -213,7 +222,7 @@ def main():
     # create prxy_file which contains the substitution models for HYPHY
     prxy_file = 'Prxy.ibf'
     print "\nCreating the HYPHY include batch file %s which holds the substitution model constructed using the %s fixation model..." % (prxy_file, fixationmodel)
-    phyloExpCM.submatrix.WriteHYPHYMatrices2(prxy_file, sites, aapreferences, fixationmodel, includeselection=fitomega)
+    phyloExpCM.submatrix.WriteHYPHYMatrices2(prxy_file, sites, aapreferences, fixationmodel, includeselection=fitomega, fitbeta=fitbeta)
 
     # re-map names in treefile and fastafile to HYPHY acceptable formats in codetreefile and codefastafile
     # code_d maps sequence headers to code names
@@ -224,7 +233,7 @@ def main():
     code_d = dict([(seqs[i][0], 'TipSeq%d_' % (i + 1)) for i in range(len(seqs))])
     code_d_inv = dict([(y, x) for (x, y) in code_d.iteritems()])
     if len(code_d) != len(code_d_inv):
-        raise ValueError("Some the sequence names are not unique")
+        raise ValueError("Some of the sequence names are not unique")
     EncodeNames(code_d, treefile, codetreefile)
     RemoveBranchSupports(codetreefile)
     EncodeNames(code_d, fastafile, codefastafile)
@@ -251,7 +260,9 @@ def main():
         for mutrate in ['RAG', 'RAT', 'RCA', 'RCG']:
             constraints.append("global %s :> 1.0e-7" % mutrate) # constrain all mutation rates greater than zero
     if fitomega == 'global_omega':
-        constraints.append('global omega :> 1.0e-7') # set omega greater than zero
+        constraints += ['global omega = 1.0', 'omega :> 0.001', 'omega :< 1000.0'] # set reasonable initial guess and range for omega
+    if fitbeta:
+        constraints += ['global beta = 1.0', 'beta :> 0.001', 'beta :< 1000.0'] # set reasonable initial guess and range for beta
     phyloExpCM.hyphy.CreateHYPHYCommandFile2(optimizetree_cmdfile, optimizetree_outfile, codefastafile, codetreefile, sites, prxy_file, constraints)
     RunHYPHY(hyphypath, optimizetree_cmdfile, optimizetree_outfile)
     # extract tree and write to file
@@ -269,6 +280,8 @@ def main():
         values['RCG'] = None
     if fitomega == 'global_omega':
         values['omega'] = None
+    if fitbeta:
+        values['beta'] = None
     phyloExpCM.hyphy.ExtractValues(optimizetree_outfile, values)
     f = open(optimizedtreeresults, 'w')
     f.write('Log likelihood: %g\n' % values['Log likelihood'])
@@ -281,6 +294,8 @@ def main():
             mutationrates[mut] = values['R%s' % mut]
     if fitomega == 'global_omega':
         f.write('omega: %g\n' % values['omega'])
+    if fitbeta:
+        f.write('beta: %g\n' % values['beta'])
     f.close()
     # extract branch lengths
     nodebranchmatch = re.compile('(?P<node>((TipSeq\d+_)|(Node\d+)))\:(?P<branch>\d+\.*\d*((e|E)\-{0,1}\d+){0,1})[\(\,\)]')
@@ -296,8 +311,6 @@ def main():
         print "\nNow computing per-site likelihoods and writing to %s" % sitelikelihoodsfile
         f = open(sitelikelihoodsfile, 'w')
         f.write('#SITE\tSITE_LOG_LIKELIHOOD\n')
-        if fitomega:
-            raise ValueError("The persitelikelihoods and fitomega options are currently incompatible")
         mutconstraints = ['global R%s := %g' % (mut, mutrate) for (mut, mutrate) in mutationrates.iteritems()] # constrain mutation rates to pre-specified or pre-determined values
         branchconstraints = ['tree.%s.t := %g' % (node, branch) for (node, branch) in branchlengths] # constrain branch lengths to fixed values
         for r in sites:
@@ -308,13 +321,17 @@ def main():
                 os.remove(outfile)
             tempfiles += [cmdfile, outfile]
             constraints = ['global mu%d := 1.0' % r] 
+            if fitbeta:
+                constraints.append('global beta := %g' % values['beta'])
+            if fitomega == 'global_omega':
+                constraints.append('global omega := %g' % values['omega'])
             phyloExpCM.hyphy.CreateHYPHYCommandFile2(cmdfile, outfile, codefastafile, codeoptimizedtreefile, [r], prxy_file, constraints + mutconstraints, branchconstraints=branchconstraints)
             RunHYPHY(hyphypath, cmdfile, outfile)
-            values = dict([('Log likelihood', None), ('independent parameters (includes branch lengths)', None)])
-            phyloExpCM.hyphy.ExtractValues(outfile, values)
-            if values['independent parameters (includes branch lengths)'] != 0:
-                raise ValueError("Found %d independent parameters rather than the expected zero." % values['independent parameters (includes branch lengths)'])
-            f.write('%d\t%g\n' % (r, values['Log likelihood']))
+            sitevalues = dict([('Log likelihood', None), ('independent parameters (includes branch lengths)', None)])
+            phyloExpCM.hyphy.ExtractValues(outfile, sitevalues)
+            if sitevalues['independent parameters (includes branch lengths)'] != 0:
+                raise ValueError("Found %d independent parameters rather than the expected zero." % sitevalues['independent parameters (includes branch lengths)'])
+            f.write('%d\t%g\n' % (r, sitevalues['Log likelihood']))
             f.flush()
         f.close()
         print "Finished writing per-site likelihoods to %s" % sitelikelihoodsfile

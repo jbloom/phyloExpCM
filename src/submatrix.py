@@ -209,7 +209,7 @@ def WriteHYPHYMatrices(exchangeabilities, stationary_vecs, outfile):
     f.close()
 
 
-def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includeselection=True):
+def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includeselection=True, fitbeta=False):
     """Creates HYPHY include batch file with codon substitution models.
 
     Created HYPHY include batch file (``*.ibf`` file), include with the command::
@@ -257,8 +257,9 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
 
     Fixation probabilities are defined as numbers in the substition models. 
     These numbers are computed from the amino-acid preferences
-    :math:`\pi_{r,a}`. There are two different models that can be used to calculate
-    these fixation probabilities. The model to be used is specified by 
+    :math:`\pi_{r,a}`, possibly with these preferences taken to the exponent of
+    :math:`\\beta` depending on the value of *fitbeta*. There are two different models that can
+    be used to calculate these fixation probabilities. The model to be used is specified by 
     *fixationmodel* as one of these:
 
        * *FracTolerated* specifies that the fixation probabilities are
@@ -268,7 +269,7 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
                F_{r,xy} =
                \\begin{cases}
                1 & \mbox{if $\mathcal{A}\left(x\\right) = \mathcal{A}\left(y\\right)$ or $\pi_{r,\mathcal{A}\left(y\\right)} \ge \pi_{r,\mathcal{A}\left(x\\right)}$} \\\\
-               \\frac{\pi_{r, \mathcal{A}\left(y\\right)}}{\pi_{r, \mathcal{A}\left(x\\right)}} & \mbox{otherwise.}
+               \left(\\frac{\pi_{r, \mathcal{A}\left(y\\right)}}{\pi_{r, \mathcal{A}\left(x\\right)}}\\right)^{\\beta} & \mbox{otherwise.}
                \end{cases}
 
        * *HalpernBruno* specifies that the fixation probabilities are
@@ -278,7 +279,7 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
                F_{r,xy} = 
                \\begin{cases}
                1 & \mbox{if $\mathcal{A}\left(x\\right) = \mathcal{A}\left(y\\right)$ or $\pi_{r,\mathcal{A}\left(x\\right)} = \pi_{r,\mathcal{A}\left(y\\right)}$} \\\\
-               \\frac{\ln\left(\pi_{r,\mathcal{A}\left(y\\right)} / \pi_{r,\mathcal{A}\left(x\\right)}\\right)}{1 - \pi_{r,\mathcal{A}\left(x\\right)} / \pi_{r,\mathcal{A}\left(y\\right)}} & \mbox{otherwise.}
+               \\frac{\\beta \\times \ln\left(\pi_{r,\mathcal{A}\left(y\\right)} / \pi_{r,\mathcal{A}\left(x\\right)}\\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\\right)} / \pi_{r,\mathcal{A}\left(y\\right)}\\right)^{\\beta}} & \mbox{otherwise.}
                \end{cases}
 
     The mutation rates are equal among all sites, and are 
@@ -355,8 +356,26 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
            so only one free parameter for all selection. This could be
            useful if there is stronger selection on nonsynymous mutations
            than captured by the amino-acid preferences.
+
+    * *fitbeta* allows the :math:`\\beta` value that scales the preferences as an
+      exponent to have values other than one. By default, *fitbeta* is *False*, which
+      means that :math:`\\beta` is one. Possible values:
+
+        - *False* (default value) means that :math:`\\beta` is fixed to be one.
+
+        - *global_beta* means that there is a single :math:`\\beta` value for all sites.
+          This could be useful if the strength of selection in the experiments is different
+          from that in nature.
     """
     assert includeselection in [False, True, 'global_omega'], "Invalid value of includeselection: %s" % includeselection
+    if fitbeta == 'global_beta':
+        betaexponent = '^beta'
+        betamultiplier = 'beta * '
+    elif fitbeta == False:
+        betaexponent = ''
+        betamultiplier = ''
+    else:
+        raise ValueError("Invalid value of fitbeta: %s" % fitbeta)
     codontable = CodonTable()
     codons = NonStopCodons()
     ncodons = len(codons)
@@ -379,15 +398,15 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
     for r in sites:
         f.write("\n//Equilibrium frequencies for site %d\np%dx = {%d, 1};\n" % (r, r, ncodons))
         if includeselection == True:
-            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s * omega%d%s" % (aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x]) for x in codons])))
+            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g%s * q%s * omega%d%s" % (aapreferences[r]['PI_%s' % codontable[x]], betaexponent, x, r, codontable[x]) for x in codons])))
         else:
-            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g * q%s" % (aapreferences[r]['PI_%s' % codontable[x]], x) for x in codons])))
+            f.write("global p%dx_denominator := %s;\n" % (r, ' + '.join(["%g%s * q%s" % (aapreferences[r]['PI_%s' % codontable[x]], betaexponent, x) for x in codons])))
         for xi in range(ncodons):
             x = codons[xi]
             if includeselection == True:
-                f.write("p%dx[%d] := (%g * q%s * omega%d%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r, codontable[x], r))
+                f.write("p%dx[%d] := (%g%s * q%s * omega%d%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], betaexponent, x, r, codontable[x], r))
             else:
-                f.write("p%dx[%d] := (%g * q%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], x, r))
+                f.write("p%dx[%d] := (%g%s * q%s) / p%dx_denominator;\n" % (r, xi, aapreferences[r]['PI_%s' % codontable[x]], betaexponent, x, r))
         f.write("\n// Exchangeabilities for site %d\nS%dxy = {%d, %d};\n" % (r, r, ncodons, ncodons))
         for xi in range(ncodons):
             x = codons[xi]
@@ -407,31 +426,31 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
                     assert pirx > 0 and piry > 0, "Preferences must be > 0"
                     if fixationmodel == 'FracTolerated':
                         if piry >= pirx:
-                            frxy = 1.0
+                            frxy = '1.0'
                         else:
-                            frxy = float(piry / pirx)
+                            frxy = "%g%s" % (float(piry / pirx), betaexponent)
                     elif fixationmodel == 'HalpernBruno':
                         if piry == pirx:
-                            frxy = 1.0;
+                            frxy = '1.0'
                         else:
-                            frxy = math.log(piry / pirx) / (1.0 - pirx / piry)
+                            frxy = '%s(%g) / (1.0 - %g%s)' % (betamultiplier, math.log(piry / pirx), float(pirx / piry), betaexponent)
                     else:
                         raise ValueError("Invalid fixationmodel of %s" % fixationmodel)
                     qxy = "R%s" % ''.join(ntdiffs[0])
                     if ax != ay: # nonsynonymous
                         if includeselection == 'global_omega':
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g * omega / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g * omega / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s * omega / %g%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, betaexponent))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s * omega / %g%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, betaexponent))
                         else:
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, betaexponent))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, betaexponent))
                     else: # synonymous
                         if includeselection == True:
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, r, ay))
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g / omega%d%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, r, ay))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s / omega%d%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, betaexponent, r, ay))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s / omega%d%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, betaexponent, r, ay))
                         else:
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry))
-                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %g / %g;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s;\n" % (r, xi, yi, r, r, qxy, y, frxy, piry, betaexponent))
+                            f.write("S%dxy[%d][%d] := t * mu%d * p%dx_denominator * %s / q%s * %s / %g%s;\n" % (r, yi, xi, r, r, qxy, y, frxy, piry, betaexponent))
         f.write("\n//Define substitution model for site %d as exchangeabilities times equilibrium frequencies\nModel P%dxy = (S%dxy, p%dx);\n\n" % (r, r, r, r))
     f.close()
 

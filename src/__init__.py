@@ -15,4 +15,4 @@ The package consists of the following Python modules:
 * submatrix
 
 """
-__version__ = '0.22'
+__version__ = '0.3'
