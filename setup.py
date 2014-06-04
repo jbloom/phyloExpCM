@@ -55,5 +55,6 @@ setup(
             'scripts/phyloExpCM_ExpModelOptimizeHyphyTree.py',
             'scripts/phyloExpCM_multiHyphyRuns.py',
             'scripts/phyloExpCM_FreqsFromAlignment.py',
+            'scripts/phyloExpCM_SiteLikelihoodComparison.py',
             ],
 )
