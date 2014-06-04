@@ -389,7 +389,7 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
         ncg = x.count('C') + x.count('G')
         assert 0 <= ncg <= 3
         if ncg == 0:
-            f.write('global q%s := RAC^3;\n' % x)
+            f.write('global q%s := RCA^3;\n' % x)
         elif ncg == 3:
             f.write('global q%s := 1.0;\n' % x)
         else:
