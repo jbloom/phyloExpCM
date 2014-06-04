@@ -385,16 +385,15 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
     f.write("\n//Values for constrained mutation rates defined by others.\n")
     f.write("global RTG := RAC;\nglobal RTC := RAG;\nglobal RTA := RAT;\nglobal RGT := RCA;\nglobal RGC := RCG;\nglobal RCT := RAG * RCA / RAC;\n");
     f.write("\n// Equilibrium codon frequencies for purely mutation-driven evolution, denoted by qx.\n")
-    f.write("global qx_denominator := 8.0 * (RAC + RAG + RCA + RCG)^3;\n")
     for x in codons:
         ncg = x.count('C') + x.count('G')
         assert 0 <= ncg <= 3
         if ncg == 0:
-            f.write('global q%s := (RCA + RCT)^3 / qx_denominator;\n' % x)
+            f.write('global q%s := RAC^3;\n' % x)
         elif ncg == 3:
-            f.write('global q%s := (RAC + RAG)^3 / qx_denominator;\n' % x)
+            f.write('global q%s := 1.0;\n' % x)
         else:
-            f.write('global q%s := (RAC + RAG)^%d * (RCA + RCT)^%d / qx_denominator;\n' % (x, ncg, 3 - ncg))
+            f.write('global q%s := RCA^%d;\n' % (x, 3 - ncg))
     for r in sites:
         f.write("\n//Equilibrium frequencies for site %d\np%dx = {%d, 1};\n" % (r, r, ncodons))
         if includeselection == True:
