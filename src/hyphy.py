@@ -69,7 +69,7 @@ def RandomizeCodonAlignment(seqs):
     return rseqs
 
 
-def ExtractValues(hyphyoutfile, values):
+def ExtractValues(hyphyoutfile, values, allowmising=False):
     """Extracts values for parameters from ``HYPHY`` output.
 
     *hyphyoutfile* is a string giving the name of a ``HYPHY`` output file
@@ -106,6 +106,11 @@ def ExtractValues(hyphyoutfile, values):
     On return, *values* will hold the extracted values for each key.
     An exception (a *ValueError*) will be raised if a key is either
     not present or is present multiple times.
+
+    If *allowmissing* is *True*, then it is OK if a key in *values* is not
+    found in *hyphyoutfile*. In this case, keys that are not found
+    simply have a value of *None* retained in *values*. The
+    *allowmissing* option is *False* by default.
     """
     lines = open(hyphyoutfile).readlines()
     keys = values.keys()
@@ -113,7 +118,7 @@ def ExtractValues(hyphyoutfile, values):
         m = re.compile("^\s*(global\s+){0,1}%s\s*(\:|\=|\:\=)\s*(?P<value>\-{0,1}\d+\.{0,1}\d*((e|E)(\-|\+){0,1}\d+){0,1})\s*\;{0,1}\s*$" % re.escape(key))
         matches = [m.search(line) for line in lines]
         matches = [x for x in matches if x]
-        if not matches:
+        if (not matches) and (not allowmissing):
             raise ValueError("Failed to match %s in %s" % (key, hyphyoutfile))
         elif len(matches) > 1:
             raise ValueError("Multiple matches for %s in %s" % (key, hyphyoutfile))
