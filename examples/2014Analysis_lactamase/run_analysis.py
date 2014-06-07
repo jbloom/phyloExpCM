@@ -547,6 +547,7 @@ def main():
             'R_CA':'$R_{C \\shortrightarrow A}$',
             'R_CG':'$R_{C \\shortrightarrow G}$',
             'global rate_alpha':'rate shape',
+            'global omega':'$\omega$',
             'global omega_mean':'mean $\omega$',
             'global kappa':'$\kappa$',
             'global omega_alpha':'$\omega$ shape',
