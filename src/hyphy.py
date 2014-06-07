@@ -69,7 +69,7 @@ def RandomizeCodonAlignment(seqs):
     return rseqs
 
 
-def ExtractValues(hyphyoutfile, values, allowmising=False):
+def ExtractValues(hyphyoutfile, values, allowmissing=False):
     """Extracts values for parameters from ``HYPHY`` output.
 
     *hyphyoutfile* is a string giving the name of a ``HYPHY`` output file
@@ -120,9 +120,12 @@ def ExtractValues(hyphyoutfile, values, allowmising=False):
         matches = [x for x in matches if x]
         if (not matches) and (not allowmissing):
             raise ValueError("Failed to match %s in %s" % (key, hyphyoutfile))
+        elif (not matches) and allowmissing:
+            pass
         elif len(matches) > 1:
             raise ValueError("Multiple matches for %s in %s" % (key, hyphyoutfile))
-        values[key] = float(matches[0].group('value'))
+        else:
+            values[key] = float(matches[0].group('value'))
 
 
 def ExtractLikelihoodAndNParameters(hyphyoutfile):
