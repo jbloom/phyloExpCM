@@ -1,0 +1,36 @@
+
+
+This is RAxML version 7.7.6 released by Alexandros Stamatakis on August 29 2013.
+
+With greatly appreciated code contributions by:
+Andre Aberer (HITS)
+Simon Berger (HITS)
+Nick Pattengale (Sandia)
+Wayne Pfeiffer (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+
+RAxML computation of RF distances for all pairs of trees in a set of trees
+
+
+RAxML was called as follows:
+
+raxmlHPC-SSE3 -z /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RobinsonFouldsDistances//concatenated_trees.newick -w /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RobinsonFouldsDistances/ -f r -n RobinsonFouldsDistances -m GTRCAT 
+
+
+
+
+Found 2 trees in File /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RobinsonFouldsDistances//concatenated_trees.newick
+
+
+
+Average relative RF in this set: 0.146341
+
+
+Average relative WRF in this set: 0.000000
+
+
+Average relative WRF2 in this set: 0.000000
+
+File containing all 1 pair-wise RF, WRF and WRF2 distances written to file /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RobinsonFouldsDistances/RAxML_RF-Distances.RobinsonFouldsDistances
+

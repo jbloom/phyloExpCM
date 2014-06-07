@@ -1,15 +1,24 @@
-\begin{tabular}{c|c|c|c}
-model & $\Delta$AIC & log likelihood & \parbox[b]{0.9in}{\center parameters (optimized + empirical)} \\ \hline
-HalpernBruno & 0.0 & -1782.7 & 4 (4 + 0) \\ 
-FracTolerated & 10.3 & -1787.8 & 4 (4 + 0) \\ 
-KOSI07 F omega-global-gamma4 rates-gamma4 & 382.7 & -1914.0 & 64 (4 + 60) \\ 
-KOSI07 F omega-global-one rates-gamma4 & 393.4 & -1920.4 & 63 (3 + 60) \\ 
-GY94 CF3x4 omega-global-gamma4 rates-gamma4 & 399.6 & -1973.4 & 13 (4 + 9) \\ 
-GY94 CF3x4 omega-global-one rates-gamma4 & 407.8 & -1978.5 & 12 (3 + 9) \\ 
-KOSI07 F omega-global-gamma4 rates-one & 449.5 & -1948.4 & 63 (3 + 60) \\ 
-KOSI07 F omega-global-one rates-one & 467.4 & -1958.3 & 62 (2 + 60) \\ 
-GY94 CF3x4 omega-global-gamma4 rates-one & 475.3 & -2012.3 & 12 (3 + 9) \\ 
-GY94 CF3x4 omega-global-one rates-one & 496.4 & -2023.8 & 11 (2 + 9) \\ 
-FracToleratedrandomized & 940.8 & -2253.1 & 4 (4 + 0) \\ 
-HalpernBrunorandomized & 965.0 & -2265.2 & 4 (4 + 0) 
-\end{tabular}
+{\scriptsize
+\begin{tabular}{ccccc}
+model & $\Delta$AIC & \parbox[b]{0.53in}{\center log\\likelihood} & \parbox[b]{0.7in}{\center parameters (optimized + empirical)} & optimized parameters \\ \hline
+experimental, \ref{eq:Frxy_HalpernBruno}, free $\beta$ & 0.0 & -1728.5 & 5 (5 + 0) & $R_{A \shortrightarrow G}$ = 4.4, $R_{A \shortrightarrow T}$ = 1.9, $R_{C \shortrightarrow A}$ = 0.5, $R_{C \shortrightarrow G}$ = 1.1, $\beta$ = 2.5\\ 
+experimental, \ref{eq:Frxy_FracTolerated}, free $\beta$ & 34.9 & -1746.0 & 5 (5 + 0) & $R_{A \shortrightarrow G}$ = 4.2, $R_{A \shortrightarrow T}$ = 1.9, $R_{C \shortrightarrow A}$ = 0.5, $R_{C \shortrightarrow G}$ = 1.1, $\beta$ = 2.2\\ 
+experimental, \ref{eq:Frxy_HalpernBruno}, $\beta = 1$ & 106.2 & -1782.7 & 4 (4 + 0) & $R_{A \shortrightarrow G}$ = 4.5, $R_{A \shortrightarrow T}$ = 1.9, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.2\\ 
+experimental, \ref{eq:Frxy_FracTolerated}, $\beta = 1$ & 116.5 & -1787.8 & 4 (4 + 0) & $R_{A \shortrightarrow G}$ = 4.4, $R_{A \shortrightarrow T}$ = 1.9, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.2\\ 
+KOSI07+F, gamma $\omega$, gamma rates & 489.0 & -1914.0 & 64 (4 + 60) & $\kappa$ = 0.2, $\omega$ shape = 0.5, mean $\omega$ = 2.9, rate shape = 0.2\\ 
+KOSI07+F, one $\omega$, gamma rates & 499.7 & -1920.4 & 63 (3 + 60) & $\kappa$ = 0.2, rate shape = 0.3\\ 
+GY94, gamma $\omega$, gamma rates & 505.8 & -1973.4 & 13 (4 + 9) & $\kappa$ = 3.6, $\omega$ shape = 0.6, mean $\omega$ = 0.5, rate shape = 0.2\\ 
+GY94, one $\omega$, gamma rates & 514.0 & -1978.5 & 12 (3 + 9) & $\kappa$ = 3.4, rate shape = 0.2\\ 
+KOSI07+F, gamma $\omega$, one rate & 555.7 & -1948.4 & 63 (3 + 60) & $\kappa$ = 0.3, $\omega$ shape = 0.3, mean $\omega$ = 2.0\\ 
+KOSI07+F, one $\omega$, one rate & 573.6 & -1958.3 & 62 (2 + 60) & $\kappa$ = 0.3\\ 
+GY94, gamma $\omega$, one rate & 581.5 & -2012.3 & 12 (3 + 9) & $\kappa$ = 3.4, $\omega$ shape = 0.3, mean $\omega$ = 0.4\\ 
+randomized, \ref{eq:Frxy_FracTolerated}, free $\beta$ & 601.7 & -2029.4 & 5 (5 + 0) & $R_{A \shortrightarrow G}$ = 5.0, $R_{A \shortrightarrow T}$ = 1.8, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.4, $\beta$ = 0.1\\ 
+GY94, one $\omega$, one rate & 602.6 & -2023.8 & 11 (2 + 9) & $\kappa$ = 3.4\\ 
+randomized, \ref{eq:Frxy_HalpernBruno}, free $\beta$ & 602.7 & -2029.9 & 5 (5 + 0) & $R_{A \shortrightarrow G}$ = 5.1, $R_{A \shortrightarrow T}$ = 1.8, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.5, $\beta$ = 0.0\\ 
+avg. frequencies, \ref{eq:Frxy_FracTolerated}, free $\beta$ & 711.5 & -2024.3 & 65 (5 + 60) & $R_{A \shortrightarrow G}$ = 5.0, $R_{A \shortrightarrow T}$ = 2.0, $R_{C \shortrightarrow A}$ = 0.7, $R_{C \shortrightarrow G}$ = 1.5, $\beta$ = 0.3\\ 
+avg. frequencies, \ref{eq:Frxy_HalpernBruno}, free $\beta$ & 715.7 & -2026.4 & 65 (5 + 60) & $R_{A \shortrightarrow G}$ = 5.1, $R_{A \shortrightarrow T}$ = 1.9, $R_{C \shortrightarrow A}$ = 0.7, $R_{C \shortrightarrow G}$ = 1.5, $\beta$ = 0.3\\ 
+avg. frequencies, \ref{eq:Frxy_FracTolerated}, $\beta = 1$ & 749.8 & -2044.5 & 64 (4 + 60) & $R_{A \shortrightarrow G}$ = 4.9, $R_{A \shortrightarrow T}$ = 2.1, $R_{C \shortrightarrow A}$ = 0.8, $R_{C \shortrightarrow G}$ = 1.6\\ 
+avg. frequencies, \ref{eq:Frxy_HalpernBruno}, $\beta = 1$ & 758.8 & -2048.9 & 64 (4 + 60) & $R_{A \shortrightarrow G}$ = 5.2, $R_{A \shortrightarrow T}$ = 2.1, $R_{C \shortrightarrow A}$ = 0.8, $R_{C \shortrightarrow G}$ = 1.7\\ 
+randomized, \ref{eq:Frxy_FracTolerated} & 1047.0 & -2253.1 & 4 (4 + 0) & $R_{A \shortrightarrow G}$ = 4.8, $R_{A \shortrightarrow T}$ = 1.8, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.4\\ 
+randomized, \ref{eq:Frxy_HalpernBruno} & 1071.2 & -2265.2 & 4 (4 + 0) & $R_{A \shortrightarrow G}$ = 5.3, $R_{A \shortrightarrow T}$ = 1.7, $R_{C \shortrightarrow A}$ = 0.6, $R_{C \shortrightarrow G}$ = 1.5
+\end{tabular}}

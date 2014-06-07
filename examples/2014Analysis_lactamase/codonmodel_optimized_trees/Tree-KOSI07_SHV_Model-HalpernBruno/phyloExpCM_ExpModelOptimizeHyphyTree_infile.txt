@@ -1,12 +1,14 @@
 # input file for running script phyloExpCM_ExpModelOptimizeHyphyTree.py for phyloExpCM_ExpModelOptimizeHyphyTree
-fastafile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/aligned_KOSI07_SHV.fasta
+fastafile /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/aligned_KOSI07_SHV.fasta
 mutationrates freeparameters
 randomizepreferences False
-treefile /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/KOSI07_codonPhyML_tree/codonphyml_tree_SHV.newick
+treefile /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/KOSI07_codonPhyML_tree/codonphyml_tree_SHV.newick
 outfileprefix None
+fitbeta False
 fixationmodel HalpernBruno
-siteslist /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
-aapreferences /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+aapreferences /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+siteslist /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
 keeptempfiles False
 scalefactor 10000.0
-hyphypath HYPHYMP CPU=4
+hyphypath HYPHYMP CPU=2
+persitelikelihoods True

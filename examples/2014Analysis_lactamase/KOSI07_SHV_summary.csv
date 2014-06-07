@@ -1,15 +1,23 @@
 #Summary for tree KOSI07_SHV.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -1778.55, 4, 4, 0
-FracTolerated, 10.22, -1783.66, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 382.172, -1909.64, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 387.314, -1913.21, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.923, -1966.01, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 397.129, -1969.11, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 443.221, -1941.16, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 458.154, -1949.63, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 463.62, -2002.36, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-one, 481.866, -2012.48, 11, 2, 9
-FracToleratedrandomized, 936.56, -2246.83, 4, 4, 0
-HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
+fitbetaHalpernBruno, 0, -1725.36, 5, 5, 0
+fitbetaFracTolerated, 34.12, -1742.42, 5, 5, 0
+HalpernBruno, 104.38, -1778.55, 4, 4, 0
+FracTolerated, 114.6, -1783.66, 4, 4, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 486.552, -1909.64, 64, 4, 60
+KOSI07_F_omega-global-one_rates-gamma4, 491.694, -1913.21, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 497.303, -1966.01, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 501.509, -1969.11, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 547.601, -1941.16, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 562.534, -1949.63, 62, 2, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 568, -2002.36, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-one, 586.246, -2012.48, 11, 2, 9
+fitbetaFracToleratedrandomized, 597.66, -2024.19, 5, 5, 0
+fitbetaHalpernBrunorandomized, 598.68, -2024.7, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 706.44, -2018.58, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 710.94, -2020.83, 65, 5, 60
+avgaafreqs_FracTolerated, 745.92, -2039.32, 64, 4, 60
+avgaafreqs_HalpernBruno, 755.3, -2044.01, 64, 4, 60
+FracToleratedrandomized, 1040.94, -2246.83, 4, 4, 0
+HalpernBrunorandomized, 1063.86, -2258.29, 4, 4, 0

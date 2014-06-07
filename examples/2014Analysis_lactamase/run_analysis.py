@@ -22,6 +22,7 @@ import copy
 import shutil
 import multiprocessing
 import Bio.Phylo
+import Bio.SeqIO
 import mapmuts.sequtils
 import phyloExpCM.hyphy
 
@@ -139,7 +140,95 @@ def RunProcesses(processes, nmultiruns):
                     if processes[i].exitcode:
                         raise IOError("One of the processes failed to complete.")
         time.sleep(1)
-        
+
+
+def PairwiseStatistics(seqfile1, seqfile2=None):
+    """Computes average pairwise divergence between aligned sequences.
+
+    *seqfile1* is a FASTA file that contains aligned and translatable
+    sequences (all of the same length).
+
+    *seqfile2* can be *None* (default) or another FASTA file.
+
+    If *seqfile2* is *None*, computes pairwise statistics among 
+    all sequences in *seqfile1*. If *seqfile2* is another file,
+    computes pairwise statistics between sequences in *seqfile1*
+    and *seqfile2*.
+
+    The returned value is the 4-tuple *(n_nt, f_nt, n_aa, f_aa)* where:
+
+        - *n_nt* : average number of pairwise nucleotide differences
+
+        - *f_nt* : average fractional nucleotide divergence
+
+        - *n_aa* : average number of amino-acid differences
+
+        - *f_aa* : average fractional amino-acid divergence
+    """
+    seqs1 = [seq for seq in Bio.SeqIO.parse(seqfile1, 'fasta')]
+    if seqfile2:
+        seqs2 = [seq for seq in Bio.SeqIO.parse(seqfile2, 'fasta')]
+        pairs = []
+        for iseq in seqs1:
+            for jseq in seqs2:
+                pairs.append((iseq, jseq))
+    else:
+        pairs = []
+        for i in range(len(seqs1)):
+            iseq = seqs1[i]
+            for jseq in seqs1[i + 1 : ]:
+                pairs.append((iseq, jseq))
+    n = len(seqs1[0])
+    ntdiffs = []
+    aadiffs = []
+    naa = None
+    for (iseq, jseq) in pairs:
+        assert len(iseq) == len(jseq) == n, "Not all of same length"
+        iseq = iseq.seq.upper()
+        jseq = jseq.seq.upper()
+        ntdiffs.append(len([k for k in range(n) if iseq[k] != jseq[k]]))
+        iprot = mapmuts.sequtils.Translate([('head', str(iseq))], translate_gaps=True)[0][1]
+        if not naa:
+            naa = len(iprot)
+            assert naa == n // 3 or naa == n // 3 - 1, "Proteins not of right length"
+        jprot = mapmuts.sequtils.Translate([('head', str(jseq))], translate_gaps=True)[0][1]
+        assert naa == len(iprot) == len(jprot), "Proteins not of same length"
+        aadiffs.append(len([k for k in range(n // 3) if iprot[k] != jprot[k]]))
+    n_nt = sum(ntdiffs) / float(len(ntdiffs))
+    f_nt = n_nt / float(n)
+    n_aa = sum(aadiffs) / float(len(aadiffs))
+    f_aa = n_aa / float(naa)
+    return (n_nt, f_nt, n_aa, f_aa)
+
+
+def FormatModelName(name):
+    """Returns a LaTex formatted model name."""
+    formatted_names = {
+            'fitbetaHalpernBruno':'experimental, \\ref{eq:Frxy_HalpernBruno}, free $\\beta$',
+            'HalpernBruno':'experimental, \\ref{eq:Frxy_HalpernBruno}, $\\beta = 1$',
+            'fitbetaFracTolerated':'experimental, \\ref{eq:Frxy_FracTolerated}, free $\\beta$',
+            'FracTolerated':'experimental, \\ref{eq:Frxy_FracTolerated}, $\\beta = 1$',
+            'GY94_CF3x4_omega-global-gamma4_rates-gamma4':'GY94, gamma $\omega$, gamma rates',
+            'KOSI07_F_omega-global-gamma4_rates-gamma4':'KOSI07+F, gamma $\omega$, gamma rates',
+            'GY94_CF3x4_omega-global-gamma4_rates-one':'GY94, gamma $\omega$, one rate',
+            'KOSI07_F_omega-global-gamma4_rates-one':'KOSI07+F, gamma $\omega$, one rate',
+            'GY94_CF3x4_omega-global-one_rates-gamma4':'GY94, one $\omega$, gamma rates',
+            'KOSI07_F_omega-global-one_rates-gamma4':'KOSI07+F, one $\omega$, gamma rates',
+            'KOSI07_F_omega-global-one_rates-one':'KOSI07+F, one $\omega$, one rate',
+            'GY94_CF3x4_omega-global-one_rates-one':'GY94, one $\omega$, one rate',
+            'fitbetaFracToleratedrandomized':'randomized, \\ref{eq:Frxy_FracTolerated}, free $\\beta$',
+            'fitbetaHalpernBrunorandomized':'randomized, \\ref{eq:Frxy_HalpernBruno}, free $\\beta$',
+            'avgaafreqsfitbeta_FracTolerated':'avg. frequencies, \\ref{eq:Frxy_FracTolerated}, free $\\beta$',
+            'avgaafreqsfitbeta_HalpernBruno':'avg. frequencies, \\ref{eq:Frxy_HalpernBruno}, free $\\beta$',
+            'avgaafreqs_FracTolerated':'avg. frequencies, \\ref{eq:Frxy_FracTolerated}, $\\beta = 1$',
+            'avgaafreqs_HalpernBruno':'avg. frequencies, \\ref{eq:Frxy_HalpernBruno}, $\\beta = 1$',
+            'FracToleratedrandomized':'randomized, \\ref{eq:Frxy_FracTolerated}',
+            'HalpernBrunorandomized':'randomized, \\ref{eq:Frxy_HalpernBruno}',
+                      }
+    if name in formatted_names:
+        return formatted_names[name]
+    else:
+        return name.replace('_', ' ')
 
 
 def main():
@@ -163,7 +252,7 @@ def main():
     # amino-acid preferences
     preferencesfile = '%s/amino_acid_preferences.txt' % os.getcwd()
 
-    # extract the amino acid prefrences
+    # extract the amino acid preferences
     print "\n%s\nExtracting amino acid preferences with get_preferences.py...\n" % separator
     if os.path.isfile(preferencesfile) and use_existing_output:
         print "The preferences already exist in %s, and will not be extracted again." % preferencesfile
@@ -231,7 +320,7 @@ def main():
     # build the codonPhyML trees
     script = 'phyloExpCM_runcodonPhyML.py'
     sbatch_cpus = 12 # need to set to full number on node as codonphyml is greedy
-    walltime = 5 * 24 # give five days
+    walltime = 3 * 24 # give 3 days
     print "\n%s\nUsing %s to build maximum likelihood trees..." % (separator, script)
     codonphyml_trees = { # keyed by model abbreviation, value is created tree file
             'KOSI07':'%s/KOSI07_codonPhyML_tree/codonphyml_tree.newick' % os.getcwd(),
@@ -263,6 +352,24 @@ def main():
             raise ValueError("Failed to find the expected output tree %s" % tree)
     print "\n%s\n\n" % separator
 
+    # compute the Robinson-Foulds distances between the trees
+    if len(codonphyml_trees) > 1:
+        rfdir = '%s/RobinsonFouldsDistances/' % os.getcwd()
+        print "\n%s\nComputing the Robinson-Foulds distance between the trees using %s, and writing results to %s." % (separator, raxml, rfdir)
+        rffile = '%s/RAxML_RF-Distances.RobinsonFouldsDistances' % rfdir
+        if not os.path.isdir(rfdir):
+            os.mkdir(rfdir)
+        if os.path.isfile(rffile) and use_existing_output:
+            print "Robinson-Foulds distances are already in %s." % rffile
+        else:
+            concatenatedtrees = '%s/concatenated_trees.newick' % (rfdir)
+            os.system('cat %s > %s' % (' '.join([treefile for treefile in codonphyml_trees.itervalues()]), concatenatedtrees))
+            os.system('%s -z %s -w %s -f r -n RobinsonFouldsDistances -m GTRCAT' % (raxml, concatenatedtrees, rfdir))
+            print "Robinson-Foulds distances have been computed into %s" % rffile
+            if not os.path.isfile(rffile):
+                raise ValueError("Failed to create expected file %s" % rffile)
+    print "\n%s\n\n" % separator
+
     # Get the subtrees
     alignmentfiles = dict([(treemodel, alignmentfile) for treemodel in codonphyml_trees.iterkeys()]) # keyed by treemodel, value is corresponding alignmentfile
     seqs = dict(mapmuts.sequtils.ReadFASTA(alignmentfile))
@@ -292,13 +399,37 @@ def main():
             Bio.Phylo.write(subtree, subtreefile, 'newick')
             codonphyml_trees['%s_%s' % (maintree, subtreename)] = subtreefile
             alignmentfiles['%s_%s' % (maintree, subtreename)] = subtreealignmentfile
+            (n_nt, f_nt, n_aa, f_aa) = PairwiseStatistics(seqfile1=subtreealignmentfile)
+            print "For this alignment, the average number of pairwise nucleotide differences is %.2f (fractional divergence %.4f) and the average number of pairwise amino-acid differences is %.2f (fractional divergence %.4f).\n" % (n_nt, f_nt, n_aa, f_aa)
     print "\n%s\n\n" % separator
+
+    # Get the average amino-acid frequencies for each alignment
+    print "\nExtracting average amino-acid frequencies for each alignment (averaged over all sites)..."
+    avg_aa_freqs = {} # keyed by treemodel
+    for (treemodel, alignmentfile) in alignmentfiles.iteritems():
+        basename = os.path.splitext(os.path.basename(alignmentfile))[0]
+        outputfile = '%s/avg_aa_freqs_%s.txt' % (os.getcwd(), basename)
+        commands = [('alignmentfile', alignmentfile),
+                    ('translateseqs', 'True'),
+                    ('includestop', 'False'),
+                    ('pseudocounts', '1'),
+                    ('averagesites', 'True'),
+                    ('outputfile', outputfile),
+                   ]
+        if os.path.isfile(outputfile) and use_existing_output:
+            print "Using existing average amino-acid frequencies for %s in the file %s" % (basename, outputfile)
+        else:
+            print "Extracting average amino-acid frequencies for %s to %s" % (basename, outputfile)
+            RunScript('./', 'phyloExpCM_FreqsFromAlignment_%s' % basename, 'phyloExpCM_FreqsFromAlignment.py', commands, False, 1)
+        if not os.path.isfile(outputfile):
+            raise ValueError("Failed to generate expected output file of %s" % outputfile)
+        avg_aa_freqs[treemodel] = outputfile
 
     # Optimize the trees for the various substitution models
     print "\n%s\nOptimizing the trees for various substitution models" % separator
     hyphy_results = {} # keyed by (treemodel, substitutionmodel) to give hyphyoutfile
-    sbatch_cpus = 4 # get four CPUs as script uses lots of memory and having more CPUs typically means less other jobs on the node
-    walltime =  8 * 24 # give script eight days for optimization
+    sbatch_cpus = 2 # get two CPUs as script uses lots of memory and having more CPUs typically means less other jobs on the node
+    walltime =  4 * 24 # give script four days for optimization
     processes = []
     optimizedtreedir = "%s/codonmodel_optimized_trees/" % os.getcwd()
     if not os.path.isdir(optimizedtreedir):
@@ -306,32 +437,51 @@ def main():
     # First the experimentally determined substitution models
     fixationmodels = ['FracTolerated', 'HalpernBruno']
     commands = {
-                'hyphypath':'HYPHYMP CPU=4',
-                'aapreferences':preferencesfile,
+                'hyphypath':'HYPHYMP CPU=2',
                 'mutationrates':'freeparameters',
                 'scalefactor':10000.0,
                 'siteslist':preferencesfile,
-                'keeptempfiles':'False',
+                'keeptempfiles':'False', 
                 'outfileprefix':'None',
+                'persitelikelihoods':'True',
                }
     experimentalmodels = []
     for fixationmodel in fixationmodels:
         commands['fixationmodel'] = fixationmodel
         for (treemodel, tree) in codonphyml_trees.iteritems():
             commands['fastafile'] = alignmentfiles[treemodel]
-            for (randomizepreferences, randstring) in [('False', ''), ('1', 'randomized')]:
-                commands['randomizepreferences'] = randomizepreferences
-                subdir = '%s/Tree-%s_Model-%s%s/' % (optimizedtreedir, treemodel, fixationmodel, randstring)
+            commands['treefile'] = tree
+            for (fitbeta, fitbetastring) in [('False', ''), ('freeparameter', 'fitbeta')]:
+                commands['fitbeta'] = fitbeta
+                commands['aapreferences'] = preferencesfile
+                for (randomizepreferences, randstring) in [('False', ''), ('1', 'randomized')]:
+                    commands['randomizepreferences'] = randomizepreferences
+                    istring = '%s%s%s' % (fitbetastring, fixationmodel, randstring)
+                    subdir = '%s/Tree-%s_Model-%s/' % (optimizedtreedir, treemodel, istring)
+                    hyphyoutfile = '%s/optimizedtree_results.txt' % subdir
+                    if os.path.isfile(hyphyoutfile) and use_existing_output:
+                        print "The output for the HYPHY analysis of the %s tree with the %s fixation model already exists in %s" % (treemodel, istring, hyphyoutfile)
+                    else:
+                        print "Using HYPHY to analyze the %s tree with the %s fixation model to create output file %s" % (treemodel, istring, hyphyoutfile)
+                        processes.append(multiprocessing.Process(target=RunScript,\
+                            args=(subdir, 'phyloExpCM_ExpModelOptimizeHyphyTree', 'phyloExpCM_ExpModelOptimizeHyphyTree.py', list(commands.items()), use_sbatch, sbatch_cpus), kwargs={'walltime':walltime}))
+                    hyphy_results[(treemodel, istring)] = hyphyoutfile
+                    experimentalmodels.append(istring)
+                # now add the models using average aa frequencies
+                commands['randomizepreferences'] = 'False'
+                commands['aapreferences'] = avg_aa_freqs[treemodel]
+                istring = 'avgaafreqs%s_%s' % (fitbetastring, fixationmodel)
+                subdir = '%s/Tree-%s_Model-%s/' % (optimizedtreedir, treemodel, istring)
                 hyphyoutfile = '%s/optimizedtree_results.txt' % subdir
-                hyphy_results[(treemodel, "%s%s" % (fixationmodel, randstring))] = hyphyoutfile
-                experimentalmodels.append("%s%s" % (fixationmodel, randstring))
-                commands['treefile'] = tree
                 if os.path.isfile(hyphyoutfile) and use_existing_output:
-                    print "The output for the HYPHY analysis of the %s tree with the %s%s fixation model already exists in %s" % (treemodel, fixationmodel, randstring, hyphyoutfile)
+                    print "The output for the HYPHY analysis of the %s tree with the %s fixation model already exists in %s" % (treemodel, istring, hyphyoutfile)
                 else:
-                    print "Using HYPHY to analyze the %s tree with the %s%s fixation model to create output file %s" % (treemodel, fixationmodel, randstring, hyphyoutfile)
+                    print "Using HYPHY to analyze the %s tree with the %s fixation model to create output file %s" % (tree, istring, hyphyoutfile)
                     processes.append(multiprocessing.Process(target=RunScript,\
                         args=(subdir, 'phyloExpCM_ExpModelOptimizeHyphyTree', 'phyloExpCM_ExpModelOptimizeHyphyTree.py', list(commands.items()), use_sbatch, sbatch_cpus), kwargs={'walltime':walltime}))
+                hyphy_results[(treemodel, istring)] = hyphyoutfile
+                experimentalmodels.append(istring)
+
     # Now the non-experimentally determined substitution models
     substitutionmodels = [
                 'KOSI07_F_omega-global-one_rates-one',
@@ -348,12 +498,13 @@ def main():
     substitutionmodels = dict([(x, x) for x in substitutionmodels])
     print "Using %s to optimize the tree branch lengths for different substitution models and compute the resulting likelihoods..." % (script)
     commands = {
-                'hyphypath':'HYPHYMP CPU=4',
+                'hyphypath':'HYPHYMP CPU=2',
                 'hyphycmdfile':'hyphy_cmds.bf',
                 'hyphyoutfile':'hyphy_output.txt',
                 'hyphytreefile':'hyphy_tree.newick',
                 'hyphydistancesfile':'None',
                 'siteslist':preferencesfile,
+                'persitelikelihoods':'sitelikelihoods.txt',
                }
     for (treemodel, tree) in codonphyml_trees.iteritems():
         commands['fastafile'] = alignmentfiles[treemodel]
@@ -374,7 +525,7 @@ def main():
         if not os.path.isfile(hyphyoutfile):
             raise ValueError("Failed to find expected HYPHY output for the %s tree with the %s substitution model, which should be in the file %s" % (treemodel, substitutionmodel, hyphyoutfile))
     for x in experimentalmodels:
-        substitutionmodels[x] = [x]
+        substitutionmodels[x] = x
     print "\nAll HYPHY analyses have been completed."
     print "\n%s\n\n" % separator
 
@@ -382,10 +533,24 @@ def main():
     empiricalparameters = [ # (unique re matching model name, number empirical parameters)
             (re.compile('GY94_CF3x4'), 9),
             (re.compile('KOSI07_F'), 60),
-            (re.compile('FracTolerated'), 0),
-            (re.compile('HalpernBruno'), 0),
+            (re.compile('^FracTolerated'), 0),
+            (re.compile('^HalpernBruno'), 0),
+            (re.compile('^avgaafreqs_'), 60),
+            (re.compile('^fitbeta'), 0),
+            (re.compile('^avgaafreqsfitbeta'), 60),
             ]
     print "\n%s\nCreating summaries of log likelihoods and parameter counts.\n" % separator
+    parameters = { # keyed by parameter strings in HYPHY output, value is printed parameter name
+            'beta':'$\\beta$' ,
+            'R_AG':'$R_{A \\shortrightarrow G}$',
+            'R_AT':'$R_{A \\shortrightarrow T}$',
+            'R_CA':'$R_{C \\shortrightarrow A}$',
+            'R_CG':'$R_{C \\shortrightarrow G}$',
+            'global rate_alpha':'rate shape',
+            'global omega_mean':'mean $\omega$',
+            'global kappa':'$\kappa$',
+            'global omega_alpha':'$\omega$ shape',
+            }
     for treemodel in codonphyml_trees:
         fname = '%s_summary.csv' % treemodel
         flatexname = '%s_summary.tex' % treemodel
@@ -403,12 +568,19 @@ def main():
             if eparameters == None:
                 raise ValueError("empiricalparameters not specified for %s" % substitutionmodel)
             resultfile = hyphy_results[(treemodel, substitutionmodel)]
+            treeparameters = dict([(parameter, None) for parameter in parameters.iterkeys()])
+            if 'fitbeta' not in substitutionmodel:
+                del treeparameters['beta']
+            phyloExpCM.hyphy.ExtractValues(resultfile, treeparameters, allowmissing=True)
             (loglikelihood, mlparameters) = phyloExpCM.hyphy.ExtractLikelihoodAndNParameters(resultfile)
             totparameters = mlparameters + eparameters
             aic = 2.0 * totparameters - 2.0 * loglikelihood
             textstring = "%s, %%g, %g, %d, %d, %d" % (substitutionmodel, loglikelihood, totparameters, mlparameters, eparameters)
-            latexsubstitutionmodel = substitutionmodel.replace('_', ' ')
-            latexstring = "%s & %%.1f & %.1f & %d (%d + %d) " % (latexsubstitutionmodel, loglikelihood, totparameters, mlparameters, eparameters)
+            latexsubstitutionmodel = FormatModelName(substitutionmodel)
+            treeparameters = ['%s = %.1f' % (parameters[parameter], value) for (parameter, value) in treeparameters.iteritems() if value]
+            treeparameters.sort()
+            treeparameters = ', '.join(treeparameters)
+            latexstring = "%s & %%.1f & %.1f & %d (%d + %d) & %s" % (latexsubstitutionmodel, loglikelihood, totparameters, mlparameters, eparameters, treeparameters)
             linelist.append((aic, textstring))
             latexlinelist.append((aic, latexstring))
         linelist.sort()
@@ -420,10 +592,26 @@ def main():
         f = open(fname, 'w')
         flatex = open(flatexname, 'w')
         f.write('#Summary for tree %s.\n#\n#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS\n%s' % (treemodel, '\n'.join([line for line in linelist])))
-        flatex.write('\\begin{tabular}{c|c|c|c}\nmodel & $\Delta$AIC & log likelihood & \parbox[b]{0.9in}{\center parameters (optimized + empirical)} \\\\ \hline\n%s\n\end{tabular}' % '\\\\ \n'.join([line for line in latexlinelist]))
+        flatex.write('{\\scriptsize\n\\begin{tabular}{ccccc}\nmodel & $\Delta$AIC & \parbox[b]{0.53in}{\center log\\\\likelihood} & \parbox[b]{0.7in}{\center parameters (optimized + empirical)} & optimized parameters \\\\ \hline\n%s\n\end{tabular}}' % '\\\\ \n'.join([line for line in latexlinelist]))
         f.close()
         flatex.close()
     print "\nAll summaries created.\n%s\n\n" % separator
+
+    # compare site likelihoods
+    print "\n%s\nComparing site likelihoods for the best experimental and traditional model.\n\n" % separator
+    (model1name, model1file) = ('experimental', 'codonmodel_optimized_trees/Tree-GY94_Model-fitbetaHalpernBruno/sitelikelihoods.txt')
+    (model2name, model2file) = ('GY94', 'codonmodel_optimized_trees/Tree-GY94_Model-GY94_CF3x4_omega-global-gamma4_rates-gamma4/sitelikelihoods.txt')
+    print "The two models being compared are %s (%s) versus %s (%s)" % (model1name, model1file, model2name, model2file)
+    commands = [('sitelikelihoodfiles', '%s %s' % (model1file, model2file)),
+                ('modelnames', '%s %s' % (model1name, model2name)),
+                ('dsspfile', '1XPB_renumbered.dssp'),
+                ('dsspchain', 'None'),
+                ('outfileprefix', 'None'),
+                ]
+    RunScript('./', 'phyloExpCM_SiteLikelihoodComparison', 'phyloExpCM_SiteLikelihoodComparison.py', commands, False, 1)
+    for x in ['SS', 'RSA']:
+        os.system('convert -density 300 sitelikelihoodcomparison_by%s.pdf sitelikelihoodcomparison_by%s.jpg' % (x, x))
+    print "\nCompleted the site likelihood comparison.\n%s\n\n" % separator
 
     print "\nCompleted execution of script at %s.\n" % time.asctime()
 

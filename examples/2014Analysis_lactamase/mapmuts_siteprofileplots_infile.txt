@@ -1,5 +1,5 @@
 #Input file for mapmuts_siteprofileplots.py
-sitepreferences /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
+sitepreferences /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/amino_acid_preferences.txt
 outfileprefix lactamase_
 siterange all
 dsspfile 1XPB_renumbered.dssp

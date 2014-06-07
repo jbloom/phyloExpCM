@@ -1,15 +1,23 @@
 #Summary for tree GY94_SHV.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -1782.66, 4, 4, 0
-FracTolerated, 10.28, -1787.8, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 382.734, -1914.03, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 393.442, -1920.38, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 399.58, -1973.45, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 407.754, -1978.54, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 449.52, -1948.42, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 467.36, -1958.34, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 475.306, -2012.31, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-one, 496.353, -2023.84, 11, 2, 9
-FracToleratedrandomized, 940.78, -2253.05, 4, 4, 0
-HalpernBrunorandomized, 964.98, -2265.15, 4, 4, 0
+fitbetaHalpernBruno, 0, -1728.55, 5, 5, 0
+fitbetaFracTolerated, 34.92, -1746.01, 5, 5, 0
+HalpernBruno, 106.22, -1782.66, 4, 4, 0
+FracTolerated, 116.5, -1787.8, 4, 4, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 488.954, -1914.03, 64, 4, 60
+KOSI07_F_omega-global-one_rates-gamma4, 499.662, -1920.38, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 505.8, -1973.45, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 513.974, -1978.54, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 555.74, -1948.42, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 573.58, -1958.34, 62, 2, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 581.526, -2012.31, 12, 3, 9
+fitbetaFracToleratedrandomized, 601.68, -2029.39, 5, 5, 0
+GY94_CF3x4_omega-global-one_rates-one, 602.573, -2023.84, 11, 2, 9
+fitbetaHalpernBrunorandomized, 602.7, -2029.9, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 711.48, -2024.29, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 715.68, -2026.39, 65, 5, 60
+avgaafreqs_FracTolerated, 749.82, -2044.46, 64, 4, 60
+avgaafreqs_HalpernBruno, 758.76, -2048.93, 64, 4, 60
+FracToleratedrandomized, 1047, -2253.05, 4, 4, 0
+HalpernBrunorandomized, 1071.2, -2265.15, 4, 4, 0

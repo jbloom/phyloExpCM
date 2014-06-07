@@ -1,15 +1,23 @@
 #Summary for tree KOSI07_TEM.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -2392.25, 4, 4, 0
-FracTolerated, 58.22, -2421.36, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 232.17, -2499.34, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 292.211, -2530.36, 12, 3, 9
-GY94_CF3x4_omega-global-gamma4_rates-one, 298.661, -2533.58, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 300.22, -2482.36, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 368.039, -2517.27, 63, 3, 60
-KOSI07_F_omega-global-one_rates-gamma4, 376.965, -2521.73, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-one, 462.511, -2616.51, 11, 2, 9
-KOSI07_F_omega-global-one_rates-one, 524.95, -2596.73, 62, 2, 60
-FracToleratedrandomized, 955.28, -2869.89, 4, 4, 0
-HalpernBrunorandomized, 989.18, -2886.84, 4, 4, 0
+fitbetaHalpernBruno, 0, -2378.53, 5, 5, 0
+HalpernBruno, 25.44, -2392.25, 4, 4, 0
+fitbetaFracTolerated, 80.64, -2418.85, 5, 5, 0
+FracTolerated, 83.68, -2421.37, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 257.61, -2499.34, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 317.651, -2530.36, 12, 3, 9
+GY94_CF3x4_omega-global-gamma4_rates-one, 324.101, -2533.58, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 325.66, -2482.36, 64, 4, 60
+KOSI07_F_omega-global-gamma4_rates-one, 393.479, -2517.27, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 402.405, -2521.73, 63, 3, 60
+fitbetaFracToleratedrandomized, 471.96, -2614.51, 5, 5, 0
+fitbetaHalpernBrunorandomized, 472.38, -2614.72, 5, 5, 0
+GY94_CF3x4_omega-global-one_rates-one, 487.951, -2616.51, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 550.39, -2596.73, 62, 2, 60
+avgaafreqsfitbeta_HalpernBruno, 581.58, -2609.32, 65, 5, 60
+avgaafreqsfitbeta_FracTolerated, 584.16, -2610.61, 65, 5, 60
+avgaafreqs_HalpernBruno, 617.3, -2628.18, 64, 4, 60
+avgaafreqs_FracTolerated, 629.16, -2634.11, 64, 4, 60
+FracToleratedrandomized, 980.72, -2869.89, 4, 4, 0
+HalpernBrunorandomized, 1014.62, -2886.84, 4, 4, 0

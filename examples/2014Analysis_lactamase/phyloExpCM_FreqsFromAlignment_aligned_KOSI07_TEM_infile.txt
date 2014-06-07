@@ -1,0 +1,7 @@
+# input file for running script phyloExpCM_FreqsFromAlignment.py for phyloExpCM_FreqsFromAlignment_aligned_KOSI07_TEM
+alignmentfile /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/aligned_KOSI07_TEM.fasta
+translateseqs True
+includestop False
+pseudocounts 1
+averagesites True
+outputfile /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/avg_aa_freqs_aligned_KOSI07_TEM.txt

@@ -39,7 +39,7 @@ Substitution Matrix: GTR
 
 RAxML was called as follows:
 
-raxmlHPC-SSE3 -w /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/ -n aligned_lactamases -p 1 -m GTRCAT -s /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/aligned_lactamases.fasta 
+raxmlHPC-SSE3 -w /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/ -n aligned_lactamases -p 1 -m GTRCAT -s /home/jbloom//phyloExpCM/examples/2014Analysis_lactamase/aligned_lactamases.fasta 
 
 
 Partition: 0 with name: No Name Provided
@@ -51,15 +51,15 @@ alpha[0]: 1.000000 rates[0] ac ag at cg ct gt: 1.515384 4.607708 0.931510 0.7700
 
 Conducting final model optimizations on all 1 trees under GAMMA-based models ....
 
-Inference[0] final GAMMA-based Likelihood: -4290.312630 tree written to file /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_result.aligned_lactamases
+Inference[0] final GAMMA-based Likelihood: -4290.312630 tree written to file /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_result.aligned_lactamases
 
 
 Starting final GAMMA-based thorough Optimization on tree 0 likelihood -4290.312630 .... 
 
 Final GAMMA-based Score of best tree -4284.170739
 
-Program execution info written to /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_info.aligned_lactamases
-Best-scoring ML tree written to: /home/jbloom/new_phyloExpCM/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_bestTree.aligned_lactamases
+Program execution info written to /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_info.aligned_lactamases
+Best-scoring ML tree written to: /home/jbloom/phyloExpCM/examples/2014Analysis_lactamase/RAxML_output/RAxML_bestTree.aligned_lactamases
 
 Overall execution time: 23.516949 secs or 0.006532 hours or 0.000272 days
 

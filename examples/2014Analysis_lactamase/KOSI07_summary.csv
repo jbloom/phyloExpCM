@@ -1,15 +1,23 @@
 #Summary for tree KOSI07.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -4045.11, 4, 4, 0
-FracTolerated, 37.26, -4063.74, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 349.625, -4210.92, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 353.849, -4162.03, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 406.786, -4189.5, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 416.06, -4245.14, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 479.517, -4276.87, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 481.487, -4226.85, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 559.957, -4267.09, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 603.593, -4339.91, 11, 2, 9
-FracToleratedrandomized, 1216.8, -4653.51, 4, 4, 0
-HalpernBrunorandomized, 1425.74, -4757.98, 4, 4, 0
+fitbetaHalpernBruno, 0, -4019.94, 5, 5, 0
+HalpernBruno, 48.34, -4045.11, 4, 4, 0
+fitbetaFracTolerated, 76.06, -4057.97, 5, 5, 0
+FracTolerated, 85.6, -4063.74, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 397.965, -4210.92, 13, 4, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 402.189, -4162.03, 64, 4, 60
+KOSI07_F_omega-global-gamma4_rates-one, 455.126, -4189.5, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 464.4, -4245.14, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 527.857, -4276.87, 12, 3, 9
+KOSI07_F_omega-global-one_rates-gamma4, 529.827, -4226.85, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 608.297, -4267.09, 62, 2, 60
+GY94_CF3x4_omega-global-one_rates-one, 651.932, -4339.91, 11, 2, 9
+fitbetaFracToleratedrandomized, 726.26, -4383.07, 5, 5, 0
+fitbetaHalpernBrunorandomized, 736.96, -4388.42, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 823.74, -4371.81, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 844.76, -4382.32, 65, 5, 60
+avgaafreqs_FracTolerated, 862.08, -4391.98, 64, 4, 60
+avgaafreqs_HalpernBruno, 907.08, -4414.48, 64, 4, 60
+FracToleratedrandomized, 1265.14, -4653.51, 4, 4, 0
+HalpernBrunorandomized, 1474.08, -4757.98, 4, 4, 0
