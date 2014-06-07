@@ -50,7 +50,7 @@ def PlotSiteLikelihoods(sites, classifications, classificationtypes, xvalues, xl
 
     The each set of data is plotted using a box plots.
 
-    All strings (*xlabel*, *ylabels*, *classificationtypes*, *title*) use ``LaTex``
+    All strings (*xlabel*, *ylabel*, *classificationtypes*, *title*) use ``LaTex``
     formatting.
 
     CALLING VARIABLES:
@@ -122,8 +122,10 @@ def PlotSiteLikelihoods(sites, classifications, classificationtypes, xvalues, xl
     ys = []
     xs = []
     xmin = xmax = None
+    yticks = []
     for iclassification in range(nclassifications):
         ixdata = [xvalues[site] for site in sites if classifications[site] == classificationtypes[iclassification]]
+        yticks.append('%s\n(%d sites)' % (classificationtypes[iclassification], len(ixdata)))
         if xmin == None:
             (xmin, xmax) = (min(ixdata), max(ixdata))
         else:
@@ -163,7 +165,7 @@ def PlotSiteLikelihoods(sites, classifications, classificationtypes, xvalues, xl
     pylab.ylabel(ylabel, size=10)
     ax.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(5))
     ax.yaxis.set_major_locator(matplotlib.ticker.FixedLocator(ys))
-    ax.yaxis.set_major_formatter(matplotlib.ticker.FixedFormatter(classificationtypes))
+    ax.yaxis.set_major_formatter(matplotlib.ticker.FixedFormatter(yticks))
     pylab.savefig(plotfile)
     pylab.clf()
     pylab.close()

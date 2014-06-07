@@ -77,20 +77,20 @@ These files all have the prefix specified by *outfileprefix* followed by the fol
         162 -12.0474    -102.512    -90.4646    loop    $< 0.33$
         237 -10.3165    -87.4672    -77.1507    loop    $0.33 - 0.67$
 
-Here are examples of the two plots:
+Here are examples of the two plots. The y-axis labels show the site category (top line of label) and the number of sites that fall into that category (bottom line of label).
 
-.. figure:: sitelikelihoodcomparison_byRSA.jpg
+.. figure:: example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg
    :width: 45%
    :align: center
-   :alt: sitelikelihoodcomparison_byRSA.jpg
+   :alt: example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg
 
    Example of the ``sitelikelihoodcomparison_byRSA.pdf`` plot.
 
 
-.. figure:: sitelikelihoodcomparison_bySS.jpg
+.. figure:: example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg
    :width: 45%
    :align: center
-   :alt: sitelikelihoodcomparison_bySS.jpg
+   :alt: example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg
 
    Example of the ``sitelikelihoodcomparison_bySS.pdf`` plot.
 
