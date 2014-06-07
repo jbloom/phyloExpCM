@@ -1,15 +1,23 @@
 #Summary for tree GY94.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -4044.85, 4, 4, 0
-FracTolerated, 39.24, -4064.47, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 345.96, -4208.83, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 364.263, -4166.98, 64, 4, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 414.46, -4244.08, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 420.593, -4196.15, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-gamma4, 482.484, -4278.09, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 504.858, -4238.28, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 586.438, -4280.07, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 609.747, -4342.72, 11, 2, 9
-FracToleratedrandomized, 1218.44, -4654.07, 4, 4, 0
-HalpernBrunorandomized, 1428.02, -4758.86, 4, 4, 0
+fitbetaHalpernBruno, 0, -4020.63, 5, 5, 0
+HalpernBruno, 46.44, -4044.85, 4, 4, 0
+fitbetaFracTolerated, 77.28, -4059.27, 5, 5, 0
+FracTolerated, 85.68, -4064.47, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.4, -4208.83, 13, 4, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 410.703, -4166.98, 64, 4, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 460.9, -4244.08, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 467.033, -4196.15, 63, 3, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 528.924, -4278.09, 12, 3, 9
+KOSI07_F_omega-global-one_rates-gamma4, 551.298, -4238.28, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 632.878, -4280.07, 62, 2, 60
+GY94_CF3x4_omega-global-one_rates-one, 656.184, -4342.72, 11, 2, 9
+fitbetaFracToleratedrandomized, 724.54, -4382.9, 5, 5, 0
+fitbetaHalpernBrunorandomized, 735.06, -4388.16, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 820.78, -4371.02, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 841.8, -4381.53, 65, 5, 60
+avgaafreqs_FracTolerated, 858.04, -4390.65, 64, 4, 60
+avgaafreqs_HalpernBruno, 900.68, -4411.97, 64, 4, 60
+FracToleratedrandomized, 1264.88, -4654.07, 4, 4, 0
+HalpernBrunorandomized, 1474.46, -4758.86, 4, 4, 0
