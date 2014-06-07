@@ -47,9 +47,9 @@ def main():
     modelnames = modelnames.split()
     assert len(modelnames) == len(sitelikelihoodfiles), "Failed to find expected number of modelnames"
     modelnames = [name.strip().replace('_', ' ') for name in modelnames]
-    plotfileprefix = phyloExpCM.io.ParseStringValue(d, 'plotfileprefix')
-    if plotfileprefix.upper() == 'NONE':
-        plotfileprefix = ''
+    outfileprefix = phyloExpCM.io.ParseStringValue(d, 'outfileprefix')
+    if outfileprefix.upper() == 'NONE':
+        outfileprefix = ''
     dsspfile = phyloExpCM.io.ParseStringValue(d, 'dsspfile')
     if dsspfile.upper() in ['NONE', 'FALSE']:
         dsspfile = False
@@ -96,7 +96,7 @@ def main():
 
     # make the plot
     for (classification_name, classifications, classificationtypes) in [('RSA', rsa_classification, rsa_classification_types), ('SS', ss_classification, ss_classification_types)]:
-        plotfile = '%ssitelikelihoodcomparison_by%s.pdf' % (plotfileprefix, classification_name)
+        plotfile = '%ssitelikelihoodcomparison_by%s.pdf' % (outfileprefix, classification_name)
         print "Plotting the data for the %s classification to %s" % (classification_name, plotfile)
         assert len(sitelikelihoods) == 2, "Currently only works for 2 sitelikelihoods"
         xvalues = dict([(site, sitelikelihoods[0][site] - sitelikelihoods[1][site]) for site in sites])
@@ -104,6 +104,21 @@ def main():
         ylabel = {'SS':'secondary structure',
                   'RSA':'relative solvent accessibility'}[classification_name] 
         phyloExpCM.plot.PlotSiteLikelihoods(sites, classifications, classificationtypes, xvalues, xlabel, ylabel, plotfile, symmetrize_axis=True, title='', alpha=0.2)
+
+    # write the text output
+    textfile = '%ssitelikelihoods.txt' % outfileprefix
+    print "Writing the data in text format to %s" % textfile
+    persitedata = []
+    for site in sites:
+        logl1 = sitelikelihoods[0][site]
+        logl2 = sitelikelihoods[1][site]
+        diff = logl1 - logl2
+        persitedata.append((diff, '%d\t%g\t%g\t%g\t%s\t%s' % (site, diff, logl1, logl2, ss_classification[site], rsa_classification[site])))
+    persitedata.sort()
+    persitedata = '\n'.join([line for (diff, line) in persitedata])
+    f = open(textfile, 'w')
+    f.write('#SITE\t%s_likelihood_minus_%s_likelihood\t%s_likelihood\t%s_likelihood\tsecondary_structure\trelative_solvent_accessibility\n%s' % (modelnames[0].replace(' ', '_'), modelnames[1].replace(' ', '_'), modelnames[0].replace(' ', '_'), modelnames[1].replace(' ', '_'), persitedata))
+    f.close()
     
     # script done
     print "\nScript complete."

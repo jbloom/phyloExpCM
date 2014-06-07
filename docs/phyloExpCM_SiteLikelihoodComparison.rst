@@ -38,7 +38,7 @@ The input file should contain the following keys:
 
 * *modelnames* : This should be the names of the two models using to produce the two files specified by *sitelikelihoodsfiles*. These names cannot contain spaces, but they can contain underscores which are converted to spaces in the displayed results.
 
-* *plotfileprefix* : The prefix of the output PDF plot files created by this script (see `Output files`_). Set to *None* if you don't want any prefix.
+* *outfileprefix* : The prefix of the output files created by this script (see `Output files`_). Set to *None* if you don't want any prefix and just want the base names described in `Output files`_.
 
 * *dsspfile* : is an option that allows you to compare the observed site entropies and preferences to the relative solvent accessibility (RSA) and the secondary structure for the sites. This will only be useful if a crystal structure for your protein is available. You can then use the `DSSP`_ webserver to calculate the secondary structures and the RSAs. If you do not want to use this option, just set *dsspfile* to *None*. If you do want to use this option, then run `DSSP`_ on your protein structure – this script is tested against output from the `DSSP`_ webserver, but should probably work on output from the standalone too. Then save the `DSSP`_ output in a text file, and specify the path to that file as the value for *dsspfile*. This script does not currently have a robust ability to parse the `DSSP`_ output, so you have to do some careful checks. In particular, you must make sure that residue numbers in the PDB file exactly match the residue numbering scheme used for the rest of this analysis (i.e. the same residue numbers found in sitepreferences, and that none of the residue numbers contain letter suffixes (such as 24A) as is sometimes the case in PDB files. It is not necessary that all of the residues be present in the PDB. If there are multiple PDB chains, you can specify them using the *dsspchain* option. `DSSP`_ only calculates absolute accessible surface areas (ASAs); the RSAs are computed by normalizing by the maximum ASAs given by `Tien et al, 2013`_.
 
@@ -49,24 +49,35 @@ Example input file
 ---------------------------
 Here is an example input file::
 
-    # Example input file for phyloExpCM_SiteLikelihoodComparison.py
-    sitelikelihoodfiles
-    modelnames
-    plotfile
-    dsspfile
-    dsspchain
+    # input file for running script phyloExpCM_SiteLikelihoodComparison.py for phyloExpCM_SiteLikelihoodComparison
+    sitelikelihoodfiles codonmodel_optimized_trees/Tree-GY94_Model-fitbetaHalpernBruno/sitelikelihoods.txt codonmodel_optimized_trees/Tree-GY94_Model-GY94_CF3x4_omega-global-gamma4_rates-gamma4/sitelikelihoods.txt
+    modelnames experimental GY94
+    dsspfile 1XPB_renumbered.dssp
+    dsspchain None
+    outfileprefix None
 
 
 Output files
 ----------------
 
-The output of this script is two PDF plots. These plots have the prefix specified by *plotfileprefix* followed by the following to suffixes:
+The output of this script is two PDF plots and a text file. These files give the site likelihood computed by model 1 (the first entry in *sitelikelihoodsfiles* and *modelnames*) minus the site likelihood computed by model 2 (the second entry in *sitelikelhoodsfiles* and *modelnames*).
 
-    * ``sitelikelihoodcomparison_bySS.pdf`` : sites are categorized according to secondary structure in this plot.
+These files all have the prefix specified by *outfileprefix* followed by the following to suffixes:
 
-    * ``sitelikelihoodcomparison_byRSA.pdf`` : sites are categorized according to RSA (relative solvent accessibility) in this plot.
+    * ``sitelikelihoodcomparison_bySS.pdf`` : sites are categorized according to secondary structure in this PDF plot.
 
-Here are examples of these two plots:
+    * ``sitelikelihoodcomparison_byRSA.pdf`` : sites are categorized according to RSA (relative solvent accessibility) in this PDF plot.
+
+    * ``sitelikelihoods.txt`` : text file listing per-site likelihoods and differences between them for the two models. These are sorted according to the differences in site likelihoods. Here are the first few lines of such a file::
+
+        #SITE   experimental_likelihood_minus_GY94_likelihood   experimental_likelihood GY9    4_likelihood secondary_structure relative_solvent_accessibility
+        33  -17.8153    -94.7358    -76.9205    helix   $< 0.33$
+        236 -16.6144    -77.372     -60.7576    loop    $< 0.33$
+        102 -15.1698    -75.4882    -60.3184    loop    $0.33 - 0.67$
+        162 -12.0474    -102.512    -90.4646    loop    $< 0.33$
+        237 -10.3165    -87.4672    -77.1507    loop    $0.33 - 0.67$
+
+Here are examples of the two plots:
 
 .. figure:: sitelikelihoodcomparison_byRSA.jpg
    :width: 45%

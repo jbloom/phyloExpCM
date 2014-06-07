@@ -14,6 +14,7 @@ Here are the scripts:
    phyloExpCM_optimizeHyphyTree
    phyloExpCM_ExpModelOptimizeHyphyTree
    phyloExpCM_FreqsFromAlignment
+   phyloExpCM_SiteLikelihoodComparison
    phyloExpCM_multiHyphyRuns
 
 
