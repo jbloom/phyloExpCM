@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>phyloExpCM_ExpModelOptimizeHyphyTree.py &mdash; phyloExpCM 0.21 documentation</title>
+    <title>phyloExpCM_ExpModelOptimizeHyphyTree.py &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
     <link rel="next" title="phyloExpCM_FreqsFromAlignment.py" href="phyloExpCM_FreqsFromAlignment.html" />
     <link rel="prev" title="phyloExpCM_optimizeHyphyTree.py" href="phyloExpCM_optimizeHyphyTree.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
@@ -70,7 +70,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#amino-acid-preferences" id="id9">Amino-acid preferences</a></li>
-<li><a class="reference internal" href="#fixation-probabilitites" id="id10">Fixation probabilitites</a></li>
+<li><a class="reference internal" href="#fixation-probabilities" id="id10">Fixation probabilities</a></li>
 <li><a class="reference internal" href="#equilibrium-frequencies-and-reversibility" id="id11">Equilibrium frequencies and reversibility</a></li>
 </ul>
 </li>
@@ -177,17 +177,17 @@ R_{C \rightarrow T} \times R_{A \rightarrow C} &amp;=&amp; R_{A \rightarrow G} \
 <div class="section" id="amino-acid-preferences">
 <h3><a class="toc-backref" href="#id9">Amino-acid preferences</a><a class="headerlink" href="#amino-acid-preferences" title="Permalink to this headline">¶</a></h3>
 <p>For each codon site <em>r</em>, we are assumed to have measured the preference <span class="math">\(\pi_{r,a}\)</span> for each amino-acid <em>a</em>, where <span class="math">\(1 = \sum_a \pi_{r,a}\)</span>. These must be provided as input to the script based on experimental measurements.</p>
-<p>The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationshps are described below.</p>
+<p>The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationships are described below.</p>
 </div>
-<div class="section" id="fixation-probabilitites">
-<h3><a class="toc-backref" href="#id10">Fixation probabilitites</a><a class="headerlink" href="#fixation-probabilitites" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="fixation-probabilities">
+<h3><a class="toc-backref" href="#id10">Fixation probabilities</a><a class="headerlink" href="#fixation-probabilities" title="Permalink to this headline">¶</a></h3>
 <p>We consider two different models for how the fixation probabilities <span class="math">\(F_{r,xy}\)</span> depend on the amino-acid preferences <span class="math">\(\pi_{r,xy}\)</span>. We refer to the first model as the <em>FracTolerated</em> model since it conceptually considers the preferences to be related to the fraction of genetic backgrounds that tolerate a given mutation. In this model,</p>
 <div class="math" id="equation-Frxy_FracTolerated">
 <span class="eqno">(10)</span>\[\begin{split}F_{r,xy} =
 \begin{cases}
 1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
 \omega &amp; \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
-\omega \times \frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}} &amp; \mbox{otherwise.}
+\omega \times \left(\frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}}\right)^{\beta} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 <p>where <span class="math">\(\mathcal{A}\left(x\right)\)</span> denotes the amino acid encoded by codon <em>x</em> and the meaning of <span class="math">\(\omega\)</span> is discussed below.</p>
 <p>We refer to the second model as the <em>HalpernBruno</em> model since it was originally introduced by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9656490">Halpern and Bruno, MBE, 1998</a>. This model interprets the amino-acid preferences <span class="math">\(\pi_{r,xy}\)</span> as being related to selection coefficients, and specifies,</p>
@@ -196,12 +196,13 @@ R_{C \rightarrow T} \times R_{A \rightarrow C} &amp;=&amp; R_{A \rightarrow G} \
 \begin{cases}
 1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
 \omega &amp; \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
-\omega \times \frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} &amp; \mbox{otherwise.}
+\omega \times \frac{\beta \times \ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
-<p>In both Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a>, <span class="math">\(\omega\)</span> is a parameter that scales the rate of nonsynonymous versus synonymous mutations. A large value of <span class="math">\(\omega\)</span> means that nonsynonymous mutations are elevated relative to the expectation from the amino-acid preferences, and a small value means that they are depressed. Fixing <span class="math">\(\omega = 1\)</span> means that the amino-acid preferences naturally describe the relative rates of nonsynonymous and synonymous mutations by capturing all of the selection. This script allows models either with <span class="math">\(\omega = 1\)</span>, or <span class="math">\(\omega\)</span> as a free parameter. In general, if the selection in natural evolution is more stringent than that in the experiment used to determine the preferences, then we might expect models with <span class="math">\(\omega &lt; 1\)</span> might provide better fit by adding extra selection against nonsynoymous mutations.</p>
-<p>Note that the definitions in both Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a> are <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain#Reversible_Markov_chain">reversible</a> with respect to <span class="math">\(\pi_{r,x}\)</span>, such that</p>
+<p>In both Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a>, <span class="math">\(\omega\)</span> is a parameter that scales the rate of nonsynonymous versus synonymous mutations. A large value of <span class="math">\(\omega\)</span> means that nonsynonymous mutations are elevated relative to the expectation from the amino-acid preferences, and a small value means that they are depressed. Fixing <span class="math">\(\omega = 1\)</span> means that the amino-acid preferences naturally describe the relative rates of nonsynonymous and synonymous mutations by capturing all of the selection. This script allows models either with <span class="math">\(\omega = 1\)</span>, or <span class="math">\(\omega\)</span> as a free parameter.</p>
+<p>In both Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a>, <span class="math">\(\beta\)</span> is a parameter that corresponds to the relative strength of selection the experiment used to determind <span class="math">\(\pi_{r,a}\)</span> versus natural evolution. The actual preference in nature for an amino-acid is taken to be proportional to <span class="math">\(\pi_{r,a}^{\beta}\)</span>. Therefore, values of <span class="math">\(\beta &gt; 1\)</span> correspond to stronger selection in nature than in the experiments, and values of <span class="math">\(\beta &lt; 1\)</span> correspond to weaker selection in nature than in the experiments. This script allows models with either the fixed value of <span class="math">\(\beta = 1\)</span> or with <span class="math">\(\beta\)</span> as a free parameter.</p>
+<p>Note that the definitions in both Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a> are <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain#Reversible_Markov_chain">reversible</a> with respect to <span class="math">\(\left(\pi_{r,x}\right)^{\beta}\)</span>, such that</p>
 <div class="math" id="equation-Frxy_reversible">
-<span class="eqno">(12)</span>\[\pi_{r,x} F_{r,xy} = \pi_{r,y} F_{r,yx}.\]</div>
+<span class="eqno">(12)</span>\[\left(\pi_{r,x}\right)^{\beta} F_{r,xy} = \left(\pi_{r,y}\right)^{\beta} F_{r,yx}.\]</div>
 </div>
 <div class="section" id="equilibrium-frequencies-and-reversibility">
 <h3><a class="toc-backref" href="#id11">Equilibrium frequencies and reversibility</a><a class="headerlink" href="#equilibrium-frequencies-and-reversibility" title="Permalink to this headline">¶</a></h3>
@@ -210,7 +211,7 @@ R_{C \rightarrow T} \times R_{A \rightarrow C} &amp;=&amp; R_{A \rightarrow G} \
 <p>Specifically, we let <span class="math">\(p_{r,x}\)</span> denote the evolutionary equilibrium frequency of codon <em>x</em> at site <em>r</em>. We assume stop codon variants are non-viable (they have <span class="math">\(\pi_{r,x} = 0\)</span>) and so the evolutionary equilibrium frequency for all stop codons is zero. This reduces us to 61 possible values for <em>x</em> at each site, corresponding to the the 61 non-stop codons.</p>
 <p>The evolutionary equilibrium codon frequencies are given by:</p>
 <div class="math" id="equation-prx">
-<span class="eqno">(13)</span>\[\begin{split}p_{r,x} &amp;=&amp; \frac{\pi_{r,\mathcal{A}\left(x\right)} \times q_x }{\sum\limits_y \pi_{r,\mathcal{A}\left(y\right)} \times q_y} \\\end{split}\]</div>
+<span class="eqno">(13)</span>\[\begin{split}p_{r,x} &amp;=&amp; \frac{\left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x }{\sum\limits_y \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y} \\\end{split}\]</div>
 <p>To see that these are the evolutionary equilibrium frequencies, define</p>
 <div class="math" id="equation-Prxx">
 <span class="eqno">(14)</span>\[P_{r,xx} = -\sum\limits_{y \ne x} P_{r,xy}.\]</div>
@@ -221,18 +222,16 @@ R_{C \rightarrow T} \times R_{A \rightarrow C} &amp;=&amp; R_{A \rightarrow G} \
         &amp;=&amp; p_{r,x} + (\sum\limits_{y\ne x} p_{r,y} P_{r,yx}) - p_{r,x} \sum\limits_{y\ne x} P_{r,xy} \\
         &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(p_{r,y} P_{r,yx} - p_{r,x} P_{r,xy}\right) \\
         &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(p_{r,y} Q_{yx} F_{r,yx} - p_{r,x} Q_{xy} F_{r,xy}\right) \\
-        &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} F_{r,yx} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} F_{r,xy}\right) \\
-        &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} F_{r,yx} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} F_{r,xy}\right) \\
-        &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} \frac{\pi_{r,\mathcal{A}\left(x\right)}}{\pi_{r,\mathcal{A}\left(y\right)}} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} \right) \\
-        &amp;=&amp; p_{r,x} + \pi_{r,\mathcal{A}\left(x\right)} \sum\limits_{y \ne x} \left( q_y Q_{yx} - q_x Q_{xy} \right) \\
+        &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} q_y Q_{yx} F_{r,yx} - \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} q_x Q_{xy} F_{r,xy}\right) \\
+        &amp;=&amp; p_{r,x} + \sum\limits_{y \ne x} \left(\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} q_y Q_{yx} \left(\frac{\pi_{r,\mathcal{A}\left(x\right)}}{\pi_{r,\mathcal{A}\left(y\right)}}\right)^{\beta} - \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} q_x Q_{xy} \right) \\
+        &amp;=&amp; p_{r,x} + \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \sum\limits_{y \ne x} \left( q_y Q_{yx} - q_x Q_{xy} \right) \\
         &amp;=&amp; p_{r,x}\end{split}\]</div>
 <p>where the last line follows from Equation <a href="#equation-Qxy_reversible">(6)</a>. This verifies that <span class="math">\(p_{r,x}\)</span> is the stationary state of the Markov process defined by <span class="math">\(P_{r,xy}\)</span>.</p>
 <p>To verify that the substitution model is <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain#Reversible_Markov_chain">reversible</a>, it is necessary to show that <span class="math">\(0 = p_{r,x} P_{r,xy} - p_{r,y} P_{r,yx}\)</span>. This is shown below for the case where <span class="math">\(F_{r,xy}\)</span> is defined by Equation <a href="#equation-Frxy_FracTolerated">(10)</a>, and <span class="math">\(\pi_{r,\mathcal{A}\left(y\right)} &gt; \pi_{r,\mathcal{A}\left(x\right)}\)</span>. Other cases can be verified similarly.</p>
 <div class="math" id="equation-Prxy_reversible">
 <span class="eqno">(16)</span>\[\begin{split}0 &amp;=&amp; p_{r,x} P_{r,xy} - p_{r,y} P_{r,yx} \\
-  &amp;=&amp; \pi_{r,\mathcal{A}\left(x\right)} \times q_x  \times Q_{xy} \times F_{r,xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times F_{r,yx} \\
-  &amp;=&amp; \pi_{r,\mathcal{A}\left(x\right)} \times q_x \times Q_{xy} \times F_{r,xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times F_{r,yx} \\
-  &amp;=&amp; \pi_{r,\mathcal{A}\left(x\right)} \times q_x \times Q_{xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times \frac{\pi_{r, \mathcal{A}\left(x\right)}}{\pi_{r, \mathcal{A}\left(y\right)}} \\
+  &amp;=&amp; \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x  \times Q_{xy} \times F_{r,xy} - \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y \times Q_{yx} \times F_{r,yx} \\
+  &amp;=&amp; \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x \times Q_{xy} - \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y \times Q_{yx} \times \left(\frac{\pi_{r, \mathcal{A}\left(x\right)}}{\pi_{r, \mathcal{A}\left(y\right)}}\right)^{\beta} \\
   &amp;=&amp; q_x \times Q_{xy} - q_y \times Q_{yx} \\
   &amp;=&amp; 0\end{split}\]</div>
 <p>where the last line follows from Equation <a href="#equation-Qxy_reversible">(6)</a>.
@@ -244,10 +243,10 @@ The fact that <span class="math">\(P_{r,xy}\)</span> defines a <a class="referen
 <span class="eqno">(18)</span>\[\begin{split}S_{r,xy} =
 \begin{cases}
 \frac{P_{r,xy}}{p_{r,y}} = 0 &amp; \mbox{if $x$ and $y$ differ by more than one nucleotide mutation,} \\
-\frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \pi_{r,\mathcal{A}\left(z\right)} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} &amp; \mbox{if $x$ and $y$ differ by one nucleotide,} \\
+\frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \left(\pi_{r,\mathcal{A}\left(z\right)}\right)^{\beta} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} &amp; \mbox{if $x$ and $y$ differ by one nucleotide,} \\
 \frac{P_{r,xx}}{p_{r,x}} &amp; \mbox{otherwise.} \\
 \end{cases}\end{split}\]</div>
-<p>This matrix is symmetric since <span class="math">\(S_{r,xy} = S_{r,yx}\)</span> as can be verified from the fact that <span class="math">\(\frac{Q_{xy}}{q_y} = \frac{Q_{yx}}{q_x}\)</span> and <span class="math">\(\frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} = \frac{F_{r,yx}}{\pi_{r,\mathcal{A}\left(x\right)}}\)</span> as is guaranteed by the reversibility conditions in Equations <a href="#equation-Qxy_reversible">(6)</a> and <a href="#equation-Frxy_reversible">(12)</a>.</p>
+<p>This matrix is symmetric since <span class="math">\(S_{r,xy} = S_{r,yx}\)</span> as can be verified from the fact that <span class="math">\(\frac{Q_{xy}}{q_y} = \frac{Q_{yx}}{q_x}\)</span> and <span class="math">\(\frac{F_{r,xy}}{\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} = \frac{F_{r,yx}}{\left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta}}\)</span> as is guaranteed by the reversibility conditions in Equations <a href="#equation-Qxy_reversible">(6)</a> and <a href="#equation-Frxy_reversible">(12)</a>.</p>
 </div>
 </div>
 <div class="section" id="requirements">
@@ -344,9 +343,13 @@ CG 1.9e-6
 </li>
 <li><p class="first"><em>outfileprefix</em> gives the name of the prefix pre-pended to the output files. You can also make it <em>None</em> if you don&#8217;t want to pre-pend any prefix.</p>
 </li>
-<li><p class="first"><em>fitomega</em> is an optional parameters. If it is <em>None</em>, <em>False</em>, or is not specified, then the <span class="math">\(\omega\)</span> parameter defined in Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a> is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If <em>fitomega</em> is instead specified with a value of <em>freeparameter</em>, then the value of <span class="math">\(\omega\)</span> is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.</p>
+<li><p class="first"><em>fitomega</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or is not specified, then the <span class="math">\(\omega\)</span> parameter defined in Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a> is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If <em>fitomega</em> is instead specified with a value of <em>freeparameter</em>, then the value of <span class="math">\(\omega\)</span> is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.</p>
+</li>
+<li><p class="first"><em>fitbeta</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or is not specified, then the <span class="math">\(\beta\)</span> parameter defined in Equations <a href="#equation-Frxy_FracTolerated">(10)</a> and <a href="#equation-Frxy_HalpernBruno">(11)</a> is fixed to one. This corresponds to equal strength of selection in the experiments and natural evolution. If <em>fitbeta</em> is instead given a value of <em>freeparameter</em>, then the value of <span class="math">\(\beta\)</span> is fit by maximum likelihood, thereby allowing for weaker (<span class="math">\(\beta &lt; 1\)</span>) or stronger (<span class="math">\(\beta &gt; 1\)</span>) selection in nature than in the experiments.</p>
 </li>
 <li><p class="first"><em>randomizepreferences</em> is an optional argument. If it is not specified or set to a value of <em>False</em>, nothing unusual is done. Otherwise it should be set to an integer &gt;= 1 that specifies the random number seed used to randomize the amino-acid preferences among sites. You might want to do this if you are testing that the model relies relies on accurate experimental determination of the amino-acid preferences at each site by scrambling these preferences.</p>
+</li>
+<li><p class="first"><em>persitelikelihoods</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or not specified, the nothing is done. If you set it to <em>True</em>, then the script also reports the per-site likelihoods in a separate file. Specifically, the file with the suffix <tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> (see <a class="reference internal" href="#output-files">Output files</a>) lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are <strong>not</strong> re-optimized for each site &#8211; rather, they are set to their global best values and then the likelihood contribution of each site is computed.</p>
 </li>
 </ul>
 </div>
@@ -394,6 +397,18 @@ R_CG: 1.8586e-15
 <div class="highlight-python"><div class="highlight"><pre>omega 0.03132
 </pre></div>
 </div>
+<p>If <span class="math">\(\beta\)</span> is also being fit via setting <em>fitbeta</em> to <em>freeparameter</em>, then the file also specifies the value of this parameter as in:</p>
+<div class="highlight-python"><div class="highlight"><pre>beta 1.2314
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> is created if <em>persitelikelihoods</em> is <em>True</em>. In this case, the first line is a header line and all subsequent lines list the integer site number and the log likelihood with tabs between these two columns. The format is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#SITE   SITE_LOG_LIKELIHOODS</span>
+<span class="mi">1</span>   <span class="o">-</span><span class="mf">4.792906363107919</span>
+<span class="mi">2</span>   <span class="o">-</span><span class="mf">15.89808216031635</span>
+<span class="mi">3</span>   <span class="o">-</span><span class="mf">17.19022748421175</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div></blockquote>
@@ -409,6 +424,7 @@ R_CG: 1.8586e-15
 <li><tt class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></tt> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file that performs the operations to optimize the tree branch lengths and any global parameters (such as the mutation rates <span class="math">\(Q_{xy}\)</span>) over all sites.</li>
 <li><tt class="docutils literal"><span class="pre">hyphy_optimizetree_output.txt</span></tt> is a file that contains the results of running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> on <tt class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></tt>.</li>
 <li><tt class="docutils literal"><span class="pre">coded_optimizedtree.newick</span></tt> is a version of the tree with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> optimized branch lengths with the names still matching those that have been changed to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming as in <tt class="docutils literal"><span class="pre">coded_fastafile.fasta</span></tt> and <tt class="docutils literal"><span class="pre">coded_treefile.newick</span></tt>. Except for the names being coded, this matches the primary output file with suffix <tt class="docutils literal"><span class="pre">optimizedtree.newick</span></tt>.</li>
+<li>If <em>persitelikelihoods</em> is <em>True</em>, then for each site files of the name <tt class="docutils literal"><span class="pre">hyphy_site1_cmds.bf</span></tt> and <tt class="docutils literal"><span class="pre">hyphy_site1_output.txt</span></tt> are created for each site number (the example names above are for site <tt class="docutils literal"><span class="pre">1</span></tt>).</li>
 </ul>
 </div></blockquote>
 </div>
@@ -433,7 +449,7 @@ R_CG: 1.8586e-15
 </ul>
 </li>
 <li><a class="reference internal" href="#amino-acid-preferences">Amino-acid preferences</a></li>
-<li><a class="reference internal" href="#fixation-probabilitites">Fixation probabilitites</a></li>
+<li><a class="reference internal" href="#fixation-probabilities">Fixation probabilities</a></li>
 <li><a class="reference internal" href="#equilibrium-frequencies-and-reversibility">Equilibrium frequencies and reversibility</a></li>
 </ul>
 </li>
@@ -495,7 +511,7 @@ R_CG: 1.8586e-15
         <li class="right" >
           <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>

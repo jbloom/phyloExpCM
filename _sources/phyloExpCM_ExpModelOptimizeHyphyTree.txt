@@ -153,9 +153,9 @@ Amino-acid preferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 For each codon site *r*, we are assumed to have measured the preference :math:`\pi_{r,a}` for each amino-acid *a*, where :math:`1 = \sum_a \pi_{r,a}`. These must be provided as input to the script based on experimental measurements.
 
-The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationshps are described below.
+The fixation probabilities are determined from these amino-acid preferences. The general idea is that mutations to higher preference amino acids are more likely to fix than mutations to lower preference amino acids. The exact quantitative relationships are described below.
 
-Fixation probabilitites
+Fixation probabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We consider two different models for how the fixation probabilities :math:`F_{r,xy}` depend on the amino-acid preferences :math:`\pi_{r,xy}`. We refer to the first model as the *FracTolerated* model since it conceptually considers the preferences to be related to the fraction of genetic backgrounds that tolerate a given mutation. In this model, 
 
@@ -166,7 +166,7 @@ We consider two different models for how the fixation probabilities :math:`F_{r,
    \begin{cases}
    1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
    \omega & \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
-   \omega \times \frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}} & \mbox{otherwise.}
+   \omega \times \left(\frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}}\right)^{\beta} & \mbox{otherwise.}
    \end{cases}
 
 where :math:`\mathcal{A}\left(x\right)` denotes the amino acid encoded by codon *x* and the meaning of :math:`\omega` is discussed below.
@@ -180,17 +180,19 @@ We refer to the second model as the *HalpernBruno* model since it was originally
    \begin{cases}
    1 & \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$} \\
    \omega & \mbox{if $\mathcal{A}\left(x\right) \ne \mathcal{A}\left(y\right)$ and $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
-   \omega \times \frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} & \mbox{otherwise.}
+   \omega \times \frac{\beta \times \ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} & \mbox{otherwise.}
    \end{cases}
 
-In both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno`, :math:`\omega` is a parameter that scales the rate of nonsynonymous versus synonymous mutations. A large value of :math:`\omega` means that nonsynonymous mutations are elevated relative to the expectation from the amino-acid preferences, and a small value means that they are depressed. Fixing :math:`\omega = 1` means that the amino-acid preferences naturally describe the relative rates of nonsynonymous and synonymous mutations by capturing all of the selection. This script allows models either with :math:`\omega = 1`, or :math:`\omega` as a free parameter. In general, if the selection in natural evolution is more stringent than that in the experiment used to determine the preferences, then we might expect models with :math:`\omega < 1` might provide better fit by adding extra selection against nonsynoymous mutations.
+In both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno`, :math:`\omega` is a parameter that scales the rate of nonsynonymous versus synonymous mutations. A large value of :math:`\omega` means that nonsynonymous mutations are elevated relative to the expectation from the amino-acid preferences, and a small value means that they are depressed. Fixing :math:`\omega = 1` means that the amino-acid preferences naturally describe the relative rates of nonsynonymous and synonymous mutations by capturing all of the selection. This script allows models either with :math:`\omega = 1`, or :math:`\omega` as a free parameter. 
 
-Note that the definitions in both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` are `reversible`_ with respect to :math:`\pi_{r,x}`, such that
+In both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno`, :math:`\beta` is a parameter that corresponds to the relative strength of selection the experiment used to determind :math:`\pi_{r,a}` versus natural evolution. The actual preference in nature for an amino-acid is taken to be proportional to :math:`\pi_{r,a}^{\beta}`. Therefore, values of :math:`\beta > 1` correspond to stronger selection in nature than in the experiments, and values of :math:`\beta < 1` correspond to weaker selection in nature than in the experiments. This script allows models with either the fixed value of :math:`\beta = 1` or with :math:`\beta` as a free parameter.
+
+Note that the definitions in both Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` are `reversible`_ with respect to :math:`\left(\pi_{r,x}\right)^{\beta}`, such that
 
 .. math::
    :label: Frxy_reversible
 
-   \pi_{r,x} F_{r,xy} = \pi_{r,y} F_{r,yx}.
+   \left(\pi_{r,x}\right)^{\beta} F_{r,xy} = \left(\pi_{r,y}\right)^{\beta} F_{r,yx}.
 
 
 Equilibrium frequencies and reversibility
@@ -206,7 +208,7 @@ The evolutionary equilibrium codon frequencies are given by:
 .. math::
    :label: prx
 
-   p_{r,x} &=& \frac{\pi_{r,\mathcal{A}\left(x\right)} \times q_x }{\sum\limits_y \pi_{r,\mathcal{A}\left(y\right)} \times q_y} \\
+   p_{r,x} &=& \frac{\left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x }{\sum\limits_y \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y} \\
 
 
 To see that these are the evolutionary equilibrium frequencies, define
@@ -226,10 +228,9 @@ With the definition in Equation :eq:`Prxx`, the matrix :math:`\mathbf{I} + \math
            &=& p_{r,x} + (\sum\limits_{y\ne x} p_{r,y} P_{r,yx}) - p_{r,x} \sum\limits_{y\ne x} P_{r,xy} \\
            &=& p_{r,x} + \sum\limits_{y \ne x} \left(p_{r,y} P_{r,yx} - p_{r,x} P_{r,xy}\right) \\
            &=& p_{r,x} + \sum\limits_{y \ne x} \left(p_{r,y} Q_{yx} F_{r,yx} - p_{r,x} Q_{xy} F_{r,xy}\right) \\
-           &=& p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} F_{r,yx} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} F_{r,xy}\right) \\
-           &=& p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} F_{r,yx} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} F_{r,xy}\right) \\
-           &=& p_{r,x} + \sum\limits_{y \ne x} \left(\pi_{r,\mathcal{A}\left(y\right)} q_y Q_{yx} \frac{\pi_{r,\mathcal{A}\left(x\right)}}{\pi_{r,\mathcal{A}\left(y\right)}} - \pi_{r,\mathcal{A}\left(x\right)} q_x Q_{xy} \right) \\
-           &=& p_{r,x} + \pi_{r,\mathcal{A}\left(x\right)} \sum\limits_{y \ne x} \left( q_y Q_{yx} - q_x Q_{xy} \right) \\
+           &=& p_{r,x} + \sum\limits_{y \ne x} \left(\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} q_y Q_{yx} F_{r,yx} - \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} q_x Q_{xy} F_{r,xy}\right) \\
+           &=& p_{r,x} + \sum\limits_{y \ne x} \left(\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} q_y Q_{yx} \left(\frac{\pi_{r,\mathcal{A}\left(x\right)}}{\pi_{r,\mathcal{A}\left(y\right)}}\right)^{\beta} - \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} q_x Q_{xy} \right) \\
+           &=& p_{r,x} + \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \sum\limits_{y \ne x} \left( q_y Q_{yx} - q_x Q_{xy} \right) \\
            &=& p_{r,x} 
 
 where the last line follows from Equation :eq:`Qxy_reversible`. This verifies that :math:`p_{r,x}` is the stationary state of the Markov process defined by :math:`P_{r,xy}`.
@@ -240,9 +241,8 @@ To verify that the substitution model is `reversible`_, it is necessary to show 
    :label: Prxy_reversible
 
    0 &=& p_{r,x} P_{r,xy} - p_{r,y} P_{r,yx} \\
-     &=& \pi_{r,\mathcal{A}\left(x\right)} \times q_x  \times Q_{xy} \times F_{r,xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times F_{r,yx} \\
-     &=& \pi_{r,\mathcal{A}\left(x\right)} \times q_x \times Q_{xy} \times F_{r,xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times F_{r,yx} \\
-     &=& \pi_{r,\mathcal{A}\left(x\right)} \times q_x \times Q_{xy} - \pi_{r,\mathcal{A}\left(y\right)} \times q_y \times Q_{yx} \times \frac{\pi_{r, \mathcal{A}\left(x\right)}}{\pi_{r, \mathcal{A}\left(y\right)}} \\
+     &=& \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x  \times Q_{xy} \times F_{r,xy} - \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y \times Q_{yx} \times F_{r,yx} \\
+     &=& \left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta} \times q_x \times Q_{xy} - \left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta} \times q_y \times Q_{yx} \times \left(\frac{\pi_{r, \mathcal{A}\left(x\right)}}{\pi_{r, \mathcal{A}\left(y\right)}}\right)^{\beta} \\
      &=& q_x \times Q_{xy} - q_y \times Q_{yx} \\
      &=& 0
 
@@ -262,11 +262,11 @@ where :math:`\rm{diag}\left(\ldots, p_{r,x}, \ldots\right)` is the diagonal matr
    S_{r,xy} = 
    \begin{cases}
    \frac{P_{r,xy}}{p_{r,y}} = 0 & \mbox{if $x$ and $y$ differ by more than one nucleotide mutation,} \\
-   \frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \pi_{r,\mathcal{A}\left(z\right)} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} & \mbox{if $x$ and $y$ differ by one nucleotide,} \\
+   \frac{P_{r,xy}}{p_{r,y}} = \left( \sum\limits_z \left(\pi_{r,\mathcal{A}\left(z\right)}\right)^{\beta} \times q_z \right) \frac{Q_{xy}}{q_y} \frac{F_{r,xy}}{\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} & \mbox{if $x$ and $y$ differ by one nucleotide,} \\
    \frac{P_{r,xx}}{p_{r,x}} & \mbox{otherwise.} \\
    \end{cases}
 
-This matrix is symmetric since :math:`S_{r,xy} = S_{r,yx}` as can be verified from the fact that :math:`\frac{Q_{xy}}{q_y} = \frac{Q_{yx}}{q_x}` and :math:`\frac{F_{r,xy}}{\pi_{r,\mathcal{A}\left(y\right)}} = \frac{F_{r,yx}}{\pi_{r,\mathcal{A}\left(x\right)}}` as is guaranteed by the reversibility conditions in Equations :eq:`Qxy_reversible` and :eq:`Frxy_reversible`.
+This matrix is symmetric since :math:`S_{r,xy} = S_{r,yx}` as can be verified from the fact that :math:`\frac{Q_{xy}}{q_y} = \frac{Q_{yx}}{q_x}` and :math:`\frac{F_{r,xy}}{\left(\pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} = \frac{F_{r,yx}}{\left(\pi_{r,\mathcal{A}\left(x\right)}\right)^{\beta}}` as is guaranteed by the reversibility conditions in Equations :eq:`Qxy_reversible` and :eq:`Frxy_reversible`.
 
 
 Requirements
@@ -363,10 +363,13 @@ The input file should contain the following keys:
 
 * *outfileprefix* gives the name of the prefix pre-pended to the output files. You can also make it *None* if you don't want to pre-pend any prefix. 
 
-* *fitomega* is an optional parameters. If it is *None*, *False*, or is not specified, then the :math:`\omega` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If *fitomega* is instead specified with a value of *freeparameter*, then the value of :math:`\omega` is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.
+* *fitomega* is an optional argument. If it is *None*, *False*, or is not specified, then the :math:`\omega` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to assuming that the amino-acid preferences capture all of the selection. If *fitomega* is instead specified with a value of *freeparameter*, then the value of :math:`\omega` is fit by maximum likelihood. This corresponds to the case where there is some additional selection against (or for) nonsynymous mutations beyond that captured by the amino-acid preferences.
+
+* *fitbeta* is an optional argument. If it is *None*, *False*, or is not specified, then the :math:`\beta` parameter defined in Equations :eq:`Frxy_FracTolerated` and :eq:`Frxy_HalpernBruno` is fixed to one. This corresponds to equal strength of selection in the experiments and natural evolution. If *fitbeta* is instead given a value of *freeparameter*, then the value of :math:`\beta` is fit by maximum likelihood, thereby allowing for weaker (:math:`\beta < 1`) or stronger (:math:`\beta > 1`) selection in nature than in the experiments.
 
 * *randomizepreferences* is an optional argument. If it is not specified or set to a value of *False*, nothing unusual is done. Otherwise it should be set to an integer >= 1 that specifies the random number seed used to randomize the amino-acid preferences among sites. You might want to do this if you are testing that the model relies relies on accurate experimental determination of the amino-acid preferences at each site by scrambling these preferences.
 
+* *persitelikelihoods* is an optional argument. If it is *None*, *False*, or not specified, the nothing is done. If you set it to *True*, then the script also reports the per-site likelihoods in a separate file. Specifically, the file with the suffix ``sitelikelihoods.txt`` (see `Output files`_) lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are **not** re-optimized for each site -- rather, they are set to their global best values and then the likelihood contribution of each site is computed. 
 
 Example input file
 ---------------------------
@@ -415,6 +418,17 @@ The following primary output files are created. Each of these files begins with 
 
         omega 0.03132
 
+      If :math:`\beta` is also being fit via setting *fitbeta* to *freeparameter*, then the file also specifies the value of this parameter as in::
+
+        beta 1.2314
+
+    * ``sitelikelihoods.txt`` is created if *persitelikelihoods* is *True*. In this case, the first line is a header line and all subsequent lines list the integer site number and the log likelihood with tabs between these two columns. The format is as follows::
+
+        #SITE   SITE_LOG_LIKELIHOODS
+        1   -4.792906363107919
+        2   -15.89808216031635
+        3   -17.19022748421175
+
 
 Temporary output files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -431,5 +445,9 @@ The following temporary output files are created, largely for running `HYPHY`_. 
     * ``hyphy_optimizetree_output.txt`` is a file that contains the results of running `HYPHY`_ on ``hyphy_optimizetree_cmds.bf``.
 
     * ``coded_optimizedtree.newick`` is a version of the tree with `HYPHY`_ optimized branch lengths with the names still matching those that have been changed to `HYPHY`_ naming as in ``coded_fastafile.fasta`` and ``coded_treefile.newick``. Except for the names being coded, this matches the primary output file with suffix ``optimizedtree.newick``.
+
+    * If *persitelikelihoods* is *True*, then for each site files of the name ``hyphy_site1_cmds.bf`` and ``hyphy_site1_output.txt`` are created for each site number (the example names above are for site ``1``). 
+
+
 
 .. include:: weblinks.txt

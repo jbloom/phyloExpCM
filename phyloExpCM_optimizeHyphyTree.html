@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>phyloExpCM_optimizeHyphyTree.py &mdash; phyloExpCM 0.21 documentation</title>
+    <title>phyloExpCM_optimizeHyphyTree.py &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
     <link rel="next" title="phyloExpCM_ExpModelOptimizeHyphyTree.py" href="phyloExpCM_ExpModelOptimizeHyphyTree.html" />
     <link rel="prev" title="phyloExpCM_buildHyphyExpCM.py" href="phyloExpCM_buildHyphyExpCM.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
@@ -138,6 +138,8 @@ that begin with # are ignored (i.e. as comment lines).</p>
 </ul>
 </div></blockquote>
 </li>
+<li><p class="first"><em>persitelikelihoods</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or not specified, the nothing is done. Otherwise, set it to the name of a file that you would like to create that reports the per-site likelihoods. Specifically, the created file lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are <strong>not</strong> re-optimized for each site &#8211; rather, they are set to their global best values and then the likelihood contribution of each site is computed. The per-site likelihoods are listed in tab-delimited columns with each site on a separate line, and the first column giving the site number and second giving the per-site likelihood. The first line in the file is a header.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="example-input-file">
@@ -187,6 +189,14 @@ number of internal branches: 21
 <div class="highlight-python"><div class="highlight"><pre>Sequence1   Sequence2    0.800143
 Sequence1   Sequence3    0.92947
 Sequence2   Sequence3    2.13376
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you use the <em>persitelikelihoods</em> option, then an output file is created that shows the per-site likelihoods. The format is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#SITE   SITE_LOG_LIKELIHOODS</span>
+<span class="mi">1</span>   <span class="o">-</span><span class="mf">4.792906363107919</span>
+<span class="mi">2</span>   <span class="o">-</span><span class="mf">15.89808216031635</span>
+<span class="mi">3</span>   <span class="o">-</span><span class="mf">17.19022748421175</span>
 </pre></div>
 </div>
 </li>
@@ -257,7 +267,7 @@ Sequence2   Sequence3    2.13376
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>

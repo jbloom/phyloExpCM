@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2014 analysis of beta-lactamase phylogenetic fit &mdash; phyloExpCM 0.21 documentation</title>
+    <title>2014 analysis of beta-lactamase phylogenetic fit &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Examples" href="examples.html" />
-    <link rel="next" title="2014 analysis of H1 influenza HAs descended from 1918 virus" href="example_2014Analysis_Influenza_H1_HA.html" />
+    <link rel="next" title="2014 analysis of influenza NP with stringency parameter" href="example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html" />
     <link rel="prev" title="2013 analysis of human influenza NPs descended from 1918 virus" href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html" /> 
   </head>
   <body role="document">
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="example_2014Analysis_Influenza_H1_HA.html" title="2014 analysis of H1 influenza HAs descended from 1918 virus"
+          <a href="example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html" title="2014 analysis of influenza NP with stringency parameter"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html" title="2013 analysis of human influenza NPs descended from 1918 virus"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>  
@@ -72,10 +72,12 @@
 <li><a class="reference internal" href="#creation-of-sequence-alignment" id="id10">Creation of sequence alignment</a></li>
 <li><a class="reference internal" href="#inspection-of-aligned-sequences" id="id11">Inspection of aligned sequences</a></li>
 <li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id12">Construction of phylogenetic trees</a></li>
-<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id13">Optimizing the trees with various substitution models</a></li>
+<li><a class="reference internal" href="#average-amino-acid-frequencies-in-the-alignments" id="id13">Average amino-acid frequencies in the alignments</a></li>
+<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id14">Optimizing the trees with various substitution models</a></li>
+<li><a class="reference internal" href="#comparison-of-per-site-likelihoods" id="id15">Comparison of per-site likelihoods</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusions" id="id14">Conclusions</a></li>
+<li><a class="reference internal" href="#conclusions" id="id16">Conclusions</a></li>
 </ul>
 </li>
 </ul>
@@ -110,7 +112,7 @@
 <ul>
 <li><p class="first"><a class="reference external" href="http://www.python.org/">Python</a> (version 2.7.3)</p>
 </li>
-<li><p class="first"><a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> (version 0.2)</p>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> (version 0.3)</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://www.numpy.org/">numpy</a> (version 1.6.1)</p>
 </li>
@@ -118,7 +120,7 @@
 </li>
 <li><p class="first"><a class="reference external" href="http://biopython.org/wiki/Main_Page">Biopython</a> (version 1.58)</p>
 </li>
-<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> (version 1.0) was used to make the sequence logo plot and to do some basic sequence manipulation in <a class="reference external" href="http://www.python.org/">Python</a>.</p>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> : (<a class="reference external" href="https://github.com/jbloom/mapmuts/tree/v1.0">mapmuts version 1.0</a>) was used to make the sequence logo plot and to do some basic sequence manipulation in <a class="reference external" href="http://www.python.org/">Python</a>.</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/apps/release/6.6/emboss/apps/needle.html">EMBOSS needle</a> (version 6.6.0). The executable with the name <tt class="docutils literal"><span class="pre">needle</span></tt> is expected to be in the current search path.</p>
 </li>
@@ -324,6 +326,7 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 </li>
 </ol>
 </div></blockquote>
+<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Foulds_metric">Robinson-Foulds distance</a> between the trees computed with the <em>GY94</em> and <em>KOSI07</em> models was computed with <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a>, and the results written to the directory <tt class="docutils literal"><span class="pre">./RobinsonFouldsDistances/</span></tt>. This distance provides a quantitative measure of the similarity between the tree topologies.</p>
 <p>Each of these trees was also parsed into the subtrees representing the <em>TEM</em> and the <em>SHV</em> sequences keeping the tree topology estimated jointly. The subtree parsing is done automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script using <a class="reference external" href="http://biopython.org/wiki/Main_Page">BioPython</a>. These subtrees have the names:</p>
 <blockquote>
 <div><ul class="simple">
@@ -343,8 +346,23 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 </ul>
 </div></blockquote>
 </div>
+<div class="section" id="average-amino-acid-frequencies-in-the-alignments">
+<h3><a class="toc-backref" href="#id13">Average amino-acid frequencies in the alignments</a><a class="headerlink" href="#average-amino-acid-frequencies-in-the-alignments" title="Permalink to this headline">¶</a></h3>
+<p>The overall average amino-acid frequencies for each alignment (averaged over all sites and sequences) were computed using the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_FreqsFromAlignment.py</span></tt>.</p>
+<p>Within the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></tt> these files have the following names:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_lactamases.txt</span></tt> : the averages over all of the lactamase sequences in <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_TEM.txt</span></tt> : the averages over just the sequences in <tt class="docutils literal"><span class="pre">aligned_GY94_TEM.fasta</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_TEM.txt</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_SHV.txt</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_SHV.txt</span></tt></li>
+</ul>
+</div></blockquote>
+<p>Although these files list a line of frequencies for each site, the frequencies reported for each site are the <strong>average</strong> over all sites and sequences. These frequencies are used in the models that have the same mutation structure as the experimentally informed models, but replace the preferences with the average amino-acid frequencies. These frequencies are calculated by adding a pseudocount of one to each amino-acid type (a very small correction as there are many sequences and sites).</p>
+</div>
 <div class="section" id="optimizing-the-trees-with-various-substitution-models">
-<h3><a class="toc-backref" href="#id13">Optimizing the trees with various substitution models</a><a class="headerlink" href="#optimizing-the-trees-with-various-substitution-models" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">Optimizing the trees with various substitution models</a><a class="headerlink" href="#optimizing-the-trees-with-various-substitution-models" title="Permalink to this headline">¶</a></h3>
 <p>This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topologies estimated with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> and the <em>GY94</em> or <em>KOSI07</em> substitution models as described in <a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a>. The analyses are also done for the <em>TEM</em> and <em>SHV</em> subtrees. This analysis compares the experimentally determined codon substitution models with various other substitution models.</p>
 <p>This analysis is done with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> scripts <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></tt> (for standard substitution models) and <tt class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></tt> (for substitution models using the experimentally determined amino-acid preferences), both of which are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>. These scripts uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model free parameters while keeping the tree topologies fixed.</p>
 <p>The results of the optimizations for the various substitution models are in the subdirectory <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/</span></tt>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. For example, <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/Tree-KOSI07_Model-KOSI07_F_omega-global-gamma4_rates-one/</span></tt> contains one such model. Within this subdirectory, the files of interest are:</p>
@@ -363,25 +381,31 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 <div><div class="math">
 \[\begin{split}F_{r,xy} =
 \begin{cases}
-1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
-\frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} &amp; \mbox{otherwise.}
+1 &amp; \mbox{if $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
+\frac{\beta \times \ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 </div></blockquote>
-<p>The mutation rates involve the fitting of four free parameters as described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>.</p>
+<p>The mutation rates involve the fitting of four free parameters as described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>. The stringency parameter <span class="math">\(\beta\)</span> is either fixed to one or optimized.</p>
 </li>
 <li><p class="first"><em>FracTolerated</em> : the model described as <em>FracTolerated</em> in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>. This model differs from <em>HalpernBruno</em> in that the fixation probabilities are now determined as</p>
 <blockquote>
 <div><div class="math">
 \[\begin{split}F_{r,xy} =
 \begin{cases}
-1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
-\frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}} &amp; \mbox{otherwise.}
+1 &amp; \mbox{if $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
+\left(\frac{\pi_{r,\mathcal{A}\left(y\right)}}{\pi_{\mathcal{A}\left(x\right)}}\right)^{\beta} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 </div></blockquote>
 </li>
 <li><p class="first"><em>HalpernBrunorandomized</em> : like <em>HalpernBruno</em> but with the experimentally determined amino-acid preferences randomized among sites. This model is not expected to be good because there is no longer any accurate site-specific information.</p>
 </li>
 <li><p class="first"><em>FracToleratedrandomized</em> : like <em>FracTolerated</em> but with the experimentally determined amino-acid preferences randomized among sites.</p>
+</li>
+<li><p class="first"><em>avgaafreqsHalpernBruno</em> : this model uses the mutation model and fixation model of <em>HalpernBruno</em>, but does not use the experimentally determined amino-acid preferences. Instead, the amino-acid preferences for all sites are simply set based on the amino-acid frequencies obtained from averaging all sites and sequences in the alignment (see <a class="reference internal" href="#average-amino-acid-frequencies-in-the-alignments">Average amino-acid frequencies in the alignments</a>). So this is a null model that captures the mutation process of the <em>HalpernBruno</em> model but isn&#8217;t site specific. It does contain 60 parameters (the amino-acid frequencies) that are estimated empirically from the seuences, plus the four free mutation parameters used in <em>HalperBruno</em>.</p>
+</li>
+<li><p class="first"><em>avgaafreqsFracTolerated</em> : like <em>avgaafreqsHalpernBruno</em> except that the fixation model is <em>FracTolerated</em>.</p>
+</li>
+<li><p class="first">Versions of the six models above where the stringency parameter <span class="math">\(\beta\)</span> is fixed to one, and versions where <span class="math">\(\beta\)</span> is treated as a free parameter. These have names like <em>HalpernBruno</em> (when <span class="math">\(\beta = 1\)</span>) and like <em>fitbetaHalpernBruno</em> (when <span class="math">\(\beta\)</span> is a free parameter).</p>
 </li>
 <li><p class="first"><em>GY94_CF3x4_omega-global-one_rates-one</em> : the <a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a> model with the equilibrium frequencies from the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> method (9 parameters) and a single transition-transversion ratio (<em>kappa</em>) and nonsynonymous-synonymous ration (<em>omega</em>) estimated by maximum likelihood (2 parameters).</p>
 </li>
@@ -413,7 +437,7 @@ Overall, the files contain the following columns:</p>
 <li><p class="first">The total number of parameters in the substitution model optimized by maximum likelihood:</p>
 <blockquote>
 <div><ul class="simple">
-<li>For experimental models, this is four, corresponding to the four optimized mutation rates.</li>
+<li>For experimental models, this is four or five. There are always four optimized mutation rates, and some models also fit the stringency parameter <span class="math">\(\beta\)</span> while others constrain it to one.</li>
 <li>For <em>GY94</em> and <em>KOSI07</em> models, this is always at least two, as both <em>omega</em> and <em>kappa</em> are estimated by maximum likelihood. For some of the variants, <em>omega</em> is drawn from discrete gamma categories, which adds an additional parameter (there is now a shape and rate parameter). For some of the variants, the rate is also allowed to be drawn from discrete gamma categories, which also adds another parameter. Finally, for some of the variants <em>omega</em> is different for each branch, which adds a number of free parameters equal to the number of branches.</li>
 </ul>
 </div></blockquote>
@@ -434,18 +458,26 @@ Overall, the files contain the following columns:</p>
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -4044.85, 4, 4, 0
-FracTolerated, 39.24, -4064.47, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 345.96, -4208.83, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 364.263, -4166.98, 64, 4, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 414.46, -4244.08, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 420.593, -4196.15, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-gamma4, 482.484, -4278.09, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 504.858, -4238.28, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 586.438, -4280.07, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 609.747, -4342.72, 11, 2, 9
-FracToleratedrandomized, 1218.44, -4654.07, 4, 4, 0
-HalpernBrunorandomized, 1428.02, -4758.86, 4, 4, 0
+fitbetaHalpernBruno, 0, -4020.63, 5, 5, 0
+HalpernBruno, 46.44, -4044.85, 4, 4, 0
+fitbetaFracTolerated, 77.28, -4059.27, 5, 5, 0
+FracTolerated, 85.68, -4064.47, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.4, -4208.83, 13, 4, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 410.703, -4166.98, 64, 4, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 460.9, -4244.08, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 467.033, -4196.15, 63, 3, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 528.924, -4278.09, 12, 3, 9
+KOSI07_F_omega-global-one_rates-gamma4, 551.298, -4238.28, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 632.878, -4280.07, 62, 2, 60
+GY94_CF3x4_omega-global-one_rates-one, 656.184, -4342.72, 11, 2, 9
+fitbetaFracToleratedrandomized, 724.54, -4382.9, 5, 5, 0
+fitbetaHalpernBrunorandomized, 735.06, -4388.16, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 820.78, -4371.02, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 841.8, -4381.53, 65, 5, 60
+avgaafreqs_FracTolerated, 858.04, -4390.65, 64, 4, 60
+avgaafreqs_HalpernBruno, 900.68, -4411.97, 64, 4, 60
+FracToleratedrandomized, 1264.88, -4654.07, 4, 4, 0
+HalpernBrunorandomized, 1474.46, -4758.86, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
@@ -454,18 +486,26 @@ HalpernBrunorandomized, 1428.02, -4758.86, 4, 4, 0
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -4045.11, 4, 4, 0
-FracTolerated, 37.26, -4063.74, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 349.625, -4210.92, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 353.849, -4162.03, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 406.786, -4189.5, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 416.06, -4245.14, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 479.517, -4276.87, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 481.487, -4226.85, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 559.957, -4267.09, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 603.593, -4339.91, 11, 2, 9
-FracToleratedrandomized, 1216.8, -4653.51, 4, 4, 0
-HalpernBrunorandomized, 1425.74, -4757.98, 4, 4, 0
+fitbetaHalpernBruno, 0, -4019.94, 5, 5, 0
+HalpernBruno, 48.34, -4045.11, 4, 4, 0
+fitbetaFracTolerated, 76.06, -4057.97, 5, 5, 0
+FracTolerated, 85.6, -4063.74, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 397.965, -4210.92, 13, 4, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 402.189, -4162.03, 64, 4, 60
+KOSI07_F_omega-global-gamma4_rates-one, 455.126, -4189.5, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 464.4, -4245.14, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 527.857, -4276.87, 12, 3, 9
+KOSI07_F_omega-global-one_rates-gamma4, 529.827, -4226.85, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 608.297, -4267.09, 62, 2, 60
+GY94_CF3x4_omega-global-one_rates-one, 651.932, -4339.91, 11, 2, 9
+fitbetaFracToleratedrandomized, 726.26, -4383.07, 5, 5, 0
+fitbetaHalpernBrunorandomized, 736.96, -4388.42, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 823.74, -4371.81, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 844.76, -4382.32, 65, 5, 60
+avgaafreqs_FracTolerated, 862.08, -4391.98, 64, 4, 60
+avgaafreqs_HalpernBruno, 907.08, -4414.48, 64, 4, 60
+FracToleratedrandomized, 1265.14, -4653.51, 4, 4, 0
+HalpernBrunorandomized, 1474.08, -4757.98, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
@@ -474,18 +514,26 @@ HalpernBrunorandomized, 1425.74, -4757.98, 4, 4, 0
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94_TEM.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -2386.85, 4, 4, 0
-FracTolerated, 60.48, -2417.09, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 229.119, -2492.41, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 294.434, -2526.07, 12, 3, 9
-GY94_CF3x4_omega-global-gamma4_rates-one, 295.348, -2526.52, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 303.775, -2478.74, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 371.818, -2513.76, 63, 3, 60
-KOSI07_F_omega-global-one_rates-gamma4, 388.907, -2522.3, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-one, 460.181, -2609.94, 11, 2, 9
-KOSI07_F_omega-global-one_rates-one, 533.615, -2595.66, 62, 2, 60
-FracToleratedrandomized, 953.5, -2863.6, 4, 4, 0
-HalpernBrunorandomized, 984.66, -2879.18, 4, 4, 0
+fitbetaHalpernBruno, 0, -2374.29, 5, 5, 0
+HalpernBruno, 23.12, -2386.85, 4, 4, 0
+fitbetaFracTolerated, 81.8, -2415.19, 5, 5, 0
+FracTolerated, 83.6, -2417.09, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 252.239, -2492.41, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 317.554, -2526.07, 12, 3, 9
+GY94_CF3x4_omega-global-gamma4_rates-one, 318.468, -2526.52, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 326.895, -2478.74, 64, 4, 60
+KOSI07_F_omega-global-gamma4_rates-one, 394.938, -2513.76, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 412.027, -2522.3, 63, 3, 60
+fitbetaFracToleratedrandomized, 465.8, -2607.19, 5, 5, 0
+fitbetaHalpernBrunorandomized, 466.16, -2607.37, 5, 5, 0
+GY94_CF3x4_omega-global-one_rates-one, 483.301, -2609.94, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 556.735, -2595.66, 62, 2, 60
+avgaafreqsfitbeta_HalpernBruno, 574.64, -2601.61, 65, 5, 60
+avgaafreqsfitbeta_FracTolerated, 577.9, -2603.24, 65, 5, 60
+avgaafreqs_HalpernBruno, 609.12, -2619.85, 64, 4, 60
+avgaafreqs_FracTolerated, 622.74, -2626.66, 64, 4, 60
+FracToleratedrandomized, 976.62, -2863.6, 4, 4, 0
+HalpernBrunorandomized, 1007.78, -2879.18, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
@@ -494,18 +542,26 @@ HalpernBrunorandomized, 984.66, -2879.18, 4, 4, 0
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94_SHV.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -1782.66, 4, 4, 0
-FracTolerated, 10.28, -1787.8, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 382.734, -1914.03, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 393.442, -1920.38, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 399.58, -1973.45, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 407.754, -1978.54, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 449.52, -1948.42, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 467.36, -1958.34, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 475.306, -2012.31, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-one, 496.353, -2023.84, 11, 2, 9
-FracToleratedrandomized, 940.78, -2253.05, 4, 4, 0
-HalpernBrunorandomized, 964.98, -2265.15, 4, 4, 0
+fitbetaHalpernBruno, 0, -1728.55, 5, 5, 0
+fitbetaFracTolerated, 34.92, -1746.01, 5, 5, 0
+HalpernBruno, 106.22, -1782.66, 4, 4, 0
+FracTolerated, 116.5, -1787.8, 4, 4, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 488.954, -1914.03, 64, 4, 60
+KOSI07_F_omega-global-one_rates-gamma4, 499.662, -1920.38, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 505.8, -1973.45, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 513.974, -1978.54, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 555.74, -1948.42, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 573.58, -1958.34, 62, 2, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 581.526, -2012.31, 12, 3, 9
+fitbetaFracToleratedrandomized, 601.68, -2029.39, 5, 5, 0
+GY94_CF3x4_omega-global-one_rates-one, 602.573, -2023.84, 11, 2, 9
+fitbetaHalpernBrunorandomized, 602.7, -2029.9, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 711.48, -2024.29, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 715.68, -2026.39, 65, 5, 60
+avgaafreqs_FracTolerated, 749.82, -2044.46, 64, 4, 60
+avgaafreqs_HalpernBruno, 758.76, -2048.93, 64, 4, 60
+FracToleratedrandomized, 1047, -2253.05, 4, 4, 0
+HalpernBrunorandomized, 1071.2, -2265.15, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
@@ -514,18 +570,26 @@ HalpernBrunorandomized, 964.98, -2265.15, 4, 4, 0
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07_TEM.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -2392.25, 4, 4, 0
-FracTolerated, 58.22, -2421.36, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 232.17, -2499.34, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 292.211, -2530.36, 12, 3, 9
-GY94_CF3x4_omega-global-gamma4_rates-one, 298.661, -2533.58, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 300.22, -2482.36, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 368.039, -2517.27, 63, 3, 60
-KOSI07_F_omega-global-one_rates-gamma4, 376.965, -2521.73, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-one, 462.511, -2616.51, 11, 2, 9
-KOSI07_F_omega-global-one_rates-one, 524.95, -2596.73, 62, 2, 60
-FracToleratedrandomized, 955.28, -2869.89, 4, 4, 0
-HalpernBrunorandomized, 989.18, -2886.84, 4, 4, 0
+fitbetaHalpernBruno, 0, -2378.53, 5, 5, 0
+HalpernBruno, 25.44, -2392.25, 4, 4, 0
+fitbetaFracTolerated, 80.64, -2418.85, 5, 5, 0
+FracTolerated, 83.68, -2421.37, 4, 4, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 257.61, -2499.34, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 317.651, -2530.36, 12, 3, 9
+GY94_CF3x4_omega-global-gamma4_rates-one, 324.101, -2533.58, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 325.66, -2482.36, 64, 4, 60
+KOSI07_F_omega-global-gamma4_rates-one, 393.479, -2517.27, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 402.405, -2521.73, 63, 3, 60
+fitbetaFracToleratedrandomized, 471.96, -2614.51, 5, 5, 0
+fitbetaHalpernBrunorandomized, 472.38, -2614.72, 5, 5, 0
+GY94_CF3x4_omega-global-one_rates-one, 487.951, -2616.51, 11, 2, 9
+KOSI07_F_omega-global-one_rates-one, 550.39, -2596.73, 62, 2, 60
+avgaafreqsfitbeta_HalpernBruno, 581.58, -2609.32, 65, 5, 60
+avgaafreqsfitbeta_FracTolerated, 584.16, -2610.61, 65, 5, 60
+avgaafreqs_HalpernBruno, 617.3, -2628.18, 64, 4, 60
+avgaafreqs_FracTolerated, 629.16, -2634.11, 64, 4, 60
+FracToleratedrandomized, 980.72, -2869.89, 4, 4, 0
+HalpernBrunorandomized, 1014.62, -2886.84, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
@@ -534,32 +598,61 @@ HalpernBrunorandomized, 989.18, -2886.84, 4, 4, 0
 <div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07_SHV.
 #
 #SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-HalpernBruno, 0, -1778.55, 4, 4, 0
-FracTolerated, 10.22, -1783.66, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 382.172, -1909.64, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 387.314, -1913.21, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.923, -1966.01, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 397.129, -1969.11, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 443.221, -1941.16, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 458.154, -1949.63, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 463.62, -2002.36, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-one, 481.866, -2012.48, 11, 2, 9
-FracToleratedrandomized, 936.56, -2246.83, 4, 4, 0
-HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
+fitbetaHalpernBruno, 0, -1725.36, 5, 5, 0
+fitbetaFracTolerated, 34.12, -1742.42, 5, 5, 0
+HalpernBruno, 104.38, -1778.55, 4, 4, 0
+FracTolerated, 114.6, -1783.66, 4, 4, 0
+KOSI07_F_omega-global-gamma4_rates-gamma4, 486.552, -1909.64, 64, 4, 60
+KOSI07_F_omega-global-one_rates-gamma4, 491.694, -1913.21, 63, 3, 60
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 497.303, -1966.01, 13, 4, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 501.509, -1969.11, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-one, 547.601, -1941.16, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 562.534, -1949.63, 62, 2, 60
+GY94_CF3x4_omega-global-gamma4_rates-one, 568, -2002.36, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-one, 586.246, -2012.48, 11, 2, 9
+fitbetaFracToleratedrandomized, 597.66, -2024.19, 5, 5, 0
+fitbetaHalpernBrunorandomized, 598.68, -2024.7, 5, 5, 0
+avgaafreqsfitbeta_FracTolerated, 706.44, -2018.58, 65, 5, 60
+avgaafreqsfitbeta_HalpernBruno, 710.94, -2020.83, 65, 5, 60
+avgaafreqs_FracTolerated, 745.92, -2039.32, 64, 4, 60
+avgaafreqs_HalpernBruno, 755.3, -2044.01, 64, 4, 60
+FracToleratedrandomized, 1040.94, -2246.83, 4, 4, 0
+HalpernBrunorandomized, 1063.86, -2258.29, 4, 4, 0
 </pre></div>
 </div>
 </div></blockquote>
 <p>Similar files are created in LaTex formatted tables as <tt class="docutils literal"><span class="pre">GY94_summary.tex</span></tt>, <tt class="docutils literal"><span class="pre">KOSI07_summary.tex</span></tt>, etc.</p>
 </div>
+<div class="section" id="comparison-of-per-site-likelihoods">
+<h3><a class="toc-backref" href="#id15">Comparison of per-site likelihoods</a><a class="headerlink" href="#comparison-of-per-site-likelihoods" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>phyloExpCM</cite> script <tt class="docutils literal"><span class="pre">phyloExpCM_SiteLikelihoodComparison.py</span></tt> was used to compare the per-site likelihoods between the best experimentally informed model (the <em>HalpernBruno</em> model with a fitted <span class="math">\(\beta\)</span>) and the best traditional model (the <em>GY94</em> model with gamma-distributed rates and <span class="math">\(\omega\)</span>) values for the tree inferred with <em>GY94</em> over the entire lactamase (TEM and SHV) sequences.</p>
+<p>This was done by creating the input file <tt class="docutils literal"><span class="pre">phyloExpCM_SitelikelihoodComparison_infile.txt</span></tt> and then running:</p>
+<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_SiteLikelihoodComparison.py phyloExpCM_SiteLikelihoodComparison_infile.txt
+</pre></div>
+</div>
+<p>This created three output files.</p>
+<p>The first, <tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> lists the differences in per-site likelihoods by site.</p>
+<p>The next two are the following plots, which use Tukey box plots to show the differences in site likelihoods, categorizing sites by the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> computed secondary structures (<em>SS</em>) and relative solvent accessibilities (<em>RSA</em>) in <tt class="docutils literal"><span class="pre">1XPB_renumbered.dssp</span></tt>. Here are these plots:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg"><img alt="sitelikelihoodcomparison_bySS.jpg" src="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg" style="width: 45%;" /></a>
+<p class="caption">The comparison of site likelihoods with sites categorized by secondary structure (<tt class="docutils literal"><span class="pre">sitelikelihoodcomparison_bySS.pdf</span></tt>).</p>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg"><img alt="sitelikelihoodcomparison_byRSA.jpg" src="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg" style="width: 45%;" /></a>
+<p class="caption">The comparison of site likelihoods with sites categorized by relative solvent accessibility (<tt class="docutils literal"><span class="pre">sitelikelihoodcomparison_byRSA.pdf</span></tt>).</p>
+</div>
+<p>These plots show that the experimental model is modestly better for most sites, but there are a small number of sites for which the experimental model is far worse.</p>
+</div>
 </div>
 <div class="section" id="conclusions">
-<h2><a class="toc-backref" href="#id14">Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
 <p>The key conclusions that can be drawn from the tables generated by <a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models">Optimizing the trees with various substitution models</a> are as follows:</p>
 <ol class="arabic simple">
 <li>The evolutionary models that use the experimentally determined amino-acid preferences substantially outperform the other models. The results are slightly better if the fixation probabilities are estimated using the <em>HalpernBruno</em> method.</li>
-<li>The superior performance of the models with the experimentally determined preferences is due to the site-specific information. If the preferences are randomized among sites, the models are far worse than any others.</li>
+<li>The superior performance of the models with the experimentally determined preferences is due to the site-specific information. If the preferences are randomized among sites or determined from overall average amino-acid frequencies, the models are far worse than any others.</li>
 <li>The <em>GY94</em> and <em>KOSI07</em> models perform similarly &#8211; not as good as the experimentally informed models, but better than the randomized models with the experimental data. Overall <em>KOSI07</em> gives better likelihoods, but not enough so to justify the additional empirically determined equilibrium frequencies according to <a class="reference external" href="http://en.wikipedia.org/wiki/Akaike_information_criterion">AIC</a>. In general, more parameterized versions of the models give better likelihoods, although the improvements are not enough to support the use of branch-local <em>omega</em> values.</li>
 <li>These results are robust to the exact sequences and model used to the build the tree. They are true for trees built using <em>GY94</em> or <em>KOSI07</em>, and for trees with the combined <em>TEM</em> and <em>SHV</em> sequences or for trees with just one sequence subset alone.</li>
+<li>Incorporation of the stringency parameter <span class="math">\(\beta\)</span> leads to improvements in the experimentally informed models. The fit values of <span class="math">\(\beta\)</span> are greater than one, suggesting that real evolution is more stringent than the deep mutational scanning.</li>
 </ol>
 <p><strong>Overall, these results demonstrate that using the experimentally determined amino-acid preferences improves phylogenetic fit over existing approaches.</strong></p>
 </div>
@@ -585,7 +678,9 @@ HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
 <li><a class="reference internal" href="#creation-of-sequence-alignment">Creation of sequence alignment</a></li>
 <li><a class="reference internal" href="#inspection-of-aligned-sequences">Inspection of aligned sequences</a></li>
 <li><a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a></li>
+<li><a class="reference internal" href="#average-amino-acid-frequencies-in-the-alignments">Average amino-acid frequencies in the alignments</a></li>
 <li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models">Optimizing the trees with various substitution models</a></li>
+<li><a class="reference internal" href="#comparison-of-per-site-likelihoods">Comparison of per-site likelihoods</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#conclusions">Conclusions</a></li>
@@ -597,8 +692,8 @@ HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
   <p class="topless"><a href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html"
                         title="previous chapter">2013 analysis of human influenza NPs descended from 1918 virus</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="example_2014Analysis_Influenza_H1_HA.html"
-                        title="next chapter">2014 analysis of H1 influenza HAs descended from 1918 virus</a></p>
+  <p class="topless"><a href="example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html"
+                        title="next chapter">2014 analysis of influenza NP with stringency parameter</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -633,12 +728,12 @@ HalpernBrunorandomized, 959.48, -2258.29, 4, 4, 0
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="example_2014Analysis_Influenza_H1_HA.html" title="2014 analysis of H1 influenza HAs descended from 1918 virus"
+          <a href="example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html" title="2014 analysis of influenza NP with stringency parameter"
              >next</a> |</li>
         <li class="right" >
           <a href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html" title="2013 analysis of human influenza NPs descended from 1918 virus"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>

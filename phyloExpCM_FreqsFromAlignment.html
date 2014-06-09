@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>phyloExpCM_FreqsFromAlignment.py &mdash; phyloExpCM 0.21 documentation</title>
+    <title>phyloExpCM_FreqsFromAlignment.py &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
-    <link rel="next" title="phyloExpCM_multiHyphyRuns.py" href="phyloExpCM_multiHyphyRuns.html" />
+    <link rel="next" title="phyloExpCM_SiteLikelihoodComparison.py" href="phyloExpCM_SiteLikelihoodComparison.html" />
     <link rel="prev" title="phyloExpCM_ExpModelOptimizeHyphyTree.py" href="phyloExpCM_ExpModelOptimizeHyphyTree.html" /> 
   </head>
   <body role="document">
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+          <a href="phyloExpCM_SiteLikelihoodComparison.html" title="phyloExpCM_SiteLikelihoodComparison.py"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
@@ -93,8 +93,11 @@ that begin with # are ignored (i.e. as comment lines).</p>
 <p>In this file, the <tt class="docutils literal"><span class="pre">SITE_ENTROPY</span></tt> column gives the site entropy taken to the base 2.</p>
 <p>In this file, all of the wildtype identities (<tt class="docutils literal"><span class="pre">WT_AA</span></tt>) are set to <tt class="docutils literal"><span class="pre">na</span></tt> because there is no wildtype in the sequence alignment.</p>
 <p>In this file, residues are numbered sequentially starting with one according to the aligned sequences in <em>alignmentfile</em>.</p>
+<p>Note that if <em>averagesites</em> is set to <em>True</em>, then the fractions for each site <em>r</em> will be identical, and will represent the average over the entire length of the sequence.</p>
 </li>
 <li><p class="first"><em>requiresubstring</em> is an optional argument. If it is not specified or set to <em>None</em> then nothing is done. Otherwise, it should be set to a substring &#8211; in this case, we only compute the frequencies from sequences in <em>alignmentfile</em> that have headers that contain the substring specified by <em>requiresubstring</em>. For instance, if this substring is <em>HOST_Swine</em> then only sequences with headers that contain <em>HOST_swine</em> are counted. Note that if no sequences in <em>alignmentfile</em> contain headers with this substring, an error will be raised.</p>
+</li>
+<li><p class="first"><em>averagesites</em> is an optional Boolean switch. If it is not specified or set to <em>False</em>, then nothing is done. If you specify this option as <em>True</em>, then the fractions are <strong>averaged over all sites</strong>, and include the total number of occurrences of each amino acid at every site over all of the sequences. The pseudocounts specified by <em>pseudocounts</em> are then added to these total occurrences of amino acids at all sites. In this case, the reported fractions for each site in <em>outputfile</em> will be identical, since each is just reported as the average of all sites.</p>
 </li>
 </ul>
 </div>
@@ -136,8 +139,8 @@ outputfile aminoacid_frequencies.txt
   <p class="topless"><a href="phyloExpCM_ExpModelOptimizeHyphyTree.html"
                         title="previous chapter">phyloExpCM_ExpModelOptimizeHyphyTree.py</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="phyloExpCM_multiHyphyRuns.html"
-                        title="next chapter">phyloExpCM_multiHyphyRuns.py</a></p>
+  <p class="topless"><a href="phyloExpCM_SiteLikelihoodComparison.html"
+                        title="next chapter">phyloExpCM_SiteLikelihoodComparison.py</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -172,12 +175,12 @@ outputfile aminoacid_frequencies.txt
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="phyloExpCM_multiHyphyRuns.html" title="phyloExpCM_multiHyphyRuns.py"
+          <a href="phyloExpCM_SiteLikelihoodComparison.html" title="phyloExpCM_SiteLikelihoodComparison.py"
              >next</a> |</li>
         <li class="right" >
           <a href="phyloExpCM_ExpModelOptimizeHyphyTree.html" title="phyloExpCM_ExpModelOptimizeHyphyTree.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>

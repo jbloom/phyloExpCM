@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>hyphy Module &mdash; phyloExpCM 0.21 documentation</title>
+    <title>hyphy Module &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="packagedata Module" href="packagedata.html" />
     <link rel="prev" title="submatrix Module" href="submatrix.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="submatrix.html" title="submatrix Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
@@ -74,7 +74,7 @@ tested with <tt class="docutils literal"><span class="pre">HYPHY</span></tt> ver
 </ul>
 <dl class="function">
 <dt id="hyphy.CreateHYPHYCommandFile">
-<tt class="descclassname">hyphy.</tt><tt class="descname">CreateHYPHYCommandFile</tt><big>(</big><em>cmdfile</em>, <em>outputfile</em>, <em>fastafile</em>, <em>newickfile</em>, <em>distancesfile</em>, <em>sites</em>, <em>model</em><big>)</big><a class="headerlink" href="#hyphy.CreateHYPHYCommandFile" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">hyphy.</tt><tt class="descname">CreateHYPHYCommandFile</tt><big>(</big><em>cmdfile</em>, <em>outputfile</em>, <em>fastafile</em>, <em>newickfile</em>, <em>distancesfile</em>, <em>sites</em>, <em>model</em>, <em>persitelikelihoods=False</em><big>)</big><a class="headerlink" href="#hyphy.CreateHYPHYCommandFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> command file.</p>
 <p>The created command file <em>cmdfile</em> specifies that we run <tt class="docutils literal"><span class="pre">HYPHY</span></tt>
 on a pre-existing tree topology given by <em>newickfile</em>, where
@@ -270,6 +270,17 @@ option for <em>equilfreqs</em> is <em>F</em>.</p>
 </ul>
 </div></blockquote>
 </li>
+<li><p class="first"><em>persitelikelihoods</em> specifies that we compute the per-site likelihoods and write
+them to a file. This is the contribution of each site to the likelihood after
+fixing the model parameters and branch lengths to the values obtained from maximizing
+the likelihood using all of the sites specified in <em>sites</em>. If <em>persitelikelihoods</em>
+has its default value of <em>False</em>, then nothing is done. Otherwise, set
+<em>persitelikelihoods</em> to the name of the file that you would like to create that
+gives the per-site likelihoods. This file contains an initial header line, and
+then subsequent rows are the site and the log likelihood delimited by tabs.
+If the file specified by <em>persitelikelihoods</em> already exists, it is removed before
+running <tt class="docutils literal"><span class="pre">HYPHY</span></tt>.</p>
+</li>
 </ul>
 </dd></dl>
 
@@ -425,7 +436,7 @@ returns the resulting tree string.</p>
 
 <dl class="function">
 <dt id="hyphy.ExtractValues">
-<tt class="descclassname">hyphy.</tt><tt class="descname">ExtractValues</tt><big>(</big><em>hyphyoutfile</em>, <em>values</em><big>)</big><a class="headerlink" href="#hyphy.ExtractValues" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">hyphy.</tt><tt class="descname">ExtractValues</tt><big>(</big><em>hyphyoutfile</em>, <em>values</em>, <em>allowmissing=False</em><big>)</big><a class="headerlink" href="#hyphy.ExtractValues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts values for parameters from <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output.</p>
 <p><em>hyphyoutfile</em> is a string giving the name of a <tt class="docutils literal"><span class="pre">HYPHY</span></tt> output file
 of the type produced by <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelectionHyphy.py</span></tt>.</p>
@@ -465,6 +476,10 @@ global RCG:=1.02;
 <p>On return, <em>values</em> will hold the extracted values for each key.
 An exception (a <em>ValueError</em>) will be raised if a key is either
 not present or is present multiple times.</p>
+<p>If <em>allowmissing</em> is <em>True</em>, then it is OK if a key in <em>values</em> is not
+found in <em>hyphyoutfile</em>. In this case, keys that are not found
+simply have a value of <em>None</em> retained in <em>values</em>. The
+<em>allowmissing</em> option is <em>False</em> by default.</p>
 </dd></dl>
 
 <dl class="function">
@@ -546,7 +561,7 @@ in which the codons have been interchanged randomly.</p>
         <li class="right" >
           <a href="submatrix.html" title="submatrix Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>

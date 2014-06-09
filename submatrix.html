@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>submatrix Module &mdash; phyloExpCM 0.21 documentation</title>
+    <title>submatrix Module &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="hyphy Module" href="hyphy.html" />
     <link rel="prev" title="io Module" href="io.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="io.html" title="io Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
@@ -353,7 +353,7 @@ standard order that <tt class="docutils literal"><span class="pre">HYPHY</span><
 
 <dl class="function">
 <dt id="submatrix.WriteHYPHYMatrices2">
-<tt class="descclassname">submatrix.</tt><tt class="descname">WriteHYPHYMatrices2</tt><big>(</big><em>outfile</em>, <em>sites</em>, <em>aapreferences</em>, <em>fixationmodel</em>, <em>includeselection=True</em><big>)</big><a class="headerlink" href="#submatrix.WriteHYPHYMatrices2" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">submatrix.</tt><tt class="descname">WriteHYPHYMatrices2</tt><big>(</big><em>outfile</em>, <em>sites</em>, <em>aapreferences</em>, <em>fixationmodel</em>, <em>includeselection=True</em>, <em>fitbeta=False</em><big>)</big><a class="headerlink" href="#submatrix.WriteHYPHYMatrices2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates HYPHY include batch file with codon substitution models.</p>
 <p>Created HYPHY include batch file (<tt class="docutils literal"><span class="pre">*.ibf</span></tt> file), include with the command:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;myfile.ibf&quot;;</span>
@@ -398,8 +398,9 @@ omega1D := omega1;
 </div>
 <p>Fixation probabilities are defined as numbers in the substition models. 
 These numbers are computed from the amino-acid preferences
-<span class="math">\(\pi_{r,a}\)</span>. There are two different models that can be used to calculate
-these fixation probabilities. The model to be used is specified by 
+<span class="math">\(\pi_{r,a}\)</span>, possibly with these preferences taken to the exponent of
+<span class="math">\(\beta\)</span> depending on the value of <em>fitbeta</em>. There are two different models that can
+be used to calculate these fixation probabilities. The model to be used is specified by 
 <em>fixationmodel</em> as one of these:</p>
 <blockquote>
 <div><ul>
@@ -409,7 +410,7 @@ these fixation probabilities. The model to be used is specified by
 \[\begin{split}F_{r,xy} =
 \begin{cases}
 1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(y\right)} \ge \pi_{r,\mathcal{A}\left(x\right)}$} \\
-\frac{\pi_{r, \mathcal{A}\left(y\right)}}{\pi_{r, \mathcal{A}\left(x\right)}} &amp; \mbox{otherwise.}
+\left(\frac{\pi_{r, \mathcal{A}\left(y\right)}}{\pi_{r, \mathcal{A}\left(x\right)}}\right)^{\beta} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 </div></blockquote>
 </li>
@@ -419,7 +420,7 @@ these fixation probabilities. The model to be used is specified by
 \[\begin{split}F_{r,xy} = 
 \begin{cases}
 1 &amp; \mbox{if $\mathcal{A}\left(x\right) = \mathcal{A}\left(y\right)$ or $\pi_{r,\mathcal{A}\left(x\right)} = \pi_{r,\mathcal{A}\left(y\right)}$} \\
-\frac{\ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}} &amp; \mbox{otherwise.}
+\frac{\beta \times \ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 </div></blockquote>
 </li>
@@ -507,6 +508,18 @@ than captured by the amino-acid preferences.</li>
 </div></blockquote>
 </div></blockquote>
 </li>
+<li><p class="first"><em>fitbeta</em> allows the <span class="math">\(\beta\)</span> value that scales the preferences as an
+exponent to have values other than one. By default, <em>fitbeta</em> is <em>False</em>, which
+means that <span class="math">\(\beta\)</span> is one. Possible values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>False</em> (default value) means that <span class="math">\(\beta\)</span> is fixed to be one.</li>
+<li><em>global_beta</em> means that there is a single <span class="math">\(\beta\)</span> value for all sites.
+This could be useful if the strength of selection in the experiments is different
+from that in nature.</li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 </dd></dl>
 
@@ -530,10 +543,10 @@ than captured by the amino-acid preferences.</li>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="io.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">io</span></tt> Module</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">io</span></tt> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="hyphy.html"
-                        title="next chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">hyphy</span></tt> Module</a></p>
+                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">hyphy</span></tt> Module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -573,7 +586,7 @@ than captured by the amino-acid preferences.</li>
         <li class="right" >
           <a href="io.html" title="io Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>plot Module &mdash; phyloExpCM 0.21 documentation</title>
+    <title>plot Module &mdash; phyloExpCM 0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.21',
+        VERSION:     '0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="phyloExpCM 0.21 documentation" href="index.html" />
+    <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
-    <link rel="next" title="Acknowledgements" href="acknowledgements.html" />
+    <link rel="next" title="phylodistances Module" href="phylodistances.html" />
     <link rel="prev" title="packagedata Module" href="packagedata.html" /> 
   </head>
   <body role="document">
@@ -40,12 +40,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="acknowledgements.html" title="Acknowledgements"
+          <a href="phylodistances.html" title="phylodistances Module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="packagedata.html" title="packagedata Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
@@ -71,6 +71,7 @@
 <ul class="simple">
 <li><em>PlotLogLvsNParams</em> : plots log likelihood versus number of parameters.</li>
 <li><em>PlotYearVersusDistance</em> : plots year separation versus distance</li>
+<li><em>PlotSiteLikelihoods</em> : plots site likelihood comparison</li>
 </ul>
 <dl class="function">
 <dt id="plot.PlotLogLvsNParams">
@@ -101,6 +102,48 @@ a data point for that <em>plotting_group</em> as <em>(log_likelihood, nparams)</
 <p>Overall, <em>data_d</em> must specify at least two data points (although
 they can both be from the same plotting group if yo would like).</p>
 </li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.PlotSiteLikelihoods">
+<tt class="descclassname">plot.</tt><tt class="descname">PlotSiteLikelihoods</tt><big>(</big><em>sites</em>, <em>classifications</em>, <em>classificationtypes</em>, <em>xvalues</em>, <em>xlabel</em>, <em>ylabel</em>, <em>plotfile</em>, <em>symmetrize_axis=True</em>, <em>title=''</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#plot.PlotSiteLikelihoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots comparison of site likelihoods.</p>
+<p>Requires <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>, will raise an exception if
+not available.</p>
+<p>This function plots a comparison of the log likelihoods at a set of sites.</p>
+<p>Typically you will have computed the difference in the log likelihoods for each
+site over two different models. You may then have classified the sites into
+one or more categories. This function plots points showing the differences
+in log likelihoods for all sites in each classification.</p>
+<p>The each set of data is plotted using a box plots.</p>
+<p>All strings (<em>xlabel</em>, <em>ylabel</em>, <em>classificationtypes</em>, <em>title</em>) use <tt class="docutils literal"><span class="pre">LaTex</span></tt>
+formatting.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>sites</em> is a list of integer sites (should all be unique)</li>
+<li><em>classifications</em> is a dictionary that is keyed by all integers in <em>sites</em>.
+The values should be some set of (relatively few) strings that define the site
+classification. Don&#8217;t make too many classifications, as a separate row is plotted
+for each.</li>
+<li><em>classificationtypes</em> is a list of the classifications (the unique values in
+<em>classifications</em>) in the order they should be plotted from bottom to top on the
+y-axis.</li>
+<li><em>xvalues</em> is a dictionary keyed by all integers in <em>sites</em>, with the value being
+the number plotted on the x-axis. Typically this would be the difference in
+log likelihoods between model 1 and model 2.</li>
+<li><em>xlabel</em> is the string label for the x-axis. This might be something like
+<em>LogL for model 1 - LogL for model 2</em>.</li>
+<li><em>ylabel</em> is the string label for the y-axis.</li>
+<li><em>plotfile</em> is the name of the created plot. Must have the extension
+<tt class="docutils literal"><span class="pre">.pdf</span></tt>.</li>
+<li><em>symmetrize_axis</em> is a Boolean switch specifying if we make the x-axis
+range equal at both ends (i.e. goes from -10 to 10). Is <em>True</em> by default.</li>
+<li><em>title</em> is an optional string above the plot. Is empty (<em>&#8216;&#8217;</em>) by default.
+Uses <tt class="docutils literal"><span class="pre">LaTex</span></tt> formatting.</li>
+<li><em>alpha</em> is the transparency of the plotted points. An <em>alpha</em> of 1 means
+no transparency, and <em>alpha</em> less than one means transparent. Is 1 by
+default.</li>
 </ul>
 </dd></dl>
 
@@ -144,8 +187,8 @@ above plot.</li>
   <p class="topless"><a href="packagedata.html"
                         title="previous chapter"><tt class="docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="acknowledgements.html"
-                        title="next chapter">Acknowledgements</a></p>
+  <p class="topless"><a href="phylodistances.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">phylodistances</span></tt> Module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -180,12 +223,12 @@ above plot.</li>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="acknowledgements.html" title="Acknowledgements"
+          <a href="phylodistances.html" title="phylodistances Module"
              >next</a> |</li>
         <li class="right" >
           <a href="packagedata.html" title="packagedata Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
           <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>

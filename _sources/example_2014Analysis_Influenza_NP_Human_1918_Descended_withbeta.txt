@@ -1,5 +1,5 @@
 ===============================================================
-2013 analysis of human influenza NPs descended from 1918 virus
+2014 analysis of influenza NP with stringency parameter
 ===============================================================
 
 .. contents::
@@ -7,11 +7,12 @@
 
 Overview
 ------------
-This is a description of an analysis of the effectiveness of experimentally determined substitution models for describing the evolution of influenza nucleoprotein (NP).
+This is a description of an analysis of the effectiveness of experimentally determined substitution models for describing the evolution of influenza nucleoprotein (NP). 
 
-This is the analysis described in the paper `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_.
+This analysis closely parallels the one that has been previously described
+in the paper `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_ and is available at http://jbloom.github.io/phyloExpCM/example_2013Analysis_Influenza_NP_Human_1918_Descended.html
 
-For a partial version of this analysis that includes fitting of a stringency parameter :math:`\beta`, see http://jbloom.github.io/phyloExpCM/example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html
+It differs from that analysis primarily in its use of a stringency parameter :math:`\beta` for the amino-acid preferences, and in its site-specific analysis.
 
 This analysis was performed by `Jesse Bloom`_.
 
@@ -27,7 +28,7 @@ The phylogenetic tree that is analyzed consists of human influenza lineages with
                 
     * H3N2 from 1968 to 2013.
 
-The code, data, and results from the analysis are in the ``./examples/2013Analysis_Influenza_NP_Human_1918_Descended/`` subdirectory in the main `phyloExpCM`_ package directory. This subdirectory contains all of the necessary input files (see `Input files`_) for running the analysis. It also contains a master script (``run_analysis.py``) that can be used to regenerate the analysis with the command::
+The code, data, and results from the analysis are in the ``./examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/`` subdirectory in the main `phyloExpCM`_ package directory. This subdirectory contains all of the necessary input files (see `Input files`_) for running the analysis. It also contains a master script (``run_analysis.py``) that can be used to regenerate the analysis with the command::
 
     python run_analysis.py
 
@@ -46,7 +47,7 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ : specifically, `phyloExpCM version 0.21`_
+* `phyloExpCM`_ : version 0.3
 
 * `numpy`_ (version 1.6.1)
 
@@ -97,15 +98,9 @@ Here are the input files that are necessary to repeat the analysis. These are th
 
 * *JDB_Anomalies.txt* is a list of strain names that appear to be anomalous based on their strong violation of the molecular clock. These sequences are probably mis-annotated in the database, come from non-standard lineages (for examples a swine H3N2 isolated from humans), are reassortants (example would be an H1N1 NP that reassorted into an H3N2), or are extensively lab adapted and so deviate from the molecular clock due to large numbers ofadaptation mutations.
 
-* *mutspectrum.txt* is a file that contains the experimentally measured nucleotide mutation rates.
+* *mutspectrum.txt* is a file that contains the experimentally measured nucleotide mutation rates. The measurement of these mutation rates is described in `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_.
 
-* Files giving the inferred equilibrium amino-acid preferences at each site in NP. These files are from the `mapmuts analysis of the Aichi68 influenza NP from 2013`_. These files are in the format of the ``*_equilibriumpreferences.txt`` files created by ``mapmuts_inferpreferences.py`` as described in the `mapmuts documentation`_. There are three such files included here:
-
-    - ``replicate_A_p1_equilibriumpreferences.txt`` gives the preferences inferred from passage 1 (*p1*) from *replicate A*.
-
-    - ``replicate_B_p1_equilibriumpreferences.txt`` gives the preferences inferred from passage 1 (*p1*) from *replicate B*.
-
-    - ``p1_equilibriumpreferences.txt`` gives the average of the preferences from the two replicates above (*replicate A* and *replicate B*, both *p1*).
+* File giving the inferred equilibrium amino-acid preferences at each site in NP. This file is from the `mapmuts analysis of the Aichi68 influenza NP from 2013`_. The file is ``p1_equilibriumpreferences.txt``. It is the combined experimental data from the two passage 1 replicates described in `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_.
 
 * ``./DSSP_analysis/`` is a subdirectory that contains the results of analyzing the solvent accessibilities and secondary structures of NP from the crystal structure. Briefly, the NP crystal structure in `PDB 2IQH`_ was downloaded, and the ``2IQH.pdb`` file was manually edited to extract only monomer C into ``2IQH_monomerC.pdb``. This monomer was then analyzed with the `DSSP webserver`_ to create the results stored in ``2IQH_monomerC.dssp``.
 
@@ -196,13 +191,12 @@ Specifically, the steps were:
     
 2) The next step is manual. Open this tree using `Path-O-Gen`_, and look manually to see if there are outliers from the molecular clock in the ``./RAxML_output/RAxML_bestTree.Aligned_NPs`` file. If so, add these outliers to *JDB_Anomalies.txt* and repeat the `Creation of sequence alignments`_ and this `RAxML`_ analysis. Note that this has already been done, so if you are just re-running the analysis then you don't need to do this unless you have changed the sequence set.
 
-Construction of phylogenetic trees 
+Construction of phylogenetic tree
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-High-quality phylogenetic trees were then constructed using `codonPhyML`_, which is able to build maximum-likelihood trees with codon substitution models. 
+A high-quality phylogenetic trees were then constructed using `codonPhyML`_, which is able to build maximum-likelihood trees with codon substitution models. 
 
-The `phyloExpCM`_ script ``phyloExpCM_runcodonPhyML.py`` (see `phyloExpCM documentation`_ for details) was used to run `codonPhyML`_. Trees were built using two different substitution models, with each tree in its own subdirectory within ``./examples/2013Analysis_Influenza_NP_Human_1918_Descended/``. The substitution models used to build the trees:
-
-    * The *GY94* codon model (`Goldman and Yang 1994`_) with:
+The `phyloExpCM`_ script ``phyloExpCM_runcodonPhyML.py`` (see `phyloExpCM documentation`_ for details) was used to run `codonPhyML`_. Trees were built using 
+the *GY94* codon model (`Goldman and Yang 1994`_) with:
     
         - The equilibrium codon frequencies estimated emprically using the `CF3x4`_ method.
 
@@ -210,133 +204,63 @@ The `phyloExpCM`_ script ``phyloExpCM_runcodonPhyML.py`` (see `phyloExpCM docume
 
         - The dN/dS ratio (*omega*) drawn from four discrete gamma-distributed categories (`Yang 1994`_) with the shape parameter and mean estimated by maximum likelihood.
 
-      The tree construction was performed in the ``./GY94_codonPhyML_tree/`` subdirectory. The tree itself is in the file ``./GY94_codonPhyML_tree/codonphyml_tree.newick``.
+The tree construction was performed in the ``./GY94_codonPhyML_tree/`` subdirectory. The tree itself is in the file ``./GY94_codonPhyML_tree/codonphyml_tree.newick``.
 
-    * The *KOSI07* empirical codon model (`Kosiol et al, 2007`_), using the variant denoted as *ECM+F+omega+1kappa(tv)* in `Kosiol et al, 2007`_. Specifically:
-
-        - The equilibrium codon frequencies were estimated empirically using the *F* method (empirical estimation of 60 frequencies for the 61 non-stop codons).
-
-        - The relative decrease in transversions versus transitions, *kappa(tv)*, estimated by maximum likelihood.
-
-        - The relative elevation in nonsynonymous over synonymous mutations (*omega*) drawn from four gamma-distributed categories with shape parameter and mean estimated by maximum likelihood.
-
-      The tree construction was performed in the ``./KOSI07_codonPhyML_tree/`` subdirectory. The tree itself is in the file ``./KOSI07_codonPhyML_tree/codonphyml_tree.newick``.
-
-To visualize these trees, the following **manual** steps were performed:
-
-    1) The ``codonphyml_tree.newick`` tree in each of the two subdirectories was opened with `Path-O-Gen`_, the tree was re-rooted according to the dates assigned to the tips, and the re-rooted tree was saved with the name ``rooted_tree.trees``.
-
-    2) The ``rooted_tree.trees`` file was opened in `FigTree`_, adjusted for attractive visual display, and saved to the file ``annotated_tree.trees``.
-
-    3) A PDF image of the tree in the ``annotated_tree.trees`` file was saved manually with `FigTree`_, and then converted to a JPG with `ImageMagick convert`_ using the command::
-
-        convert -density 200 annotated_tree.pdf annotated_tree.jpg
-
-       The tree images created by these steps are shown below:
-
-         .. figure:: example_2013Analysis_Influenza_NP_Human_1918_Descended_GY94_codonPhyML_tree_annotated_tree.jpg
-            :width: 65%
-            :align: center
-            :alt: GY94_codonPhyML_tree/annotated_tree.jpg
-
-            Image of the tree generated by `codonPhyML`_ for the *GY94* substitution mdel (file ``./GY94_codonPhyML_tree/annotated_tree.jpg``). In this tree, H2N2 is colored in red, H3N2 is colored in blue, seasonal H1N1 from the 1977 pandemic is colored in green, and all earlier H1N1 is colored in black.
-
-         .. figure:: example_2013Analysis_Influenza_NP_Human_1918_Descended_KOSI07_codonPhyML_tree_annotated_tree.jpg
-            :width: 65%
-            :align: center
-            :alt: KOSI07_codonPhyML_tree/annotated_tree.jpg
-
-            Image of the tree generated by `codonPhyML`_ for the *KOSI07* substitution mdel (file ``./KOSI07_codonPhyML_tree/annotated_tree.jpg``). In this tree, H2N2 is colored in red, H3N2 is colored in blue, seasonal H1N1 from the 1977 pandemic is colored in green, and all earlier H1N1 is colored in black.
-
-        As can be seen from the above figures, the *GY94* and *KOSI07* substitution models yield extremely similar tree topologies. This is probably because the extremely dense sampling of the phylogeny makes it easy to place nodes.
-
-
-Construction of experimental substitution models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Experimental codon substitution models usable by `HYPHY`_ were constructed from the equilibrium preferences inferred by the `mapmuts analysis of the Aichi68 influenza NP from 2013`_. Recall that the `Input files`_ include the following three files giving experimentally inferred equilibrium preferences:
-
-    - ``replicate_A_p1_equilibriumpreferences.txt`` 
-
-    - ``replicate_B_p1_equilibriumpreferences.txt`` 
-
-    - ``p1_equilibriumpreferences.txt`` 
-
-as well as as the ``mutspectrum.txt`` file giving the experimentally measured nucleotide mutation frequencies.
-
-The experimental codon models are constructed with the ``phyloExpCM_buildHyphyExpCM.py`` script described in the `phyloExpCM documentation`_. The models are constructed to be reversible, are created from the amino acid preferences using either the *FracTolerated* or the *HalpernBruno* approach described in the `phyloExpCM documentation`_ for ``phyloExpCM_buildHyphyExpCM.py``.
-
-The experimental models are constructed in the subdirectory ``./experimental_substitution_models/``. Specifically, the following files are created in this directory
-for each of the three amino-acid preference sets (*replicate A*, *replicate B*, and *combined*). The names below are for the one for the *combined* preferences; the names for *replicate A* and *replicate B* have the prefix ``combined_`` replaced with ``replicate_A_`` or ``replicate_B_``:
-
-        * ``./experimental_substitution_models/combined_FracTolerated.ibf`` contains the codon substitution model using the *FracTolerated* method in `HYPHY`_ format as described in the `phyloExpCM documentation`_ for ``phyloExpCM_buildHyphyExpCM.py``.
-
-        * ``./experimental_substitution_models/combined_Halpern.ibf`` contains the codon substitution model using the *HalpernBruno* method in `HYPHY`_ format.
-
-        * ``./experimental_substitution_models/combined_FracTolerated_evolutionary_equilibriumfreqs.txt`` contains the expected equilibrium amino-acid frequencies for evolution governed by *FracTolerated* model with the mutation process described in ``mutspectrum.txt``. This file is in the format described in the `phyloExpCM documentation`_ for ``phyloExpCM_buildHyphyExpCM.py``.
-
-        * ``./experimental_substitution_models/combined_HalpernBruno_evolutionary_equilibriumfreqs.txt`` is the expected equilibrium frequencies for evolution governed by the *HalpernBruno* model.
-
-Note that the ``*.ibf`` files are not actually included in the `phyloExpCM`_ repository `on GitHub`_ due to their large file size, but they can be regenerated with the commands here.
-
-We also make a visual logo plot image of the expected equilibrium frequencies of the different amino acids during evolution. Note that these frequencies are **different** from the amino-acid preferences themselves described in the `mapmuts analysis of the Aichi68 influenza NP from 2013`_, since these evolutionary frequencies account for the structure of the genetic code and mutation frequencies (see the `phyloExpCM documentation`_ for ``phyloExpCM_buildHyphyExpCM.py``). A visual plot is made for the *combined* experimental data using the *FracTolerated* model (as will be seen below, this appears to be the best model), and is in the file ``./experimental_substitution_models/combined_FracTolerated_evolutionarysite_preferences_logoplot.pdf`` as shown below:
-
-    .. figure:: example_2013Analysis_Influenza_NP_Human_1918_Descended_experimental_substitution_models_combined_FracTolerated_evolutionarysite_preferences_logoplot.jpg
-       :width: 80%
-       :align: center
-       :alt: experimental_substitution_models/combined_FracTolerated_evolutionarysite_preferences_logoplot.jpg
-
-       The expected amino-acid frequencies during evolution, as shown in the plot ``./experimental_substitution_models/combined_FracTolerated_evolutionarysite_preferences_logoplot.pdf``.
-
-
-Optimizing the trees with various substitution models
+Optimizing the tree with various substitution models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topologies estimated with `codonPhyML`_ and the *GY94* or *KOSI07* substitution models as described in `Construction of phylogenetic trees`_. This analysis compares the experimentally determined codon substitution models with various other substitution models.
+This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topology estimated with `codonPhyML`_ and the *GY94* substitution model as described in `Construction of phylogenetic tree`_. This analysis compares the experimentally determined codon substitution models with various other substitution models.
 
-This analysis is done with the `phyloExpCM`_ script ``phyloExpCM_optimizeHyphyTree.py``, which is described in the `phyloExpCM documentation`_. This script uses `HYPHY`_ to optimize the branch lengths and any substitution model free parameters on fixed tree topologies (the topologies estimated with `codonPhyML`_ using the *GY94* or *KOSI07* models).
+This analysis is done with the `phyloExpCM`_ scripts ``phyloExpCM_ExpModelOptimizeHyphyTree.py`` and ``phyloExpCM_optimizeHyphyTree.py``, which are described in the `phyloExpCM documentation`_. These scripts uses `HYPHY`_ to optimize the branch lengths and any substitution model free parameters on the fixed tree topology estimated with `codonPhyML`_.
 
-The results of the optimizations for the various substitution models are in the subdirectory ``./codonmodel_optimized_trees/``. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with `HYPHY`_ using the indicated codon substitution models. For example, ``./codonmodel_optimized_trees/Tree-KOSI07_Model-KOSI07_F_omega-global-gamma4_rates-one/`` contains one such model. Within this subdirectory, the files of interest are:
+The results of the optimizations for the various substitution models are in the subdirectory ``./codonmodel_optimized_trees/``. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with `HYPHY`_ using the indicated codon substitution models. For example, ``./codonmodel_optimized_trees/Tree-GY94_Model-KOSI07_F_omega-global-gamma4_rates-one/`` contains one such model. Within this subdirectory, the files of interest are:
 
-    * ``hyphy_tree.newick`` is the tree with branch lengths optimized by `HYPHY`_ using the substitution model in question.
+    * ``hyphy_tree.newick`` or ``optimizedtree.newick`` (file name differs for different analyses) is the tree with branch lengths optimized by `HYPHY`_ using the substitution model in question.
 
-    * ``hyphy_output.txt`` is a text file summarizing the `HYPHY`_ output from the optimization. Note that the ``hyphy_output.txt`` files are not actually included in the `phyloExpCM`_ repository `on GitHub`_ due to their large file size, but they can be regenerated using the commands here.
+    * ``hyphy_output.txt`` or ``optimizedtree_results.txt`` (file name differs for different analyses) is a text file summarizing the `HYPHY`_ output from the optimization. 
 
-A more helpful way to view the results is to look at the main summary files created in the examples home directory. These files are ``KOSI07_summary.csv`` (for optimization of the tree topology estimated by `codonPhyML`_ with the *KOSI07* model) and ``GY94_summary.csv`` (for optimization of the tree topology estimated by `codonPhyML`_ with the *GY94* model). The results are sorted by the likelihood from best to worst.
-Overall, this file contains the following columns:
+    * ``sitelikelihoods.txt`` gives the per-site likelihoods.
 
-    1) Description of the substitution model.    
+A more helpful way to view the results is to look at the main summary files created in the examples home directory. These files are ``GY94_summary.csv`` (for optimization of the tree topology estimated by `codonPhyML`_ with the *GY94* model) and a ``LaTex`` version of this file called ``GY94_summary.tex``.
 
-    2) The difference in `AIC`_ from the best model.
+Here are the results for optimization of the tree topology inferred with the *GY94* model in `codonPhyML`_ (this is the file ``GY94_summary.csv``):
 
-    3) The log likelihood.
-
-    4) The total number of free parameters in the substitution model. This is the sum of the parameters optimized by maximum likelihood and the parameters estimated empirically from the data.
-
-    5) The total number of parameters in the substitution model optimized by maximum likelihood:
-
-        - For experimental models, this is zero.
-
-        - For *GY94* and *KOSI07* models, this are always at least two, as both *omega* and *kappa* are estimated by maximum likelihood. For some of the variants, *omega* is drawn from discrete gamma, beta, or discrete category distributions, which adds additional parameters. For some of the variants, the rate is drawn from discrete gamma categories, which also adds another parameter. Finally, for some of the variants *omega* is different for each branch, which adds a number of free parameters equal to the number of branches.
-
-    6) The total number of parameters in the substitution model that are empirically estimated from the sequence data:
-
-        - For experimental models, this is zero.
-
-        - For *GY94* models, this is 9 as in the `CF3x4`_ model there are a total of three independent frequencies for each of the three codon positions.
-
-        - For *KOSI07* models, this is 60 as there are a total of 60 independent frequencies for the 61 non-stop codons.
-
-
-Here are the results for optimization of the tree built with the *GY94* model in `codonPhyML`_ (this is the file ``GY94_summary.csv``):
-
-    .. include:: example_2013Analysis_Influenza_NP_Human_1918_Descended_GY94_summary.csv
+    .. include:: example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta_GY94_summary.csv
        :literal:
 
-Here are the results for optimization of the tree built with the *KOSI07* model in `codonPhyML`_ (this is the file ``KOSI07_summary.csv``):
+These results show that inclusion of the stringency parameter :math:`\beta` improves the phylogenetic fit.
 
-    .. include:: example_2013Analysis_Influenza_NP_Human_1918_Descended_KOSI07_summary.csv
-       :literal:
+Comparison of per-site likelihoods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The `phyloExpCM` script ``phyloExpCM_SiteLikelihoodComparison.py`` was used to compare the per-site likelihoods between the best experimentally informed model (the *HalpernBruno* model with a fitted :math:`\beta`) and the best traditional model (the *GY94*
+model with gamma-distributed rates and :math:`\omega`).
+ 
+This was done by creating the input file ``phyloExpCM_SitelikelihoodComparison_infile.txt``
+and then running::
 
-Similar files are created in LaTex formatted tables as ``GY94_summary.tex`` and ``KOSI07_summary.tex``.
+     phyloExpCM_SiteLikelihoodComparison.py phyloExpCM_SiteLikelihoodComparison_infile.txt
+
+This created three output files.
+
+The first, ``sitelikelihoods.txt`` lists the differences in per-site likelihoods by site.
+     
+The next two are the following plots, which use Tukey box plots to show the differences in site likelihoods, categorizing sites by the `DSSP webserver`_ computed secondary
+structures (*SS*) and relative solvent accessibilities (*RSA*) in ``DSSP_analysis/2IQH_monomerC.dssp``
+Here are these plots:
+
+.. figure:: example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta_sitelikelihoodcomparison_bySS.jpg   
+   :width: 45%
+   :align: center
+   :alt: sitelikelihoodcomparison_bySS.jpg   
+   
+   The comparison of site likelihoods with sites categorized by secondary structure (``sitelikelihoodcomparison_bySS.pdf``).
+   
+.. figure:: example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta_sitelikelihoodcomparison_byRSA.jpg
+   :width: 45%
+   :align: center   
+   :alt: sitelikelihoodcomparison_byRSA.jpg
+
+   The comparison of site likelihoods with sites categorized by relative solvent accessibility (``sitelikelihoodcomparison_byRSA.pdf``).
+                    
 
 
 .. _`mapmuts`: https://github.com/jbloom/mapmuts
