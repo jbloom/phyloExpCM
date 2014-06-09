@@ -1,0 +1,15 @@
+#Summary for tree GY94.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+fitbetaFracTolerated, 0, -12144.2, 1, 1, 0
+FracTolerated, 391.8, -12341.1, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-gamma4, 1453.03, -12858.7, 13, 4, 9
+GY94_CF3x4_omega-global-gamma4_rates-one, 1616, -12941.2, 12, 3, 9
+KOSI07_F_omega-global-gamma4_rates-gamma4, 1845.6, -13004, 64, 4, 60
+GY94_CF3x4_omega-global-one_rates-gamma4, 1884.13, -13075.3, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-one, 2153.21, -13210.8, 11, 2, 9
+KOSI07_F_omega-global-gamma4_rates-one, 2153.56, -13159, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 2227.3, -13195.9, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 2650.12, -13408.3, 62, 2, 60
+avgaafreqsfitbeta_FracTolerated, 3736.2, -13952.3, 61, 1, 60
+avgaafreqs_FracTolerated, 3742.2, -13956.3, 60, 0, 60
