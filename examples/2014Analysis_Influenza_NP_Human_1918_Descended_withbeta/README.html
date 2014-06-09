@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.8.1: http://docutils.sourceforge.net/" />
+<title>2014 analysis of influenza NP with stringency parameter</title>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7056 2011-06-17 10:50:48Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="analysis-of-influenza-np-with-stringency-parameter">
+<h1 class="title">2014 analysis of influenza NP with stringency parameter</h1>
+
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
+<li><a class="reference internal" href="#software-used" id="id2">Software used</a></li>
+<li><a class="reference internal" href="#input-files" id="id3">Input files</a></li>
+<li><a class="reference internal" href="#running-the-analysis" id="id4">Running the analysis</a></li>
+<li><a class="reference internal" href="#steps-in-the-analysis" id="id5">Steps in the analysis</a><ul>
+<li><a class="reference internal" href="#creation-of-sequence-alignments" id="id6">Creation of sequence alignments</a></li>
+<li><a class="reference internal" href="#check-for-outlier-sequences" id="id7">Check for outlier sequences</a></li>
+<li><a class="reference internal" href="#construction-of-phylogenetic-tree" id="id8">Construction of phylogenetic tree</a></li>
+<li><a class="reference internal" href="#optimizing-the-tree-with-various-substitution-models" id="id9">Optimizing the tree with various substitution models</a></li>
+<li><a class="reference internal" href="#comparison-of-per-site-likelihoods" id="id10">Comparison of per-site likelihoods</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h1><a class="toc-backref" href="#id1">Overview</a></h1>
+<p>This is a description of an analysis of the effectiveness of experimentally determined substitution models for describing the evolution of influenza nucleoprotein (NP).</p>
+<p>This analysis closely parallels the one that has been previously described
+in the paper <a class="reference external" href="http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract">An experimentally determined evolutionary model dramatically improves phylogenetic fit</a> and is available at <a class="reference external" href="http://jbloom.github.io/phyloExpCM/example_2013Analysis_Influenza_NP_Human_1918_Descended.html">http://jbloom.github.io/phyloExpCM/example_2013Analysis_Influenza_NP_Human_1918_Descended.html</a></p>
+<p>It differs from that analysis primarily in its use of a stringency parameter <span class="math">
+\(\beta\)</span>
+ for the amino-acid preferences, and in its site-specific analysis.</p>
+<p>This analysis was performed by <a class="reference external" href="http://research.fhcrc.org/bloom/en.html">Jesse Bloom</a>.</p>
+<p>The overall approach is to use the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package to analyze a NP phylogeny using an experimentally derived substitution model from a <a class="reference external" href="http://jbloom.github.io/mapmuts/example_2013Analysis_Influenza_NP_Aichi68.html">mapmuts analysis of the Aichi68 influenza NP from 2013</a>, and to compare this model to various standard codon substitution models.</p>
+<p>Much of the analysis itself is performed using <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>, which is run by <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> using the scripts detailed in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>.</p>
+<p>The phylogenetic tree that is analyzed consists of human influenza lineages with their NPs directly descended from the 1918 virus, specifically:</p>
+<blockquote>
+<ul class="simple">
+<li>H1N1 from 1918 to 1957, and again from 1977 to 2008 (seasonal H1N1).</li>
+<li>H2N2 from 1957 to 1968.</li>
+<li>H3N2 from 1968 to 2013.</li>
+</ul>
+</blockquote>
+<p>The code, data, and results from the analysis are in the <tt class="docutils literal">./examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/</tt> subdirectory in the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package directory. This subdirectory contains all of the necessary input files (see <a class="reference internal" href="#input-files">Input files</a>) for running the analysis. It also contains a master script (<tt class="docutils literal">run_analysis.py</tt>) that can be used to regenerate the analysis with the command:</p>
+<pre class="literal-block">
+python run_analysis.py
+</pre>
+<p>provided that you have installed the software described in <a class="reference internal" href="#software-used">Software used</a>.</p>
+</div>
+<div class="section" id="software-used">
+<h1><a class="toc-backref" href="#id2">Software used</a></h1>
+<p>The analysis was performed using the following software on the Fred Hutchinson computer cluster using the following Linux distribution:</p>
+<pre class="literal-block">
+Linux version 3.5.0-43-generic (buildd&#64;roseapple) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #66~precise1-Ubuntu SMP Thu Oct 24 14:52:23 UTC 2013
+</pre>
+<p>In order to replicate the analysis, you will need to use Linux or Mac OS X, and install the software listed below.</p>
+<p>The specific versions of software used are specified. Other versions will likely work as well, but this has not been confirmed.</p>
+<ul>
+<li><p class="first"><a class="reference external" href="http://www.python.org/">Python</a> (version 2.7.3)</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> : version 0.3</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.numpy.org/">numpy</a> (version 1.6.1)</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://matplotlib.org/">matplotlib</a> (version 1.3.1).</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> : specifically, <a class="reference external" href="https://github.com/jbloom/mapmuts/tree/v1.0">mapmuts version 1.0</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/download/">EMBOSS needle</a> (version 6.6.0). The executable with the name <tt class="docutils literal">needle</tt> is expected to be in the current search path.</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> (version 7.7.6). The executable with the name <tt class="docutils literal"><span class="pre">raxmlHPC-SSE3</span></tt> is expected to be in the current search path. This is the SSE3 version, and was built using the command:</p>
+<pre class="literal-block">
+make -f Makefile.SSE3.gcc
+</pre>
+<p>and then copying the executable into the search path.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> (version 1.4) was used for the visual identification of outliers from the molecular clock and to root trees based on date-stamping.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> (version 1.4.0) was used to open tree files for annotation, visualization, and saving of images.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (version 1.00 201306.18) was used to build phylogenetic trees. The executable with the name <tt class="docutils literal">codonphyml</tt> is expected to be in the current search path. This executable was compiled with the <em>omp</em> options to make it multi-threaded.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (version HYPHY 2.220131214beta(MP) for Linux on x86_64) was used to optimize the branches and compute the likelihoods under the different models. The multiprocessor (<tt class="docutils literal">HYPHYMP</tt>) version of the executable was used. To install this, the following commands were run in the unzipped <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> source code directory after download:</p>
+<pre class="literal-block">
+cmake -DINSTALL_PREFIX=/home/jbloom/.local/ .
+make MP2
+make install
+</pre>
+</li>
+<li><p class="first">This analysis was run on the FHCRC scientific computing cluster using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> (version 2.6.2), and requires <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> to be installed to run as currently implemented. If you don't want to use <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>, all you need to do is modify the main <tt class="docutils literal">run_analysis.py</tt> script to not submit any jobs via <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>. The use of <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> in the current version simply allows more processors to be used simultaneously and so speeds up the analysis.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> 6.6.9-7 2012-08-17 was used to convert PDF files to JPGs.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="input-files">
+<h1><a class="toc-backref" href="#id3">Input files</a></h1>
+<p>Here are the input files that are necessary to repeat the analysis. These are the names assigned with the <tt class="docutils literal">./examples/2013Analysis_Influenza_NP_Human_1918_Descended/</tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal">run_analysis.py</tt> is a <a class="reference external" href="http://www.python.org/">Python</a> script that will perform the analysis assuming that you have all of the appropriate software (see <a class="reference internal" href="#software-used">Software used</a>) and input files. To run this script, use:</p>
+<pre class="literal-block">
+python run_analysis.py
+</pre>
+<p>at the command line.</p>
+</li>
+<li><p class="first"><em>NPseqs.fasta</em> is the set of all unique full-length influenza A coding DNA sequences as downloaded from the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/genomes/FLU/FLU.html">Influenza Virus Resource</a> on June-25-2013.</p>
+</li>
+<li><p class="first"><em>Aichi68-NP.fasta</em> is the coding DNA sequence for A/Aichi/2/1968 (H3N2) NP as taken from reverse-genetics plasmid pHWAichi68-NP.</p>
+</li>
+<li><p class="first"><em>JVI_82_8947_Anomalies.txt</em> is a list of the strain names for the sequences identified as anomalous (either frozen in time or recombinant) in Appendices 1 and 2 of <cite>Krasnitz et al, 2008</cite>.</p>
+</li>
+<li><p class="first"><em>JDB_Anomalies.txt</em> is a list of strain names that appear to be anomalous based on their strong violation of the molecular clock. These sequences are probably mis-annotated in the database, come from non-standard lineages (for examples a swine H3N2 isolated from humans), are reassortants (example would be an H1N1 NP that reassorted into an H3N2), or are extensively lab adapted and so deviate from the molecular clock due to large numbers ofadaptation mutations.</p>
+</li>
+<li><p class="first"><em>mutspectrum.txt</em> is a file that contains the experimentally measured nucleotide mutation rates. The measurement of these mutation rates is described in <a class="reference external" href="http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract">An experimentally determined evolutionary model dramatically improves phylogenetic fit</a>.</p>
+</li>
+<li><p class="first">File giving the inferred equilibrium amino-acid preferences at each site in NP. This file is from the <a class="reference external" href="http://jbloom.github.io/mapmuts/example_2013Analysis_Influenza_NP_Aichi68.html">mapmuts analysis of the Aichi68 influenza NP from 2013</a>. The file is <tt class="docutils literal">p1_equilibriumpreferences.txt</tt>. It is the combined experimental data from the two passage 1 replicates described in <a class="reference external" href="http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract">An experimentally determined evolutionary model dramatically improves phylogenetic fit</a>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal">./DSSP_analysis/</tt> is a subdirectory that contains the results of analyzing the solvent accessibilities and secondary structures of NP from the crystal structure. Briefly, the NP crystal structure in <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=2iqh">PDB 2IQH</a> was downloaded, and the <tt class="docutils literal">2IQH.pdb</tt> file was manually edited to extract only monomer C into <tt class="docutils literal">2IQH_monomerC.pdb</tt>. This monomer was then analyzed with the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> to create the results stored in <tt class="docutils literal">2IQH_monomerC.dssp</tt>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="running-the-analysis">
+<h1><a class="toc-backref" href="#id4">Running the analysis</a></h1>
+<p>The analysis in this directory can be repeated simply by running the master script <tt class="docutils literal">run_analysis.py</tt> from the command line with:</p>
+<pre class="literal-block">
+python run_analysis.py
+</pre>
+<p>or running it using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> with:</p>
+<pre class="literal-block">
+sbatch run_analysis.sbatch
+</pre>
+<p>Other than the files delineated under <a class="reference internal" href="#input-files">Input files</a>, all data files in this directory can be re-generated with this command. However, the analysis approach does involve a few manual steps with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> to create nicely formatted and annotated tree images from the raw tree files produced by the script. These manual steps are indicated below.</p>
+<p>There is a variable called <em>use_existing_output</em> that is hardcoded into the beginning of this script. This variable is currently set to <em>True</em>, which means that if output already exists it is <strong>not</strong> overwritten and regenerated. If you want to regenerate the output (such as after changing input files or altering analysis parameters), then either manually delete the old output or change <em>use_existing_output</em> to <em>False</em> to force the script to overwrite old output. This script does <strong>not</strong> automatically test for dependencies among files, so if you change a file but keep <em>use_existing_output</em> to <em>True</em>, then you need to manually remove any old files with dependencies.</p>
+<p>Note that <tt class="docutils literal">run_analysis.py</tt> uses multiple CPUs to speed up some of the analyses. If you don't have as many CPUs on your system, you might want to check that you are not overloading the system -- you can avoid this by using fewer CPUs, which will require you to manually modify the <tt class="docutils literal">run_analysis.py</tt> script.</p>
+<p>Note that <tt class="docutils literal">run_analysis.py</tt> uses <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> by default to run some of its subsidiary programs -- if you don't want to do this, set the <em>use_sbatch</em> option to <em>False</em> within the program.</p>
+</div>
+<div class="section" id="steps-in-the-analysis">
+<h1><a class="toc-backref" href="#id5">Steps in the analysis</a></h1>
+<p>Here are the steps in the analysis. The command for each step is shown, but these commands (with the exception of some manual formatting of tree images with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>) are run automatically by the main <tt class="docutils literal">run_analysis.py</tt> script if you are using that.</p>
+<div class="section" id="creation-of-sequence-alignments">
+<h2><a class="toc-backref" href="#id6">Creation of sequence alignments</a></h2>
+<p>Extract and align the human NP sequences descended from the 1918 virus into <em>Aligned_NPs.fasta</em>. This is done by the script <tt class="docutils literal">get_treeseqs.py</tt>, by running:</p>
+<pre class="literal-block">
+python get_treeseqs.py
+</pre>
+<p>The created <em>Aligned_NPs.fasta</em> includes the sequences with headers that give their isolation date (except for H1N1 from after 1977, where 24 years are subtracted from the isolation date for the reasons described below).</p>
+<p>The specific steps are as follows:</p>
+<ol class="arabic">
+<li><p class="first">Read all sequences from <em>NPseqs.fasta</em>.</p>
+</li>
+<li><p class="first">Purge any sequences specified as anomalous in <em>JVI_82_8947_Anomalies.txt</em> and <em>JDB_Anomalies.txt</em>.</p>
+</li>
+<li><p class="first">Purge any sequences with ambiguous nucleotide identities.</p>
+</li>
+<li><p class="first">If there are redundant identical sequences, keep only one sequence from each set of identical sequences.</p>
+</li>
+<li><p class="first">Purge any sequences for which the host, year of isolation, or subtype is unavailable.</p>
+</li>
+<li><p class="first">Purge any sequences for which the host is something other than human.</p>
+</li>
+<li><p class="first">Keep at most 3 sequences per year from each of the following classifications. Sequences from other classifications are all removed. The classifications for which 3 per year are retained are:</p>
+<blockquote>
+<ul class="simple">
+<li>H1N1 from 1918 to 1957: this is H1N1 directly descended from the 1918 virus.</li>
+<li>H2N2 from 1957 to 1968: this H2N2 derived from reassortment of an avian virus with the existing H1N1 in the 1957 &quot;Asian flu&quot; pandemic. The NP in the new H2N2 was from the existing H1N1, which then went extinct.</li>
+<li>H3N2 from 1968 to 2013: this is H3N2 derived from reassortment of an avian virus with thte existing H2N2 in the 1968 &quot;Hong Kong flu&quot; pandemic. The NP in the new H3N2 was from the existing H2N2, when then went extinct.</li>
+<li>H1N1 from 1977 to 2008: this is &quot;seasonal H1N1&quot; that arose in 1977 in the &quot;Russian flu&quot; pandemic. This is a virus from the earlier human H1N1 that was frozen and re-released. The virus was frozen for about 24 years before this pandemic (estimate from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19787384">dos Reis et al, 2009</a>), and therefore <strong>24 years are subtracted from the isolation date of viruses in this lineage</strong>. This date subtraction is not important for the construction of the phylogenetic tree, but it is important for the <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> based analysis that assumes a molecular clock (see <a class="reference internal" href="#check-for-outlier-sequences">Check for outlier sequences</a>).</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first">Translate and align all of the protein sequences, then also construct nucleotide alignments from the protein alignments. The alignments are built with <a class="reference external" href="http://emboss.sourceforge.net/download/">EMBOSS needle</a>. The alignments are written to <em>Aligned_NPs.fasta</em> and <em>Aligned_NP_proteins.fasta</em>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="check-for-outlier-sequences">
+<h2><a class="toc-backref" href="#id7">Check for outlier sequences</a></h2>
+<p>There are almost always clear &quot;outlier&quot; sequences in influenza phylogenies. These outliers can arise from several sources:</p>
+<blockquote>
+<ul class="simple">
+<li>Mis-annotation of the date or subtype in the database.</li>
+<li>Amplification of a lab contaminant during sequencing.</li>
+<li>Sequencing of a zoonotic rather than epidemic strain. For example, there are currently low rates of swine-origin vH3N2 in humans. These strains are also sequenced and labeld as human H3N2 (since they are H3N2 from humans) -- but they are not from the same evolutionary lineage, as they have been evolving in swine.</li>
+</ul>
+</blockquote>
+<p>To eliminate such outliers, several steps were taken. First, sequences that have already been identified as anomalous <a class="reference external" href="http://jvi.asm.org/content/82/17/8947.abstract">Krasnitz et al, 2008</a> are eliminated in <a class="reference internal" href="#creation-of-sequence-alignments">Creation of sequence alignments</a> described above.</p>
+<p>However, to identify further outliers, the following steps were taken. Essentially, these steps utilize <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> and <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> to manually identify sequences that are clear outliers from the molecular clock. These sequences are then added to the file <em>JDB_Anomalies</em>, and the steps in <a class="reference internal" href="#creation-of-sequence-alignments">Creation of sequence alignments</a> and then those here are repeated. This iterative process has been completed for the sequences here until no more outliers were identified.</p>
+<p>Specifically, the steps were:</p>
+<ol class="arabic">
+<li><p class="first">The <tt class="docutils literal">run_analysis.py</tt> script builds a <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree for quick visual inspection. <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> is used because it is a rapid method to build a reasonable maximum-likelihood tree. The steps:</p>
+<blockquote>
+<ol class="loweralpha">
+<li><p class="first">The subdirectory <tt class="docutils literal">./RAxML_output/</tt> was created</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> was run using the following command:</p>
+<pre class="literal-block">
+raxmlHPC-SSE3 -w ./RAxML_output -n Aligned_NPs -p 1 -m GTRCAT -s Aligned_NPs.fasta
+</pre>
+<p>Note that for the actual command, the full path needs to be specified for the <tt class="docutils literal">RAxML_output</tt> subdirectory as <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> does not handle relative paths -- this is handled by the master script <tt class="docutils literal">run_analysis.py</tt>.</p>
+</li>
+<li><p class="first">The following command will have created the best <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree as <tt class="docutils literal">./RAxML_output/RAxML_bestTree.Aligned_NPs</tt>.</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">The next step is manual. Open this tree using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>, and look manually to see if there are outliers from the molecular clock in the <tt class="docutils literal">./RAxML_output/RAxML_bestTree.Aligned_NPs</tt> file. If so, add these outliers to <em>JDB_Anomalies.txt</em> and repeat the <a class="reference internal" href="#creation-of-sequence-alignments">Creation of sequence alignments</a> and this <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> analysis. Note that this has already been done, so if you are just re-running the analysis then you don't need to do this unless you have changed the sequence set.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="construction-of-phylogenetic-tree">
+<h2><a class="toc-backref" href="#id8">Construction of phylogenetic tree</a></h2>
+<p>A high-quality phylogenetic trees were then constructed using <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>, which is able to build maximum-likelihood trees with codon substitution models.</p>
+<p>The <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal">phyloExpCM_runcodonPhyML.py</tt> (see <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for details) was used to run <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. Trees were built using
+the <em>GY94</em> codon model (<a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a>) with:</p>
+<blockquote>
+<ul class="simple">
+<li>The equilibrium codon frequencies estimated emprically using the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> method.</li>
+<li>A single transition / transversion ratio (<em>kappa</em>) estimated by maximum likelihood.</li>
+<li>The dN/dS ratio (<em>omega</em>) drawn from four discrete gamma-distributed categories (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/7932792">Yang 1994</a>) with the shape parameter and mean estimated by maximum likelihood.</li>
+</ul>
+</blockquote>
+<p>The tree construction was performed in the <tt class="docutils literal">./GY94_codonPhyML_tree/</tt> subdirectory. The tree itself is in the file <tt class="docutils literal">./GY94_codonPhyML_tree/codonphyml_tree.newick</tt>.</p>
+</div>
+<div class="section" id="optimizing-the-tree-with-various-substitution-models">
+<h2><a class="toc-backref" href="#id9">Optimizing the tree with various substitution models</a></h2>
+<p>This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topology estimated with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> and the <em>GY94</em> substitution model as described in <a class="reference internal" href="#construction-of-phylogenetic-tree">Construction of phylogenetic tree</a>. This analysis compares the experimentally determined codon substitution models with various other substitution models.</p>
+<p>This analysis is done with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> scripts <tt class="docutils literal">phyloExpCM_ExpModelOptimizeHyphyTree.py</tt> and <tt class="docutils literal">phyloExpCM_optimizeHyphyTree.py</tt>, which are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>. These scripts uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model free parameters on the fixed tree topology estimated with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>.</p>
+<p>The results of the optimizations for the various substitution models are in the subdirectory <tt class="docutils literal">./codonmodel_optimized_trees/</tt>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. For example, <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/Tree-GY94_Model-KOSI07_F_omega-global-gamma4_rates-one/</span></tt> contains one such model. Within this subdirectory, the files of interest are:</p>
+<blockquote>
+<ul class="simple">
+<li><tt class="docutils literal">hyphy_tree.newick</tt> or <tt class="docutils literal">optimizedtree.newick</tt> (file name differs for different analyses) is the tree with branch lengths optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the substitution model in question.</li>
+<li><tt class="docutils literal">hyphy_output.txt</tt> or <tt class="docutils literal">optimizedtree_results.txt</tt> (file name differs for different analyses) is a text file summarizing the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> output from the optimization.</li>
+<li><tt class="docutils literal">sitelikelihoods.txt</tt> gives the per-site likelihoods.</li>
+</ul>
+</blockquote>
+<p>A more helpful way to view the results is to look at the main summary files created in the examples home directory. These files are <tt class="docutils literal">GY94_summary.csv</tt> (for optimization of the tree topology estimated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> with the <em>GY94</em> model) and a <tt class="docutils literal">LaTex</tt> version of this file called <tt class="docutils literal">GY94_summary.tex</tt>.</p>
+<p>Here are the results for optimization of the tree topology inferred with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal">GY94_summary.csv</tt>):</p>
+<blockquote>
+<pre class="literal-block">
+#Summary for tree GY94.
+#
+#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
+fitbetaFracTolerated, 0, -12144.2, 1, 1, 0
+FracTolerated, 391.8, -12341.1, 0, 0, 0
+HalpernBruno, 751.2, -12520.8, 0, 0, 0
+GY94_CF3x4_omega-global-gamma4_rates-one, 1616, -12941.2, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-gamma4, 1884.13, -13075.3, 12, 3, 9
+GY94_CF3x4_omega-global-one_rates-one, 2153.21, -13210.8, 11, 2, 9
+KOSI07_F_omega-global-gamma4_rates-one, 2153.56, -13159, 63, 3, 60
+KOSI07_F_omega-global-one_rates-gamma4, 2227.3, -13195.9, 63, 3, 60
+KOSI07_F_omega-global-one_rates-one, 2650.12, -13408.3, 62, 2, 60
+avgaafreqsfitbeta_FracTolerated, 3736.2, -13952.3, 61, 1, 60
+avgaafreqs_FracTolerated, 3742.2, -13956.3, 60, 0, 60
+fitbetaFracToleratedrandomized, 3747.4, -14017.9, 1, 1, 0
+fitbetaHalpernBrunorandomized, 3904.2, -14096.3, 1, 1, 0
+avgaafreqsfitbeta_HalpernBruno, 4002, -14085.2, 61, 1, 60
+avgaafreqs_HalpernBruno, 4080.4, -14125.4, 60, 0, 60
+FracToleratedrandomized, 4156, -14223.2, 0, 0, 0
+HalpernBrunorandomized, 4803, -14546.7, 0, 0, 0
+</pre>
+</blockquote>
+<p>These results show that inclusion of the stringency parameter <span class="math">
+\(\beta\)</span>
+ improves the phylogenetic fit.</p>
+</div>
+<div class="section" id="comparison-of-per-site-likelihoods">
+<h2><a class="toc-backref" href="#id10">Comparison of per-site likelihoods</a></h2>
+<p>The <cite>phyloExpCM</cite> script <tt class="docutils literal">phyloExpCM_SiteLikelihoodComparison.py</tt> was used to compare the per-site likelihoods between the best experimentally informed model (the <em>HalpernBruno</em> model with a fitted <span class="math">
+\(\beta\)</span>
+) and the best traditional model (the <em>GY94</em>
+model with gamma-distributed rates and <span class="math">
+\(\omega\)</span>
+).</p>
+<p>This was done by creating the input file <tt class="docutils literal">phyloExpCM_SitelikelihoodComparison_infile.txt</tt>
+and then running:</p>
+<pre class="literal-block">
+phyloExpCM_SiteLikelihoodComparison.py phyloExpCM_SiteLikelihoodComparison_infile.txt
+</pre>
+<p>This created three output files.</p>
+<p>The first, <tt class="docutils literal">sitelikelihoods.txt</tt> lists the differences in per-site likelihoods by site.</p>
+<p>The next two are the following plots, which use Tukey box plots to show the differences in site likelihoods, categorizing sites by the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> computed secondary
+structures (<em>SS</em>) and relative solvent accessibilities (<em>RSA</em>) in <tt class="docutils literal">DSSP_analysis/2IQH_monomerC.dssp</tt>
+Here are these plots:</p>
+<div class="figure align-center">
+<img alt="sitelikelihoodcomparison_bySS.jpg" src="sitelikelihoodcomparison_bySS.jpg" style="width: 45%;" />
+<p class="caption">The comparison of site likelihoods with sites categorized by secondary structure (<tt class="docutils literal">sitelikelihoodcomparison_bySS.pdf</tt>).</p>
+</div>
+<div class="figure align-center">
+<img alt="sitelikelihoodcomparison_byRSA.jpg" src="sitelikelihoodcomparison_byRSA.jpg" style="width: 45%;" />
+<p class="caption">The comparison of site likelihoods with sites categorized by relative solvent accessibility (<tt class="docutils literal">sitelikelihoodcomparison_byRSA.pdf</tt>).</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

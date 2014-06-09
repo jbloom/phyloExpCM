@@ -1,0 +1,6 @@
+# input file for running script phyloExpCM_runcodonPhyML.py for phyloExpCM_runcodonphyml
+seqfile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/Aligned_NPs.fasta
+codonPhyML_path codonphyml
+seed 1
+outprefix codonphyml
+model GY94_CF3x4_omega-gamma4

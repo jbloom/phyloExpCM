@@ -1,0 +1,7 @@
+# input file for running script phyloExpCM_FreqsFromAlignment.py for phyloExpCM_FreqsFromAlignment
+alignmentfile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/Aligned_NPs.fasta
+translateseqs True
+includestop False
+pseudocounts 1
+averagesites True
+outputfile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/avg_aa_freqs.txt

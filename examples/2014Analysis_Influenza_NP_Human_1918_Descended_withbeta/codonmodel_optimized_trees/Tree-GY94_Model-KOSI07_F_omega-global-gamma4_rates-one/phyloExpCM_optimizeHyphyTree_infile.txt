@@ -1,0 +1,11 @@
+# input file for running script phyloExpCM_optimizeHyphyTree.py for phyloExpCM_optimizeHyphyTree
+hyphyoutfile hyphy_output.txt
+hyphytreefile hyphy_tree.newick
+treefile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/GY94_codonPhyML_tree/codonphyml_tree.newick
+hyphycmdfile hyphy_cmds.bf
+hyphydistancesfile None
+siteslist /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/p1_equilibriumpreferences.txt
+model KOSI07_F_omega-global-gamma4_rates-one
+fastafile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_NP_Human_1918_Descended_withbeta/Aligned_NPs.fasta
+hyphypath HYPHYMP CPU=1
+persitelikelihoods sitelikelihoods.txt

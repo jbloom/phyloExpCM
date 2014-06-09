@@ -1,0 +1,6 @@
+*.ibf
+hyphy_output.txt
+messages.log
+errors.log
+slurm*
+*sbatch*
