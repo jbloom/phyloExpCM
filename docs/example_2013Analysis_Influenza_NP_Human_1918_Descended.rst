@@ -11,6 +11,8 @@ This is a description of an analysis of the effectiveness of experimentally dete
 
 This is the analysis described in the paper `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_.
 
+For a partial version of this analysis that includes fitting of a stringency parameter :math:`\beta`, see http://jbloom.github.io/phyloExpCM/example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html
+
 This analysis was performed by `Jesse Bloom`_.
 
 The overall approach is to use the `phyloExpCM`_ package to analyze a NP phylogeny using an experimentally derived substitution model from a `mapmuts analysis of the Aichi68 influenza NP from 2013`_, and to compare this model to various standard codon substitution models.
