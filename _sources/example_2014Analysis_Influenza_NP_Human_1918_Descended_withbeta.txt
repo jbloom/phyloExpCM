@@ -12,7 +12,7 @@ This is a description of an analysis of the effectiveness of experimentally dete
 This analysis closely parallels the one that has been previously described
 in the paper `An experimentally determined evolutionary model dramatically improves phylogenetic fit`_ and is available at http://jbloom.github.io/phyloExpCM/example_2013Analysis_Influenza_NP_Human_1918_Descended.html
 
-It differs from that analysis primarily in its use of a stringency parameter :math:`\beta` for the amino-acid preferences, and in its site-specific analysis.
+It differs from that analysis primarily in its use of a stringency parameter :math:`\beta` for the amino-acid preferences, and in its site-specific analysis. The use of this stringency parameter and the results from the analysis are described in `An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`_.
 
 This analysis was performed by `Jesse Bloom`_.
 
@@ -47,7 +47,7 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ : version 0.3
+* `phyloExpCM`_ : specifically, `phyloExpCM version 0.3`_
 
 * `numpy`_ (version 1.6.1)
 
@@ -294,5 +294,6 @@ Here are these plots:
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
 .. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract
-.. _`phyloExpCM version 0.21`: https://github.com/jbloom/phyloExpCM/tree/v0.21
+.. _`phyloExpCM version 0.3`: https://github.com/jbloom/phyloExpCM/tree/v0.3
 .. _`mapmuts version 1.0`: https://github.com/jbloom/mapmuts/tree/v1.0
+.. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://www.biorxiv.org/content/early/2014/06/11/003848
