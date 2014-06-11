@@ -23,6 +23,6 @@
 .. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract
 .. _`Posada and Buckley 2004`: http://sysbio.oxfordjournals.org/content/53/5/793.full
 .. _`Yang et al 2005`: http://mbe.oxfordjournals.org/content/22/4/1107.full
-.. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://biorxiv.org/content/early/2014/04/03/003848
+.. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://www.biorxiv.org/content/early/2014/06/11/003848
 .. _`DSSP` : http://swift.cmbi.ru.nl/gv/dssp/
 .. _`Tien et al, 2013` : http://www.plosone.org/article/info:doi/10.1371/journal.pone.0080635
