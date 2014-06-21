@@ -5,8 +5,6 @@
 .. contents::
    :depth: 3
 
-**This description of the analysis is currently available. The actual source code and data for this specific analysis are not yet posted publicly on GitHub in the ``./examples/2014Analysis_Influenza_H1_HA/`` subdirectory. They will be posted upon publication of the paper. If you are a reviewer and you would like to see them now, please relay this request to Jesse via the editor.**
-
 Overview
 ------------
 This is an analysis of influenza A virus H1 hemagglutinins (HAs) from human and swine that are descended from a common ancestor closely related the HA of the 1918 virus. This analysis constructs phylogenies of these sequences and analyzes them with standard and experimentally determined codon substitution models.
