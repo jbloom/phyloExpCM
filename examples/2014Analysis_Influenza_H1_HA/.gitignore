@@ -1,0 +1,11 @@
+slurm*
+*.DS_Store
+*.fasta.reduced
+*sbatch*
+*replicate*logoplot*
+evolutionary_frequencies/*correlationplot*
+evolutionary_frequencies/*entropy_plot*
+messages.log
+errors.log
+*.swp
+._*

@@ -1,0 +1,8 @@
+# input file for running script phyloExpCM_buildHyphyExpCM.py for phyloExpCM_buildHyphyExpCM_combined
+aapreferences /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/combined_amino_acid_preferences.txt
+mutspectrum /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/mutationrates.txt
+scalefactor 10000.0
+makereversible False
+model HalpernBruno
+evolequilfreqs /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/evolutionary_frequencies//combined_evolutionary_equilibriumfreqs.txt
+hyphyExpCMs /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/evolutionary_frequencies//temp.ibf

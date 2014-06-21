@@ -1,0 +1,11 @@
+# input file for running script mapmuts_siteprofileplots.py for mapmuts_siteprofileplots_H3_numbering_combined
+outfileprefix H3_numbering_combined_evolequilfreqs_
+sitepreferences /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/evolutionary_frequencies//combined_evolutionary_equilibriumfreqs.txt
+siterange 2 565
+dsspfile /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/PDB_structure//1RVX_trimer_renumbered.dssp
+dsspchain A
+add_rsa True
+add_ss True
+nperline 81
+includestop False
+sitenumbermapping /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/PDB_structure//sequential_to_H3.txt

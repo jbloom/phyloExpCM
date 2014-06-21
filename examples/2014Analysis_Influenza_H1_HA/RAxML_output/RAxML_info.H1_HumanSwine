@@ -1,0 +1,102 @@
+
+
+IMPORTANT WARNING: Sequences 1930.50_STRAIN_A/swine/Iowa/15/1930_HOST_Swine_SUBTYPE_H1N1_n1 and 1931.50_STRAIN_A/swine/JY2/1931_HOST_Swine_SUBTYPE_H1N1_n3 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1992.50_STRAIN_A/swine/Nebraska/1/1992_HOST_Swine_SUBTYPE_H1N1_n1 and 1992.50_STRAIN_A/swine/Nebraska/1/1992_HOST_Swine_SUBTYPE_H1N1_n2 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1997.50_STRAIN_A/Swine/Wisconsin/163/97_HOST_Swine_SUBTYPE_H1N1_n2 and 1998.50_STRAIN_A/Swine/Wisconsin/457/98_HOST_Swine_SUBTYPE_H1N1_n3 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 2009.67_STRAIN_A/swine/Minnesota/130A/2009_HOST_Swine_SUBTYPE_H1N1_n2 and 2009.56_STRAIN_A/Japan/NHRC0003/2009_HOST_Human_SUBTYPE_H1N1_n3 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1949.50_STRAIN_A/Netherlands/002K1/1949_HOST_Human_SUBTYPE_H1N1_n2 and 1950.50_STRAIN_A/Netherlands/001G1/1950_HOST_Human_SUBTYPE_H1N1_n2 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1953.50_STRAIN_A/USSR/90/1977_HOST_Human_SUBTYPE_H1N1_n1 and 1954.50_STRAIN_A/Memphis/15/1978_HOST_Human_SUBTYPE_H1N1_n1 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1976.50_STRAIN_A/Wellington/7/2000_HOST_Human_SUBTYPE_H1N1_n2 and 1976.64_STRAIN_A/Canterbury/36/2000_HOST_Human_SUBTYPE_H1N1_n1 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1977.38_STRAIN_A/Waikato/4/2001_HOST_Human_SUBTYPE_H1N1_n3 and 1977.54_STRAIN_A/Canterbury/63/2001_HOST_Human_SUBTYPE_H1N1_n1 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 1979.50_STRAIN_A/HaNoi/BM857/2003_HOST_Human_SUBTYPE_H1N1_n1 and 1979.72_STRAIN_A/HaNoi/BM870/2003_HOST_Human_SUBTYPE_H1N1_n1 are exactly identical
+
+
+IMPORTANT WARNING: Sequences 2009.40_STRAIN_A/Chile/36/2009_HOST_Human_SUBTYPE_H1N1_n1 and 2009.51_STRAIN_A/Singapore/GP1087/2009_HOST_Human_SUBTYPE_H1N1_n1 are exactly identical
+
+IMPORTANT WARNING
+Found 10 sequences that are exactly identical to other sequences in the alignment.
+Normally they should be excluded from the analysis.
+
+An alignment file with sequence duplicates removed has already
+been printed to file /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/H1_HumanSwine_alignment.fasta.reduced
+
+
+This is RAxML version 7.7.6 released by Alexandros Stamatakis on August 29 2013.
+
+With greatly appreciated code contributions by:
+Andre Aberer (HITS)
+Simon Berger (HITS)
+Nick Pattengale (Sandia)
+Wayne Pfeiffer (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+
+Alignment has 949 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 0.00%
+
+RAxML rapid hill-climbing mode
+
+Using 1 distinct models/data partitions with joint branch length optimization
+
+
+Executing 1 inferences on the original alignment using 1 distinct randomized MP trees
+
+All free model parameters will be estimated by RAxML
+ML estimate of 25 per site rate categories
+
+Likelihood of final tree will be evaluated and optimized under GAMMA
+
+GAMMA Model parameters will be estimated up to an accuracy of 0.1000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 949
+Name: No Name Provided
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+
+RAxML was called as follows:
+
+raxmlHPC-SSE3 -w /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/RAxML_output/ -n H1_HumanSwine -p 1 -m GTRCAT -s /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/H1_HumanSwine_alignment.fasta 
+
+
+Partition: 0 with name: No Name Provided
+Base frequencies: 0.347 0.186 0.225 0.241 
+
+Inference[0]: Time 51.503080 CAT-based likelihood -22935.933451, best rearrangement setting 5
+alpha[0]: 1.000000 rates[0] ac ag at cg ct gt: 1.129485 5.146266 0.568585 0.225826 6.663788 1.000000 
+
+
+Conducting final model optimizations on all 1 trees under GAMMA-based models ....
+
+Inference[0] final GAMMA-based Likelihood: -24851.311990 tree written to file /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/RAxML_output/RAxML_result.H1_HumanSwine
+
+
+Starting final GAMMA-based thorough Optimization on tree 0 likelihood -24851.311990 .... 
+
+Final GAMMA-based Score of best tree -24851.311990
+
+Program execution info written to /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/RAxML_output/RAxML_info.H1_HumanSwine
+Best-scoring ML tree written to: /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/RAxML_output/RAxML_bestTree.H1_HumanSwine
+
+Overall execution time: 130.312816 secs or 0.036198 hours or 0.001508 days
+

@@ -5,8 +5,6 @@
 .. contents::
    :depth: 3
 
-**This description of the analysis is currently available. The actual source code and data for this specific analysis are not yet posted publicly on GitHub in the ``./examples/2014Analysis_Influenza_H1_HA/`` subdirectory. They will be posted upon publication of the paper. If you are a reviewer and you would like to see them now, please relay this request to Jesse via the editor.**
-
 Overview
 ------------
 This is an analysis of influenza A virus H1 hemagglutinins (HAs) from human and swine that are descended from a common ancestor closely related the HA of the 1918 virus. This analysis constructs phylogenies of these sequences and analyzes them with standard and experimentally determined codon substitution models.
@@ -34,13 +32,13 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ (version 0.21).
+* `phyloExpCM`_ (specifically, `phyloExpCM version 0.31`_).
 
 * `numpy`_ (version 1.6.1)
 
 * `matplotlib`_ (version 1.3.1).
 
-* `mapmuts`_ (version 1.0)
+* `mapmuts`_ (specifically, `mapmuts version 1.01`_)
 
 * `Biopython`_ (version 1.5.8)
 
@@ -382,3 +380,5 @@ The models are ranked in order of `AIC`_ difference from the best model. Both tr
 .. _`mapmuts analysis of the WSN HA from 2014` :  http://jbloom.github.io/mapmuts/example_WSN_HA_2014Analysis.html
 .. _`weblogo`: http://weblogo.threeplusone.com/
 .. _`pyPdf`: http://pybrary.net/pyPdf/
+.. _`phyloExpCM version 0.31`: https://github.com/jbloom/phyloExpCM/tree/v0.31
+.. _`mapmuts version 1.01`: https://github.com/jbloom/mapmuts/tree/v1.01

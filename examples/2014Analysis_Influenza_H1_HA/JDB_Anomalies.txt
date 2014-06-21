@@ -1,0 +1,46 @@
+A/mallard/Minnesota/346229/2000
+A/swine/Iowa/1945
+A/Wisconsin/4754/1994
+A/Wisconsin/4755/1994
+A/swine/Cambridge/1939
+A/swine/Saskatchewan/18789/02
+A/swine/Eire/89/1996
+A/chicken/PA/35154/1991
+A/turkey/Kansas/4880/1980
+A/turkey/NC/19762
+A/turkey/IA/21089-3/1992
+A/duck/NC/91347/01
+A/Turkey/MO/24093/99
+A/swine/Italy/172336/2001
+A/turkey/NC/17026/1988
+A/swine/Henan/01/2006
+A/Ohio/3559/1988
+A/Maryland/12/1991
+A/Taiwan/4845/1999
+A/Mongolia/153/88
+A/Melbourne/1/1946
+A/swine/Shanghai/1/2005
+A/swine/Thailand/CU-S3243N/2012
+A/duck/Taiwan/11254/2013
+A/swine/Schleswig-Holstein/
+A/swine/England/
+A/swine/Denmark/
+A/swine/Belgium/
+A/swine/Finnistere/
+A/swine/Netherlands/
+A/swine/OMS/
+A/swine/Italy/
+A/swine/Spain/
+A/swine/Guangdong/
+A/swine/Germany/
+A/swine/HongKong
+A/swine/Hong Kong/
+A/swine/Lutol/
+A/swine/Ille et Vilaine/
+A/swine/France/
+A/swine/Brno/
+A/swine/Cotes d'Armor/
+A/swine/Jiangsu
+A/swine/IDT
+A/swine/Minnesota/07002083/2007
+A/swine/Gent

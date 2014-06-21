@@ -1,0 +1,5 @@
+# input file for running script mapmuts_preferencescorrelate.py for mapmuts_preferencescorrelate
+preferencesfiles /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/frequency_correlations//H1_HumanSwine_alignment_frequencies.txt /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/combined_amino_acid_preferences.txt
+samplenames natural_frequency preference
+plotdir /home/jbloom/phyloExpCM/examples/2014Analysis_Influenza_H1_HA/frequency_correlations/
+alpha 0.1
