@@ -5,6 +5,8 @@
 .. contents::
    :depth: 3
 
+This is a description of the analysis in `The inherent mutational tolerance and antigenic evolvability of influenza hemagglutinin`_.
+
 Overview
 ------------
 This is an analysis of influenza A virus H1 hemagglutinins (HAs) from human and swine that are descended from a common ancestor closely related the HA of the 1918 virus. This analysis constructs phylogenies of these sequences and analyzes them with standard and experimentally determined codon substitution models.
@@ -382,3 +384,4 @@ The models are ranked in order of `AIC`_ difference from the best model. Both tr
 .. _`pyPdf`: http://pybrary.net/pyPdf/
 .. _`phyloExpCM version 0.31`: https://github.com/jbloom/phyloExpCM/tree/v0.31
 .. _`mapmuts version 1.01`: https://github.com/jbloom/mapmuts/tree/v1.01
+.. _`The inherent mutational tolerance and antigenic evolvability of influenza hemagglutinin`: http://dx.doi.org/10.7554/eLife.03300
