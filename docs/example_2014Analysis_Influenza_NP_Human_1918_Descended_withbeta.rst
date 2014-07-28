@@ -293,7 +293,7 @@ Here are these plots:
 .. _`AIC`: http://en.wikipedia.org/wiki/Akaike_information_criterion
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
-.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract
+.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/31/8/1956
 .. _`phyloExpCM version 0.3`: https://github.com/jbloom/phyloExpCM/tree/v0.3
 .. _`mapmuts version 1.0`: https://github.com/jbloom/mapmuts/tree/v1.0
-.. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://www.biorxiv.org/content/early/2014/06/11/003848
+.. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://dx.doi.org/10.1093/molbev/msu220

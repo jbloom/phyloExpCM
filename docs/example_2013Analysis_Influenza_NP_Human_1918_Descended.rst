@@ -369,6 +369,6 @@ Similar files are created in LaTex formatted tables as ``GY94_summary.tex`` and 
 .. _`AIC`: http://en.wikipedia.org/wiki/Akaike_information_criterion
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
-.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/early/2014/05/23/molbev.msu173.abstract
+.. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/31/8/1956
 .. _`phyloExpCM version 0.21`: https://github.com/jbloom/phyloExpCM/tree/v0.21
 .. _`mapmuts version 1.0`: https://github.com/jbloom/mapmuts/tree/v1.0
