@@ -367,6 +367,7 @@ def main():
     for (treemodel, tree) in codonphyml_trees.iteritems():
         commands['treefile'] = tree
         for (substitutionmodel, substitutionmodelspecs) in substitutionmodels.iteritems():
+            commands['model'] = substitutionmodelspecs
             subdir = '%s/Tree-%s_Model-%s/' % (optimizedtreedir, treemodel, substitutionmodel)
             hyphyoutfile = '%s/hyphy_output.txt' % subdir
             if os.path.isfile(hyphyoutfile) and use_existing_output:
@@ -376,7 +377,6 @@ def main():
                 processes.append(multiprocessing.Process(target=RunScript,\
                     args=(subdir, 'phyloExpCM_optimizeHyphyTree', 'phyloExpCM_optimizeHyphyTree.py', list(commands.items()), use_sbatch, 1), kwargs={'walltime':walltime}))
             hyphy_results[(treemodel, substitutionmodel)] = hyphyoutfile
-            commands['model'] = substitutionmodelspecs
     RunProcesses(processes, nmultiruns=len(processes))
     for ((treemodel, substitutionmodel), hyphyoutfile) in hyphy_results.iteritems():
         if not os.path.isfile(hyphyoutfile):
