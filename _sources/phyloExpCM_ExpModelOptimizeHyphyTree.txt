@@ -21,6 +21,8 @@ You must provide the script with a phylogenetic tree topology and a sequence ali
 Substitution models
 --------------------
 
+The model used here is the one described in `An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`_. It may be helpful to read that reference before reading the rest of this section.
+
 Substitution model
 ~~~~~~~~~~~~~~~~~~~~~~~
 The codon substitution models used here are defined based on experimentally measured parameters. The substitution model is determined by site-specific amino-acid preferences plus mutation rate parameters that are shared across all sites. All selection is assumed to be at the amino-acid level (selection on synonymous sites is not included). So substitution is entirely determined by knowing which mutations arise on the nucleotide level, and then how selection acts on any resulting amino-acid change.
@@ -147,7 +149,24 @@ The equilibrium codon frequencies with this constraint can be simplified to
 
 Therefore, a reversible codon mutation model can be established in terms of five mutation rate parameters. Now Equation :eq:`Qxy_reversible` is satisfied.
 
-In general, only four of the five mutation rates are really free parameters if the branch lengths are free parameters and the sequences are not date-stamped. In this case, we will use the convention of setting :math:`R_{A \rightarrow C} = 1` and then view the other four mutation rates as relative to this rate of one.
+In many cases, only four of the five mutation rates are really free parameters (this would be the case unless specific numerical values are attached to the mutation rates, or unless it is not the case that the branch lengths are free parameters, or unless the sequences are date-stamped). In the case where the mutation rates are not scaled by any other means, we will use the convention of setting :math:`R_{A \rightarrow C} = 1` and then view the other four mutation rates as relative to this rate of one. In this case, it turns out (see `An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`_) that
+
+.. math::
+   :label: qx_simple
+
+   q_x \propto \left(R_{C\rightarrow A}\right)^{\mathcal{N}_{AT}\left(x\right)}.
+
+Essentially, Equation :eq:`qx_simple` holds when the *mutationrates* parameter described in the `Input file`_ has the value *freeparameters*.
+
+When the *mutationrates* parameter described in `Input file`_ does **not** have the value *freeparameters*, and we are instead specifying specific numerical rates, then it is no longer the case that :math:`R_{A \rightarrow C} = 1`. However, in this case we can still simplify the expression for :math:`q_x` to
+
+.. math::
+   :label: qx_specificrates
+
+   q_x & \propto & \left(R_{A \rightarrow C} + R_{A \rightarrow G} \right)^{\mathcal{N}_{CG}\left(x\right)}\times \left(R_{C \rightarrow A} + \frac{R_{A \rightarrow G} \times R_{C \rightarrow A}}{R_{A \rightarrow C}} \right)^{\left(3 - \mathcal{N}_{CG}\right)} \\
+   & \propto & \left(R_{A \rightarrow C} + R_{A \rightarrow G} \right)^{\mathcal{N}_{CG}\left(x\right)} \times \left(\frac{R_{C \rightarrow A}}{R_{A \rightarrow C}}\right)^{3 - \mathcal{N}_{CG}\left(x\right)} \times \left(R_{A \rightarrow C} + R_{A \rightarrow G} \right)^{3 - \mathcal{N}_{CG}\left(x\right)} \\
+   & \propto & \left(\frac{R_{C \rightarrow A}}{R_{A \rightarrow C}}\right)^{\mathcal{N}_{AT}\left(x\right)}.
+
 
 Amino-acid preferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
