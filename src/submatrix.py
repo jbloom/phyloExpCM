@@ -304,8 +304,9 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
           reversible. It is defined more for this property than on any
           biological basis.
 
-    With these these constraints, there are four independent mutation rates, denoted
-    by the following HYPHY variables::
+    With these these constraints, there are five independent mutation rates, denoted
+    by the following HYPHY variables. Typically one of these (*RAC* by convention)
+    can be set to an arbitrary value such as one if branch lengths are in arbitrary units::
 
         RAC
         RAG
@@ -389,11 +390,11 @@ def WriteHYPHYMatrices2(outfile, sites, aapreferences, fixationmodel, includesel
         ncg = x.count('C') + x.count('G')
         assert 0 <= ncg <= 3
         if ncg == 0:
-            f.write('global q%s := RCA^3;\n' % x)
+            f.write('global q%s := (RCA / RAC)^3;\n' % x)
         elif ncg == 3:
             f.write('global q%s := 1.0;\n' % x)
         else:
-            f.write('global q%s := RCA^%d;\n' % (x, 3 - ncg))
+            f.write('global q%s := (RCA / RAC)^%d;\n' % (x, 3 - ncg))
     for r in sites:
         f.write("\n//Equilibrium frequencies for site %d\np%dx = {%d, 1};\n" % (r, r, ncodons))
         if includeselection == True:

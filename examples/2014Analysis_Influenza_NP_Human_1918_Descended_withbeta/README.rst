@@ -47,7 +47,7 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ : specifically, `phyloExpCM version 0.3`_
+* `phyloExpCM`_ : specifically, `phyloExpCM version 0.32`_
 
 * `numpy`_ (version 1.6.1)
 
@@ -294,6 +294,6 @@ Here are these plots:
 .. _`numpy`: http://www.numpy.org/
 .. _`matplotlib`: http://matplotlib.org/
 .. _`An experimentally determined evolutionary model dramatically improves phylogenetic fit`: http://mbe.oxfordjournals.org/content/31/8/1956
-.. _`phyloExpCM version 0.3`: https://github.com/jbloom/phyloExpCM/tree/v0.3
+.. _`phyloExpCM version 0.32`: https://github.com/jbloom/phyloExpCM/tree/v0.32
 .. _`mapmuts version 1.0`: https://github.com/jbloom/mapmuts/tree/v1.0
 .. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://dx.doi.org/10.1093/molbev/msu220

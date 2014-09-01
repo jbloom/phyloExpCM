@@ -34,7 +34,7 @@ The specific versions of software used are specified. Other versions will likely
 
 * `Python`_ (version 2.7.3)
 
-* `phyloExpCM`_ (specifically, `phyloExpCM version 0.31`_).
+* `phyloExpCM`_ (specifically, `phyloExpCM version 0.32`_).
 
 * `numpy`_ (version 1.6.1)
 
@@ -382,6 +382,6 @@ The models are ranked in order of `AIC`_ difference from the best model. Both tr
 .. _`mapmuts analysis of the WSN HA from 2014` :  http://jbloom.github.io/mapmuts/example_WSN_HA_2014Analysis.html
 .. _`weblogo`: http://weblogo.threeplusone.com/
 .. _`pyPdf`: http://pybrary.net/pyPdf/
-.. _`phyloExpCM version 0.31`: https://github.com/jbloom/phyloExpCM/tree/v0.31
+.. _`phyloExpCM version 0.32`: https://github.com/jbloom/phyloExpCM/tree/v0.32
 .. _`mapmuts version 1.01`: https://github.com/jbloom/mapmuts/tree/v1.01
 .. _`The inherent mutational tolerance and antigenic evolvability of influenza hemagglutinin`: http://dx.doi.org/10.7554/eLife.03300
