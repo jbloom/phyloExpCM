@@ -96,6 +96,8 @@ def main():
 
     # make the plot
     for (classification_name, classifications, classificationtypes) in [('RSA', rsa_classification, rsa_classification_types), ('SS', ss_classification, ss_classification_types)]:
+        if not dsspfile:
+            classificationtypes = ['unknown']
         plotfile = '%ssitelikelihoodcomparison_by%s.pdf' % (outfileprefix, classification_name)
         print "Plotting the data for the %s classification to %s" % (classification_name, plotfile)
         assert len(sitelikelihoods) == 2, "Currently only works for 2 sitelikelihoods"
