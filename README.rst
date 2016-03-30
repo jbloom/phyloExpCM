@@ -2,6 +2,13 @@
 `phyloExpCM`_
 ================
 
+This package is obsolete!
+----------------------------
+**IMPORTANT NOTE**: `phyloExpCM`_ has been superseded by `phydms`_. Unless you need legacy functions of `phyloExpCM`_, we recommend that you use `phydms`_ instead.
+
+Package notes
+----------------
+
 A `Python`_ package to implement experimentally determined codom models of substitution for phylogenetics.
 
 `phyloExpCM`_ source code is available `on GitHub`_.
@@ -22,3 +29,4 @@ If you use `phyloExpCM`_, please `cite it appropriately`_.
 .. _`Python`: http://www.python.org/
 .. _`GPLv3`: http://www.gnu.org/licenses/gpl.html
 .. _`cite it appropriately`: http://jbloom.github.io/phyloExpCM/acknowledgements.html#citations
+.. _`phydms`: http://jbloomlab.github.io/phydms/

@@ -7,6 +7,13 @@
 `phyloExpCM`_ documentation
 =======================================
 
+This package is obsolete!
+----------------------------
+**IMPORTANT NOTE**: `phyloExpCM`_ has been superseded by `phydms`_. Unless you need legacy functions of `phyloExpCM`_, we recommend that you use `phydms`_ instead.
+
+Package overview
+-----------------
+
 `phyloExpCM`_ is a `Python`_ package for implementing experimentally determined codon models of substitution for phylogenetics.
 
 Written by `Jesse Bloom`_.

@@ -26,3 +26,4 @@
 .. _`An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs`: http://dx.doi.org/10.1093/molbev/msu220
 .. _`DSSP` : http://swift.cmbi.ru.nl/gv/dssp/
 .. _`Tien et al, 2013` : http://www.plosone.org/article/info:doi/10.1371/journal.pone.0080635
+.. _`phydms`: http://jbloomlab.github.io/phydms/
