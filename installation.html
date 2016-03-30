@@ -8,7 +8,7 @@
     
     <title>Installation &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="next" title="Scripts" href="scripts.html" />
     <link rel="prev" title="phyloExpCM documentation" href="index.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="index.html" title="phyloExpCM documentation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -69,17 +69,17 @@
 <div class="section" id="id1">
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>To install <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a>, first download the source ZIP repository <a class="reference external" href="https://github.com/jbloom/phyloExpCM">on GitHub</a>. After unzipping the file, run the following commands:</p>
-<div class="highlight-python"><div class="highlight"><pre>cd phyloExpCM
-python setup.py build
-python setup.py install
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">phyloExpCM</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>The last command might require you to use:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo python setup.py install
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>if you do not have privileges to the default installation directory, or:</p>
-<div class="highlight-python"><div class="highlight"><pre>python setup.py install --user
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span>
 </pre></div>
 </div>
 <p>if you want to install locally.</p>
@@ -87,7 +87,7 @@ python setup.py install
 </div>
 <div class="section" id="hyphy-include-files">
 <h2><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include files<a class="headerlink" href="#hyphy-include-files" title="Permalink to this headline">¶</a></h2>
-<p>Several <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch files (<tt class="docutils literal"><span class="pre">.ibf</span></tt> files) are distributed with this package as they are necessary to run some of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> analyses. These are in the <tt class="docutils literal"><span class="pre">./src/data/</span></tt> subdirectory in the package source. If you install the package using the commands above, these data files should be installed in a location that the scripts are able to find. If you run the package without installing it fully, however, the scripts may not be able to find these files. In that case, you will get errors from <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> indicating that it cannot find specified include files.</p>
+<p>Several <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch files (<code class="docutils literal"><span class="pre">.ibf</span></code> files) are distributed with this package as they are necessary to run some of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> analyses. These are in the <code class="docutils literal"><span class="pre">./src/data/</span></code> subdirectory in the package source. If you install the package using the commands above, these data files should be installed in a location that the scripts are able to find. If you run the package without installing it fully, however, the scripts may not be able to find these files. In that case, you will get errors from <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> indicating that it cannot find specified include files.</p>
 </div>
 </div>
 
@@ -128,9 +128,6 @@ python setup.py install
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -152,12 +149,12 @@ python setup.py install
         <li class="right" >
           <a href="index.html" title="phyloExpCM documentation"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

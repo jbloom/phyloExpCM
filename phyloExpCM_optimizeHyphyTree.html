@@ -8,7 +8,7 @@
     
     <title>phyloExpCM_optimizeHyphyTree.py &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
     <link rel="next" title="phyloExpCM_ExpModelOptimizeHyphyTree.py" href="phyloExpCM_ExpModelOptimizeHyphyTree.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,10 +57,10 @@
             
   <div class="section" id="phyloexpcm-optimizehyphytree-py">
 <span id="id1"></span><h1>phyloExpCM_optimizeHyphyTree.py<a class="headerlink" href="#phyloexpcm-optimizehyphytree-py" title="Permalink to this headline">¶</a></h1>
-<p>This script takes a tree of known topology and uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model parameters. It can use several common codon models as well as the experimentally based codon models with known mutation rates. However, for experimentally based evolutionary models it will often be more convenient to instead use the newer script <a class="reference internal" href="phyloExpCM_ExpModelOptimizeHyphyTree.html#phyloexpcm-expmodeloptimizehyphytree-py"><em>phyloExpCM_ExpModelOptimizeHyphyTree.py</em></a> &#8211; and use of this latter script is necessary if the mutation rates are unknown.</p>
-<p>This script has been tested with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> versions 2.112*. This script uses several <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch files (<tt class="docutils literal"><span class="pre">*.ibf</span></tt> files) that are distributed with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package in the <tt class="docutils literal"><span class="pre">./src/data/</span></tt> subdirectory, and should be installed in a location that the script can find if you have installed this package as instructed. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> fails with messages about being unable to find included files, maybe this didn&#8217;t work.</p>
+<p>This script takes a tree of known topology and uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model parameters. It can use several common codon models as well as the experimentally based codon models with known mutation rates. However, for experimentally based evolutionary models it will often be more convenient to instead use the newer script <a class="reference internal" href="phyloExpCM_ExpModelOptimizeHyphyTree.html#phyloexpcm-expmodeloptimizehyphytree-py"><span class="std std-ref">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></a> &#8211; and use of this latter script is necessary if the mutation rates are unknown.</p>
+<p>This script has been tested with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> versions 2.112*. This script uses several <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch files (<code class="docutils literal"><span class="pre">*.ibf</span></code> files) that are distributed with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package in the <code class="docutils literal"><span class="pre">./src/data/</span></code> subdirectory, and should be installed in a location that the script can find if you have installed this package as instructed. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> fails with messages about being unable to find included files, maybe this didn&#8217;t work.</p>
 <p>To run the script, create an <a class="reference internal" href="#input-file">Input file</a>  as described below. Then run the script from the command line using the input file as the single argument, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_optimizeHyphyTree.py infile.txt
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">phyloExpCM_optimizeHyphyTree</span><span class="o">.</span><span class="n">py</span> <span class="n">infile</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>Note that running this script may take quite a while if <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> takes a long time to run. <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can also start to consume a lot of memory for relatively big input trees &#8211; so you may need to use a computer with a large amount of RAM.</p>
@@ -68,15 +68,15 @@
 <div class="section" id="input-file">
 <h2>Input file<a class="headerlink" href="#input-file" title="Permalink to this headline">¶</a></h2>
 <p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
-<div class="highlight-python"><div class="highlight"><pre>key1 value1
-key2 value2
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">key1</span> <span class="n">value1</span>
+<span class="n">key2</span> <span class="n">value2</span>
 </pre></div>
 </div>
 <p>Blank lines or lines
 that begin with # are ignored (i.e. as comment lines).</p>
 <p>The input file should contain the following keys:</p>
 <ul>
-<li><p class="first"><em>hyphypath</em> should contain a command that can be used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in batch mode. If you have installed <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in the current search path, this might be something like <tt class="docutils literal"><span class="pre">HYPHYMP</span></tt> or <tt class="docutils literal"><span class="pre">HYPHYMP</span> <span class="pre">CPU=4</span></tt> (the latter command specifying how many CPUs to use for this multi-thread version) or <tt class="docutils literal"><span class="pre">HYPHYDEBUG</span></tt>. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is not installed in the current search path, you will need to specify a full path to the executable.</p>
+<li><p class="first"><em>hyphypath</em> should contain a command that can be used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in batch mode. If you have installed <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in the current search path, this might be something like <code class="docutils literal"><span class="pre">HYPHYMP</span></code> or <code class="docutils literal"><span class="pre">HYPHYMP</span> <span class="pre">CPU=4</span></code> (the latter command specifying how many CPUs to use for this multi-thread version) or <code class="docutils literal"><span class="pre">HYPHYDEBUG</span></code>. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is not installed in the current search path, you will need to specify a full path to the executable.</p>
 </li>
 <li><p class="first"><em>hyphycmdfile</em> is the name of the created <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch mode command file that is used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> by this script.</p>
 </li>
@@ -87,7 +87,7 @@ that begin with # are ignored (i.e. as comment lines).</p>
 <li><p class="first"><em>hyphydistancesfile</em> is the name of a created output file file that shows the pairwise distances between all pairs of sequences (those in <em>fastafile</em>). Note that these are <strong>not</strong> the distances from the created <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> tree in <em>hyphytreefile</em>. Rather, the substitution model has all parameters frozen to the maximum-likelihood values that are determined by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> during the optimization of <em>hyphytreefile</em>. With these optimized substitution model parameters fixed, <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is then used to estimate the maximum likelihood pairwise distance between each pair of sequences (essentially, the branch length between them in a two-sequence tree). These pairwise distances are then written <em>hyphydistancesfile</em> in the format described in the <a class="reference internal" href="#output-files">Output files</a> section below. If you do not want to estimate pairwise distances, then set <em>hyphydistancesfile</em> to <em>None</em>.</p>
 <p>Also, note that <strong>pairwise distances can ony be calculated for substitution models in which all parameters are global</strong> to all branches (the reason is that the model parameters cannot all be fixed if they are branch local). So if you are using a substitution model with local branch lengths (for instance <em>GY94_CF3x4_omega-branchlocal-one_rates-gamma6</em>), then no pairwise distances can be calculated. In this case, no <em>hyphydistancesfile</em> will be created regardless of whether you specify <em>None</em> or no file name.</p>
 <p>It is also possible to use <em>hyphydistancesfile</em> to calculate pairwise distances to only certain sequences in <em>fastafile</em>. This can be particularly advantageous when using one of the <em>experimental</em> codon models (specified by the <em>models</em> parameter). The reason is that <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can take a long time to calculate pairwise distances for <em>experimental</em> codon models. If you only want to calculate pairwise distances to certain sequences, then include the name of these sequences following they <em>hyphydistancesfile</em> key and the file to be created, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>hyphydistancesfile hyphy_distances.txt A/Brevig_Mission/1918_(H1N1) A/Brisbane/10/2007_(H3N2)
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">hyphydistancesfile</span> <span class="n">hyphy_distances</span><span class="o">.</span><span class="n">txt</span> <span class="n">A</span><span class="o">/</span><span class="n">Brevig_Mission</span><span class="o">/</span><span class="mi">1918</span><span class="n">_</span><span class="p">(</span><span class="n">H1N1</span><span class="p">)</span> <span class="n">A</span><span class="o">/</span><span class="n">Brisbane</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">2007</span><span class="n">_</span><span class="p">(</span><span class="n">H3N2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The aforegoing line would cause the script to create the file <em>hyphy_distances.txt</em>, but that file would only include pairwise distances to the two indicated sequences from all other sequences in the file (so if there are <em>N</em> sequences there would be <em>2N - 1</em> distances). Note that the names of the sequences that are specified must exactly match full headers in <em>fastafile</em> or an exception is raised.</p>
@@ -97,14 +97,14 @@ that begin with # are ignored (i.e. as comment lines).</p>
 </li>
 <li><p class="first"><em>treefile</em> is a Newick-format phylogenetic tree giving the relationship among the sequences in <em>fastafile</em>. The names of the tip nodes must match those in <em>fastafile</em>. Branch lengths can be specified, but they will be optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. Branch supports can be present, but they are ignored and removed in the output tree.</p>
 </li>
-<li><p class="first"><em>siteslist</em> is the name of a file that specifies all of the codon sites that are included in the analysis in 1, 2, ... numbering. The first line of this file should be a header beginning with a <em>#</em> character, and is skipped. The remaining lines should begin with an integer &gt;= 1 that gives a site number, followed by whitespace &#8211; anything following this whitespace is ignored. All of the numbers in this first column are taken to be the numbers of the codon sites included. You can use the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file generated by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt> and used as input to <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><em>phyloExpCM_buildHyphyExpCM.py</em></a> as the value for this argument, since it satisfies these formatting requirements.</p>
+<li><p class="first"><em>siteslist</em> is the name of a file that specifies all of the codon sites that are included in the analysis in 1, 2, ... numbering. The first line of this file should be a header beginning with a <em>#</em> character, and is skipped. The remaining lines should begin with an integer &gt;= 1 that gives a site number, followed by whitespace &#8211; anything following this whitespace is ignored. All of the numbers in this first column are taken to be the numbers of the codon sites included. You can use the <code class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></code> file generated by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <code class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></code> and used as input to <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><span class="std std-ref">phyloExpCM_buildHyphyExpCM.py</span></a> as the value for this argument, since it satisfies these formatting requirements.</p>
 </li>
 <li><p class="first"><em>model</em> specifies the codon substitution model used by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. Valid values are:</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><em>experimental hyphyExpCMs.ibf</em> specifies that we use an experimentally determined codon model. The first part of this value (the string <em>experimental</em>) indicates that we are using an experimentally determined model. The second part of this value should be the name of a file (no spaces) that specifies the codon model in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch format for each site in <em>sites</em>. Typically, this would have been generated using the <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><em>phyloExpCM_buildHyphyExpCM.py</em></a> script. This file either must exist in the current directory or you must provide a full path name, as the file will be included by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in its analysis.</p>
+<li><p class="first"><em>experimental hyphyExpCMs.ibf</em> specifies that we use an experimentally determined codon model. The first part of this value (the string <em>experimental</em>) indicates that we are using an experimentally determined model. The second part of this value should be the name of a file (no spaces) that specifies the codon model in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch format for each site in <em>sites</em>. Typically, this would have been generated using the <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><span class="std std-ref">phyloExpCM_buildHyphyExpCM.py</span></a> script. This file either must exist in the current directory or you must provide a full path name, as the file will be included by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in its analysis.</p>
 </li>
-<li><p class="first"><em>experimental_randomize1 hyphyExpCMs.ibf</em> specifies that we use a experimentally determined codon model, but that we randomize the assignment of experimentally determined site models to different sites. This is done by randomly shuffling the position indices in the alignment. As a result, each site model will be assigned to some random site &#8211; not necessarily the one that is supposed to match. You would use this is a control. If the experimental models are good, we might expect them to perform well without randomization but poorly with randomization. For this option, the second argument again specifies the codon model in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file format for each site in <em>sites</em> as generated by <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><em>phyloExpCM_buildHyphyExpCM.py</em></a>. The number after <em>randomize</em> in the first argument is the integer seed used to seed the random number generator &#8211; different seeds will give different results due to different randomization orders.</p>
+<li><p class="first"><em>experimental_randomize1 hyphyExpCMs.ibf</em> specifies that we use a experimentally determined codon model, but that we randomize the assignment of experimentally determined site models to different sites. This is done by randomly shuffling the position indices in the alignment. As a result, each site model will be assigned to some random site &#8211; not necessarily the one that is supposed to match. You would use this is a control. If the experimental models are good, we might expect them to perform well without randomization but poorly with randomization. For this option, the second argument again specifies the codon model in <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file format for each site in <em>sites</em> as generated by <a class="reference internal" href="phyloExpCM_buildHyphyExpCM.html#phyloexpcm-buildhyphyexpcm-py"><span class="std std-ref">phyloExpCM_buildHyphyExpCM.py</span></a>. The number after <em>randomize</em> in the first argument is the integer seed used to seed the random number generator &#8211; different seeds will give different results due to different randomization orders.</p>
 </li>
 <li><p class="first">A number of variants of the <a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a> (GY94) codon model as delineated below.</p>
 <p>The equilibrium codon frequencies are determined empirically from the frequencies of nucleotides at the three nucleotide positions using either the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> or the F3x4 model. In general, the <a class="reference external" href="http://www.plosone.org/article/info%3Adoi/10.1371/journal.pone.0011230">CF3x4</a> model should be preferred unless you have a reason to use F3x4, since the former model corrects numerical inconsistencies with the latter.</p>
@@ -145,16 +145,16 @@ that begin with # are ignored (i.e. as comment lines).</p>
 <div class="section" id="example-input-file">
 <h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file:</p>
-<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_optimizeHyphyTree.py
-hyphypath HYPHYMP CPU=4
-hyphycmdfile hyphy_cmds.bf
-hyphyoutfile hyphy_output.txt
-hyphytreefile hyphy_tree.newick
-hyphydistancesfile hyphy_distances.txt
-fastafile Human_NPs.fasta
-treefile Human_NPs_codonphyml_tree.newick
-siteslist equilibriumpreferences.txt
-model experimental hyphyExpCMs_FracTolerated.ibf
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Example input file for phyloExpCM_optimizeHyphyTree.py</span>
+<span class="n">hyphypath</span> <span class="n">HYPHYMP</span> <span class="n">CPU</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">hyphycmdfile</span> <span class="n">hyphy_cmds</span><span class="o">.</span><span class="n">bf</span>
+<span class="n">hyphyoutfile</span> <span class="n">hyphy_output</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">hyphytreefile</span> <span class="n">hyphy_tree</span><span class="o">.</span><span class="n">newick</span>
+<span class="n">hyphydistancesfile</span> <span class="n">hyphy_distances</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">fastafile</span> <span class="n">Human_NPs</span><span class="o">.</span><span class="n">fasta</span>
+<span class="n">treefile</span> <span class="n">Human_NPs_codonphyml_tree</span><span class="o">.</span><span class="n">newick</span>
+<span class="n">siteslist</span> <span class="n">equilibriumpreferences</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">model</span> <span class="n">experimental</span> <span class="n">hyphyExpCMs_FracTolerated</span><span class="o">.</span><span class="n">ibf</span>
 </pre></div>
 </div>
 </div>
@@ -165,12 +165,12 @@ model experimental hyphyExpCMs_FracTolerated.ibf
 <li><p class="first"><em>hyphycmdfile</em> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file that contains the commands used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in batch mode.</p>
 </li>
 <li><p class="first"><em>hyphyoutfile</em> is an output file that contains the results of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> analysis. This file may contain many lines dealing with branch lengths and tree topology that you will probably want to ignore in favor of just looking at <em>hyphytreefile</em>, but you will want to look at the first few lines of this file, which will have the following format:</p>
-<div class="highlight-python"><div class="highlight"><pre>Log likelihood: -671.317
-independent parameters (includes branch lengths): 45
-shared parameters: 0
-number of branch lengths: 45
-number of tip nodes: 24
-number of internal branches: 21
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Log</span> <span class="n">likelihood</span><span class="p">:</span> <span class="o">-</span><span class="mf">671.317</span>
+<span class="n">independent</span> <span class="n">parameters</span> <span class="p">(</span><span class="n">includes</span> <span class="n">branch</span> <span class="n">lengths</span><span class="p">):</span> <span class="mi">45</span>
+<span class="n">shared</span> <span class="n">parameters</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">number</span> <span class="n">of</span> <span class="n">branch</span> <span class="n">lengths</span><span class="p">:</span> <span class="mi">45</span>
+<span class="n">number</span> <span class="n">of</span> <span class="n">tip</span> <span class="n">nodes</span><span class="p">:</span> <span class="mi">24</span>
+<span class="n">number</span> <span class="n">of</span> <span class="n">internal</span> <span class="n">branches</span><span class="p">:</span> <span class="mi">21</span>
 </pre></div>
 </div>
 </li>
@@ -186,14 +186,14 @@ number of internal branches: 21
 </div></blockquote>
 <p>These entries are separated by a tab.</p>
 <p>For example, here are a few possible lines:</p>
-<div class="highlight-python"><div class="highlight"><pre>Sequence1   Sequence2    0.800143
-Sequence1   Sequence3    0.92947
-Sequence2   Sequence3    2.13376
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Sequence1</span>   <span class="n">Sequence2</span>    <span class="mf">0.800143</span>
+<span class="n">Sequence1</span>   <span class="n">Sequence3</span>    <span class="mf">0.92947</span>
+<span class="n">Sequence2</span>   <span class="n">Sequence3</span>    <span class="mf">2.13376</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">If you use the <em>persitelikelihoods</em> option, then an output file is created that shows the per-site likelihoods. The format is as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#SITE   SITE_LOG_LIKELIHOODS</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#SITE   SITE_LOG_LIKELIHOODS</span>
 <span class="mi">1</span>   <span class="o">-</span><span class="mf">4.792906363107919</span>
 <span class="mi">2</span>   <span class="o">-</span><span class="mf">15.89808216031635</span>
 <span class="mi">3</span>   <span class="o">-</span><span class="mf">17.19022748421175</span>
@@ -243,9 +243,6 @@ Sequence2   Sequence3    2.13376
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -267,13 +264,13 @@ Sequence2   Sequence3    2.13376
         <li class="right" >
           <a href="phyloExpCM_buildHyphyExpCM.html" title="phyloExpCM_buildHyphyExpCM.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

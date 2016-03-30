@@ -8,7 +8,7 @@
     
     <title>plot Module &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="phylodistances Module" href="phylodistances.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="packagedata.html" title="packagedata Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +56,7 @@
           <div class="body" role="main">
             
   <div class="section" id="module-plot">
-<span id="plot-module"></span><h1><tt class="docutils literal"><span class="pre">plot</span></tt> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h1>
+<span id="plot-module"></span><h1><code class="docutils literal"><span class="pre">plot</span></code> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h1>
 <p>Module for making plots with <em>matplotlib</em>.</p>
 <p>Written by Jesse Bloom.</p>
 <div class="section" id="dependencies">
@@ -75,14 +75,14 @@
 </ul>
 <dl class="function">
 <dt id="plot.PlotLogLvsNParams">
-<tt class="descclassname">plot.</tt><tt class="descname">PlotLogLvsNParams</tt><big>(</big><em>plotfile</em>, <em>data_d</em><big>)</big><a class="headerlink" href="#plot.PlotLogLvsNParams" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">plot.</code><code class="descname">PlotLogLvsNParams</code><span class="sig-paren">(</span><em>plotfile</em>, <em>data_d</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.PlotLogLvsNParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots log likelihood (y-axis) versus number of parameters (x-axis).</p>
 <p>Requires <em>matplotlib</em> and <em>pylab</em>, and will raise an exception if 
 not available.</p>
 <p>CALLING VARIABLES:</p>
 <ul>
 <li><p class="first"><em>plotfile</em> is a string giving the name of the created plotfile. 
-Should end in the extension <tt class="docutils literal"><span class="pre">.pdf</span></tt>.</p>
+Should end in the extension <code class="docutils literal"><span class="pre">.pdf</span></code>.</p>
 </li>
 <li><p class="first"><em>data_d</em> specifies the data points to be plotted. Each data point
 has three pieces of information:</p>
@@ -107,9 +107,9 @@ they can both be from the same plotting group if yo would like).</p>
 
 <dl class="function">
 <dt id="plot.PlotSiteLikelihoods">
-<tt class="descclassname">plot.</tt><tt class="descname">PlotSiteLikelihoods</tt><big>(</big><em>sites</em>, <em>classifications</em>, <em>classificationtypes</em>, <em>xvalues</em>, <em>xlabel</em>, <em>ylabel</em>, <em>plotfile</em>, <em>symmetrize_axis=True</em>, <em>title=''</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#plot.PlotSiteLikelihoods" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">plot.</code><code class="descname">PlotSiteLikelihoods</code><span class="sig-paren">(</span><em>sites</em>, <em>classifications</em>, <em>classificationtypes</em>, <em>xvalues</em>, <em>xlabel</em>, <em>ylabel</em>, <em>plotfile</em>, <em>symmetrize_axis=True</em>, <em>title=''</em>, <em>alpha=1</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.PlotSiteLikelihoods" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots comparison of site likelihoods.</p>
-<p>Requires <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>, will raise an exception if
+<p>Requires <code class="docutils literal"><span class="pre">matplotlib</span></code> / <code class="docutils literal"><span class="pre">pylab</span></code>, will raise an exception if
 not available.</p>
 <p>This function plots a comparison of the log likelihoods at a set of sites.</p>
 <p>Typically you will have computed the difference in the log likelihoods for each
@@ -117,7 +117,7 @@ site over two different models. You may then have classified the sites into
 one or more categories. This function plots points showing the differences
 in log likelihoods for all sites in each classification.</p>
 <p>The each set of data is plotted using a box plots.</p>
-<p>All strings (<em>xlabel</em>, <em>ylabel</em>, <em>classificationtypes</em>, <em>title</em>) use <tt class="docutils literal"><span class="pre">LaTex</span></tt>
+<p>All strings (<em>xlabel</em>, <em>ylabel</em>, <em>classificationtypes</em>, <em>title</em>) use <code class="docutils literal"><span class="pre">LaTex</span></code>
 formatting.</p>
 <p>CALLING VARIABLES:</p>
 <ul class="simple">
@@ -136,11 +136,11 @@ log likelihoods between model 1 and model 2.</li>
 <em>LogL for model 1 - LogL for model 2</em>.</li>
 <li><em>ylabel</em> is the string label for the y-axis.</li>
 <li><em>plotfile</em> is the name of the created plot. Must have the extension
-<tt class="docutils literal"><span class="pre">.pdf</span></tt>.</li>
+<code class="docutils literal"><span class="pre">.pdf</span></code>.</li>
 <li><em>symmetrize_axis</em> is a Boolean switch specifying if we make the x-axis
 range equal at both ends (i.e. goes from -10 to 10). Is <em>True</em> by default.</li>
 <li><em>title</em> is an optional string above the plot. Is empty (<em>&#8216;&#8217;</em>) by default.
-Uses <tt class="docutils literal"><span class="pre">LaTex</span></tt> formatting.</li>
+Uses <code class="docutils literal"><span class="pre">LaTex</span></code> formatting.</li>
 <li><em>alpha</em> is the transparency of the plotted points. An <em>alpha</em> of 1 means
 no transparency, and <em>alpha</em> less than one means transparent. Is 1 by
 default.</li>
@@ -149,9 +149,9 @@ default.</li>
 
 <dl class="function">
 <dt id="plot.PlotYearVersusDistance">
-<tt class="descclassname">plot.</tt><tt class="descname">PlotYearVersusDistance</tt><big>(</big><em>plotfile</em>, <em>years</em>, <em>distances</em>, <em>xlabel='Year of isolation'</em>, <em>ylabel='Distance'</em>, <em>title=None</em><big>)</big><a class="headerlink" href="#plot.PlotYearVersusDistance" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">plot.</code><code class="descname">PlotYearVersusDistance</code><span class="sig-paren">(</span><em>plotfile</em>, <em>years</em>, <em>distances</em>, <em>xlabel='Year of isolation'</em>, <em>ylabel='Distance'</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.PlotYearVersusDistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes scatter plot of year versus distance.</p>
-<p>Requires <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>; will raise an exception if
+<p>Requires <code class="docutils literal"><span class="pre">matplotlib</span></code> / <code class="docutils literal"><span class="pre">pylab</span></code>; will raise an exception if
 not available.</p>
 <ul class="simple">
 <li><em>plotfile</em> : name of created PDF plot.</li>
@@ -176,7 +176,7 @@ above plot.</li>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">plot</span></code> Module</a><ul>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
 </ul>
@@ -185,10 +185,10 @@ above plot.</li>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="packagedata.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">packagedata</span></tt> Module</a></p>
+                        title="previous chapter"><code class="docutils literal"><span class="pre">packagedata</span></code> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="phylodistances.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">phylodistances</span></tt> Module</a></p>
+                        title="next chapter"><code class="docutils literal"><span class="pre">phylodistances</span></code> Module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -204,9 +204,6 @@ above plot.</li>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -228,13 +225,13 @@ above plot.</li>
         <li class="right" >
           <a href="packagedata.html" title="packagedata Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

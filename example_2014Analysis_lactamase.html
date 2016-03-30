@@ -8,7 +8,7 @@
     
     <title>2014 analysis of beta-lactamase phylogenetic fit &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Examples" href="examples.html" />
     <link rel="next" title="2014 analysis of influenza NP with stringency parameter" href="example_2014Analysis_Influenza_NP_Human_1918_Descended_withbeta.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html" title="2013 analysis of human influenza NPs descended from 1918 virus"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,55 +56,55 @@
           <div class="body" role="main">
             
   <div class="section" id="analysis-of-beta-lactamase-phylogenetic-fit">
-<h1><a class="toc-backref" href="#id1">2014 analysis of beta-lactamase phylogenetic fit</a><a class="headerlink" href="#analysis-of-beta-lactamase-phylogenetic-fit" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id6">2014 analysis of beta-lactamase phylogenetic fit</a><a class="headerlink" href="#analysis-of-beta-lactamase-phylogenetic-fit" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#analysis-of-beta-lactamase-phylogenetic-fit" id="id1">2014 analysis of beta-lactamase phylogenetic fit</a><ul>
-<li><a class="reference internal" href="#overview" id="id2">Overview</a></li>
-<li><a class="reference internal" href="#sequence-numbering" id="id3">Sequence numbering</a></li>
-<li><a class="reference internal" href="#software-used" id="id4">Software used</a></li>
-<li><a class="reference internal" href="#input-files" id="id5">Input files</a></li>
-<li><a class="reference internal" href="#running-the-analysis" id="id6">Running the analysis</a></li>
-<li><a class="reference internal" href="#steps-in-the-analysis" id="id7">Steps in the analysis</a><ul>
-<li><a class="reference internal" href="#extracting-amino-acid-preferences" id="id8">Extracting amino-acid preferences</a></li>
-<li><a class="reference internal" href="#visualizing-the-amino-acid-preferences" id="id9">Visualizing the amino-acid preferences</a></li>
-<li><a class="reference internal" href="#creation-of-sequence-alignment" id="id10">Creation of sequence alignment</a></li>
-<li><a class="reference internal" href="#inspection-of-aligned-sequences" id="id11">Inspection of aligned sequences</a></li>
-<li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id12">Construction of phylogenetic trees</a></li>
-<li><a class="reference internal" href="#average-amino-acid-frequencies-in-the-alignments" id="id13">Average amino-acid frequencies in the alignments</a></li>
-<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id14">Optimizing the trees with various substitution models</a></li>
-<li><a class="reference internal" href="#comparison-of-per-site-likelihoods" id="id15">Comparison of per-site likelihoods</a></li>
+<li><a class="reference internal" href="#analysis-of-beta-lactamase-phylogenetic-fit" id="id6">2014 analysis of beta-lactamase phylogenetic fit</a><ul>
+<li><a class="reference internal" href="#overview" id="id7">Overview</a></li>
+<li><a class="reference internal" href="#sequence-numbering" id="id8">Sequence numbering</a></li>
+<li><a class="reference internal" href="#software-used" id="id9">Software used</a></li>
+<li><a class="reference internal" href="#input-files" id="id10">Input files</a></li>
+<li><a class="reference internal" href="#running-the-analysis" id="id11">Running the analysis</a></li>
+<li><a class="reference internal" href="#steps-in-the-analysis" id="id12">Steps in the analysis</a><ul>
+<li><a class="reference internal" href="#extracting-amino-acid-preferences" id="id13">Extracting amino-acid preferences</a></li>
+<li><a class="reference internal" href="#visualizing-the-amino-acid-preferences" id="id14">Visualizing the amino-acid preferences</a></li>
+<li><a class="reference internal" href="#creation-of-sequence-alignment" id="id15">Creation of sequence alignment</a></li>
+<li><a class="reference internal" href="#inspection-of-aligned-sequences" id="id16">Inspection of aligned sequences</a></li>
+<li><a class="reference internal" href="#construction-of-phylogenetic-trees" id="id17">Construction of phylogenetic trees</a></li>
+<li><a class="reference internal" href="#average-amino-acid-frequencies-in-the-alignments" id="id18">Average amino-acid frequencies in the alignments</a></li>
+<li><a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models" id="id19">Optimizing the trees with various substitution models</a></li>
+<li><a class="reference internal" href="#comparison-of-per-site-likelihoods" id="id20">Comparison of per-site likelihoods</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusions" id="id16">Conclusions</a></li>
+<li><a class="reference internal" href="#conclusions" id="id21">Conclusions</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This is an analysis of the phylogenetic fit of an evolutionary model determined using deep mutational scanning of beta-lactamase. This is the analysis in the paper <a class="reference external" href="http://dx.doi.org/10.1093/molbev/msu220">An experimentally informed evolutionary model improves phylogenetic fit to divergent lactamase homologs</a>.</p>
 <p>The results show that an evolutionary model using experimentally determined amino-acid preferences and mutation rates fit from the data outperforms standard phylogenetic evolutionary models.</p>
 <p>The data comes from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>.</p>
 <p>This analysis was performed by <a class="reference external" href="http://research.fhcrc.org/bloom/en.html">Jesse Bloom</a>.</p>
 <p>The overall approach is to use the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package to analyze a beta-lactamase sequence phylogeny (tree topology estimated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> and then fixed) with an experimentally determined evolutionary model based on data from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>, and a variety of standard codon substitution models.</p>
 <p>Much of the analysis itself is performed using <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>, which is run by <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> using the scripts detailed in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>.</p>
-<p>The code, data, and results from the analysis are in the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></tt> subdirectory in the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package directory. This subdirectory contains all of the necessary input files (see <a class="reference internal" href="#input-files">Input files</a>) for running the analysis. It also contains a master script (<tt class="docutils literal"><span class="pre">run_analysis.py</span></tt>) that can be used to regenerate the analysis with the command:</p>
-<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+<p>The code, data, and results from the analysis are in the <code class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></code> subdirectory in the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package directory. This subdirectory contains all of the necessary input files (see <a class="reference internal" href="#input-files">Input files</a>) for running the analysis. It also contains a master script (<code class="docutils literal"><span class="pre">run_analysis.py</span></code>) that can be used to regenerate the analysis with the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_analysis</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>provided that you have installed the software described in <a class="reference internal" href="#software-used">Software used</a>.</p>
 </div>
 <div class="section" id="sequence-numbering">
-<h2><a class="toc-backref" href="#id3">Sequence numbering</a><a class="headerlink" href="#sequence-numbering" title="Permalink to this headline">¶</a></h2>
-<p>Beta-lactamase sequences are often numbered using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme. This is the numbering scheme used by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>. However, the phylogenetic analysis described here converts all numbering to sequential 1, 2, ... numbering (beginning with the N-terminal methionine) of the wildtype lactamase parent used by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>. So this is sequential numbering of the protein encoded by the coding sequence in the file <tt class="docutils literal"><span class="pre">TEM1_cds.fasta</span></tt> described in <a class="reference internal" href="#input-files">Input files</a>.</p>
-<p>The file <tt class="docutils literal"><span class="pre">sequential_to_Ambler.csv</span></tt> converts between the sequential and <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme. This file is created from the data provided by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> as described in <a class="reference internal" href="#extracting-amino-acid-preferences">Extracting amino-acid preferences</a>.</p>
+<h2><a class="toc-backref" href="#id8">Sequence numbering</a><a class="headerlink" href="#sequence-numbering" title="Permalink to this headline">¶</a></h2>
+<p>Beta-lactamase sequences are often numbered using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme. This is the numbering scheme used by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>. However, the phylogenetic analysis described here converts all numbering to sequential 1, 2, ... numbering (beginning with the N-terminal methionine) of the wildtype lactamase parent used by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>. So this is sequential numbering of the protein encoded by the coding sequence in the file <code class="docutils literal"><span class="pre">TEM1_cds.fasta</span></code> described in <a class="reference internal" href="#input-files">Input files</a>.</p>
+<p>The file <code class="docutils literal"><span class="pre">sequential_to_Ambler.csv</span></code> converts between the sequential and <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme. This file is created from the data provided by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> as described in <a class="reference internal" href="#extracting-amino-acid-preferences">Extracting amino-acid preferences</a>.</p>
 </div>
 <div class="section" id="software-used">
-<h2><a class="toc-backref" href="#id4">Software used</a><a class="headerlink" href="#software-used" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">Software used</a><a class="headerlink" href="#software-used" title="Permalink to this headline">¶</a></h2>
 <p>The analysis was performed using the following software on the Fred Hutchinson computer cluster using the following Linux distribution:</p>
-<div class="highlight-python"><div class="highlight"><pre>Linux version 3.5.0-43-generic (buildd@roseapple) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #66~precise1-Ubuntu SMP Thu Oct 24 14:52:23 UTC 2013
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Linux</span> <span class="n">version</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">43</span><span class="o">-</span><span class="n">generic</span> <span class="p">(</span><span class="n">buildd</span><span class="nd">@roseapple</span><span class="p">)</span> <span class="p">(</span><span class="n">gcc</span> <span class="n">version</span> <span class="mf">4.6</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">Ubuntu</span><span class="o">/</span><span class="n">Linaro</span> <span class="mf">4.6</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="n">ubuntu5</span><span class="p">)</span> <span class="p">)</span> <span class="c1">#66~precise1-Ubuntu SMP Thu Oct 24 14:52:23 UTC 2013</span>
 </pre></div>
 </div>
 <p>In order to replicate the analysis, you will need to use Linux or Mac OS X, and install the software listed below.</p>
@@ -122,10 +122,10 @@
 </li>
 <li><p class="first"><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> : (<a class="reference external" href="https://github.com/jbloom/mapmuts/tree/v1.0">mapmuts version 1.0</a>) was used to make the sequence logo plot and to do some basic sequence manipulation in <a class="reference external" href="http://www.python.org/">Python</a>.</p>
 </li>
-<li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/apps/release/6.6/emboss/apps/needle.html">EMBOSS needle</a> (version 6.6.0). The executable with the name <tt class="docutils literal"><span class="pre">needle</span></tt> is expected to be in the current search path.</p>
+<li><p class="first"><a class="reference external" href="http://emboss.sourceforge.net/apps/release/6.6/emboss/apps/needle.html">EMBOSS needle</a> (version 6.6.0). The executable with the name <code class="docutils literal"><span class="pre">needle</span></code> is expected to be in the current search path.</p>
 </li>
-<li><p class="first"><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> (version 7.7.6). The executable with the name <tt class="docutils literal"><span class="pre">raxmlHPC-SSE3</span></tt> is expected to be in the current search path. This is the SSE3 version, and was built using the command:</p>
-<div class="highlight-python"><div class="highlight"><pre>make -f Makefile.SSE3.gcc
+<li><p class="first"><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> (version 7.7.6). The executable with the name <code class="docutils literal"><span class="pre">raxmlHPC-SSE3</span></code> is expected to be in the current search path. This is the SSE3 version, and was built using the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">Makefile</span><span class="o">.</span><span class="n">SSE3</span><span class="o">.</span><span class="n">gcc</span>
 </pre></div>
 </div>
 <p>and then copying the executable into the search path.</p>
@@ -134,16 +134,16 @@
 </li>
 <li><p class="first"><a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> (version 1.4) was used to manually root the trees for visual display.</p>
 </li>
-<li><p class="first"><a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (version 1.00 201306.18) was used to build phylogenetic trees. The executable with the name <tt class="docutils literal"><span class="pre">codonphyml</span></tt> is expected to be in the current search path. This executable was compiled with the <em>omp</em> options to make it multi-threaded.</p>
+<li><p class="first"><a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (version 1.00 201306.18) was used to build phylogenetic trees. The executable with the name <code class="docutils literal"><span class="pre">codonphyml</span></code> is expected to be in the current search path. This executable was compiled with the <em>omp</em> options to make it multi-threaded.</p>
 </li>
-<li><p class="first"><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (version HYPHY 2.220131214beta(MP) for Linux on x86_64) was used to optimize the branches and compute the likelihoods under the different models. The multiprocessor (<tt class="docutils literal"><span class="pre">HYPHYMP</span></tt>) version of the executable was used. To install this, the following commands were run in the unzipped <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> source code directory after download:</p>
-<div class="highlight-python"><div class="highlight"><pre>cmake -DINSTALL_PREFIX=/home/jbloom/.local/ .
-make MP2
-make install
+<li><p class="first"><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (version HYPHY 2.220131214beta(MP) for Linux on x86_64) was used to optimize the branches and compute the likelihoods under the different models. The multiprocessor (<code class="docutils literal"><span class="pre">HYPHYMP</span></code>) version of the executable was used. To install this, the following commands were run in the unzipped <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> source code directory after download:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DINSTALL_PREFIX</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">jbloom</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span> <span class="o">.</span>
+<span class="n">make</span> <span class="n">MP2</span>
+<span class="n">make</span> <span class="n">install</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">This analysis was run on the FHCRC scientific computing cluster using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> (version 2.6.2), and requires <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> to be installed to run as currently implemented. If you don&#8217;t want to use <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>, all you need to do is modify the main <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script to not submit any jobs via <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>. The use of <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> in the current version simply allows more processors to be used simultaneously and so speeds up the analysis.</p>
+<li><p class="first">This analysis was run on the FHCRC scientific computing cluster using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> (version 2.6.2), and requires <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> to be installed to run as currently implemented. If you don&#8217;t want to use <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>, all you need to do is modify the main <code class="docutils literal"><span class="pre">run_analysis.py</span></code> script to not submit any jobs via <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>. The use of <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> in the current version simply allows more processors to be used simultaneously and so speeds up the analysis.</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> 6.6.9-7 2012-08-17 was used to convert PDF files to JPGs.</p>
 </li>
@@ -154,68 +154,68 @@ make install
 </ul>
 </div>
 <div class="section" id="input-files">
-<h2><a class="toc-backref" href="#id5">Input files</a><a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
-<p>Here are the input files that are necessary to repeat the analysis. These are the names assigned with the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package.</p>
+<h2><a class="toc-backref" href="#id10">Input files</a><a class="headerlink" href="#input-files" title="Permalink to this headline">¶</a></h2>
+<p>Here are the input files that are necessary to repeat the analysis. These are the names assigned with the <code class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></code> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package.</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> is a <a class="reference external" href="http://www.python.org/">Python</a> script that will perform the analysis assuming that you have all of the appropriate software (see <a class="reference internal" href="#software-used">Software used</a>) and input files. To run this script, use:</p>
-<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+<li><p class="first"><code class="docutils literal"><span class="pre">run_analysis.py</span></code> is a <a class="reference external" href="http://www.python.org/">Python</a> script that will perform the analysis assuming that you have all of the appropriate software (see <a class="reference internal" href="#software-used">Software used</a>) and input files. To run this script, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_analysis</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>at the command line.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">get_preferences.py</span></tt> is a <a class="reference external" href="http://www.python.org/">Python</a> script that is used to extract the amino-acid preferences from <tt class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></tt>.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">get_preferences.py</span></code> is a <a class="reference external" href="http://www.python.org/">Python</a> script that is used to extract the amino-acid preferences from <code class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></code>.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">get_treeseqs.py</span></tt> is a <a class="reference external" href="http://www.python.org/">Python</a> script that is used to construct the beta-lactamase sequence alignments.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">get_treeseqs.py</span></code> is a <a class="reference external" href="http://www.python.org/">Python</a> script that is used to construct the beta-lactamase sequence alignments.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">TEM1_cds.fasta</span></tt> is a FASTA file giving the coding DNA sequence for the parent TEM1 beta-lactamase using by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> as reconstructed from <tt class="docutils literal"><span class="pre">Data</span> <span class="pre">S2</span></tt> of their paper.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">TEM1_cds.fasta</span></code> is a FASTA file giving the coding DNA sequence for the parent TEM1 beta-lactamase using by <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> as reconstructed from <code class="docutils literal"><span class="pre">Data</span> <span class="pre">S2</span></code> of their paper.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></tt> is the Excel spreadsheet <tt class="docutils literal"><span class="pre">Data</span> <span class="pre">S2</span></tt> from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> saved in CSV (comma separated values) format using Excel. This is the table that gives the estimated fitness of each amino-acid mutations, disregarding the possibility that different synonymous codons might have unequal fitnesses.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></code> is the Excel spreadsheet <code class="docutils literal"><span class="pre">Data</span> <span class="pre">S2</span></code> from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> saved in CSV (comma separated values) format using Excel. This is the table that gives the estimated fitness of each amino-acid mutations, disregarding the possibility that different synonymous codons might have unequal fitnesses.</p>
 </li>
 <li><p class="first">Files containing the beta-lactamase sequences used to build the sequence alignments. The beta-lactamase sequences to use were taken from the <a class="reference external" href="http://www.lahey.org/Studies/">Lahey database</a>, which contains a curated listing of beta-lactamases. All <em>TEM</em> and <em>SHV</em> lactamases for which <a class="reference external" href="http://www.ncbi.nlm.nih.gov/genbank/">Genbank</a> nucleotide sequences were available were downloaded. First, the accession numbers for all sequences for which these were provided were parsed from the Excel tables in the <a class="reference external" href="http://www.lahey.org/Studies/">Lahey database</a> on March-9-2014. Then sequences were batch downloaded from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/genbank/">Genbank</a> for all of these accessions for which such sequences were available. The accessions and the batch downloaded sequences are in the following files:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Lahey_TEM_GenbankAccessions.txt</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">Lahey_TEM_GenbankSequences.gb</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">Lahey_SHV_GenbankAccessions.txt</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">Lahey_SHV_GenbankSequences.gb</span></tt></li>
+<li><code class="docutils literal"><span class="pre">Lahey_TEM_GenbankAccessions.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">Lahey_TEM_GenbankSequences.gb</span></code></li>
+<li><code class="docutils literal"><span class="pre">Lahey_SHV_GenbankAccessions.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">Lahey_SHV_GenbankSequences.gb</span></code></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">1XPB.pdb</span></tt> is PDB file <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> of the crystal structure of TEM-1 beta-lactmase, as downloaded from the Protein Data Bank.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">1XPB.pdb</span></code> is PDB file <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> of the crystal structure of TEM-1 beta-lactmase, as downloaded from the Protein Data Bank.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">1XPB_renumbered.pdb</span></tt> is file <tt class="docutils literal"><span class="pre">1XPB.pdb</span></tt> renumbered using <a class="reference external" href="http://dicsoft2.physics.iisc.ernet.in/pdbgoodies/inputpage.html">PDB Goodies</a> so that the numbering is sequential and matches the sequential numbering in <tt class="docutils literal"><span class="pre">TEM1_cds.fasta</span></tt> in sequential numbering as described in <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">1XPB_renumbered.pdb</span></code> is file <code class="docutils literal"><span class="pre">1XPB.pdb</span></code> renumbered using <a class="reference external" href="http://dicsoft2.physics.iisc.ernet.in/pdbgoodies/inputpage.html">PDB Goodies</a> so that the numbering is sequential and matches the sequential numbering in <code class="docutils literal"><span class="pre">TEM1_cds.fasta</span></code> in sequential numbering as described in <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">1XPB_renumbered.dssp</span></tt> is the result of analyzing <tt class="docutils literal"><span class="pre">1XPB_renumbered.pdb</span></tt> using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a>. This contains the accessible surface area and secondary structure for the crystal structure.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">1XPB_renumbered.dssp</span></code> is the result of analyzing <code class="docutils literal"><span class="pre">1XPB_renumbered.pdb</span></code> using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a>. This contains the accessible surface area and secondary structure for the crystal structure.</p>
 </li>
 </ul>
 </div>
 <div class="section" id="running-the-analysis">
-<h2><a class="toc-backref" href="#id6">Running the analysis</a><a class="headerlink" href="#running-the-analysis" title="Permalink to this headline">¶</a></h2>
-<p>The analysis in this directory can be repeated simply by running the master script <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> from the command line with:</p>
-<div class="highlight-python"><div class="highlight"><pre>python run_analysis.py
+<h2><a class="toc-backref" href="#id11">Running the analysis</a><a class="headerlink" href="#running-the-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The analysis in this directory can be repeated simply by running the master script <code class="docutils literal"><span class="pre">run_analysis.py</span></code> from the command line with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">run_analysis</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>(or run it using <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a>).</p>
 <p>Other than the files delineated under <a class="reference internal" href="#input-files">Input files</a>, all data files in this directory can be re-generated with this command. However, the analysis does involve a few manual steps to create nicely formatted and annotated tree images from the raw tree files produced by the script. These manual steps are described in the <a class="reference internal" href="#steps-in-the-analysis">Steps in the analysis</a> section below.</p>
 <p>There is a variable called <em>use_existing_output</em> that is hardcoded into the beginning of this script. This variable is currently set to <em>True</em>, which means that if output already exists it is <strong>not</strong> overwritten and regenerated. If you want to regenerate the output (such as after changing input files or altering analysis parameters), then either manually delete the old output or change <em>use_existing_output</em> to <em>False</em> to force the script to overwrite old output. This script does <strong>not</strong> automatically test for dependencies among files, so if you change a file but keep <em>use_existing_output</em> to <em>True</em>, then you need to manually remove any old files with dependencies.</p>
-<p>Note that <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> uses multiple CPUs to speed up some of the analyses. If you don&#8217;t have as many CPUs on your system, you might want to check that you are not overloading the system &#8211; you can avoid this by using fewer CPUs, which will require you to manually modify the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
-<p>Note that <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> uses <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> by default to run some of its subsidiary programs &#8211; if you don&#8217;t want to do this, set the <em>use_sbatch</em> option to <em>False</em> within the program.</p>
+<p>Note that <code class="docutils literal"><span class="pre">run_analysis.py</span></code> uses multiple CPUs to speed up some of the analyses. If you don&#8217;t have as many CPUs on your system, you might want to check that you are not overloading the system &#8211; you can avoid this by using fewer CPUs, which will require you to manually modify the <code class="docutils literal"><span class="pre">run_analysis.py</span></code> script.</p>
+<p>Note that <code class="docutils literal"><span class="pre">run_analysis.py</span></code> uses <a class="reference external" href="https://computing.llnl.gov/linux/slurm/sbatch.html">sbatch</a> by default to run some of its subsidiary programs &#8211; if you don&#8217;t want to do this, set the <em>use_sbatch</em> option to <em>False</em> within the program.</p>
 </div>
 <div class="section" id="steps-in-the-analysis">
-<h2><a class="toc-backref" href="#id7">Steps in the analysis</a><a class="headerlink" href="#steps-in-the-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Here are the steps in the analysis. Except for a few indicated manual steps, all of this is done automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script.</p>
+<h2><a class="toc-backref" href="#id12">Steps in the analysis</a><a class="headerlink" href="#steps-in-the-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Here are the steps in the analysis. Except for a few indicated manual steps, all of this is done automatically by the <code class="docutils literal"><span class="pre">run_analysis.py</span></code> script.</p>
 <div class="section" id="extracting-amino-acid-preferences">
-<h3><a class="toc-backref" href="#id8">Extracting amino-acid preferences</a><a class="headerlink" href="#extracting-amino-acid-preferences" title="Permalink to this headline">¶</a></h3>
-<p>The approach used here defines the evolutionary model in terms of the amino-acid preferences, where <span class="math">\(\pi_{r,a}\)</span> denotes the preference of site <em>r</em> for amino acid <em>a</em>. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> provide their data in terms of the &#8220;fitnesses&#8221; of different mutations, which are computed from the deep sequencing counts. Some aspects of the procedure used to compute these &#8220;fitnesses&#8221; from the deep sequencing counts appear to be rather ad hoc. However, here we do not attempt to re-analyze the raw data of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> (which in any case is only partly provided in their publication), but instead simply take their fitness values at face value and convert them to something approximating the amino-acid preferences. This is done by the <a class="reference external" href="http://www.python.org/">Python</a> script <tt class="docutils literal"><span class="pre">get_preferences.py</span></tt>, which can be run using the command:</p>
-<div class="highlight-python"><div class="highlight"><pre>python get_preferences.py
+<h3><a class="toc-backref" href="#id13">Extracting amino-acid preferences</a><a class="headerlink" href="#extracting-amino-acid-preferences" title="Permalink to this headline">¶</a></h3>
+<p>The approach used here defines the evolutionary model in terms of the amino-acid preferences, where <span class="math">\(\pi_{r,a}\)</span> denotes the preference of site <em>r</em> for amino acid <em>a</em>. <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> provide their data in terms of the &#8220;fitnesses&#8221; of different mutations, which are computed from the deep sequencing counts. Some aspects of the procedure used to compute these &#8220;fitnesses&#8221; from the deep sequencing counts appear to be rather ad hoc. However, here we do not attempt to re-analyze the raw data of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> (which in any case is only partly provided in their publication), but instead simply take their fitness values at face value and convert them to something approximating the amino-acid preferences. This is done by the <a class="reference external" href="http://www.python.org/">Python</a> script <code class="docutils literal"><span class="pre">get_preferences.py</span></code>, which can be run using the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">get_preferences</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>This script processes the data from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> in <tt class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></tt> to generate the file <tt class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></tt>.</p>
+<p>This script processes the data from <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> in <code class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></code> to generate the file <code class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></code>.</p>
 <p>Specifically, the script works as follows:</p>
 <ol class="arabic">
-<li><p class="first">For each residue <em>r</em>, we read in the fitness value <span class="math">\(w_{r,a}\)</span> for amino acid <em>a</em> in <tt class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></tt> if such a value is present.</p>
+<li><p class="first">For each residue <em>r</em>, we read in the fitness value <span class="math">\(w_{r,a}\)</span> for amino acid <em>a</em> in <code class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></code> if such a value is present.</p>
 </li>
-<li><p class="first">For the wildtype amino acid at site <em>r</em>, we set <span class="math">\(w_{r,a} = 1\)</span> rather than using the value (usually close to one) provided in <tt class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></tt>. This is done because their method (see supplemental material of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>) defines the fitness of the wildtype to be one, and the values in the file that are usually close to but not exactly one are actually for synonymous mutations.</p>
+<li><p class="first">For the wildtype amino acid at site <em>r</em>, we set <span class="math">\(w_{r,a} = 1\)</span> rather than using the value (usually close to one) provided in <code class="docutils literal"><span class="pre">Firnberg_missense_mutation_fitnesses.csv</span></code>. This is done because their method (see supplemental material of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a>) defines the fitness of the wildtype to be one, and the values in the file that are usually close to but not exactly one are actually for synonymous mutations.</p>
 </li>
 <li><p class="first">Sometimes amino acids don&#8217;t have a fitness specified. When this is the case, we take the mean of all fitness values at the site (including the wildtype amino acid values set to one in the previous step), and then assign this mean fitness to any amino acids with unknown fitness. This is probably non-ideal, because it seems likely that the missing amino acid fitnesses correspond to very low fitness identities. But because <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/24567513">Firnberg et al 2014</a> fail to provide raw sequencing data or computer code, it is unclear how to do any better.</p>
 </li>
@@ -224,42 +224,42 @@ make install
 \[\pi_{r,a} = \frac{w_{r,a}}{\sum_{a'} w_{r,a'}}\]</div>
 <p>where <span class="math">\(a'\)</span> ranges over all amino acids.</p>
 </li>
-<li><p class="first">The preferences computed using the aforementioned formula are written to the output file <tt class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></tt>.
-Note that the residues in the created <tt class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></tt> file are numbered sequentially rather than using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
+<li><p class="first">The preferences computed using the aforementioned formula are written to the output file <code class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></code>.
+Note that the residues in the created <code class="docutils literal"><span class="pre">amino_acid_preferences.txt</span></code> file are numbered sequentially rather than using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
 </li>
-<li><p class="first">The <tt class="docutils literal"><span class="pre">get_preferences.py</span></tt> script also creates the file <tt class="docutils literal"><span class="pre">sequential_to_Ambler.csv</span></tt>, which converts between the sequential and <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering schemes (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
+<li><p class="first">The <code class="docutils literal"><span class="pre">get_preferences.py</span></code> script also creates the file <code class="docutils literal"><span class="pre">sequential_to_Ambler.csv</span></code>, which converts between the sequential and <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering schemes (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
 </li>
 </ol>
 </div>
 <div class="section" id="visualizing-the-amino-acid-preferences">
-<h3><a class="toc-backref" href="#id9">Visualizing the amino-acid preferences</a><a class="headerlink" href="#visualizing-the-amino-acid-preferences" title="Permalink to this headline">¶</a></h3>
-<p>The amino-acid preferences are visualized using a logo plot created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></tt>, which is detailed in the <a class="reference external" href="http://jbloom.github.io/mapmuts/">mapmuts documentation</a>. Briefly, this script uses <a class="reference external" href="http://weblogo.threeplusone.com/">weblogo</a> to visualize the preferences by making a plot in which the heights of amino acids are equal to their preferences at each site. Secondary structure and relative solvent accessibility information calculated using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> from PDB <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> is overlaid on the plot. The residues in this plot are numbered using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
-<p>The main <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script runs <tt class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></tt> after creating its input file <tt class="docutils literal"><span class="pre">mapmuts_siteprofileplots_infile.txt</span></tt>. The resulting image is in <tt class="docutils literal"><span class="pre">lactamase_site_preferences_logoplot.pdf</span></tt>. A JPG version of this plot (<tt class="docutils literal"><span class="pre">lactamase_site_preferences_logoplot.jpg</span></tt>) is also created using <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a>. The JPG is shown below:</p>
-<div class="figure align-center">
+<h3><a class="toc-backref" href="#id14">Visualizing the amino-acid preferences</a><a class="headerlink" href="#visualizing-the-amino-acid-preferences" title="Permalink to this headline">¶</a></h3>
+<p>The amino-acid preferences are visualized using a logo plot created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <code class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></code>, which is detailed in the <a class="reference external" href="http://jbloom.github.io/mapmuts/">mapmuts documentation</a>. Briefly, this script uses <a class="reference external" href="http://weblogo.threeplusone.com/">weblogo</a> to visualize the preferences by making a plot in which the heights of amino acids are equal to their preferences at each site. Secondary structure and relative solvent accessibility information calculated using the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> from PDB <a class="reference external" href="http://www.rcsb.org/pdb/explore.do?structureId=1XPB">1XPB</a> is overlaid on the plot. The residues in this plot are numbered using the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1151176/">Ambler</a> numbering scheme (see <a class="reference internal" href="#sequence-numbering">Sequence numbering</a>).</p>
+<p>The main <code class="docutils literal"><span class="pre">run_analysis.py</span></code> script runs <code class="docutils literal"><span class="pre">mapmuts_siteprofileplots.py</span></code> after creating its input file <code class="docutils literal"><span class="pre">mapmuts_siteprofileplots_infile.txt</span></code>. The resulting image is in <code class="docutils literal"><span class="pre">lactamase_site_preferences_logoplot.pdf</span></code>. A JPG version of this plot (<code class="docutils literal"><span class="pre">lactamase_site_preferences_logoplot.jpg</span></code>) is also created using <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a>. The JPG is shown below:</p>
+<div class="figure align-center" id="id1">
 <a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_lactamase_site_preferences_logoplot.jpg"><img alt="lactamase_site_preferences_logoplot.jpg" src="_images/example_2014Analysis_lactamase_lactamase_site_preferences_logoplot.jpg" style="width: 80%;" /></a>
-<p class="caption">Visual display of amino-acid preferences. Letter heights are proportional to the preference for that amino acid at that site. Secondary structure (SS) and relative solvent accessibility information is overlaid on the plots. Amino-acid letters are colored according to a hydrophobicity scale.</p>
+<p class="caption"><span class="caption-text">Visual display of amino-acid preferences. Letter heights are proportional to the preference for that amino acid at that site. Secondary structure (SS) and relative solvent accessibility information is overlaid on the plots. Amino-acid letters are colored according to a hydrophobicity scale.</span></p>
 </div>
 </div>
 <div class="section" id="creation-of-sequence-alignment">
-<h3><a class="toc-backref" href="#id10">Creation of sequence alignment</a><a class="headerlink" href="#creation-of-sequence-alignment" title="Permalink to this headline">¶</a></h3>
-<p>The creation of the sequence alignment <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt> is performed by the <a class="reference external" href="http://www.python.org/">Python</a> script <tt class="docutils literal"><span class="pre">get_treeseqs.py</span></tt> using the command:</p>
-<div class="highlight-python"><div class="highlight"><pre>python get_treeseqs.py
+<h3><a class="toc-backref" href="#id15">Creation of sequence alignment</a><a class="headerlink" href="#creation-of-sequence-alignment" title="Permalink to this headline">¶</a></h3>
+<p>The creation of the sequence alignment <code class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></code> is performed by the <a class="reference external" href="http://www.python.org/">Python</a> script <code class="docutils literal"><span class="pre">get_treeseqs.py</span></code> using the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">get_treeseqs</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>The steps performed by this script are as follows:</p>
 <ol class="arabic simple">
-<li>The CDS sequences are extracted from the Genbank sequences in <tt class="docutils literal"><span class="pre">Lahey_TEM_GenbankSequences.gb</span></tt> and <tt class="docutils literal"><span class="pre">Lahey_SHV_GenbankSequences.gb</span></tt> for all records with a single specified CDS that encodes a translatable protein and has not ambiguous nucleotide identities.</li>
-<li>The CDS sequences are pairwise aligned with the reference sequence in <tt class="docutils literal"><span class="pre">TEM1_cds.fasta</span></tt> constructing codon alignments from the protein alignments, and any gaps relative to the reference sequence are stripped away.</li>
-<li>Any sequences that do have less than 60% sequence identity to <tt class="docutils literal"><span class="pre">TEM1_cds.fasta</span></tt> among alignable sites or have more than 20% gaps are removed.</li>
+<li>The CDS sequences are extracted from the Genbank sequences in <code class="docutils literal"><span class="pre">Lahey_TEM_GenbankSequences.gb</span></code> and <code class="docutils literal"><span class="pre">Lahey_SHV_GenbankSequences.gb</span></code> for all records with a single specified CDS that encodes a translatable protein and has not ambiguous nucleotide identities.</li>
+<li>The CDS sequences are pairwise aligned with the reference sequence in <code class="docutils literal"><span class="pre">TEM1_cds.fasta</span></code> constructing codon alignments from the protein alignments, and any gaps relative to the reference sequence are stripped away.</li>
+<li>Any sequences that do have less than 60% sequence identity to <code class="docutils literal"><span class="pre">TEM1_cds.fasta</span></code> among alignable sites or have more than 20% gaps are removed.</li>
 <li>Aligned sequences are examined for the number of nucleotide differences with other sequences. When there are multiple sequences that have less than four differences from another sequence, only one representative is retained. This reduces the number of highly similar sequences.</li>
-<li>The remaining set of unique aligned sequences is written to <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt>.</li>
+<li>The remaining set of unique aligned sequences is written to <code class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></code>.</li>
 </ol>
 </div>
 <div class="section" id="inspection-of-aligned-sequences">
-<h3><a class="toc-backref" href="#id11">Inspection of aligned sequences</a><a class="headerlink" href="#inspection-of-aligned-sequences" title="Permalink to this headline">¶</a></h3>
-<p>The aligned sequences in <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt> are subjected to the following manual steps to check the quality of the data:</p>
+<h3><a class="toc-backref" href="#id16">Inspection of aligned sequences</a><a class="headerlink" href="#inspection-of-aligned-sequences" title="Permalink to this headline">¶</a></h3>
+<p>The aligned sequences in <code class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></code> are subjected to the following manual steps to check the quality of the data:</p>
 <ol class="arabic">
-<li><p class="first">The <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt> file was manually checked for recombinant sequences using the online interface to <a class="reference external" href="http://www.datamonkey.org/">DataMonkey</a> to run the <em>SBP</em> and <em>GARD</em> programs. Briefly:</p>
+<li><p class="first">The <code class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></code> file was manually checked for recombinant sequences using the online interface to <a class="reference external" href="http://www.datamonkey.org/">DataMonkey</a> to run the <em>SBP</em> and <em>GARD</em> programs. Briefly:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Using <em>SBP</em>, there was no evidence of recombination using the recommended criterion of <em>cAIC</em>.</li>
@@ -267,18 +267,18 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">A quick phylogenetic tree was built using <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> to make sure that the tree topology seemed reasonable. The <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> output was placed in the subdirectory <tt class="docutils literal"><span class="pre">./RAxML_output/</span></tt>. The following command was executed:</p>
-<div class="highlight-python"><div class="highlight"><pre>raxmlHPC-SSE3 -w ./RAxML_output/ -n aligned_lactamases -p 1 -m GTRCAT -s aligned_lactamases.fasta
+<li><p class="first">A quick phylogenetic tree was built using <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> to make sure that the tree topology seemed reasonable. The <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> output was placed in the subdirectory <code class="docutils literal"><span class="pre">./RAxML_output/</span></code>. The following command was executed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">raxmlHPC</span><span class="o">-</span><span class="n">SSE3</span> <span class="o">-</span><span class="n">w</span> <span class="o">./</span><span class="n">RAxML_output</span><span class="o">/</span> <span class="o">-</span><span class="n">n</span> <span class="n">aligned_lactamases</span> <span class="o">-</span><span class="n">p</span> <span class="mi">1</span> <span class="o">-</span><span class="n">m</span> <span class="n">GTRCAT</span> <span class="o">-</span><span class="n">s</span> <span class="n">aligned_lactamases</span><span class="o">.</span><span class="n">fasta</span>
 </pre></div>
 </div>
-<p>Note that in the actual command, the full path to <tt class="docutils literal"><span class="pre">./RAxML_output/</span></tt> is specified. This created the <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree as <tt class="docutils literal"><span class="pre">/RAxML_output/RAxML_bestTree.aligned_lactamases</span></tt>, as well as several other files in <tt class="docutils literal"><span class="pre">./RAxML_output/</span></tt>. The tree was manually visualized with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> to confirm that it separated into the two expected clades of TEM and SHV sequences.</p>
+<p>Note that in the actual command, the full path to <code class="docutils literal"><span class="pre">./RAxML_output/</span></code> is specified. This created the <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree as <code class="docutils literal"><span class="pre">/RAxML_output/RAxML_bestTree.aligned_lactamases</span></code>, as well as several other files in <code class="docutils literal"><span class="pre">./RAxML_output/</span></code>. The tree was manually visualized with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> to confirm that it separated into the two expected clades of TEM and SHV sequences.</p>
 </li>
 </ol>
 </div>
 <div class="section" id="construction-of-phylogenetic-trees">
-<h3><a class="toc-backref" href="#id12">Construction of phylogenetic trees</a><a class="headerlink" href="#construction-of-phylogenetic-trees" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">Construction of phylogenetic trees</a><a class="headerlink" href="#construction-of-phylogenetic-trees" title="Permalink to this headline">¶</a></h3>
 <p>High-quality phylogenetic trees were then constructed using <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>, which is able to build maximum-likelihood trees with codon substitution models.</p>
-<p>The <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_runcodonPhyML.py</span></tt> (see <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for details) was used to run <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. Trees were built using two different substitution models, with each tree in its own subdirectory within <tt class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></tt>. The substitution models used to build the trees:</p>
+<p>The <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <code class="docutils literal"><span class="pre">phyloExpCM_runcodonPhyML.py</span></code> (see <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for details) was used to run <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. Trees were built using two different substitution models, with each tree in its own subdirectory within <code class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></code>. The substitution models used to build the trees:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">The <em>GY94</em> codon model (<a class="reference external" href="http://mbe.oxfordjournals.org/content/11/5/725.full.pdf">Goldman and Yang 1994</a>) with:</p>
@@ -289,7 +289,7 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 <li>The dN/dS ratio (<em>omega</em>) drawn from four discrete gamma-distributed categories (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/7932792">Yang 1994</a>) with the shape parameter and mean estimated by maximum likelihood.</li>
 </ul>
 </div></blockquote>
-<p>The tree construction was performed in the <tt class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/</span></tt> subdirectory. The tree itself is in the file <tt class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree.newick</span></tt>.</p>
+<p>The tree construction was performed in the <code class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/</span></code> subdirectory. The tree itself is in the file <code class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree.newick</span></code>.</p>
 </li>
 <li><p class="first">The <em>KOSI07</em> empirical codon model (<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/17400572">Kosiol et al 2007</a>), using the variant denoted as <em>ECM+F+omega+1kappa(tv)</em> in <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/17400572">Kosiol et al 2007</a>. Specifically:</p>
 <blockquote>
@@ -299,84 +299,84 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 <li>The relative elevation in nonsynonymous over synonymous mutations (<em>omega</em>) drawn from four gamma-distributed categories with shape parameter and mean estimated by maximum likelihood.</li>
 </ul>
 </div></blockquote>
-<p>The tree construction was performed in the <tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/</span></tt> subdirectory. The tree itself is in the file <tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree.newick</span></tt>.</p>
+<p>The tree construction was performed in the <code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/</span></code> subdirectory. The tree itself is in the file <code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree.newick</span></code>.</p>
 </li>
 </ul>
 </div></blockquote>
 <p>To visualize these trees, the following <strong>manual</strong> steps were performed for the tree in each subdirectory:</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p class="first">The <tt class="docutils literal"><span class="pre">codonphyml_tree.newick</span></tt> file was re-rooted using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and then opened in <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, adjusted for attractive visual display, and saved to the file <tt class="docutils literal"><span class="pre">annotated_tree.trees</span></tt>.</p>
+<li><p class="first">The <code class="docutils literal"><span class="pre">codonphyml_tree.newick</span></code> file was re-rooted using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> and then opened in <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, adjusted for attractive visual display, and saved to the file <code class="docutils literal"><span class="pre">annotated_tree.trees</span></code>.</p>
 </li>
-<li><p class="first">A PDF image of the tree in the <tt class="docutils literal"><span class="pre">annotated_tree.trees</span></tt> file was saved manually with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, and then converted to a JPG with <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> using the command:</p>
-<div class="highlight-python"><div class="highlight"><pre>convert -density 300 annotated_tree.pdf annotated_tree.jpg
+<li><p class="first">A PDF image of the tree in the <code class="docutils literal"><span class="pre">annotated_tree.trees</span></code> file was saved manually with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, and then converted to a JPG with <a class="reference external" href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> using the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">convert</span> <span class="o">-</span><span class="n">density</span> <span class="mi">300</span> <span class="n">annotated_tree</span><span class="o">.</span><span class="n">pdf</span> <span class="n">annotated_tree</span><span class="o">.</span><span class="n">jpg</span>
 </pre></div>
 </div>
 <p>The tree images created by these steps are shown below:</p>
 <blockquote>
-<div><div class="figure align-center">
+<div><div class="figure align-center" id="id2">
 <a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_GY94_codonPhyML_tree_annotated_tree.jpg"><img alt="GY94_codonPhyML_tree/annotated_tree.jpg" src="_images/example_2014Analysis_lactamase_GY94_codonPhyML_tree_annotated_tree.jpg" style="width: 65%;" /></a>
-<p class="caption">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>GY94</em> substitution model (file <tt class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/annotated_tree.jpg</span></tt>). The <em>TEM</em> sequences are colored red, while the <em>SHV</em> sequences are colored blue.</p>
+<p class="caption"><span class="caption-text">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>GY94</em> substitution model (file <code class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/annotated_tree.jpg</span></code>). The <em>TEM</em> sequences are colored red, while the <em>SHV</em> sequences are colored blue.</span></p>
 </div>
-<div class="figure align-center">
+<div class="figure align-center" id="id3">
 <a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_KOSI07_codonPhyML_tree_annotated_tree.jpg"><img alt="KOSI07_codonPhyML_tree/annotated_tree.jpg" src="_images/example_2014Analysis_lactamase_KOSI07_codonPhyML_tree_annotated_tree.jpg" style="width: 65%;" /></a>
-<p class="caption">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>KOSI07</em> substitution model (file <tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/annotated_tree.jpg</span></tt>). The <em>TEM</em> sequences are colored red, while the <em>SHV</em> sequences are colored blue.</p>
+<p class="caption"><span class="caption-text">Image of the tree generated by <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> for the <em>KOSI07</em> substitution model (file <code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/annotated_tree.jpg</span></code>). The <em>TEM</em> sequences are colored red, while the <em>SHV</em> sequences are colored blue.</span></p>
 </div>
 </div></blockquote>
 </li>
 </ol>
 </div></blockquote>
-<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Foulds_metric">Robinson-Foulds distance</a> between the trees computed with the <em>GY94</em> and <em>KOSI07</em> models was computed with <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a>, and the results written to the directory <tt class="docutils literal"><span class="pre">./RobinsonFouldsDistances/</span></tt>. This distance provides a quantitative measure of the similarity between the tree topologies.</p>
-<p>Each of these trees was also parsed into the subtrees representing the <em>TEM</em> and the <em>SHV</em> sequences keeping the tree topology estimated jointly. The subtree parsing is done automatically by the <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> script using <a class="reference external" href="http://biopython.org/wiki/Main_Page">BioPython</a>. These subtrees have the names:</p>
+<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Foulds_metric">Robinson-Foulds distance</a> between the trees computed with the <em>GY94</em> and <em>KOSI07</em> models was computed with <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a>, and the results written to the directory <code class="docutils literal"><span class="pre">./RobinsonFouldsDistances/</span></code>. This distance provides a quantitative measure of the similarity between the tree topologies.</p>
+<p>Each of these trees was also parsed into the subtrees representing the <em>TEM</em> and the <em>SHV</em> sequences keeping the tree topology estimated jointly. The subtree parsing is done automatically by the <code class="docutils literal"><span class="pre">run_analysis.py</span></code> script using <a class="reference external" href="http://biopython.org/wiki/Main_Page">BioPython</a>. These subtrees have the names:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree_SHV.newick</span></tt> : the <em>SHV</em> subtree from <tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree.newick</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree_TEM.newick</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree_SHV.newick</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree_TEM.newick</span></tt></li>
+<li><code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree_SHV.newick</span></code> : the <em>SHV</em> subtree from <code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree.newick</span></code></li>
+<li><code class="docutils literal"><span class="pre">./KOSI07_codonPhyML_tree/codonphyml_tree_TEM.newick</span></code></li>
+<li><code class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree_SHV.newick</span></code></li>
+<li><code class="docutils literal"><span class="pre">./GY94_codonPhyML_tree/codonphyml_tree_TEM.newick</span></code></li>
 </ul>
 </div></blockquote>
 <p>The sequence alignments for these subtrees are in the files</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">aligned_GY94_SHV.fasta</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">aligned_GY94_TEM.fasta</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">aligned_KOSI07_SHV.fasta</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">aligned_KOSI07_TEM.fasta</span></tt></li>
+<li><code class="docutils literal"><span class="pre">aligned_GY94_SHV.fasta</span></code></li>
+<li><code class="docutils literal"><span class="pre">aligned_GY94_TEM.fasta</span></code></li>
+<li><code class="docutils literal"><span class="pre">aligned_KOSI07_SHV.fasta</span></code></li>
+<li><code class="docutils literal"><span class="pre">aligned_KOSI07_TEM.fasta</span></code></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="average-amino-acid-frequencies-in-the-alignments">
-<h3><a class="toc-backref" href="#id13">Average amino-acid frequencies in the alignments</a><a class="headerlink" href="#average-amino-acid-frequencies-in-the-alignments" title="Permalink to this headline">¶</a></h3>
-<p>The overall average amino-acid frequencies for each alignment (averaged over all sites and sequences) were computed using the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <tt class="docutils literal"><span class="pre">phyloExpCM_FreqsFromAlignment.py</span></tt>.</p>
-<p>Within the <tt class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></tt> these files have the following names:</p>
+<h3><a class="toc-backref" href="#id18">Average amino-acid frequencies in the alignments</a><a class="headerlink" href="#average-amino-acid-frequencies-in-the-alignments" title="Permalink to this headline">¶</a></h3>
+<p>The overall average amino-acid frequencies for each alignment (averaged over all sites and sequences) were computed using the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> script <code class="docutils literal"><span class="pre">phyloExpCM_FreqsFromAlignment.py</span></code>.</p>
+<p>Within the <code class="docutils literal"><span class="pre">./examples/2014Analysis_lactamase/</span></code> these files have the following names:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_lactamases.txt</span></tt> : the averages over all of the lactamase sequences in <tt class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_TEM.txt</span></tt> : the averages over just the sequences in <tt class="docutils literal"><span class="pre">aligned_GY94_TEM.fasta</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_TEM.txt</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_SHV.txt</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_SHV.txt</span></tt></li>
+<li><code class="docutils literal"><span class="pre">avg_aa_freqs_aligned_lactamases.txt</span></code> : the averages over all of the lactamase sequences in <code class="docutils literal"><span class="pre">aligned_lactamases.fasta</span></code></li>
+<li><code class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_TEM.txt</span></code> : the averages over just the sequences in <code class="docutils literal"><span class="pre">aligned_GY94_TEM.fasta</span></code></li>
+<li><code class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_TEM.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">avg_aa_freqs_aligned_GY94_SHV.txt</span></code></li>
+<li><code class="docutils literal"><span class="pre">avg_aa_freqs_aligned_KOSI07_SHV.txt</span></code></li>
 </ul>
 </div></blockquote>
 <p>Although these files list a line of frequencies for each site, the frequencies reported for each site are the <strong>average</strong> over all sites and sequences. These frequencies are used in the models that have the same mutation structure as the experimentally informed models, but replace the preferences with the average amino-acid frequencies. These frequencies are calculated by adding a pseudocount of one to each amino-acid type (a very small correction as there are many sequences and sites).</p>
 </div>
 <div class="section" id="optimizing-the-trees-with-various-substitution-models">
-<h3><a class="toc-backref" href="#id14">Optimizing the trees with various substitution models</a><a class="headerlink" href="#optimizing-the-trees-with-various-substitution-models" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">Optimizing the trees with various substitution models</a><a class="headerlink" href="#optimizing-the-trees-with-various-substitution-models" title="Permalink to this headline">¶</a></h3>
 <p>This is the heart of the analysis: to use various codon substitution models to optimize the branch lengths and likelihood for the tree topologies estimated with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> and the <em>GY94</em> or <em>KOSI07</em> substitution models as described in <a class="reference internal" href="#construction-of-phylogenetic-trees">Construction of phylogenetic trees</a>. The analyses are also done for the <em>TEM</em> and <em>SHV</em> subtrees. This analysis compares the experimentally determined codon substitution models with various other substitution models.</p>
-<p>This analysis is done with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> scripts <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></tt> (for standard substitution models) and <tt class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></tt> (for substitution models using the experimentally determined amino-acid preferences), both of which are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>. These scripts uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model free parameters while keeping the tree topologies fixed.</p>
-<p>The results of the optimizations for the various substitution models are in the subdirectory <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/</span></tt>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. For example, <tt class="docutils literal"><span class="pre">./codonmodel_optimized_trees/Tree-KOSI07_Model-KOSI07_F_omega-global-gamma4_rates-one/</span></tt> contains one such model. Within this subdirectory, the files of interest are:</p>
+<p>This analysis is done with the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> scripts <code class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></code> (for standard substitution models) and <code class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></code> (for substitution models using the experimentally determined amino-acid preferences), both of which are described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a>. These scripts uses <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> to optimize the branch lengths and any substitution model free parameters while keeping the tree topologies fixed.</p>
+<p>The results of the optimizations for the various substitution models are in the subdirectory <code class="docutils literal"><span class="pre">./codonmodel_optimized_trees/</span></code>. Within this subdirectory are further subdirectories containing the results of optimizing the branch lengths with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the indicated codon substitution models. For example, <code class="docutils literal"><span class="pre">./codonmodel_optimized_trees/Tree-KOSI07_Model-KOSI07_F_omega-global-gamma4_rates-one/</span></code> contains one such model. Within this subdirectory, the files of interest are:</p>
 <blockquote>
 <div><ul class="simple">
-<li>The tree with branch lengths optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the substitution model in question is in a file called either <tt class="docutils literal"><span class="pre">hyphy_tree.newick</span></tt> or <tt class="docutils literal"><span class="pre">optimizedtree.newick</span></tt>.</li>
-<li>A summary of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> results including the log likelihood is found in a file called either <tt class="docutils literal"><span class="pre">hyphy_output.txt</span></tt> or <tt class="docutils literal"><span class="pre">optimizedtree_results.txt</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">*_infile.txt</span></tt> the input file used to run either <tt class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></tt> or <tt class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></tt>.</li>
+<li>The tree with branch lengths optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> using the substitution model in question is in a file called either <code class="docutils literal"><span class="pre">hyphy_tree.newick</span></code> or <code class="docutils literal"><span class="pre">optimizedtree.newick</span></code>.</li>
+<li>A summary of the <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> results including the log likelihood is found in a file called either <code class="docutils literal"><span class="pre">hyphy_output.txt</span></code> or <code class="docutils literal"><span class="pre">optimizedtree_results.txt</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">*_infile.txt</span></code> the input file used to run either <code class="docutils literal"><span class="pre">phyloExpCM_optimizeHyphyTree.py</span></code> or <code class="docutils literal"><span class="pre">phyloExpCM_ExpModelOptimizeHyphyTree.py</span></code>.</li>
 </ul>
 </div></blockquote>
 <p>The models are:</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><em>HalpernBruno</em> : the model described as <em>HalpernBruno</em> in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>. Briefly, the fixation probabilities <span class="math">\(F_{r,xy}\)</span> are determined from the amino-acid preferences <span class="math">\(\pi_{r,a}\)</span> using formula of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9656490">Halpern and Bruno 1998</a> as</p>
+<li><p class="first"><em>HalpernBruno</em> : the model described as <em>HalpernBruno</em> in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <code class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></code>. Briefly, the fixation probabilities <span class="math">\(F_{r,xy}\)</span> are determined from the amino-acid preferences <span class="math">\(\pi_{r,a}\)</span> using formula of <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/9656490">Halpern and Bruno 1998</a> as</p>
 <blockquote>
 <div><div class="math">
 \[\begin{split}F_{r,xy} =
@@ -385,9 +385,9 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 \frac{\beta \times \ln\left(\pi_{r,\mathcal{A}\left(y\right)} / \pi_{r,\mathcal{A}\left(x\right)}\right)}{1 - \left(\pi_{r,\mathcal{A}\left(x\right)} / \pi_{r,\mathcal{A}\left(y\right)}\right)^{\beta}} &amp; \mbox{otherwise.}
 \end{cases}\end{split}\]</div>
 </div></blockquote>
-<p>The mutation rates involve the fitting of four free parameters as described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>. The stringency parameter <span class="math">\(\beta\)</span> is either fixed to one or optimized.</p>
+<p>The mutation rates involve the fitting of four free parameters as described in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <code class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></code>. The stringency parameter <span class="math">\(\beta\)</span> is either fixed to one or optimized.</p>
 </li>
-<li><p class="first"><em>FracTolerated</em> : the model described as <em>FracTolerated</em> in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <tt class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></tt>. This model differs from <em>HalpernBruno</em> in that the fixation probabilities are now determined as</p>
+<li><p class="first"><em>FracTolerated</em> : the model described as <em>FracTolerated</em> in the <a class="reference external" href="http://jbloom.github.io/phyloExpCM">phyloExpCM documentation</a> for <code class="docutils literal"><span class="pre">phyloExpCM_OptimizeDetectSelection.py</span></code>. This model differs from <em>HalpernBruno</em> in that the fixation probabilities are now determined as</p>
 <blockquote>
 <div><div class="math">
 \[\begin{split}F_{r,xy} =
@@ -421,7 +421,7 @@ Note that the residues in the created <tt class="docutils literal"><span class="
 </li>
 </ul>
 </div></blockquote>
-<p>A helpful way to view the results is to look at the main summary files created by <tt class="docutils literal"><span class="pre">run_analysis.py</span></tt> in the examples home directory. These files summarize the results for each tree topology.
+<p>A helpful way to view the results is to look at the main summary files created by <code class="docutils literal"><span class="pre">run_analysis.py</span></code> in the examples home directory. These files summarize the results for each tree topology.
 The results are sorted by the <a class="reference external" href="http://en.wikipedia.org/wiki/Akaike_information_criterion">AIC</a> from best to worst.
 Overall, the files contain the following columns:</p>
 <blockquote>
@@ -453,199 +453,199 @@ Overall, the files contain the following columns:</p>
 </li>
 </ol>
 </div></blockquote>
-<p>Here are the results for optimization of the combined <em>TEM</em> and <em>SHV</em> tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">GY94_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the combined <em>TEM</em> and <em>SHV</em> tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">GY94_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -4020.63, 5, 5, 0
-HalpernBruno, 46.44, -4044.85, 4, 4, 0
-fitbetaFracTolerated, 77.28, -4059.27, 5, 5, 0
-FracTolerated, 85.68, -4064.47, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 392.4, -4208.83, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 410.703, -4166.98, 64, 4, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 460.9, -4244.08, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 467.033, -4196.15, 63, 3, 60
-GY94_CF3x4_omega-global-one_rates-gamma4, 528.924, -4278.09, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 551.298, -4238.28, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 632.878, -4280.07, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 656.184, -4342.72, 11, 2, 9
-fitbetaFracToleratedrandomized, 724.54, -4382.9, 5, 5, 0
-fitbetaHalpernBrunorandomized, 735.06, -4388.16, 5, 5, 0
-avgaafreqsfitbeta_FracTolerated, 820.78, -4371.02, 65, 5, 60
-avgaafreqsfitbeta_HalpernBruno, 841.8, -4381.53, 65, 5, 60
-avgaafreqs_FracTolerated, 858.04, -4390.65, 64, 4, 60
-avgaafreqs_HalpernBruno, 900.68, -4411.97, 64, 4, 60
-FracToleratedrandomized, 1264.88, -4654.07, 4, 4, 0
-HalpernBrunorandomized, 1474.46, -4758.86, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree GY94.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4020.63</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">46.44</span><span class="p">,</span> <span class="o">-</span><span class="mf">4044.85</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">77.28</span><span class="p">,</span> <span class="o">-</span><span class="mf">4059.27</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">85.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">4064.47</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">392.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">4208.83</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">410.703</span><span class="p">,</span> <span class="o">-</span><span class="mf">4166.98</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">460.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">4244.08</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">467.033</span><span class="p">,</span> <span class="o">-</span><span class="mf">4196.15</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">528.924</span><span class="p">,</span> <span class="o">-</span><span class="mf">4278.09</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">551.298</span><span class="p">,</span> <span class="o">-</span><span class="mf">4238.28</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">632.878</span><span class="p">,</span> <span class="o">-</span><span class="mf">4280.07</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">656.184</span><span class="p">,</span> <span class="o">-</span><span class="mf">4342.72</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">724.54</span><span class="p">,</span> <span class="o">-</span><span class="mf">4382.9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">735.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">4388.16</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">820.78</span><span class="p">,</span> <span class="o">-</span><span class="mf">4371.02</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">841.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">4381.53</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">858.04</span><span class="p">,</span> <span class="o">-</span><span class="mf">4390.65</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">900.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">4411.97</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mf">1264.88</span><span class="p">,</span> <span class="o">-</span><span class="mf">4654.07</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1474.46</span><span class="p">,</span> <span class="o">-</span><span class="mf">4758.86</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here are the results for optimization of the combined <em>TEM</em> and <em>SHV</em> tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">KOSI07_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the combined <em>TEM</em> and <em>SHV</em> tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">KOSI07_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -4019.94, 5, 5, 0
-HalpernBruno, 48.34, -4045.11, 4, 4, 0
-fitbetaFracTolerated, 76.06, -4057.97, 5, 5, 0
-FracTolerated, 85.6, -4063.74, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 397.965, -4210.92, 13, 4, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 402.189, -4162.03, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 455.126, -4189.5, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 464.4, -4245.14, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 527.857, -4276.87, 12, 3, 9
-KOSI07_F_omega-global-one_rates-gamma4, 529.827, -4226.85, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 608.297, -4267.09, 62, 2, 60
-GY94_CF3x4_omega-global-one_rates-one, 651.932, -4339.91, 11, 2, 9
-fitbetaFracToleratedrandomized, 726.26, -4383.07, 5, 5, 0
-fitbetaHalpernBrunorandomized, 736.96, -4388.42, 5, 5, 0
-avgaafreqsfitbeta_FracTolerated, 823.74, -4371.81, 65, 5, 60
-avgaafreqsfitbeta_HalpernBruno, 844.76, -4382.32, 65, 5, 60
-avgaafreqs_FracTolerated, 862.08, -4391.98, 64, 4, 60
-avgaafreqs_HalpernBruno, 907.08, -4414.48, 64, 4, 60
-FracToleratedrandomized, 1265.14, -4653.51, 4, 4, 0
-HalpernBrunorandomized, 1474.08, -4757.98, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree KOSI07.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4019.94</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">48.34</span><span class="p">,</span> <span class="o">-</span><span class="mf">4045.11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">76.06</span><span class="p">,</span> <span class="o">-</span><span class="mf">4057.97</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">85.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">4063.74</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">397.965</span><span class="p">,</span> <span class="o">-</span><span class="mf">4210.92</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">402.189</span><span class="p">,</span> <span class="o">-</span><span class="mf">4162.03</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">455.126</span><span class="p">,</span> <span class="o">-</span><span class="mf">4189.5</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">464.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">4245.14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">527.857</span><span class="p">,</span> <span class="o">-</span><span class="mf">4276.87</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">529.827</span><span class="p">,</span> <span class="o">-</span><span class="mf">4226.85</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">608.297</span><span class="p">,</span> <span class="o">-</span><span class="mf">4267.09</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">651.932</span><span class="p">,</span> <span class="o">-</span><span class="mf">4339.91</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">726.26</span><span class="p">,</span> <span class="o">-</span><span class="mf">4383.07</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">736.96</span><span class="p">,</span> <span class="o">-</span><span class="mf">4388.42</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">823.74</span><span class="p">,</span> <span class="o">-</span><span class="mf">4371.81</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">844.76</span><span class="p">,</span> <span class="o">-</span><span class="mf">4382.32</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">862.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">4391.98</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">907.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">4414.48</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mf">1265.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">4653.51</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1474.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">4757.98</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here are the results for optimization of the  <em>TEM</em>-only tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">GY94_TEM_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the  <em>TEM</em>-only tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">GY94_TEM_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94_TEM.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -2374.29, 5, 5, 0
-HalpernBruno, 23.12, -2386.85, 4, 4, 0
-fitbetaFracTolerated, 81.8, -2415.19, 5, 5, 0
-FracTolerated, 83.6, -2417.09, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 252.239, -2492.41, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 317.554, -2526.07, 12, 3, 9
-GY94_CF3x4_omega-global-gamma4_rates-one, 318.468, -2526.52, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 326.895, -2478.74, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 394.938, -2513.76, 63, 3, 60
-KOSI07_F_omega-global-one_rates-gamma4, 412.027, -2522.3, 63, 3, 60
-fitbetaFracToleratedrandomized, 465.8, -2607.19, 5, 5, 0
-fitbetaHalpernBrunorandomized, 466.16, -2607.37, 5, 5, 0
-GY94_CF3x4_omega-global-one_rates-one, 483.301, -2609.94, 11, 2, 9
-KOSI07_F_omega-global-one_rates-one, 556.735, -2595.66, 62, 2, 60
-avgaafreqsfitbeta_HalpernBruno, 574.64, -2601.61, 65, 5, 60
-avgaafreqsfitbeta_FracTolerated, 577.9, -2603.24, 65, 5, 60
-avgaafreqs_HalpernBruno, 609.12, -2619.85, 64, 4, 60
-avgaafreqs_FracTolerated, 622.74, -2626.66, 64, 4, 60
-FracToleratedrandomized, 976.62, -2863.6, 4, 4, 0
-HalpernBrunorandomized, 1007.78, -2879.18, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree GY94_TEM.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2374.29</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">23.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">2386.85</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">81.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">2415.19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">83.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">2417.09</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">252.239</span><span class="p">,</span> <span class="o">-</span><span class="mf">2492.41</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">317.554</span><span class="p">,</span> <span class="o">-</span><span class="mf">2526.07</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">318.468</span><span class="p">,</span> <span class="o">-</span><span class="mf">2526.52</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">326.895</span><span class="p">,</span> <span class="o">-</span><span class="mf">2478.74</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">394.938</span><span class="p">,</span> <span class="o">-</span><span class="mf">2513.76</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">412.027</span><span class="p">,</span> <span class="o">-</span><span class="mf">2522.3</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">465.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">2607.19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">466.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">2607.37</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">483.301</span><span class="p">,</span> <span class="o">-</span><span class="mf">2609.94</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">556.735</span><span class="p">,</span> <span class="o">-</span><span class="mf">2595.66</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">574.64</span><span class="p">,</span> <span class="o">-</span><span class="mf">2601.61</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">577.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">2603.24</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">609.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">2619.85</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">622.74</span><span class="p">,</span> <span class="o">-</span><span class="mf">2626.66</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mf">976.62</span><span class="p">,</span> <span class="o">-</span><span class="mf">2863.6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1007.78</span><span class="p">,</span> <span class="o">-</span><span class="mf">2879.18</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here are the results for optimization of the  <em>SHV</em>-only tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">GY94_SHV_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the  <em>SHV</em>-only tree built with the <em>GY94</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">GY94_SHV_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree GY94_SHV.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -1728.55, 5, 5, 0
-fitbetaFracTolerated, 34.92, -1746.01, 5, 5, 0
-HalpernBruno, 106.22, -1782.66, 4, 4, 0
-FracTolerated, 116.5, -1787.8, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 488.954, -1914.03, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 499.662, -1920.38, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 505.8, -1973.45, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 513.974, -1978.54, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 555.74, -1948.42, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 573.58, -1958.34, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 581.526, -2012.31, 12, 3, 9
-fitbetaFracToleratedrandomized, 601.68, -2029.39, 5, 5, 0
-GY94_CF3x4_omega-global-one_rates-one, 602.573, -2023.84, 11, 2, 9
-fitbetaHalpernBrunorandomized, 602.7, -2029.9, 5, 5, 0
-avgaafreqsfitbeta_FracTolerated, 711.48, -2024.29, 65, 5, 60
-avgaafreqsfitbeta_HalpernBruno, 715.68, -2026.39, 65, 5, 60
-avgaafreqs_FracTolerated, 749.82, -2044.46, 64, 4, 60
-avgaafreqs_HalpernBruno, 758.76, -2048.93, 64, 4, 60
-FracToleratedrandomized, 1047, -2253.05, 4, 4, 0
-HalpernBrunorandomized, 1071.2, -2265.15, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree GY94_SHV.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1728.55</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">34.92</span><span class="p">,</span> <span class="o">-</span><span class="mf">1746.01</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">106.22</span><span class="p">,</span> <span class="o">-</span><span class="mf">1782.66</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">116.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1787.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">488.954</span><span class="p">,</span> <span class="o">-</span><span class="mf">1914.03</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">499.662</span><span class="p">,</span> <span class="o">-</span><span class="mf">1920.38</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">505.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">1973.45</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">513.974</span><span class="p">,</span> <span class="o">-</span><span class="mf">1978.54</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">555.74</span><span class="p">,</span> <span class="o">-</span><span class="mf">1948.42</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">573.58</span><span class="p">,</span> <span class="o">-</span><span class="mf">1958.34</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">581.526</span><span class="p">,</span> <span class="o">-</span><span class="mf">2012.31</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">601.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">2029.39</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">602.573</span><span class="p">,</span> <span class="o">-</span><span class="mf">2023.84</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">602.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">2029.9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">711.48</span><span class="p">,</span> <span class="o">-</span><span class="mf">2024.29</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">715.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">2026.39</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">749.82</span><span class="p">,</span> <span class="o">-</span><span class="mf">2044.46</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">758.76</span><span class="p">,</span> <span class="o">-</span><span class="mf">2048.93</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mi">1047</span><span class="p">,</span> <span class="o">-</span><span class="mf">2253.05</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1071.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2265.15</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here are the results for optimization of the  <em>TEM</em>-only tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">KOSI07_TEM_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the  <em>TEM</em>-only tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">KOSI07_TEM_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07_TEM.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -2378.53, 5, 5, 0
-HalpernBruno, 25.44, -2392.25, 4, 4, 0
-fitbetaFracTolerated, 80.64, -2418.85, 5, 5, 0
-FracTolerated, 83.68, -2421.37, 4, 4, 0
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 257.61, -2499.34, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 317.651, -2530.36, 12, 3, 9
-GY94_CF3x4_omega-global-gamma4_rates-one, 324.101, -2533.58, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-gamma4, 325.66, -2482.36, 64, 4, 60
-KOSI07_F_omega-global-gamma4_rates-one, 393.479, -2517.27, 63, 3, 60
-KOSI07_F_omega-global-one_rates-gamma4, 402.405, -2521.73, 63, 3, 60
-fitbetaFracToleratedrandomized, 471.96, -2614.51, 5, 5, 0
-fitbetaHalpernBrunorandomized, 472.38, -2614.72, 5, 5, 0
-GY94_CF3x4_omega-global-one_rates-one, 487.951, -2616.51, 11, 2, 9
-KOSI07_F_omega-global-one_rates-one, 550.39, -2596.73, 62, 2, 60
-avgaafreqsfitbeta_HalpernBruno, 581.58, -2609.32, 65, 5, 60
-avgaafreqsfitbeta_FracTolerated, 584.16, -2610.61, 65, 5, 60
-avgaafreqs_HalpernBruno, 617.3, -2628.18, 64, 4, 60
-avgaafreqs_FracTolerated, 629.16, -2634.11, 64, 4, 60
-FracToleratedrandomized, 980.72, -2869.89, 4, 4, 0
-HalpernBrunorandomized, 1014.62, -2886.84, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree KOSI07_TEM.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2378.53</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">25.44</span><span class="p">,</span> <span class="o">-</span><span class="mf">2392.25</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">80.64</span><span class="p">,</span> <span class="o">-</span><span class="mf">2418.85</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">83.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">2421.37</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">257.61</span><span class="p">,</span> <span class="o">-</span><span class="mf">2499.34</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">317.651</span><span class="p">,</span> <span class="o">-</span><span class="mf">2530.36</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">324.101</span><span class="p">,</span> <span class="o">-</span><span class="mf">2533.58</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">325.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">2482.36</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">393.479</span><span class="p">,</span> <span class="o">-</span><span class="mf">2517.27</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">402.405</span><span class="p">,</span> <span class="o">-</span><span class="mf">2521.73</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">471.96</span><span class="p">,</span> <span class="o">-</span><span class="mf">2614.51</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">472.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">2614.72</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">487.951</span><span class="p">,</span> <span class="o">-</span><span class="mf">2616.51</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">550.39</span><span class="p">,</span> <span class="o">-</span><span class="mf">2596.73</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">581.58</span><span class="p">,</span> <span class="o">-</span><span class="mf">2609.32</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">584.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">2610.61</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">617.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2628.18</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">629.16</span><span class="p">,</span> <span class="o">-</span><span class="mf">2634.11</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mf">980.72</span><span class="p">,</span> <span class="o">-</span><span class="mf">2869.89</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1014.62</span><span class="p">,</span> <span class="o">-</span><span class="mf">2886.84</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Here are the results for optimization of the  <em>SHV</em>-only tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <tt class="docutils literal"><span class="pre">KOSI07_SHV_summary.csv</span></tt>):</p>
+<p>Here are the results for optimization of the  <em>SHV</em>-only tree built with the <em>KOSI07</em> model in <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> (this is the file <code class="docutils literal"><span class="pre">KOSI07_SHV_summary.csv</span></code>):</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre>#Summary for tree KOSI07_SHV.
-#
-#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS
-fitbetaHalpernBruno, 0, -1725.36, 5, 5, 0
-fitbetaFracTolerated, 34.12, -1742.42, 5, 5, 0
-HalpernBruno, 104.38, -1778.55, 4, 4, 0
-FracTolerated, 114.6, -1783.66, 4, 4, 0
-KOSI07_F_omega-global-gamma4_rates-gamma4, 486.552, -1909.64, 64, 4, 60
-KOSI07_F_omega-global-one_rates-gamma4, 491.694, -1913.21, 63, 3, 60
-GY94_CF3x4_omega-global-gamma4_rates-gamma4, 497.303, -1966.01, 13, 4, 9
-GY94_CF3x4_omega-global-one_rates-gamma4, 501.509, -1969.11, 12, 3, 9
-KOSI07_F_omega-global-gamma4_rates-one, 547.601, -1941.16, 63, 3, 60
-KOSI07_F_omega-global-one_rates-one, 562.534, -1949.63, 62, 2, 60
-GY94_CF3x4_omega-global-gamma4_rates-one, 568, -2002.36, 12, 3, 9
-GY94_CF3x4_omega-global-one_rates-one, 586.246, -2012.48, 11, 2, 9
-fitbetaFracToleratedrandomized, 597.66, -2024.19, 5, 5, 0
-fitbetaHalpernBrunorandomized, 598.68, -2024.7, 5, 5, 0
-avgaafreqsfitbeta_FracTolerated, 706.44, -2018.58, 65, 5, 60
-avgaafreqsfitbeta_HalpernBruno, 710.94, -2020.83, 65, 5, 60
-avgaafreqs_FracTolerated, 745.92, -2039.32, 64, 4, 60
-avgaafreqs_HalpernBruno, 755.3, -2044.01, 64, 4, 60
-FracToleratedrandomized, 1040.94, -2246.83, 4, 4, 0
-HalpernBrunorandomized, 1063.86, -2258.29, 4, 4, 0
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Summary for tree KOSI07_SHV.</span>
+<span class="c1">#</span>
+<span class="c1">#SUBSTITUTION_MODEL, dAIC, LOG_LIKELIHOOD, FREE_PARAMETERS, MAXIMUM_LIKELIHOOD_PARAMETERS, EMPIRICAL_PARAMETERS</span>
+<span class="n">fitbetaHalpernBruno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1725.36</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaFracTolerated</span><span class="p">,</span> <span class="mf">34.12</span><span class="p">,</span> <span class="o">-</span><span class="mf">1742.42</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBruno</span><span class="p">,</span> <span class="mf">104.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">1778.55</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">FracTolerated</span><span class="p">,</span> <span class="mf">114.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">1783.66</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">486.552</span><span class="p">,</span> <span class="o">-</span><span class="mf">1909.64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">491.694</span><span class="p">,</span> <span class="o">-</span><span class="mf">1913.21</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">497.303</span><span class="p">,</span> <span class="o">-</span><span class="mf">1966.01</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">gamma4</span><span class="p">,</span> <span class="mf">501.509</span><span class="p">,</span> <span class="o">-</span><span class="mf">1969.11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">547.601</span><span class="p">,</span> <span class="o">-</span><span class="mf">1941.16</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">KOSI07_F_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">562.534</span><span class="p">,</span> <span class="o">-</span><span class="mf">1949.63</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">gamma4_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mi">568</span><span class="p">,</span> <span class="o">-</span><span class="mf">2002.36</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="k">global</span><span class="o">-</span><span class="n">one_rates</span><span class="o">-</span><span class="n">one</span><span class="p">,</span> <span class="mf">586.246</span><span class="p">,</span> <span class="o">-</span><span class="mf">2012.48</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span>
+<span class="n">fitbetaFracToleratedrandomized</span><span class="p">,</span> <span class="mf">597.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">2024.19</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">fitbetaHalpernBrunorandomized</span><span class="p">,</span> <span class="mf">598.68</span><span class="p">,</span> <span class="o">-</span><span class="mf">2024.7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">avgaafreqsfitbeta_FracTolerated</span><span class="p">,</span> <span class="mf">706.44</span><span class="p">,</span> <span class="o">-</span><span class="mf">2018.58</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqsfitbeta_HalpernBruno</span><span class="p">,</span> <span class="mf">710.94</span><span class="p">,</span> <span class="o">-</span><span class="mf">2020.83</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_FracTolerated</span><span class="p">,</span> <span class="mf">745.92</span><span class="p">,</span> <span class="o">-</span><span class="mf">2039.32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">avgaafreqs_HalpernBruno</span><span class="p">,</span> <span class="mf">755.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2044.01</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">60</span>
+<span class="n">FracToleratedrandomized</span><span class="p">,</span> <span class="mf">1040.94</span><span class="p">,</span> <span class="o">-</span><span class="mf">2246.83</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">HalpernBrunorandomized</span><span class="p">,</span> <span class="mf">1063.86</span><span class="p">,</span> <span class="o">-</span><span class="mf">2258.29</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Similar files are created in LaTex formatted tables as <tt class="docutils literal"><span class="pre">GY94_summary.tex</span></tt>, <tt class="docutils literal"><span class="pre">KOSI07_summary.tex</span></tt>, etc.</p>
+<p>Similar files are created in LaTex formatted tables as <code class="docutils literal"><span class="pre">GY94_summary.tex</span></code>, <code class="docutils literal"><span class="pre">KOSI07_summary.tex</span></code>, etc.</p>
 </div>
 <div class="section" id="comparison-of-per-site-likelihoods">
-<h3><a class="toc-backref" href="#id15">Comparison of per-site likelihoods</a><a class="headerlink" href="#comparison-of-per-site-likelihoods" title="Permalink to this headline">¶</a></h3>
-<p>The <cite>phyloExpCM</cite> script <tt class="docutils literal"><span class="pre">phyloExpCM_SiteLikelihoodComparison.py</span></tt> was used to compare the per-site likelihoods between the best experimentally informed model (the <em>HalpernBruno</em> model with a fitted <span class="math">\(\beta\)</span>) and the best traditional model (the <em>GY94</em> model with gamma-distributed rates and <span class="math">\(\omega\)</span>) values for the tree inferred with <em>GY94</em> over the entire lactamase (TEM and SHV) sequences.</p>
-<p>This was done by creating the input file <tt class="docutils literal"><span class="pre">phyloExpCM_SitelikelihoodComparison_infile.txt</span></tt> and then running:</p>
-<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_SiteLikelihoodComparison.py phyloExpCM_SiteLikelihoodComparison_infile.txt
+<h3><a class="toc-backref" href="#id20">Comparison of per-site likelihoods</a><a class="headerlink" href="#comparison-of-per-site-likelihoods" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>phyloExpCM</cite> script <code class="docutils literal"><span class="pre">phyloExpCM_SiteLikelihoodComparison.py</span></code> was used to compare the per-site likelihoods between the best experimentally informed model (the <em>HalpernBruno</em> model with a fitted <span class="math">\(\beta\)</span>) and the best traditional model (the <em>GY94</em> model with gamma-distributed rates and <span class="math">\(\omega\)</span>) values for the tree inferred with <em>GY94</em> over the entire lactamase (TEM and SHV) sequences.</p>
+<p>This was done by creating the input file <code class="docutils literal"><span class="pre">phyloExpCM_SitelikelihoodComparison_infile.txt</span></code> and then running:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">phyloExpCM_SiteLikelihoodComparison</span><span class="o">.</span><span class="n">py</span> <span class="n">phyloExpCM_SiteLikelihoodComparison_infile</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>This created three output files.</p>
-<p>The first, <tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> lists the differences in per-site likelihoods by site.</p>
-<p>The next two are the following plots, which use Tukey box plots to show the differences in site likelihoods, categorizing sites by the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> computed secondary structures (<em>SS</em>) and relative solvent accessibilities (<em>RSA</em>) in <tt class="docutils literal"><span class="pre">1XPB_renumbered.dssp</span></tt>. Here are these plots:</p>
-<div class="figure align-center">
+<p>The first, <code class="docutils literal"><span class="pre">sitelikelihoods.txt</span></code> lists the differences in per-site likelihoods by site.</p>
+<p>The next two are the following plots, which use Tukey box plots to show the differences in site likelihoods, categorizing sites by the <a class="reference external" href="http://www.cmbi.ru.nl/hsspsoap/">DSSP webserver</a> computed secondary structures (<em>SS</em>) and relative solvent accessibilities (<em>RSA</em>) in <code class="docutils literal"><span class="pre">1XPB_renumbered.dssp</span></code>. Here are these plots:</p>
+<div class="figure align-center" id="id4">
 <a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg"><img alt="sitelikelihoodcomparison_bySS.jpg" src="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_bySS.jpg" style="width: 45%;" /></a>
-<p class="caption">The comparison of site likelihoods with sites categorized by secondary structure (<tt class="docutils literal"><span class="pre">sitelikelihoodcomparison_bySS.pdf</span></tt>).</p>
+<p class="caption"><span class="caption-text">The comparison of site likelihoods with sites categorized by secondary structure (<code class="docutils literal"><span class="pre">sitelikelihoodcomparison_bySS.pdf</span></code>).</span></p>
 </div>
-<div class="figure align-center">
+<div class="figure align-center" id="id5">
 <a class="reference internal image-reference" href="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg"><img alt="sitelikelihoodcomparison_byRSA.jpg" src="_images/example_2014Analysis_lactamase_sitelikelihoodcomparison_byRSA.jpg" style="width: 45%;" /></a>
-<p class="caption">The comparison of site likelihoods with sites categorized by relative solvent accessibility (<tt class="docutils literal"><span class="pre">sitelikelihoodcomparison_byRSA.pdf</span></tt>).</p>
+<p class="caption"><span class="caption-text">The comparison of site likelihoods with sites categorized by relative solvent accessibility (<code class="docutils literal"><span class="pre">sitelikelihoodcomparison_byRSA.pdf</span></code>).</span></p>
 </div>
 <p>These plots show that the experimental model is modestly better for most sites, but there are a small number of sites for which the experimental model is far worse.</p>
 </div>
 </div>
 <div class="section" id="conclusions">
-<h2><a class="toc-backref" href="#id16">Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id21">Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
 <p>The key conclusions that can be drawn from the tables generated by <a class="reference internal" href="#optimizing-the-trees-with-various-substitution-models">Optimizing the trees with various substitution models</a> are as follows:</p>
 <ol class="arabic simple">
 <li>The evolutionary models that use the experimentally determined amino-acid preferences substantially outperform the other models. The results are slightly better if the fixation probabilities are estimated using the <em>HalpernBruno</em> method.</li>
@@ -709,9 +709,6 @@ HalpernBrunorandomized, 1063.86, -2258.29, 4, 4, 0
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -733,13 +730,13 @@ HalpernBrunorandomized, 1063.86, -2258.29, 4, 4, 0
         <li class="right" >
           <a href="example_2013Analysis_Influenza_NP_Human_1918_Descended.html" title="2013 analysis of human influenza NPs descended from 1918 virus"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="examples.html" >Examples</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

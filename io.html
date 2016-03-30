@@ -8,7 +8,7 @@
     
     <title>io Module &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Python modules in phyloExpCM" href="modules.html" />
     <link rel="next" title="submatrix Module" href="submatrix.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="runphyml.html" title="runphyml Module"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +56,7 @@
           <div class="body" role="main">
             
   <div class="section" id="module-src.io">
-<span id="io-module"></span><h1><tt class="docutils literal"><span class="pre">io</span></tt> Module<a class="headerlink" href="#module-src.io" title="Permalink to this headline">¶</a></h1>
+<span id="io-module"></span><h1><code class="docutils literal"><span class="pre">io</span></code> Module<a class="headerlink" href="#module-src.io" title="Permalink to this headline">¶</a></h1>
 <p>Module for performing input/output operations.</p>
 <p>Written by Jesse Bloom.</p>
 <div class="section" id="functions">
@@ -70,7 +70,7 @@
 <p><em>ParseFileList</em> : reads file list specified by input dictionary.</p>
 <dl class="function">
 <dt id="src.io.ParseBoolValue">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseBoolValue</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets Boolean argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -79,22 +79,22 @@ should be <em>True</em> or <em>False</em>.</p>
 <p>Returns the Boolean truth value specified by <em>key</em>. Raises a <em>ValueError</em>
 if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
 something other than <em>True</em> or <em>False</em>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;gzipped&#39;</span><span class="p">:</span><span class="s">&#39;True&#39;</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">:</span><span class="s">&#39;False&#39;</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">:</span><span class="s">&#39;a1.txt&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;gzipped&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gzipped&#39;</span><span class="p">:</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;applyfilter&#39;</span><span class="p">:</span><span class="s1">&#39;False&#39;</span><span class="p">,</span> <span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="s1">&#39;a1.txt&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;gzipped&#39;</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;applyfilter&#39;</span><span class="p">)</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;a1&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">value a1.txt for a1 is not True/False</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;otherkey&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
@@ -104,7 +104,7 @@ something other than <em>True</em> or <em>False</em>.</p>
 
 <dl class="function">
 <dt id="src.io.ParseFileList">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFileList" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseFileList</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseFileList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets list of files from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -117,7 +117,7 @@ exist in <em>d</em>, raises and KeyError.</p>
 
 <dl class="function">
 <dt id="src.io.ParseFloatValue">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseFloatValue</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets float argument from input dictionary.</p>
 <p><em>d</em> a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -126,22 +126,22 @@ should be convertible to a float.</p>
 <p>Returns the float specified by <em>key</em>. Raises a <em>ValueError</em>
 if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
 something other than an integer.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">:</span><span class="s">&#39;hello&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;maxn&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;minq&#39;</span><span class="p">:</span><span class="s1">&#39;20.5&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">:</span><span class="s1">&#39;hello&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;maxn&#39;</span><span class="p">)</span>
 <span class="go">2.0</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;minq&#39;</span><span class="p">)</span>
 <span class="go">20.5</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">value hello for string is not float</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;otherkey&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
@@ -151,7 +151,7 @@ something other than an integer.</p>
 
 <dl class="function">
 <dt id="src.io.ParseInfile">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#src.io.ParseInfile" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseInfile</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseInfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads key / value pairs from an input file.</p>
 <p><em>f</em> should be a readable file-like object.</p>
 <p>Starting at the current position in <em>f</em>, reads all remaining lines
@@ -165,33 +165,33 @@ The key / value pairs are returned in a
 dictionary, as illustrated in the example below. If there is a
 duplicate key, and exception is raised.</p>
 <p>Example of successfully reading two key/value pairs</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key with two values</span><span class="se">\n</span><span class="s">key2 2 value2&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;key1 first_value</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# now another key with two values</span><span class="se">\n</span><span class="s1">key2 2 value2&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2 value2&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span><span class="s1">&#39;first_value&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span><span class="s1">&#39;2 value2&#39;</span><span class="p">}</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <p>Example of duplicate key name</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key</span><span class="se">\n</span><span class="s">key2 2&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">key1 1&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;key1 first_value</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# now another key</span><span class="se">\n</span><span class="s1">key2 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">key1 1&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span><span class="s1">&#39;first_value&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">}</span>
 <span class="gt">Traceback (most recent call last):</span>
     <span class="o">...</span>
-<span class="gr">ValueError: duplicate key</span>: <span class="n">key1</span>
+<span class="gr">ValueError</span>: <span class="n">duplicate key: key1</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="src.io.ParseIntValue">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseIntValue</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets integer argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -200,18 +200,18 @@ should be an integer.</p>
 <p>Returns the integer specified by <em>key</em>. Raises a <em>ValueError</em>
 if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
 something other than an integer.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;maxn&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;minq&#39;</span><span class="p">:</span><span class="s1">&#39;20.5&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;maxn&#39;</span><span class="p">)</span>
 <span class="go">2</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;minq&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">value 20.5 for minq is not integer</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;otherkey&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
@@ -221,7 +221,7 @@ something other than an integer.</p>
 
 <dl class="function">
 <dt id="src.io.ParseSeqValue">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseSeqValue</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads sequence from FASTA file specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -235,7 +235,7 @@ does not specify exactly one sequence.</p>
 
 <dl class="function">
 <dt id="src.io.ParseStringValue">
-<tt class="descclassname">src.io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">src.io.</code><code class="descname">ParseStringValue</code><span class="sig-paren">(</span><em>d</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads string argument specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of the key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -243,16 +243,16 @@ does not specify exactly one sequence.</p>
 is a string.</p>
 <p>Returns string corresponding to <em>key</em>. Raises a <em>ValueError</em> if 
 the <em>key</em> does not exist in <em>d</em>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;outfileprefix&#39;</span><span class="p">:</span><span class="s">&#39;test_example&#39;</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">:</span><span class="s">&#39;test example&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;outfileprefix&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;outfileprefix&#39;</span><span class="p">:</span><span class="s1">&#39;test_example&#39;</span><span class="p">,</span> <span class="s1">&#39;samplename&#39;</span><span class="p">:</span><span class="s1">&#39;test example&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;outfileprefix&#39;</span><span class="p">)</span>
 <span class="go">&#39;test_example&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;samplename&#39;</span><span class="p">)</span>
 <span class="go">&#39;test example&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;otherkey&#39;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
    <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
@@ -271,7 +271,7 @@ the <em>key</em> does not exist in <em>d</em>.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">io</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">io</span></code> Module</a><ul>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
@@ -279,10 +279,10 @@ the <em>key</em> does not exist in <em>d</em>.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="runphyml.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">runphyml</span></tt> Module</a></p>
+                        title="previous chapter"><code class="docutils literal"><span class="pre">runphyml</span></code> Module</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="submatrix.html"
-                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">submatrix</span></tt> Module</a></p>
+                        title="next chapter"><code class="docutils literal"><span class="pre">submatrix</span></code> Module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -298,9 +298,6 @@ the <em>key</em> does not exist in <em>d</em>.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -322,13 +319,13 @@ the <em>key</em> does not exist in <em>d</em>.</p>
         <li class="right" >
           <a href="runphyml.html" title="runphyml Module"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >Python modules in phyloExpCM</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

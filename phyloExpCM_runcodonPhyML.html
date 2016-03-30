@@ -8,7 +8,7 @@
     
     <title>phyloExpCM_runcodonPhyML.py &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
     <link rel="next" title="phyloExpCM_buildHyphyExpCM.py" href="phyloExpCM_buildHyphyExpCM.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="scripts.html" title="Scripts"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -59,23 +59,23 @@
 <span id="id1"></span><h1>phyloExpCM_runcodonPhyML.py<a class="headerlink" href="#phyloexpcm-runcodonphyml-py" title="Permalink to this headline">¶</a></h1>
 <p>This script allows you to estimate a tree topology using <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. It has been tested with <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> version 1.00 201306.18.</p>
 <p>To run the script, create an input file of the format described below. Then run the script followed by the input file, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_runcodonPhyML.py infile.txt
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">phyloExpCM_runcodonPhyML</span><span class="o">.</span><span class="n">py</span> <span class="n">infile</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <div class="section" id="format-of-the-input-file">
 <h2>Format of the input file<a class="headerlink" href="#format-of-the-input-file" title="Permalink to this headline">¶</a></h2>
 <p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
-<div class="highlight-python"><div class="highlight"><pre>key1 value1
-key2 value2
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">key1</span> <span class="n">value1</span>
+<span class="n">key2</span> <span class="n">value2</span>
 </pre></div>
 </div>
 <p>Blank lines or lines
 that begin with # are ignored (i.e. as comment lines). The input file should
 contain the following keys:</p>
 <ul>
-<li><p class="first"><em>seqfile</em> should specify the name of a FASTA file with the sequences that we want to analyze. Each must have a unique header of less than 100 characters. These characters should not include any spaces or any of the following: <tt class="docutils literal"><span class="pre">:(),&quot;</span></tt> &#8211; an exception will be raised if these conditions are not met. In addition, the character <tt class="docutils literal"><span class="pre">*</span></tt> has special meaning if it is found at the end of a header (it specifies the sequence is an outgroup), so only include this if you know what you are doing. The sequences are assumed to be aligned coding sequences &#8211; an exception will be raised if they are not all of the same length.</p>
+<li><p class="first"><em>seqfile</em> should specify the name of a FASTA file with the sequences that we want to analyze. Each must have a unique header of less than 100 characters. These characters should not include any spaces or any of the following: <code class="docutils literal"><span class="pre">:(),&quot;</span></code> &#8211; an exception will be raised if these conditions are not met. In addition, the character <code class="docutils literal"><span class="pre">*</span></code> has special meaning if it is found at the end of a header (it specifies the sequence is an outgroup), so only include this if you know what you are doing. The sequences are assumed to be aligned coding sequences &#8211; an exception will be raised if they are not all of the same length.</p>
 </li>
-<li><p class="first"><em>codonPhyML_path</em> should specify the path to the <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> program. For example, this might just be <tt class="docutils literal"><span class="pre">codonphyml</span></tt> if the program is installed in the search path. Or it could be an absolute path name if the executable is not installed in the search path.</p>
+<li><p class="first"><em>codonPhyML_path</em> should specify the path to the <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a> program. For example, this might just be <code class="docutils literal"><span class="pre">codonphyml</span></code> if the program is installed in the search path. Or it could be an absolute path name if the executable is not installed in the search path.</p>
 </li>
 <li><p class="first"><em>seed</em> specifies the integer random number seed passed to <a class="reference external" href="http://sourceforge.net/projects/codonphyml/">codonPhyML</a>. Setting the same seed for identical runs should guarantee identical output.</p>
 </li>
@@ -95,12 +95,12 @@ contain the following keys:</p>
 <div class="section" id="example-input-file">
 <h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file:</p>
-<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_runcodonPhyML.py
-seqfile Human_NPs.fasta
-codonPhyML_path codonphyml
-seed 1
-outprefix Human_NPs_codonphyml
-model GY94_CF3x4_omega-gamma4
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Example input file for phyloExpCM_runcodonPhyML.py</span>
+<span class="n">seqfile</span> <span class="n">Human_NPs</span><span class="o">.</span><span class="n">fasta</span>
+<span class="n">codonPhyML_path</span> <span class="n">codonphyml</span>
+<span class="n">seed</span> <span class="mi">1</span>
+<span class="n">outprefix</span> <span class="n">Human_NPs_codonphyml</span>
+<span class="n">model</span> <span class="n">GY94_CF3x4_omega</span><span class="o">-</span><span class="n">gamma4</span>
 </pre></div>
 </div>
 </div>
@@ -113,11 +113,11 @@ model GY94_CF3x4_omega-gamma4
 <li><p class="first">Files are created with the prefix <em>outprefix</em> and the following suffixes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">_config.drw</span></tt> is the darwin format input file used to run <tt class="docutils literal"><span class="pre">codonphyml</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">_output.txt</span></tt> is the output of <tt class="docutils literal"><span class="pre">codonphyml</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">_tree.newick</span></tt> is the inferred tree in Newick format. This tree contains branch supports calculated using the <a class="reference external" href="http://sysbio.oxfordjournals.org/content/60/5/685.long">SH-aLRT</a> method.</li>
-<li><tt class="docutils literal"><span class="pre">_stats.txt</span></tt> contains the statistics from the inference, including all parameter values.</li>
-<li><tt class="docutils literal"><span class="pre">_loglikelihood.txt</span></tt> contains a single number representing log likelihood.</li>
+<li><code class="docutils literal"><span class="pre">_config.drw</span></code> is the darwin format input file used to run <code class="docutils literal"><span class="pre">codonphyml</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">_output.txt</span></code> is the output of <code class="docutils literal"><span class="pre">codonphyml</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">_tree.newick</span></code> is the inferred tree in Newick format. This tree contains branch supports calculated using the <a class="reference external" href="http://sysbio.oxfordjournals.org/content/60/5/685.long">SH-aLRT</a> method.</li>
+<li><code class="docutils literal"><span class="pre">_stats.txt</span></code> contains the statistics from the inference, including all parameter values.</li>
+<li><code class="docutils literal"><span class="pre">_loglikelihood.txt</span></code> contains a single number representing log likelihood.</li>
 </ul>
 </div></blockquote>
 </li>
@@ -162,9 +162,6 @@ model GY94_CF3x4_omega-gamma4
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -186,13 +183,13 @@ model GY94_CF3x4_omega-gamma4
         <li class="right" >
           <a href="scripts.html" title="Scripts"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

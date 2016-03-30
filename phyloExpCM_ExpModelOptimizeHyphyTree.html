@@ -8,7 +8,7 @@
     
     <title>phyloExpCM_ExpModelOptimizeHyphyTree.py &mdash; phyloExpCM 0.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="phyloExpCM 0.3 documentation" href="index.html" />
     <link rel="up" title="Scripts" href="scripts.html" />
     <link rel="next" title="phyloExpCM_FreqsFromAlignment.py" href="phyloExpCM_FreqsFromAlignment.html" />
@@ -45,8 +45,8 @@
         <li class="right" >
           <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -90,7 +90,7 @@
 <div class="section" id="overview">
 <h2><a class="toc-backref" href="#id3">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This script uses codon substitution models derived from experimental measurements to optimize a tree of known topology. It can use either fully experimentally determined evolutionary models (known amino-acid preferences and known mutation rates), or models for which only the amino-acid preferences are known (and the mutation rates are treated as free parameters).</p>
-<p>For most purposes, this script should supersede <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><em>phyloExpCM_optimizeHyphyTree.py</em></a> for optimizing trees with experimentally determined amino-acid preferences. For experimentally determined models, it has all of the functionality of that earlier script plus more.</p>
+<p>For most purposes, this script should supersede <a class="reference internal" href="phyloExpCM_optimizeHyphyTree.html#phyloexpcm-optimizehyphytree-py"><span class="std std-ref">phyloExpCM_optimizeHyphyTree.py</span></a> for optimizing trees with experimentally determined amino-acid preferences. For experimentally determined models, it has all of the functionality of that earlier script plus more.</p>
 <p>You must provide the script with a phylogenetic tree topology and a sequence alignment, as well as a set of site-specific amino-acid preferences. You can also provide a set of mutation rates, or these mutation rate parameters are optimized as free parameters (in either case, the mutation rates are shared among all sites). The amino-acid preferences and mutation rates define a codon-substitution model, which is then used to optimize the branches of the phylogenetic tree (and also the mutation rates if these are not pre-specified from experimental measurements).</p>
 <p><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is used to perform the core analyses, and this script primarily runs <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> and manipulates the input / output.</p>
 </div>
@@ -264,13 +264,13 @@ The fact that <span class="math">\(P_{r,xy}\)</span> defines a <a class="referen
 <li><a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> : this script is part of the <a class="reference external" href="https://github.com/jbloom/phyloExpCM">phyloExpCM</a> package.</li>
 <li><a class="reference external" href="http://www.python.org/">Python</a> : this script has been tested with version 2.7.3.</li>
 <li><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> : this script has been tested with version 1.0.</li>
-<li><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> : this script has been tested with version <tt class="docutils literal"><span class="pre">HYPHY</span> <span class="pre">2.220131214beta(MP)</span> <span class="pre">for</span> <span class="pre">Linux</span> <span class="pre">on</span> <span class="pre">x86_64</span></tt>.</li>
+<li><a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> : this script has been tested with version <code class="docutils literal"><span class="pre">HYPHY</span> <span class="pre">2.220131214beta(MP)</span> <span class="pre">for</span> <span class="pre">Linux</span> <span class="pre">on</span> <span class="pre">x86_64</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="running-the-script">
 <h2><a class="toc-backref" href="#id13">Running the script</a><a class="headerlink" href="#running-the-script" title="Permalink to this headline">¶</a></h2>
 <p>To run the script, create an <a class="reference internal" href="#input-file">Input file</a>  as described below. Then run the script from the command line using the input file as the single argument, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>phyloExpCM_ExpModelOptimizeHyphyTree.py infile.txt
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">phyloExpCM_ExpModelOptimizeHyphyTree</span><span class="o">.</span><span class="n">py</span> <span class="n">infile</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>Note that running this script may take quite a while if <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> takes a long time to run. <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> can also start to consume a lot of memory for relatively big input trees &#8211; so you may need to use a computer with a large amount of RAM.</p>
@@ -279,29 +279,29 @@ The fact that <span class="math">\(P_{r,xy}\)</span> defines a <a class="referen
 <div class="section" id="input-file">
 <h2><a class="toc-backref" href="#id14">Input file</a><a class="headerlink" href="#input-file" title="Permalink to this headline">¶</a></h2>
 <p>The input file specifies <cite>key</cite> / <cite>value</cite> pairs on individual lines in the format:</p>
-<div class="highlight-python"><div class="highlight"><pre>key1 value1
-key2 value2
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">key1</span> <span class="n">value1</span>
+<span class="n">key2</span> <span class="n">value2</span>
 </pre></div>
 </div>
 <p>Blank lines or lines
 that begin with # are ignored (i.e. as comment lines).</p>
 <p>The input file should contain the following keys:</p>
 <ul>
-<li><p class="first"><em>hyphypath</em> should contain a command that can be used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in batch mode. If you have installed <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in the current search path, this might be something like <tt class="docutils literal"><span class="pre">HYPHYMP</span></tt> or <tt class="docutils literal"><span class="pre">HYPHYMP</span> <span class="pre">CPU=4</span></tt> (the latter command specifying how many CPUs to use for this multi-thread version) or <tt class="docutils literal"><span class="pre">HYPHYDEBUG</span></tt>. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is not installed in the current search path, you will need to specify a full path to the executable.</p>
+<li><p class="first"><em>hyphypath</em> should contain a command that can be used to run <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in batch mode. If you have installed <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> in the current search path, this might be something like <code class="docutils literal"><span class="pre">HYPHYMP</span></code> or <code class="docutils literal"><span class="pre">HYPHYMP</span> <span class="pre">CPU=4</span></code> (the latter command specifying how many CPUs to use for this multi-thread version) or <code class="docutils literal"><span class="pre">HYPHYDEBUG</span></code>. If <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> is not installed in the current search path, you will need to specify a full path to the executable.</p>
 </li>
 <li><p class="first"><em>fastafile</em> is the name of a FASTA file containing the sequences that comprise the tip nodes. These should be nucleotide coding sequences aligned at the codon level (not at the nucleotide level). Stop codons should be removed, and the aligned sequence length should be a multiple of three. Ambiguous nucleotide identities are not supported. The headers for the sequences should match the names of the tip nodes in <em>treefile</em>.</p>
 </li>
 <li><p class="first"><em>treefile</em> is a Newick-format phylogenetic tree giving the relationship among the sequences in <em>fastafile</em>. The names of the tip nodes must match those in <em>fastafile</em>. Branch lengths can be specified, but they will be optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. Branch supports can be present, but they are ignored and removed in the output tree.</p>
 </li>
-<li><p class="first"><em>aapreferences</em> is the name of a file giving the experimentally determined equilibrium amino-acid preferences. These might be the <span class="math">\(\pi_{r,a}\)</span> values inferred by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt> into the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file. Specifically, <span class="math">\(\pi_{r,a}\)</span> represents the preference of site <em>r</em> for amino acid <em>a</em> under the constraint <span class="math">\(\sum_a \pi_{r,a} = 1\)</span>. This preference is the expected equilibrium amino-acid frequency of amino acid <em>a</em> at site <em>r</em> for a hypothetical evolving population where every amino-acid is equally likely to mutate to every other amino acid (so all frequencies would be 1/20 = 0.05 in the absence of selection).</p>
-<p>The format of the file specified by <em>aapreferences</em> should match that of the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt>. After an initial header line, each line gives the site number (1, 2, ... numbering) for all
+<li><p class="first"><em>aapreferences</em> is the name of a file giving the experimentally determined equilibrium amino-acid preferences. These might be the <span class="math">\(\pi_{r,a}\)</span> values inferred by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <code class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></code> into the <code class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></code> file. Specifically, <span class="math">\(\pi_{r,a}\)</span> represents the preference of site <em>r</em> for amino acid <em>a</em> under the constraint <span class="math">\(\sum_a \pi_{r,a} = 1\)</span>. This preference is the expected equilibrium amino-acid frequency of amino acid <em>a</em> at site <em>r</em> for a hypothetical evolving population where every amino-acid is equally likely to mutate to every other amino acid (so all frequencies would be 1/20 = 0.05 in the absence of selection).</p>
+<p>The format of the file specified by <em>aapreferences</em> should match that of the <code class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></code> file created by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <code class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></code>. After an initial header line, each line gives the site number (1, 2, ... numbering) for all
 specified sites, the wildtype amino acid(s) (not used by this script), the site entropy (not used by this script), and then the experimentally determined equilibrium amino-acid frequencies for each amino acid. These equilibrium frequencies can either include or exclude a stop codon (denoted by the * character) as a possible amino acid.
 However, for the purposes of this script, stop codons are not considered possible
 amino acid identities. So if there is value for a stop codon, it is set to zero and the remaining <span class="math">\(\pi_{r,a}\)</span> values are rescaled so that they sum to one. Here are a few example lines of the input file format:</p>
-<div class="highlight-python"><div class="highlight"><pre>#SITE   WT_AA   SITE_ENTROPY    PI_A    PI_C    PI_D    PI_E    PI_F    PI_G    PI_H    PI_I    PI_K    PI_L    PI_M    PI_N    PI_P    PI_Q    PI_R    PI_S    PI_T    PI_V    PI_W    PI_Y    PI_*
-1   M   2.85229 0.0113803   0.0402777   0.0153121   0.0320438   0.013312    0.00936795  0.026916    0.0192017   0.0224047   0.018926    0.554093    0.0445008   0.0138125   0.0212192   0.0131771   0.0152268   0.0237621   0.0102606   0.0369008   0.0367991   0.0211056
-2   A   0.968359    0.878703    0.00384431  0.00390501  0.00815666  0.0048199   0.00244426  0.00333017  0.00258064  0.00391181  0.00094265  0.0248087   0.00238593  0.00064321  0.00288323  0.00610788  0.0012339   0.001455    0.0290568   0.0107545   0.00492073  0.00311186
-3   S   2.93851 0.0295947   0.00304848  0.00227603  0.00668501  0.131168    0.000710502 0.0199653   0.00804841  0.000619715 0.366698    0.0132841   0.0223199   0.0048327   0.0170484   0.00875982  0.090712    0.0171888   0.0102176   0.177257    0.069395    0.000170873
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#SITE   WT_AA   SITE_ENTROPY    PI_A    PI_C    PI_D    PI_E    PI_F    PI_G    PI_H    PI_I    PI_K    PI_L    PI_M    PI_N    PI_P    PI_Q    PI_R    PI_S    PI_T    PI_V    PI_W    PI_Y    PI_*</span>
+<span class="mi">1</span>   <span class="n">M</span>   <span class="mf">2.85229</span> <span class="mf">0.0113803</span>   <span class="mf">0.0402777</span>   <span class="mf">0.0153121</span>   <span class="mf">0.0320438</span>   <span class="mf">0.013312</span>    <span class="mf">0.00936795</span>  <span class="mf">0.026916</span>    <span class="mf">0.0192017</span>   <span class="mf">0.0224047</span>   <span class="mf">0.018926</span>    <span class="mf">0.554093</span>    <span class="mf">0.0445008</span>   <span class="mf">0.0138125</span>   <span class="mf">0.0212192</span>   <span class="mf">0.0131771</span>   <span class="mf">0.0152268</span>   <span class="mf">0.0237621</span>   <span class="mf">0.0102606</span>   <span class="mf">0.0369008</span>   <span class="mf">0.0367991</span>   <span class="mf">0.0211056</span>
+<span class="mi">2</span>   <span class="n">A</span>   <span class="mf">0.968359</span>    <span class="mf">0.878703</span>    <span class="mf">0.00384431</span>  <span class="mf">0.00390501</span>  <span class="mf">0.00815666</span>  <span class="mf">0.0048199</span>   <span class="mf">0.00244426</span>  <span class="mf">0.00333017</span>  <span class="mf">0.00258064</span>  <span class="mf">0.00391181</span>  <span class="mf">0.00094265</span>  <span class="mf">0.0248087</span>   <span class="mf">0.00238593</span>  <span class="mf">0.00064321</span>  <span class="mf">0.00288323</span>  <span class="mf">0.00610788</span>  <span class="mf">0.0012339</span>   <span class="mf">0.001455</span>    <span class="mf">0.0290568</span>   <span class="mf">0.0107545</span>   <span class="mf">0.00492073</span>  <span class="mf">0.00311186</span>
+<span class="mi">3</span>   <span class="n">S</span>   <span class="mf">2.93851</span> <span class="mf">0.0295947</span>   <span class="mf">0.00304848</span>  <span class="mf">0.00227603</span>  <span class="mf">0.00668501</span>  <span class="mf">0.131168</span>    <span class="mf">0.000710502</span> <span class="mf">0.0199653</span>   <span class="mf">0.00804841</span>  <span class="mf">0.000619715</span> <span class="mf">0.366698</span>    <span class="mf">0.0132841</span>   <span class="mf">0.0223199</span>   <span class="mf">0.0048327</span>   <span class="mf">0.0170484</span>   <span class="mf">0.00875982</span>  <span class="mf">0.090712</span>    <span class="mf">0.0171888</span>   <span class="mf">0.0102176</span>   <span class="mf">0.177257</span>    <span class="mf">0.069395</span>    <span class="mf">0.000170873</span>
 </pre></div>
 </div>
 </li>
@@ -323,11 +323,11 @@ As described in the <a class="reference internal" href="#mutation-rates">Mutatio
 <li><p class="first">The string <em>freeparameters</em>. In this case, five independent free parameters are created to describe the mutation rates, and are fitted by maximum likelihood. You should use this option if you do not have experimental data that determines the mutation rates ahead of time.</p>
 </li>
 <li><p class="first">The name of a file specifying experimentally measured mutation rates. Specifically, the entry for <em>A -&gt; G</em> represents the probability that a given site mutations from nucleotide <em>A</em> to nucleotide <em>G</em> in a unit of time given that it was already <em>A</em> (in other words, it is <span class="math">\(\Pr\left(G \rm{\; at\; time\;} t = 1 | A \rm{\; at\; time\;} t = 0\right)\)</span>. The five rates described above should be specified in the file as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>AC 9.0e-6
-AG 2.4e-5
-AT 3.0e-6
-CA 9.4e-6
-CG 1.9e-6
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">AC</span> <span class="mf">9.0e-6</span>
+<span class="n">AG</span> <span class="mf">2.4e-5</span>
+<span class="n">AT</span> <span class="mf">3.0e-6</span>
+<span class="n">CA</span> <span class="mf">9.4e-6</span>
+<span class="n">CG</span> <span class="mf">1.9e-6</span>
 </pre></div>
 </div>
 <p>The rates for other mutations are determined from these values as described by Equations <a href="#equation-Rmn">(3)</a> and <a href="#equation-Rmn_reversible">(8)</a>.</p>
@@ -346,9 +346,9 @@ CG 1.9e-6
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><em>siteslist</em> is the name of a file that specifies all of the codon sites that are included in the analysis in 1, 2, ... numbering. Any lines beginning with a <em>#</em> character are skipped. The remaining lines should begin with an integer &gt;= 1 that gives a site number, followed by whitespace &#8211; anything following this whitespace is ignored. All of the numbers in this first column are taken to be the numbers of the codon sites included. You can use the <tt class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></tt> file generated by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <tt class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></tt> as the value for this argument, since it satisfies these formatting requirements. So potentially, you can set <em>siteslist</em> to the same file used for <em>aapreferences</em>. All sites listed must be present in the file specified by <em>aapreferences</em>.</p>
+<li><p class="first"><em>siteslist</em> is the name of a file that specifies all of the codon sites that are included in the analysis in 1, 2, ... numbering. Any lines beginning with a <em>#</em> character are skipped. The remaining lines should begin with an integer &gt;= 1 that gives a site number, followed by whitespace &#8211; anything following this whitespace is ignored. All of the numbers in this first column are taken to be the numbers of the codon sites included. You can use the <code class="docutils literal"><span class="pre">*_equilibriumpreferences.txt</span></code> file generated by the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> script <code class="docutils literal"><span class="pre">mapmuts_inferpreferences.py</span></code> as the value for this argument, since it satisfies these formatting requirements. So potentially, you can set <em>siteslist</em> to the same file used for <em>aapreferences</em>. All sites listed must be present in the file specified by <em>aapreferences</em>.</p>
 </li>
-<li><p class="first"><em>keeptempfiles</em> specifies whether we create temporary files created by the script. A variety of files are created, primarily for the purpose of running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (i.e. many of these are <tt class="docutils literal"><span class="pre">*.ibf</span></tt> files for <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>). These files are detailed in <a class="reference internal" href="#temporary-output-files">Temporary output files</a>. If <em>keeptempfiles</em> is <em>True</em>, then these files are retained after conclusion of the script. If <em>keeptempfiles</em> is <em>False</em>, then these files are deleted if the script terminates normally (they are retained if it ends in error). You might set <em>keeptempfiles</em> to <em>True</em> to create intermediate files to aid in debugging. You might set it to <em>False</em> if you want to avoid creating lots of output files.</p>
+<li><p class="first"><em>keeptempfiles</em> specifies whether we create temporary files created by the script. A variety of files are created, primarily for the purpose of running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (i.e. many of these are <code class="docutils literal"><span class="pre">*.ibf</span></code> files for <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>). These files are detailed in <a class="reference internal" href="#temporary-output-files">Temporary output files</a>. If <em>keeptempfiles</em> is <em>True</em>, then these files are retained after conclusion of the script. If <em>keeptempfiles</em> is <em>False</em>, then these files are deleted if the script terminates normally (they are retained if it ends in error). You might set <em>keeptempfiles</em> to <em>True</em> to create intermediate files to aid in debugging. You might set it to <em>False</em> if you want to avoid creating lots of output files.</p>
 </li>
 <li><p class="first"><em>outfileprefix</em> gives the name of the prefix pre-pended to the output files. You can also make it <em>None</em> if you don&#8217;t want to pre-pend any prefix.</p>
 </li>
@@ -358,24 +358,24 @@ CG 1.9e-6
 </li>
 <li><p class="first"><em>randomizepreferences</em> is an optional argument. If it is not specified or set to a value of <em>False</em>, nothing unusual is done. Otherwise it should be set to an integer &gt;= 1 that specifies the random number seed used to randomize the amino-acid preferences among sites. You might want to do this if you are testing that the model relies relies on accurate experimental determination of the amino-acid preferences at each site by scrambling these preferences.</p>
 </li>
-<li><p class="first"><em>persitelikelihoods</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or not specified, the nothing is done. If you set it to <em>True</em>, then the script also reports the per-site likelihoods in a separate file. Specifically, the file with the suffix <tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> (see <a class="reference internal" href="#output-files">Output files</a>) lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are <strong>not</strong> re-optimized for each site &#8211; rather, they are set to their global best values and then the likelihood contribution of each site is computed.</p>
+<li><p class="first"><em>persitelikelihoods</em> is an optional argument. If it is <em>None</em>, <em>False</em>, or not specified, the nothing is done. If you set it to <em>True</em>, then the script also reports the per-site likelihoods in a separate file. Specifically, the file with the suffix <code class="docutils literal"><span class="pre">sitelikelihoods.txt</span></code> (see <a class="reference internal" href="#output-files">Output files</a>) lists the per-site likelihood for each site after the mutation rates and branch lengths have been optimized by maximum likelihood. These parameters and branch lengths are <strong>not</strong> re-optimized for each site &#8211; rather, they are set to their global best values and then the likelihood contribution of each site is computed.</p>
 </li>
 </ul>
 </div>
 <div class="section" id="example-input-file">
 <h2><a class="toc-backref" href="#id15">Example input file</a><a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file:</p>
-<div class="highlight-python"><div class="highlight"><pre># Example input file for phyloExpCM_OptimizeDetectSelectionHyphy.py
-hyphypath HYPHYMP CPU=4
-fastafile Aligned_NPs.fasta
-treefile codonphyml_tree.newick
-aapreferences equilibriumpreferences.txt
-mutationrates mutations.txt
-scalefactor 10000.0
-fixationmodel FracTolerated
-siteslist siteslist.txt
-keeptempfiles True
-outfileprefix None
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Example input file for phyloExpCM_OptimizeDetectSelectionHyphy.py</span>
+<span class="n">hyphypath</span> <span class="n">HYPHYMP</span> <span class="n">CPU</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">fastafile</span> <span class="n">Aligned_NPs</span><span class="o">.</span><span class="n">fasta</span>
+<span class="n">treefile</span> <span class="n">codonphyml_tree</span><span class="o">.</span><span class="n">newick</span>
+<span class="n">aapreferences</span> <span class="n">equilibriumpreferences</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">mutationrates</span> <span class="n">mutations</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">scalefactor</span> <span class="mf">10000.0</span>
+<span class="n">fixationmodel</span> <span class="n">FracTolerated</span>
+<span class="n">siteslist</span> <span class="n">siteslist</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">keeptempfiles</span> <span class="kc">True</span>
+<span class="n">outfileprefix</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -389,30 +389,30 @@ outfileprefix None
 <p>The following primary output files are created. Each of these files begins with the prefix specified by <em>outfileprefix</em>, and then has the file name indicated.</p>
 <blockquote>
 <div><ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">optimizedtree.newick</span></tt> is a Newick file containing the tree with the branch lengths optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (using Equation <a href="#equation-Prxy">(1)</a>). The tree topology is unchanged from that specified in <em>newickfile</em>.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">optimizedtree.newick</span></code> is a Newick file containing the tree with the branch lengths optimized by <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> (using Equation <a href="#equation-Prxy">(1)</a>). The tree topology is unchanged from that specified in <em>newickfile</em>.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">optimizedtree_results.txt</span></tt> is a text file containing the results of optimizing the tree (this is the tree in <tt class="docutils literal"><span class="pre">optimizedtree.newick</span></tt>). This file gives the log likelihood, the number of branch lengths optimized, the number of free model parameters, and the values of any free parameters. If <em>mutationrates</em> specifies known mutation rates then there are no free parameters. If <em>mutationrates</em> is set to <em>freeparameters</em>, then there are five mutation rate parameters as described above (description of reversible model in <a class="reference internal" href="#mutation-rates">Mutation rates</a> section), but since one of these mutation rates is not independent of the branch lengths, there are really on four free parameters (since we have <span class="math">\(R_{A \rightarrow C} = 1\)</span> as described above). Here are example contents of this file:</p>
-<div class="highlight-python"><div class="highlight"><pre>Log likelihood: -58.6512
-Branch lengths optimized: 27
-Model parameters optimized: 4
-R_AG: 2.86282
-R_AT: 0
-R_CA: 1.62803
-R_CG: 1.8586e-15
+<li><p class="first"><code class="docutils literal"><span class="pre">optimizedtree_results.txt</span></code> is a text file containing the results of optimizing the tree (this is the tree in <code class="docutils literal"><span class="pre">optimizedtree.newick</span></code>). This file gives the log likelihood, the number of branch lengths optimized, the number of free model parameters, and the values of any free parameters. If <em>mutationrates</em> specifies known mutation rates then there are no free parameters. If <em>mutationrates</em> is set to <em>freeparameters</em>, then there are five mutation rate parameters as described above (description of reversible model in <a class="reference internal" href="#mutation-rates">Mutation rates</a> section), but since one of these mutation rates is not independent of the branch lengths, there are really on four free parameters (since we have <span class="math">\(R_{A \rightarrow C} = 1\)</span> as described above). Here are example contents of this file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Log</span> <span class="n">likelihood</span><span class="p">:</span> <span class="o">-</span><span class="mf">58.6512</span>
+<span class="n">Branch</span> <span class="n">lengths</span> <span class="n">optimized</span><span class="p">:</span> <span class="mi">27</span>
+<span class="n">Model</span> <span class="n">parameters</span> <span class="n">optimized</span><span class="p">:</span> <span class="mi">4</span>
+<span class="n">R_AG</span><span class="p">:</span> <span class="mf">2.86282</span>
+<span class="n">R_AT</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">R_CA</span><span class="p">:</span> <span class="mf">1.62803</span>
+<span class="n">R_CG</span><span class="p">:</span> <span class="mf">1.8586e-15</span>
 </pre></div>
 </div>
 <p>Here <em>R_AG</em> is the rate of mutation from <em>A</em> to <em>G</em> (<span class="math">\(R_{A \rightarrow G}\)</span>). If the mutation rates are not free parameters, then the last four lines giving these rates will be absent.</p>
 <p>If <span class="math">\(\omega\)</span> is also being fit via setting <em>fitomega</em> to <em>freeparameter</em>, then the file also specifies the value of this parameter as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>omega 0.03132
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">omega</span> <span class="mf">0.03132</span>
 </pre></div>
 </div>
 <p>If <span class="math">\(\beta\)</span> is also being fit via setting <em>fitbeta</em> to <em>freeparameter</em>, then the file also specifies the value of this parameter as in:</p>
-<div class="highlight-python"><div class="highlight"><pre>beta 1.2314
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="mf">1.2314</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">sitelikelihoods.txt</span></tt> is created if <em>persitelikelihoods</em> is <em>True</em>. In this case, the first line is a header line and all subsequent lines list the integer site number and the log likelihood with tabs between these two columns. The format is as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#SITE   SITE_LOG_LIKELIHOODS</span>
+<li><p class="first"><code class="docutils literal"><span class="pre">sitelikelihoods.txt</span></code> is created if <em>persitelikelihoods</em> is <em>True</em>. In this case, the first line is a header line and all subsequent lines list the integer site number and the log likelihood with tabs between these two columns. The format is as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#SITE   SITE_LOG_LIKELIHOODS</span>
 <span class="mi">1</span>   <span class="o">-</span><span class="mf">4.792906363107919</span>
 <span class="mi">2</span>   <span class="o">-</span><span class="mf">15.89808216031635</span>
 <span class="mi">3</span>   <span class="o">-</span><span class="mf">17.19022748421175</span>
@@ -427,13 +427,13 @@ R_CG: 1.8586e-15
 <p>The following temporary output files are created, largely for running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a>. If <em>keeptempfiles</em> is <em>True</em>, then these files are kept in the directory. If <em>keeptempfiles</em> is <em>False</em>, then these files are deleted at the conclusion of the script if it terminates normally (if it ends in error, any created files are retained for debugging purposes). The temporary files are:</p>
 <blockquote>
 <div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Prxy.ibf</span></tt> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch file that specifies the substitution model in Equation <a href="#equation-Prxy">(1)</a>.</li>
-<li><tt class="docutils literal"><span class="pre">coded_fastafile.fasta</span></tt> is a version of the sequence aligment in <em>fastafile</em> where the sequence headers have been changed to unique names that conform to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming requirements.</li>
-<li><tt class="docutils literal"><span class="pre">coded_treefile.newick</span></tt> is a version of the tree in <em>treefile</em> where the sequence names have been changed to match the renamed headers in <tt class="docutils literal"><span class="pre">coded_fastafile.fasta</span></tt>, so that they conform to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming requirements.</li>
-<li><tt class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></tt> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file that performs the operations to optimize the tree branch lengths and any global parameters (such as the mutation rates <span class="math">\(Q_{xy}\)</span>) over all sites.</li>
-<li><tt class="docutils literal"><span class="pre">hyphy_optimizetree_output.txt</span></tt> is a file that contains the results of running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> on <tt class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">coded_optimizedtree.newick</span></tt> is a version of the tree with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> optimized branch lengths with the names still matching those that have been changed to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming as in <tt class="docutils literal"><span class="pre">coded_fastafile.fasta</span></tt> and <tt class="docutils literal"><span class="pre">coded_treefile.newick</span></tt>. Except for the names being coded, this matches the primary output file with suffix <tt class="docutils literal"><span class="pre">optimizedtree.newick</span></tt>.</li>
-<li>If <em>persitelikelihoods</em> is <em>True</em>, then for each site files of the name <tt class="docutils literal"><span class="pre">hyphy_site1_cmds.bf</span></tt> and <tt class="docutils literal"><span class="pre">hyphy_site1_output.txt</span></tt> are created for each site number (the example names above are for site <tt class="docutils literal"><span class="pre">1</span></tt>).</li>
+<li><code class="docutils literal"><span class="pre">Prxy.ibf</span></code> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> include batch file that specifies the substitution model in Equation <a href="#equation-Prxy">(1)</a>.</li>
+<li><code class="docutils literal"><span class="pre">coded_fastafile.fasta</span></code> is a version of the sequence aligment in <em>fastafile</em> where the sequence headers have been changed to unique names that conform to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming requirements.</li>
+<li><code class="docutils literal"><span class="pre">coded_treefile.newick</span></code> is a version of the tree in <em>treefile</em> where the sequence names have been changed to match the renamed headers in <code class="docutils literal"><span class="pre">coded_fastafile.fasta</span></code>, so that they conform to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming requirements.</li>
+<li><code class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></code> is a <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> batch file that performs the operations to optimize the tree branch lengths and any global parameters (such as the mutation rates <span class="math">\(Q_{xy}\)</span>) over all sites.</li>
+<li><code class="docutils literal"><span class="pre">hyphy_optimizetree_output.txt</span></code> is a file that contains the results of running <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> on <code class="docutils literal"><span class="pre">hyphy_optimizetree_cmds.bf</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">coded_optimizedtree.newick</span></code> is a version of the tree with <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> optimized branch lengths with the names still matching those that have been changed to <a class="reference external" href="http://www.hyphy.org/w/index.php/Main_Page">HYPHY</a> naming as in <code class="docutils literal"><span class="pre">coded_fastafile.fasta</span></code> and <code class="docutils literal"><span class="pre">coded_treefile.newick</span></code>. Except for the names being coded, this matches the primary output file with suffix <code class="docutils literal"><span class="pre">optimizedtree.newick</span></code>.</li>
+<li>If <em>persitelikelihoods</em> is <em>True</em>, then for each site files of the name <code class="docutils literal"><span class="pre">hyphy_site1_cmds.bf</span></code> and <code class="docutils literal"><span class="pre">hyphy_site1_output.txt</span></code> are created for each site number (the example names above are for site <code class="docutils literal"><span class="pre">1</span></code>).</li>
 </ul>
 </div></blockquote>
 </div>
@@ -496,9 +496,6 @@ R_CG: 1.8586e-15
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -520,13 +517,13 @@ R_CG: 1.8586e-15
         <li class="right" >
           <a href="phyloExpCM_optimizeHyphyTree.html" title="phyloExpCM_optimizeHyphyTree.py"
              >previous</a> |</li>
-        <li><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
-          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phyloExpCM 0.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Jesse D. Bloom.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3a0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>
